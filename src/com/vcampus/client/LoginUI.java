@@ -37,8 +37,8 @@ public class LoginUI extends JFrame {
 
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(400, 200, 850, 600);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/assets/icon/fav.png")));
+        setBounds(400, 200, 800, 520);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/assets/icon/fav2.png")));
         setTitle(res.getString("window_title"));
 
         loginPanel = new JPanel();
@@ -51,22 +51,22 @@ public class LoginUI extends JFrame {
         pBody.setLayout(null);
 
         JLabel lblUsername = new JLabel(res.getString("username"));
-        lblUsername.setBounds(531, 219, 60, 18);
+        lblUsername.setBounds(500, 215, 60, 18);
         pBody.add(lblUsername);
 
         txtUsername = new JTextField();
         txtUsername.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-        txtUsername.setBounds(605, 214, 180, 24);
+        txtUsername.setBounds(555, 214, 180, 24);
         pBody.add(txtUsername);
         txtUsername.setColumns(8);
 
         JLabel lblPassword = new JLabel(res.getString("password"));
-        lblPassword.setBounds(531, 271, 40, 18);
+        lblPassword.setBounds(506, 268, 40, 18);
         pBody.add(lblPassword);
 
         txtPassword = new JPasswordField();
         txtPassword.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        txtPassword.setBounds(605, 266, 180, 24);
+        txtPassword.setBounds(555, 266, 180, 24);
         pBody.add(txtPassword);
 
         rdbStudent = new JRadioButton(res.getString("student"));
@@ -109,11 +109,11 @@ public class LoginUI extends JFrame {
             }
         });
 
-        rdbStudent.setBounds(605, 320, 59, 27);
+        rdbStudent.setBounds(560, 320, 59, 27);
         pBody.add(rdbStudent);
-        rdbTeacher.setBounds(670, 320, 59, 27);
+        rdbTeacher.setBounds(620, 320, 59, 27);
         pBody.add(rdbTeacher);
-        rdbAdmin.setBounds(735, 320, 73, 27);
+        rdbAdmin.setBounds(680, 320, 73, 27);
         pBody.add(rdbAdmin);
         rdbStudent.setSelected(true);
 
@@ -137,29 +137,32 @@ public class LoginUI extends JFrame {
         JLabel label = new JLabel(res.getString("dialog_title"));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setFont(new Font("微软雅黑", Font.PLAIN, 35));
-        label.setBounds(557, 105, 233, 80);
+        label.setBounds(507, 120, 233, 80);
         pBody.add(label);
 
         JLabel icon = new JLabel("");
-        icon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/fav.png")));
-        icon.setBounds(642, 48, 64, 64);
+        icon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/fav2.png")));
+        icon.setBounds(500, 28, 248, 97);
         pBody.add(icon);
 
         btnLogin = new JButton(res.getString("login"));
-        btnLogin.setFont(new Font("微软雅黑", Font.BOLD, 35));
-        btnLogin.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/right-circle.png")));
+        btnLogin.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+        //btnLogin.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/right-circle.png")));
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 login();
             }
         });
-        btnLogin.setBounds(591, 372, 167, 100);
+        btnLogin.setBounds(555, 372, 140, 75);
         pBody.add(btnLogin);
 
         JLabel lblUserType = new JLabel(res.getString("usertype"));
-        lblUserType.setBounds(531, 324, 75, 18);
+        lblUserType.setBounds(495, 323, 75, 18);
         pBody.add(lblUserType);
 
+        JLabel bg=new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
+        pBody.add(bg);
+        bg.setBounds(0,0,470,525);
     }
 }
