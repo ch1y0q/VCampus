@@ -164,5 +164,6 @@ public class LoginUI extends JFrame {
         JLabel bg=new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
         pBody.add(bg);
         bg.setBounds(0,0,470,525);
+        //
     }
 }
