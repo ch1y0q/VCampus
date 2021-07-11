@@ -12,7 +12,7 @@ import com.vcampus.entity.*;
 public class Session {
     private Student student = null;
     private Teacher teacher = null;
-    private Manager manager = null;
+    private Admin admin = null;
     private UserType userType = null;
 
     public Student getStudent() {
@@ -23,8 +23,8 @@ public class Session {
         return teacher;
     }
 
-    public Manager getManager() {
-        return manager;
+    public Admin getAdmin() {
+        return admin;
     }
 
     public UserType getUserType() {
@@ -43,14 +43,14 @@ public class Session {
         this.userType = UserType.TEACHER;
     }
 
-    public Session(Manager manager) {
-        this.manager = manager;
-        this.userType = UserType.MANAGER;
+    public Session(Admin admin) {
+        this.admin = admin;
+        this.userType = UserType.ADMIN;
     }
 
     @Override
     public String toString() {
-        return "Session [student=" + student + ", teacher=" + teacher + ", manager=" + manager + ", userType=" + userType
+        return "Session [student=" + student + ", teacher=" + teacher + ", admin=" + admin + ", userType=" + userType
                 + "]";
     }
 

@@ -1,6 +1,7 @@
 package com.vcampus.client;
 
 import com.vcampus.entity.Student;
+import com.vcampus.entity.UserType;
 import com.vcampus.util.SwingUtils;
 
 import javax.swing.*;
@@ -33,9 +34,6 @@ public class LoginUI extends JFrame {
     private Locale locale;
     private ResourceBundle res;
 
-    enum userType {STUDENT, TEACHER, ADMIN}
-
-    ;
 
     public void login() {
         /* check if all fields are filled */
@@ -44,15 +42,15 @@ public class LoginUI extends JFrame {
             return;
         }
 
-        userType type = null;
+        UserType type = null;
         if (rdbStudent.isSelected()) {
-            type = userType.STUDENT;
+            type = UserType.STUDENT;
             // TODO
         } else if (rdbTeacher.isSelected()) {
-            type = userType.TEACHER;
+            type = UserType.TEACHER;
             // TODO
         } else if (rdbAdmin.isSelected()) {
-            type = userType.ADMIN;
+            type = UserType.ADMIN;
             // TODO
         }
     }
