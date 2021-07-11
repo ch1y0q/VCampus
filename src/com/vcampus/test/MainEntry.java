@@ -6,9 +6,10 @@ import com.vcampus.entity.Student;
 import java.util.ArrayList;
 
 /**
- * @Author: Huang Qiyue
- * @Date: 2021-07-07
- * @Description:
+ * 客户端程序主入口
+ *
+ * @author Huang Qiyue
+ * @date 2021-07-07
  */
 public class MainEntry {
     public static void main(String[] args) {

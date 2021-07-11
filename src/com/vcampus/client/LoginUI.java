@@ -1,5 +1,8 @@
 package com.vcampus.client;
 
+import com.vcampus.entity.Student;
+import com.vcampus.util.SwingUtils;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -27,18 +30,41 @@ public class LoginUI extends JFrame {
     private JTextField txtUsername;
     private JPasswordField txtPassword;
 
-    // TODO
+    private Locale locale;
+    private ResourceBundle res;
+
+    enum userType {STUDENT, TEACHER, ADMIN}
+
+    ;
+
     public void login() {
+        /* check if all fields are filled */
+        if (SwingUtils.isEmpty(txtUsername) || SwingUtils.isEmpty(txtPassword)) {
+            JOptionPane.showMessageDialog(null, res.getString("empty_field"), res.getString("error"), JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        userType type = null;
+        if (rdbStudent.isSelected()) {
+            type = userType.STUDENT;
+            // TODO
+        } else if (rdbTeacher.isSelected()) {
+            type = userType.TEACHER;
+            // TODO
+        } else if (rdbAdmin.isSelected()) {
+            type = userType.ADMIN;
+            // TODO
+        }
     }
 
     public LoginUI() {
-        Locale _locale = Locale.getDefault();
-        ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.LoginResource", _locale);
+        locale = Locale.getDefault();
+        res = ResourceBundle.getBundle("com.vcampus.client.LoginResource", locale);
 
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(400, 200, 800, 520);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/assets/icon/fav2.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/assets/icon/fav.png")));
         setTitle(res.getString("window_title"));
 
         loginPanel = new JPanel();
@@ -141,7 +167,7 @@ public class LoginUI extends JFrame {
         pBody.add(label);
 
         JLabel icon = new JLabel("");
-        icon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/fav2.png")));
+        icon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/fav.png")));
         icon.setBounds(500, 28, 248, 97);
         pBody.add(icon);
 
@@ -161,9 +187,9 @@ public class LoginUI extends JFrame {
         lblUserType.setBounds(495, 323, 75, 18);
         pBody.add(lblUserType);
 
-        JLabel bg=new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
+        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
         pBody.add(bg);
-        bg.setBounds(0,0,470,525);
+        bg.setBounds(0, 0, 470, 525);
         ///
     }
 }
