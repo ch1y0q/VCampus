@@ -13,9 +13,10 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * @Author: Huang Qiyue
- * @Date: 2021-07-07
- * @Description: 登陆界面的GUI
+ * 登陆界面的GUI
+ *
+ * @author Huang Qiyue
+ * @date 2021-07-07
  */
 public class LoginUI extends JFrame {
     private JPanel loginPanel;
@@ -28,7 +29,6 @@ public class LoginUI extends JFrame {
 
     // TODO
     public void login() {
-
     }
 
     public LoginUI() {

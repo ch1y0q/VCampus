@@ -1,12 +1,14 @@
 package com.vcampus.util;
 
+import java.util.*;
+
 /**
- * @Author: Huang Qiyue
- * @Date: 2021-07-07
- * @Description: 一些通用的工具方法
+ * 一些通用的工具方法
+ *
+ * @author Huang Qiyue
+ * @date 2021-07-07
  */
 
-import java.util.*;
 
 public class commonUtils {
 

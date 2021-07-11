@@ -9,9 +9,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 /**
- * @Author: Huang Qiyue
- * @Date: 2021-07-09
- * @Description: AES128加解密类
+ * AES128加解密类
+ *
+ * @author Huang Qiyue
+ * @date 2021-07-09
  */
 
 public class AES128 {
@@ -21,9 +22,9 @@ public class AES128 {
     /**
      * 加密
      *
-     * @param sSrc
-     * @param sKey
-     * @return
+     * @param sSrc 明文
+     * @param sKey 密钥
+     * @return AES128加密的密文
      * @throws Exception
      */
     public static String Encrypt(String sSrc, String sKey) throws Exception {
@@ -48,9 +49,9 @@ public class AES128 {
     /**
      * 解密
      *
-     * @param sSrc
-     * @param sKey
-     * @return
+     * @param sSrc 密文
+     * @param sKey 密钥
+     * @return 解密后的明文
      * @throws Exception
      */
     public static String Decrypt(String sSrc, String sKey) throws Exception {
@@ -75,11 +76,11 @@ public class AES128 {
                 String originalString = new String(original, "utf-8");
                 return originalString;
             } catch (Exception e) {
-                System.err.println(e.toString());
+                System.err.println(e);
                 return null;
             }
         } catch (Exception ex) {
-            System.err.println(ex.toString());
+            System.err.println(ex);
             return null;
         }
     }
@@ -88,21 +89,21 @@ public class AES128 {
      * 生成指定长度的密钥（盐）
      *
      * @param n 密钥长度
-     * @return
+     * @return 指定长度的密钥
      */
     public static String getCKey(int n) {
-        String val = "";
+        StringBuilder val = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < n; i++) {
             String str = random.nextInt(2) % 2 == 0 ? "num" : "char";
             if ("char".equalsIgnoreCase(str)) { // 产生字母
                 int nextInt = random.nextInt(2) % 2 == 0 ? 65 : 97;
-                val += (char) (nextInt + random.nextInt(26));
+                val.append((char) (nextInt + random.nextInt(26)));
             } else if ("num".equalsIgnoreCase(str)) { // 产生数字
-                val += String.valueOf(random.nextInt(10));
+                val.append(String.valueOf(random.nextInt(10)));
             }
         }
-        return val;
+        return val.toString();
     }
 
     public static void main(String[] args) throws Exception {
