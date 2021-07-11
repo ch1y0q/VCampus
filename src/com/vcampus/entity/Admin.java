@@ -1,24 +1,16 @@
 package com.vcampus.entity;
 
-import java.util.List;
-
-import static com.vcampus.util.CommonUtils.getSchoolByCode;
-
 /**
- * 学生类
- *
  * @author Huang Qiyue
- * @date 2021-07-09
+ * @date 2021-07-12
  */
+public class Admin {
 
-public class Student {
     /* required */
     private String name;
     private String password;
     private String cardNumber;
-    private String studentNumber;
     private float balance;
-    private List<String> courses;
 
     /* optional */
     private String email;
@@ -26,19 +18,15 @@ public class Student {
     private String gender;
 
     /* constructor */
-    public Student(String _name, String _password, String _cardNumber, String _studentNumber, float _balance, List<String> _courses) {
+    public Admin(String _name, String _password, String _cardNumber, float _balance) {
         name = _name;
         password = _password;
         cardNumber = _cardNumber;
-        studentNumber = _studentNumber;
         balance = _balance;
-        courses = _courses;
     }
 
     /* util */
-    public String getSchool() {
-        return getSchoolByCode(studentNumber.substring(0, 2));
-    }
+
 
     /* getters and setters */
     public String getName() {
@@ -65,28 +53,12 @@ public class Student {
         this.cardNumber = cardNumber;
     }
 
-    public String setStudentNumber() {
-        return studentNumber;
-    }
-
-    public void setStudentNumber(String studentNumber) {
-        this.studentNumber = studentNumber;
-    }
-
     public float setBalance() {
         return balance;
     }
 
     public void setBalance(float balance) {
         this.balance = balance;
-    }
-
-    public List<String> setCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<String> courses) {
-        this.courses = courses;
     }
 
     public String getEmail() {

@@ -11,49 +11,47 @@ import com.vcampus.entity.*;
 
 public class Session {
     private Student student = null;
-    /*
     private Teacher teacher = null;
-    private Manager manager = null;
-    */
+    private Admin admin = null;
     private UserType userType = null;
 
     public Student getStudent() {
         return student;
     }
-/*
+
     public Teacher getTeacher() {
         return teacher;
     }
 
-    public Manager getManager() {
-        return manager;
+    public Admin getAdmin() {
+        return admin;
     }
 
     public UserType getUserType() {
         return userType;
     }
-*/
+
     public Session() {}
 
     public Session(Student student) {
         this.student = student;
         this.userType = UserType.STUDENT;
     }
-/*
+
     public Session(Teacher teacher) {
         this.teacher = teacher;
         this.userType = UserType.TEACHER;
     }
 
-    public Session(Manager manager) {
-        this.manager = manager;
-        this.userType = UserType.MANAGER;
+    public Session(Admin admin) {
+        this.admin = admin;
+        this.userType = UserType.ADMIN;
     }
 
     @Override
     public String toString() {
-        return "Session [student=" + student + ", teacher=" + teacher + ", manager=" + manager + ", userType=" + userType
+        return "Session [student=" + student + ", teacher=" + teacher + ", admin=" + admin + ", userType=" + userType
                 + "]";
     }
-*/
+
 }

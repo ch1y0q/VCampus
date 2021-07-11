@@ -1,11 +1,12 @@
 package com.vcampus.entity;
 
 /**
- * 用户类型
+ * 用户角色的枚举
  *
- * @author Franklin Yang
- * @date 2021/7/12
+ * @author Huang Qiyue
+ * @date 2021-07-12
  */
-public enum UserType {
-    STUDENT,TEACHER,MANAGER
-}
+
+public enum UserType {STUDENT, TEACHER, ADMIN}
+
+;

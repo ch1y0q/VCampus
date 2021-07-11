@@ -10,7 +10,7 @@ import java.util.*;
  */
 
 
-public class commonUtils {
+public class CommonUtils {
 
     /**
      * @param code 学院的代码，用String表示
