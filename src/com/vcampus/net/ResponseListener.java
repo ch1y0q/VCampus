@@ -2,14 +2,13 @@ package com.vcampus.net;
 
 import com.alibaba.fastjson.JSON;
 
-
 /**
  * 响应监听器
  *
  * @author Franklin Yang
  * @date 2021/7/12
  */
-public class ResponseListener {
+public class ResponseListener extends Thread{
     private ConnectionToServer connectionToServer;
 
     public ResponseListener() {

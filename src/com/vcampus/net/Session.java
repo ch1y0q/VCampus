@@ -11,14 +11,16 @@ import com.vcampus.entity.*;
 
 public class Session {
     private Student student = null;
+    /*
     private Teacher teacher = null;
     private Manager manager = null;
+    */
     private UserType userType = null;
 
     public Student getStudent() {
         return student;
     }
-
+/*
     public Teacher getTeacher() {
         return teacher;
     }
@@ -30,14 +32,14 @@ public class Session {
     public UserType getUserType() {
         return userType;
     }
-
+*/
     public Session() {}
 
     public Session(Student student) {
         this.student = student;
         this.userType = UserType.STUDENT;
     }
-
+/*
     public Session(Teacher teacher) {
         this.teacher = teacher;
         this.userType = UserType.TEACHER;
@@ -53,5 +55,5 @@ public class Session {
         return "Session [student=" + student + ", teacher=" + teacher + ", manager=" + manager + ", userType=" + userType
                 + "]";
     }
-
+*/
 }

@@ -7,6 +7,7 @@ import java.net.SocketException;
 
 import com.alibaba.fastjson.JSON;
 
+import com.vcampus.server.App;
 
 /**
  * 端口请求监听器

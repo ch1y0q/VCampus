@@ -9,6 +9,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import com.vcampus.util.JSONUtils;
+
 /**
  * 响应类
  *
