@@ -17,7 +17,7 @@ import com.vcampus.server.App;
  */
 public class RequestListener extends Thread{
     private int port;//端口
-    private ServerSocket serverSocket;
+
     public RequestListener(){
 
     }
@@ -26,10 +26,10 @@ public class RequestListener extends Thread{
     @Override
     public void run(){
         try{
-            serverSocket=new ServerSocket(this.port);
+            ServerSocket serverSocket = new ServerSocket(this.port);
             //处理连接请求
             while(true){
-                Socket socket=serverSocket.accept();
+                Socket socket= serverSocket.accept();
                 if (socket!=null){
                     ConnectionToClient connectionToThisClient=new ConnectionToClient(socket);
                     //建立专门用来处理该用户请求的线程

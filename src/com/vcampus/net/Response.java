@@ -87,7 +87,9 @@ public class Response {
 
     }
 
-    // 获取Map型业务数据
+    /**
+     * 获取Map型业务数据
+      */
     public <T> Map<String, T> getMapReturn(Class<T> valueClazz) {
 
         if (this.param == null) {
