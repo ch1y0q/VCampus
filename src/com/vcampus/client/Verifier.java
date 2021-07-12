@@ -3,6 +3,8 @@ package com.vcampus.client;
 import com.vcampus.entity.*;
 import com.vcampus.net.Request;
 import com.vcampus.util.StringUtils;
+import com.vcampus.client.main.App;
+import com.vcampus.util.ResponseUtils;
 
 /**
  * @author Franklin Yang

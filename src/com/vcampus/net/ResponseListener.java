@@ -2,6 +2,8 @@ package com.vcampus.net;
 
 import com.alibaba.fastjson.JSON;
 
+import com.vcampus.client.main.App;
+
 /**
  * 响应监听器
  *
