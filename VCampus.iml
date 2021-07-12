@@ -43,5 +43,10 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="mysql-connector-java-8.0.25" level="project" />
+    <orderEntry type="library" exported="" name="mybatis-3.5.0" level="project" />
+    <orderEntry type="library" exported="" name="fastjson-1.2.76" level="project" />
+    <orderEntry type="library" exported="" name="c3p0-0.9.5.2" level="project" />
+    <orderEntry type="library" exported="" name="mchange-commons-java-0.2.11" level="project" />
   </component>
 </module>

@@ -2,6 +2,9 @@
   <library name="mysql-connector-java-8.0.25">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.25.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/c3p0-0.9.5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/fastjson-1.2.76.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mybatis-3.5.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
