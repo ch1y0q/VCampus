@@ -13,7 +13,7 @@ import com.vcampus.util.ResponseUtils;
 public class Verifier {
     public static Student verifyStudent(String cardNumber, String password) {
         return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.auth.Auth.studentLoginChecker",
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.Auth.studentLoginChecker",
                         new Object[] { new Student(cardNumber, password) }).send())
                 .getReturn(Student.class);
     }

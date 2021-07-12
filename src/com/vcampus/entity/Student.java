@@ -26,6 +26,7 @@ public class Student {
     private String gender;
 
     /* constructor */
+    public Student(){}
     public Student(String _cardNumber, String _password) {
         name = "";
         password = _password;
@@ -72,7 +73,7 @@ public class Student {
         this.password = password;
     }
 
-    public String setCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
