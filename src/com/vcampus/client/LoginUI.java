@@ -28,7 +28,7 @@ public class LoginUI extends JFrame {
     private JRadioButton rdbStudent;
     private JRadioButton rdbTeacher;
     private JRadioButton rdbAdmin;
-    private JTextField txtUsername;
+    private JTextField txtCardNumber;
     private JPasswordField txtPassword;
 
     private Locale locale;
@@ -37,7 +37,7 @@ public class LoginUI extends JFrame {
 
     public void login() {
         /* check if all fields are filled */
-        if (SwingUtils.isEmpty(txtUsername) || SwingUtils.isEmpty(txtPassword)) {
+        if (SwingUtils.isEmpty(txtCardNumber) || SwingUtils.isEmpty(txtPassword)) {
             JOptionPane.showMessageDialog(null, res.getString("empty_field"), res.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -62,7 +62,7 @@ public class LoginUI extends JFrame {
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(400, 200, 800, 520);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/assets/icon/fav.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/assets/icon/fav2.png")));
         setTitle(res.getString("window_title"));
 
         loginPanel = new JPanel();
@@ -74,15 +74,15 @@ public class LoginUI extends JFrame {
         loginPanel.add(pBody, BorderLayout.CENTER);
         pBody.setLayout(null);
 
-        JLabel lblUsername = new JLabel(res.getString("username"));
+        JLabel lblUsername = new JLabel(res.getString("card_number"));
         lblUsername.setBounds(500, 215, 60, 18);
         pBody.add(lblUsername);
 
-        txtUsername = new JTextField();
-        txtUsername.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-        txtUsername.setBounds(555, 214, 180, 24);
-        pBody.add(txtUsername);
-        txtUsername.setColumns(8);
+        txtCardNumber = new JTextField();
+        txtCardNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        txtCardNumber.setBounds(555, 214, 180, 24);
+        pBody.add(txtCardNumber);
+        txtCardNumber.setColumns(8);
 
         JLabel lblPassword = new JLabel(res.getString("password"));
         lblPassword.setBounds(506, 268, 40, 18);
@@ -151,7 +151,7 @@ public class LoginUI extends JFrame {
             }
         };
 
-        txtUsername.addKeyListener(loginKeyAdapter);
+        txtCardNumber.addKeyListener(loginKeyAdapter);
         txtPassword.addKeyListener(loginKeyAdapter);
         rdbStudent.addKeyListener(loginKeyAdapter);
         rdbTeacher.addKeyListener(loginKeyAdapter);
@@ -165,7 +165,7 @@ public class LoginUI extends JFrame {
         pBody.add(label);
 
         JLabel icon = new JLabel("");
-        icon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/fav.png")));
+        icon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/fav2.png")));
         icon.setBounds(500, 28, 248, 97);
         pBody.add(icon);
 
@@ -188,6 +188,5 @@ public class LoginUI extends JFrame {
         JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
         pBody.add(bg);
         bg.setBounds(0, 0, 470, 525);
-        ///
     }
 }
