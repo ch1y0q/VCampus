@@ -18,6 +18,14 @@ public class SwingUtils {
     public static Boolean isEmpty(JTextComponent field){
         return field.getText().trim().isEmpty();
     }
+
+    /**
+     * 弹出信息提示框
+     */
+    static public void showMessage(JPanel parent, String msg, String title) {
+        JOptionPane.showMessageDialog(parent, msg, title, JOptionPane.INFORMATION_MESSAGE);
+    }
+
     /**
      * 弹出错误提示框
      */

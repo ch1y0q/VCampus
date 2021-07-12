@@ -10,22 +10,22 @@ import java.util.Properties;
  * @date 2021/7/12
  */
 public final class ServerUtils {
-    final static String CONFIGPATH = "/resources/server.properties";
+    final static String CONFIG_PATH = "/resources/server.properties";
 
     public static String getServerHost() {
         Properties prop = new Properties();
         try {
-            prop.load(ServerUtils.class.getResourceAsStream(CONFIGPATH));
+            prop.load(ServerUtils.class.getResourceAsStream(CONFIG_PATH));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return prop.getProperty("serverhost");
+        return prop.getProperty("server_host");
     }
 
     public static String getMainPort() {
         Properties prop = new Properties();
         try {
-            prop.load(ServerUtils.class.getResourceAsStream(CONFIGPATH));
+            prop.load(ServerUtils.class.getResourceAsStream(CONFIG_PATH));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public final class ServerUtils {
     public static String getChatPort() {
         Properties prop = new Properties();
         try {
-            prop.load(ServerUtils.class.getResourceAsStream(CONFIGPATH));
+            prop.load(ServerUtils.class.getResourceAsStream(CONFIG_PATH));
         } catch (IOException e) {
             e.printStackTrace();
         }

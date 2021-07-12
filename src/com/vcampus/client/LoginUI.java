@@ -1,7 +1,9 @@
 package com.vcampus.client;
 
+import com.vcampus.client.main.App;
 import com.vcampus.entity.Student;
 import com.vcampus.entity.UserType;
+import com.vcampus.net.Session;
 import com.vcampus.util.SwingUtils;
 
 import javax.swing.*;
@@ -45,7 +47,19 @@ public class LoginUI extends JFrame {
         UserType type = null;
         if (rdbStudent.isSelected()) {
             type = UserType.STUDENT;
-            // TODO
+            Student student = Verifier.verifyStudent(txtCardNumber.getText(), new String(txtPassword.getPassword()));
+            if (student != null) {
+                SwingUtils.showMessage(null, res.getString("student_login_success"), res.getString("info"));
+                // 填充App.session
+                App.hasLogon = true;
+                App.session = new Session(student);
+                setVisible(false);
+                // 要求界面路由
+                App.requireRouting();
+            } else {
+                SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
+                txtPassword.setText("");
+            }
         } else if (rdbTeacher.isSelected()) {
             type = UserType.TEACHER;
             // TODO

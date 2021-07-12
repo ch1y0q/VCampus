@@ -46,7 +46,13 @@ public class Student {
 
     /* util */
     public String getSchool() {
-        return getSchoolByCode(studentNumber.substring(0, 2));
+        String school = "";
+        try {
+            school = getSchoolByCode(studentNumber.substring(0, 2));
+        }
+        catch (Exception e){
+        }
+        return school;
     }
 
     /* getters and setters */
