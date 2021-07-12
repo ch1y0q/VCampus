@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.vcampus.IStudentMapper">
+
+    <!-- Used By Auth Module -->
+    <select id="verifyStudent" parameterType="Student"
+            resultType="boolean">
+        SELECT COUNT(*) FROM `students` WHERE
+            `card_number`=#{cardNumber} AND `password`=#{password}
+    </select>
+    <select id="getStudentDetailByCardNumber" parameterType="String"
+            resultType="Student">
+        SELECT * FROM `students` WHERE
+            `card_number`=#{cardNumber}
+    </select>
+
+    <select id="getNameByCardNumber" parameterType="String"
+            resultType="String">
+        SELECT `name` FROM `students` WHERE
+            `card_number`=#{cardNumber}
+    </select>
+
+    <select id="getPasswordByUsername" parameterType="String"
+            resultType="String">
+        SELECT `password` FROM `students` WHERE
+            `card_number`=#{cardNumber}
+    </select>
+
+    <insert id="insertStudent" parameterType="Student">
+        INSERT INTO
+            `students` VALUES (#{cardNumber}, #{studentNumber}, #{password},
+                                 #{school}, #{name}, 0, "")
+    </insert>
+
+    <delete id="deleteStudent" parameterType="String">
+        DELETE FROM
+            `students` WHERE card_number = #{cardnumber}
+    </delete>
+
+    <select id="searchStudentByCardNumber" parameterType="String"
+            resultType="Integer">
+        SELECT COUNT(*) FROM `students` WHERE `card_number` =
+                                                #{cardnumber}
+    </select>
+
+    <select id="searchStudentByStudentNumber" parameterType="String"
+            resultType="Integer">
+        SELECT COUNT(*) FROM `students` WHERE `student_number` =
+                                                #{studentnumber}
+    </select>
+
+    <update id="switchStudent" parameterType="Student">
+        UPDATE `students` SET
+                                `school` = #{school}, `student_number` = #{studentNumber} WHERE
+            `card_number` = #{cardNumber}
+    </update>
+
+    <select id="tableDisplay" parameterType="Map"
+            resultType="Student">
+        SELECT `card_number`, `student_number`, `school`,`name`
+        FROM `students`
+        WHERE `student_number` LIKE
+              CONCAT(#{school},'_',#{grade},'%')
+    </select>
+
+    <select id="getBalance" parameterType="String"
+            resultType="String">
+        SELECT `balance` FROM `students` WHERE `card_number` =
+                                                 #{cardNumber} LIMIT 1
+    </select>
+
+    <update id="chargeCard" parameterType="Map">
+        UPDATE `students` SET
+            `balance` = `balance` + #{money} WHERE `card_number`
+                                                       = #{cardNumber}
+        LIMIT 1
+    </update>
+
+    <update id="resetPassword" parameterType="Map">
+        UPDATE `students` SET
+            `password` = #{password} WHERE `card_number`
+                                               = #{cardNumber}
+        LIMIT 1
+    </update>
+</mapper>
