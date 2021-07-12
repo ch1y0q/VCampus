@@ -18,7 +18,7 @@ public class Request {
     private String targetApi;//请求目标接口
     private Object[] params;//请求目标接口参数
 
-    public Request(){
+    public Request() {
     }
 
     public Request(ConnectionToServer connectionToServer, Session session, String targetApi, Object[] params) {

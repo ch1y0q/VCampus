@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSON;
  * @author Franklin Yang
  * @date 2021/7/12
  */
-public class ResponseListener extends Thread{
+public class ResponseListener extends Thread {
     private ConnectionToServer connectionToServer;
 
     public ResponseListener() {

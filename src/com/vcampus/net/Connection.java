@@ -19,13 +19,12 @@ public abstract class Connection {
     protected PrintWriter pWriter;
     protected BufferedReader bReader;
 
-    //连接的初始化
-    public Connection(Socket socket){
+    /* 连接的初始化 */
+    public Connection(Socket socket) {
         super();
-        this.socket=socket;
+        this.socket = socket;
 
-        if (this.socket==null||!this.socket.isConnected())
-        {
+        if (this.socket == null || !this.socket.isConnected()) {
             return;
         }
         try {
@@ -38,29 +37,29 @@ public abstract class Connection {
         }
     }
 
-    //写一段数据到socket上
+    /* 写一段数据到socket上 */
     public abstract void write(String content);
 
-    //从socket读取一段数据
+    /* 从socket读取一段数据 */
     public abstract String readLine();
 
-    //连接的销毁
-    public void destroy(){
-        try{
+    /* 连接的销毁 */
+    public void destroy() {
+        try {
             pWriter.close();
             bReader.close();
             socket.close();
-            pWriter=null;
-            bReader=null;
-            socket=null;
-        }catch (IOException e){
+            pWriter = null;
+            bReader = null;
+            socket = null;
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public String toString(){
-        return "Connection [socket="+socket+", pWriter="+pWriter+", bReader="+bReader+"]";
+    public String toString() {
+        return "Connection [socket=" + socket + ", pWriter=" + pWriter + ", bReader=" + bReader + "]";
     }
 
     public Socket getSocket() {
@@ -75,7 +74,7 @@ public abstract class Connection {
         return pWriter;
     }
 
-    public void setpWriter(PrintWriter Writer) {
+    public void setpWriter(PrintWriter pWriter) {
         this.pWriter = pWriter;
     }
 

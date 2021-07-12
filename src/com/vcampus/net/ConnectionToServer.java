@@ -9,7 +9,7 @@ import java.net.Socket;
  * @author Franklin Yang
  * @date 2021/7/9
  */
-public class ConnectionToServer extends Connection{
+public class ConnectionToServer extends Connection {
     public ConnectionToServer(Socket socket) {
         super(socket);
     }
