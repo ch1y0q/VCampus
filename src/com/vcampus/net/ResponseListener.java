@@ -1,6 +1,7 @@
 package com.vcampus.net;
 
 import com.alibaba.fastjson.JSON;
+import com.vcampus.client.main.*;
 
 import com.vcampus.client.main.App;
 

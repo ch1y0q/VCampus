@@ -26,6 +26,15 @@ public class Student {
     private String gender;
 
     /* constructor */
+    public Student(String _cardNumber, String _password) {
+        name = "";
+        password = _password;
+        cardNumber = _cardNumber;
+        studentNumber = "";
+        balance = 0.0f;
+        courses = null;
+    }
+
     public Student(String _name, String _password, String _cardNumber, String _studentNumber, float _balance, List<String> _courses) {
         name = _name;
         password = _password;

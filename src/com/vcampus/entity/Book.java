@@ -1,7 +1,6 @@
 package com.vcampus.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Book 类
@@ -15,7 +14,7 @@ public class Book implements java.io.Serializable{
     private String _introduction;       //书介绍
     private String _number;             //剩余数量
     private String _author;              //作者
-    private String _autherCountry;      //作者国籍
+    private String _authorCountry;      //作者国籍
     private String _publishingHouse;    //出版社
     private ArrayList<String> _tabs;    //分类
     private String _place;              //摆放位置
@@ -25,12 +24,13 @@ public class Book implements java.io.Serializable{
         setIntroduction(null);              //设置介绍
         setNumber(null);                   //设置剩余数量
         setAuthor(null);                    //设置作者
-        setAutherCountry(null);             //设置作者国籍
+        setAuthorCountry(null);             //设置作者国籍
         setPublishingHouse(null);           //设置出版社
         setTabs(new ArrayList<String>());      //设置分类
         setPlace(null);                        //设置摆放位置
     }
-    //setter and getter
+
+    /* setters and getters */
     public String getName() {
         return _name;
     }
@@ -59,11 +59,11 @@ public class Book implements java.io.Serializable{
         this._author = _author;
     }
 
-    public String getAutherCountry() {
-        return _autherCountry;
+    public String getAuthorCountry() {
+        return _authorCountry;
     }
-    public void setAutherCountry(String _autherCountry) {
-        this._autherCountry = _autherCountry;
+    public void setAuthorCountry(String _authorCountry) {
+        this._authorCountry = _authorCountry;
     }
 
     public String getPublishingHouse() {

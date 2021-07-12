@@ -14,7 +14,7 @@ public class Verifier {
     public static Student verifyStudent(String cardNumber, String password) {
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.auth.Auth.studentLoginChecker",
-                        new Object[] { new Student(cardNumber, null, StringUtils.MD5Encode(password), null) }).send())
+                        new Object[] { new Student(cardNumber, password) }).send())
                 .getReturn(Student.class);
     }
 /*
