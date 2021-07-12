@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -22,6 +24,8 @@ import com.vcampus.util.ServerUtils;
 public class App extends JFrame {
 
     private JPanel contentPane;
+    private Locale locale;
+    private ResourceBundle res;
 
     private RequestListener requestListener; // 请求监听器
     public static RequestQueue requestQueue; // 服务器端全局请求消息队列
@@ -54,9 +58,11 @@ public class App extends JFrame {
      * Create the frame.
      */
     public App() {
+        locale = Locale.getDefault();
+        res = ResourceBundle.getBundle("com.vcampus.server.AppResource", locale);
 
         setResizable(false);
-        setTitle("服务器端 - VCampus");
+        setTitle(res.getString("title"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 718, 493);
         contentPane = new JPanel();
@@ -68,7 +74,7 @@ public class App extends JFrame {
         contentPane.add(panel_1, BorderLayout.CENTER);
         panel_1.setLayout(null);
 
-        JLabel label = new JLabel("服务器日志");
+        JLabel label = new JLabel(res.getString("server_log"));
         label.setBounds(302, 13, 75, 18);
         panel_1.add(label);
         JScrollPane scrollPane = new JScrollPane();
@@ -89,9 +95,9 @@ public class App extends JFrame {
         try {
             inputStream = Resources.getResourceAsStream(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            App.paneLog.setText("数据库配置读取成功！");
+            App.paneLog.setText(res.getString("db_config_success"));
         } catch (IOException e) {
-            App.paneLog.setText("严重错误！数据库配置读取失败！" + e.toString());
+            App.paneLog.setText(res.getString("db_config_failure") + e.toString());
             e.printStackTrace();
         }
         // 尝试连接数据库
@@ -100,9 +106,9 @@ public class App extends JFrame {
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
             Boolean verifyResult = studentMapper.verifyStudent(new Student("0", null, "0", "0"));
             sqlSession.commit();
-            App.paneLog.setText("数据库连接成功！");
+            App.paneLog.setText(res.getString("db_connection_success"));
         } catch (Exception e) {
-            App.paneLog.setText("严重错误！数据库连接失败！请检查有关配置！");
+            App.paneLog.setText(res.getString("db_connection_failure"));
             e.printStackTrace();
         }
         // 启动服务器端侦听
@@ -112,7 +118,7 @@ public class App extends JFrame {
         App.requestHandler = new RequestHandler();
         App.requestHandler.start();
         App.paneLog.setText(
-                paneLog.getText() + (paneLog.getText().equals("") ? "" : "\n") + "开始服务器端侦听...端口=" + ServerUtils.getMainPort());
+                paneLog.getText() + (paneLog.getText().equals("") ? "" : "\n") + res.getString("start_listening_on") + ServerUtils.getMainPort());
         foreverSqlSession = sqlSessionFactory.openSession();
 
     }
