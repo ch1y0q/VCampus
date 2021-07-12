@@ -14,6 +14,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.vcampus.net.RequestListener;
 import com.vcampus.server.messageQueue.*;
 import com.vcampus.util.ServerUtils;
+import com.vcampus.dao.IStudentMapper;
+import com.vcampus.entity.Student;
 
 /**
  * @author Franklin Yang

@@ -1,5 +1,6 @@
 package com.vcampus.util;
 
+import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -17,4 +18,11 @@ public class SwingUtils {
     public static Boolean isEmpty(JTextComponent field){
         return field.getText().trim().isEmpty();
     }
+    /**
+     * 弹出错误提示框
+     */
+    static public void showError(JPanel parent, String msg, String title) {
+        JOptionPane.showMessageDialog(parent, msg, title, JOptionPane.ERROR_MESSAGE);
+    }
+
 }
