@@ -2,7 +2,7 @@
   <configuration default="false" name="client_test" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.vcampus.test.ClientEntry" />
     <module name="VCampus" />
-    <option name="PROGRAM_PARAMETERS" value="--add-opens java.base/java.net=ALL-UNNAMED" />
+    <option name="VM_PARAMETERS" value="--add-opens java.base/java.net=ALL-UNNAMED" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

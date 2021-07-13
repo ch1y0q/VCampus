@@ -6,7 +6,7 @@
 
     <!-- Used By Auth Module -->
     <select id="verifyStudent" parameterType="Student"
-            resultType="boolean">
+            resultType="Boolean">
         SELECT COUNT(*) FROM `students` WHERE
             `cardNumber`=#{cardNumber} AND `password`=#{password}
     </select>
