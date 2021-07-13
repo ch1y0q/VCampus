@@ -11,6 +11,7 @@ import com.vcampus.entity.UserType;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.IOException;
 
 /**
  * @author Franklin Yang
@@ -52,7 +53,7 @@ public class App extends JFrame {
         target.setVisible(true);
     }
 
-    public App() {
+    public App() throws IOException {
 
         // 连接到服务器
         App.connectionToServer = Utils.formConnection();
