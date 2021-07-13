@@ -7,6 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-13
+ */
+
 public class AppStudent extends JFrame {
     private JPanel contentPane;
     public static JLabel lblBalance;
@@ -25,9 +30,24 @@ public class AppStudent extends JFrame {
 
         JLabel lblVcampus = new JLabel("学生主页 - VCampus");
         lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
-        lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 32));
-        lblVcampus.setBounds(103, 25, 500, 43);
+        lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 43));
+        lblVcampus.setBounds(50, 25, 800, 43);
         contentPane.add(lblVcampus);
+
+        JButton logout = new JButton("登出");
+        logout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                    }
+                });
+            }
+        });
+        logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        logout.setBounds(1000, 25, 60, 18);
+        contentPane.add(logout);
 
         JButton btnTeaching = new JButton("教务平台");
         btnTeaching.addActionListener(new ActionListener() {
@@ -68,7 +88,7 @@ public class AppStudent extends JFrame {
         btnShop.setBounds(120, 600, 220, 80);
         contentPane.add(btnShop);
 
-        JButton btnOpencourse = new JButton("在线课堂");
+        JButton btnOpencourse = new JButton("生活服务");
         btnOpencourse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -258,10 +278,54 @@ public class AppStudent extends JFrame {
         lblNewLabel_2.setBounds(806, 450, 64, 64);
         contentPane.add(lblNewLabel_2);
 
-        JLabel lblToday = new JLabel("今天是星期");
-        lblToday.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-        lblToday.setBounds(884, 460, 198, 18);
-        contentPane.add(lblToday);
+        JLabel lblCI1 = new JLabel("无课程"); //1-2
+        lblCI1.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblCI1.setBounds(884, 546, 222, 18);
+        contentPane.add(lblCI1);
+        JLabel lblCI2 = new JLabel("无课程");//3-4
+        lblCI2.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblCI2.setBounds(884, 583, 222, 18);
+        contentPane.add(lblCI2);
+        JLabel lblCI3 = new JLabel("无课程");//5-6
+        lblCI3.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblCI3.setBounds(884, 620, 222, 18);
+        contentPane.add(lblCI3);
+        JLabel lblCI4 = new JLabel("无课程");//7-8
+        lblCI4.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblCI4.setBounds(884, 657, 222, 18);
+        contentPane.add(lblCI4);
+        JLabel lblCI5 = new JLabel("无课程");//9-10
+        lblCI5.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblCI5.setBounds(884, 694, 222, 18);
+        contentPane.add(lblCI5);
+
+        JLabel[] lblCourses = new JLabel[] { lblCI1, lblCI2, lblCI3, lblCI4, lblCI5 };
+
+
+        JLabel lblNewLabel_3 = new JLabel("1~2节");
+        lblNewLabel_3.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblNewLabel_3.setBounds(806, 541, 64, 24);
+        contentPane.add(lblNewLabel_3);
+
+        JLabel label_6 = new JLabel("3~4节");
+        label_6.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        label_6.setBounds(806, 578, 64, 24);
+        contentPane.add(label_6);
+
+        JLabel label_7 = new JLabel("5~6节");
+        label_7.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        label_7.setBounds(806, 615, 64, 24);
+        contentPane.add(label_7);
+
+        JLabel label_8 = new JLabel("7~8节");
+        label_8.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        label_8.setBounds(806, 652, 64, 24);
+        contentPane.add(label_8);
+
+        JLabel label_9 = new JLabel("9~10节");
+        label_9.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        label_9.setBounds(806, 689, 64, 24);
+        contentPane.add(label_9);
 
     }
 }
