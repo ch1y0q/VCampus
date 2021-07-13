@@ -1,5 +1,6 @@
 package com.vcampus.client.main;
 
+import java.io.IOException;
 import java.net.Socket;
 import com.vcampus.net.*;
 import com.vcampus.util.*;
@@ -22,13 +23,18 @@ public class Utils {
     }
 
     // 只应该被调用一次，connectionToServer作为长连接，在客户端整个生命周期内流动
-    public static ConnectionToServer formConnection() {
+    public static ConnectionToServer formConnection() throws IOException {
         ConnectionToServer connectionToServer = null;
+
+        connectionToServer = new ConnectionToServer(new Socket(Utils.getServerHost(), Utils.getMainPort()));
+        /*
         try {
             connectionToServer = new ConnectionToServer(new Socket(Utils.getServerHost(), Utils.getMainPort()));
         } catch (Exception e) {
             return null;
         }
+        */
+
         return connectionToServer;
     }
 }
