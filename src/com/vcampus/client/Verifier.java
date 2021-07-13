@@ -11,7 +11,7 @@ import com.vcampus.util.ResponseUtils;
  * @date 2021/7/12
  */
 public class Verifier {
-    public static Student verifyStudent(String cardNumber, String password) {
+    public static Student checkStudent(String cardNumber, String password) {
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.Auth.studentLoginChecker",
                         new Object[] { new Student(cardNumber, password) }).send())

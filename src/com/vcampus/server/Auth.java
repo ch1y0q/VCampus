@@ -2,7 +2,7 @@ package com.vcampus.server;
 import org.apache.ibatis.session.SqlSession;
 import com.vcampus.entity.*;
 import com.vcampus.dao.IStudentMapper;
-
+import com.vcampus.server.App;
 
 /**
  * 身份认证后端
@@ -18,7 +18,9 @@ public class Auth {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
             Boolean verifyResult = studentMapper.verifyStudent(student);
+
             if (!verifyResult) {
+                System.out.println("No result");
                 return null;
             }
             result = studentMapper.getStudentDetailByCardNumber(student.getCardNumber());

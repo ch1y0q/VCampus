@@ -17,6 +17,7 @@ import com.vcampus.server.App;
  */
 public class RequestListener extends Thread{
     private int port;//端口
+    private ServerSocket serverSocket;
 
     public RequestListener(){
 
@@ -26,7 +27,7 @@ public class RequestListener extends Thread{
     @Override
     public void run(){
         try{
-            ServerSocket serverSocket = new ServerSocket(this.port);
+            serverSocket = new ServerSocket(this.port);
             //处理连接请求
             while(true){
                 Socket socket= serverSocket.accept();

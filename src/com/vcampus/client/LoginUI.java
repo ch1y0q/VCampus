@@ -47,7 +47,7 @@ public class LoginUI extends JFrame {
         UserType type = null;
         if (rdbStudent.isSelected()) {
             type = UserType.STUDENT;
-            Student student = Verifier.verifyStudent(txtCardNumber.getText(), new String(txtPassword.getPassword()));
+            Student student = Verifier.checkStudent(txtCardNumber.getText(), new String(txtPassword.getPassword()));
             if (student != null) {
                 SwingUtils.showMessage(null, res.getString("student_login_success"), res.getString("info"));
                 // 填充App.session
