@@ -73,3 +73,48 @@ Exception in thread "AWT-EventQueue-0" java.lang.reflect.InaccessibleObjectExcep
 解决方法：添加JVM启动选项`--add-opens java.base/java.net=ALL-UNNAMED`。
 
 参考： https://stackoverflow.com/questions/41265266/how-to-solve-inaccessibleobjectexception-unable-to-make-member-accessible-m
+
+## Database
+### MyBatis 未正确映射Java对象和数据库字段
+这是一个示例语句。
+```sql
+CREATE DATABASE IF NOT EXISTS vCampus;
+USE vCampus;
+CREATE TABLE IF NOT EXISTS students(
+    name varchar(10),
+    password varchar(100),
+    cardNumber varchar(20),
+    studentNumber varchar(20),
+    balance decimal(10,2),
+    school varchar(20),
+    gender varchar(5),
+    email varchar(50),
+    phoneNumber varchar(20)
+);
+INSERT INTO students(name,password,cardNumber,studentNumber,balance)
+VALUES("yfdl","123","213191111","09019000",0);
+```
+在`com.vampus.client.Verifier`的方法`public static Student checkStudent(String cardNumber, String password)`中加入调试语句`System.out.println(toJSONString(new Student(cardNumber, password)));`，输出结果为`{"cardNumber":"213191111","name":"","password":"123","school":""}`，可见正常读取了登陆界面填入的卡号和密码并创建了`Student`实例。
+
+但在`com.vampus.server.Verifier`中，如果加入如下测试语句
+```java
+System.out.println(toJSONString(student));
+Student getStudent = studentMapper.getStudentDetailByCardNumber(student.getCardNumber());
+System.out.println(toJSONString(getStudent));
+System.out.println(studentMapper.verifyStudent(getStudent));
+```
+输出的结果是
+```json
+{"cardNumber":"213191111","name":"","school":""}
+{"cardNumber":"213191111","name":"yfdl","school":"计算机科学与工程学院"}
+false
+```
+
+初步判断应该与MyBatis Mapper有关。参考 https://mybatis.org/mybatis-3/sqlmap-xml.html#Result_Maps ，了解其自动映射机制，转而寻找`Student`类的问题。
+
+```java
+public void setPassword(String Password) {
+    this.password = password;
+}
+```
+第一行误将`password`写为`Password`...

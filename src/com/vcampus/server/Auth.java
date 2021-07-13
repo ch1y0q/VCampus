@@ -1,8 +1,12 @@
 package com.vcampus.server;
+
+import com.vcampus.util.JSONUtils;
 import org.apache.ibatis.session.SqlSession;
 import com.vcampus.entity.*;
 import com.vcampus.dao.IStudentMapper;
 import com.vcampus.server.App;
+
+import static com.alibaba.fastjson.JSON.toJSONString;
 
 /**
  * 身份认证后端
@@ -17,7 +21,7 @@ public class Auth {
         try {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
-            Boolean verifyResult = studentMapper.verifyStudent(student);
+            boolean verifyResult = studentMapper.verifyStudent(student);
 
             if (!verifyResult) {
                 System.out.println("No result");

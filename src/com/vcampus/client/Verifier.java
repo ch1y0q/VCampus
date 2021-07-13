@@ -6,6 +6,8 @@ import com.vcampus.util.StringUtils;
 import com.vcampus.client.main.App;
 import com.vcampus.util.ResponseUtils;
 
+import static com.alibaba.fastjson.JSON.toJSONString;
+
 /**
  * @author Franklin Yang
  * @date 2021/7/12

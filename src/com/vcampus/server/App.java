@@ -106,7 +106,7 @@ public class App extends JFrame {
         try {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
-            Boolean verifyResult = studentMapper.verifyStudent(new Student(null, null));
+            boolean verifyResult = studentMapper.verifyStudent(new Student(null, null));
             sqlSession.commit();
             App.paneLog.setText(res.getString("db_connection_success"));
         } catch (Exception e) {

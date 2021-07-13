@@ -69,7 +69,7 @@ public class Student {
         return password;
     }
 
-    public void setPassword(String Password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
