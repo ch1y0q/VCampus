@@ -81,7 +81,7 @@ public class Student {
         this.cardNumber = cardNumber;
     }
 
-    public String setStudentNumber() {
+    public String getStudentNumber() {
         return studentNumber;
     }
 

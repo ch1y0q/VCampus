@@ -35,6 +35,25 @@ public class Auth {
         }
         return result;
     }
-    //TODO
 
+    public static Teacher teacherLoginChecker(Teacher teacher) {
+        Teacher result = null;
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            ITeacherMapper teacherMapper = sqlSession.getMapper(ITeacherMapper.class);
+            boolean verifyResult = teacherMapper.verifyTeacher(teacher);
+
+            if (!verifyResult) {
+                System.out.println("No result");
+                return null;
+            }
+            result = teacherMapper.getTeacherDetailByCardNumber(teacher.getCardNumber());
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    // TODO adminLoginChecker
 }

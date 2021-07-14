@@ -19,6 +19,13 @@ public class Verifier {
                         new Object[] { new Student(cardNumber, password) }).send())
                 .getReturn(Student.class);
     }
+
+    public static Teacher checkTeacher(String cardNumber, String password) {
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.Auth.teacherLoginChecker",
+                        new Object[] { new Teacher(cardNumber, password) }).send())
+                .getReturn(Teacher.class);
+    }
 /*
     public static Teacher verifyTeacher(String cardNumber, String password) {
         return ResponseUtils

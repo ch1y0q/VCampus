@@ -1,5 +1,7 @@
 package com.vcampus.entity;
 
+import static com.vcampus.util.CommonUtils.getSchoolByCode;
+
 /**
  * @author Huang Qiyue
  * @date 2021-07-12
@@ -9,6 +11,7 @@ public class Teacher {
     private String name;
     private String password;
     private String cardNumber;
+    private String teacherNumber;
     private float balance;
 
     /* optional */
@@ -17,6 +20,13 @@ public class Teacher {
     private String gender;
 
     /* constructor */
+    public Teacher(String _cardNumber, String _password) {
+        name = "";
+        password = _password;
+        cardNumber = _cardNumber;
+        balance = 0.0f;
+    }
+
     public Teacher(String _name, String _password, String _cardNumber, float _balance) {
         name = _name;
         password = _password;
@@ -25,7 +35,14 @@ public class Teacher {
     }
 
     /* util */
-
+    public String getSchool() {
+        String school = "";
+        try {
+            school = getSchoolByCode(teacherNumber.substring(0, 2));
+        } catch (Exception e) {
+        }
+        return school;
+    }
 
     /* getters and setters */
     public String getName() {
@@ -40,11 +57,11 @@ public class Teacher {
         return password;
     }
 
-    public void setPassword(String Password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String setCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
@@ -52,7 +69,15 @@ public class Teacher {
         this.cardNumber = cardNumber;
     }
 
-    public float setBalance() {
+    public String getTeacherNumber() {
+        return teacherNumber;
+    }
+
+    public void setTeacherNumber(String teacherNumber) {
+        this.teacherNumber = teacherNumber;
+    }
+
+    public float getBalance() {
         return balance;
     }
 
@@ -68,7 +93,7 @@ public class Teacher {
         this.email = email;
     }
 
-    public String setPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -83,4 +108,5 @@ public class Teacher {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
 }
