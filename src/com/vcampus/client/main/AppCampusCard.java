@@ -161,8 +161,19 @@ public class AppCampusCard extends JFrame {
         contentPane.add(CardFoundReportButton);
         CardFoundReportButton.setBounds(320,295,90,25);
 
-        JTable table=new JTable(5,6);
-        JScrollPane pane=new JScrollPane(table);
+        JLabel WaterBillTableLabel = new JLabel("一卡通交易记录");
+        WaterBillTableLabel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        WaterBillTableLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
+        WaterBillTableLabel.setBounds(520, 80, 150, 40);
+        contentPane.add(WaterBillTableLabel);
 
+        JTable WaterBillTable=new JTable(10,3);
+        WaterBillTable.setBounds(500,120,200,200);
+        WaterBillTable.setRowHeight(20);
+        WaterBillTable.getModel().setValueAt("时间",0,0);
+        WaterBillTable.getModel().setValueAt("金额",0,1);
+        WaterBillTable.getModel().setValueAt("属性",0,2);
+        contentPane.add(WaterBillTable);
     }
 }
