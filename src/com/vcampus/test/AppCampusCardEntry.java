@@ -1,17 +1,17 @@
 package com.vcampus.test;
 
-import com.vcampus.client.main.AppStudent;
+import com.vcampus.client.main.AppCampusCard;
 import com.vcampus.server.App;
 
 import java.awt.*;
 
-public class AppStudentEntry {
+public class AppCampusCardEntry {
     public static void main(String args[]){
 
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                AppStudent app = new AppStudent();
+                AppCampusCard app = new AppCampusCard();
                 app.setVisible(true);
             }
         });
