@@ -3,6 +3,7 @@ package com.vcampus.client;
 import com.vcampus.client.main.App;
 import com.vcampus.entity.Student;
 import com.vcampus.entity.Teacher;
+import com.vcampus.entity.Admin;
 import com.vcampus.entity.UserType;
 import com.vcampus.net.Session;
 import com.vcampus.util.SwingUtils;
@@ -78,7 +79,19 @@ public class LoginUI extends JFrame {
             }
         } else if (rdbAdmin.isSelected()) {
             type = UserType.ADMIN;
-            // TODO
+            Admin admin = Verifier.checkAdmin(txtCardNumber.getText(), new String(txtPassword.getPassword()));
+            if (admin != null) {
+                SwingUtils.showMessage(null, res.getString("admin_login_success"), res.getString("info"));
+                // 填充App.session
+                App.hasLogon = true;
+                App.session = new Session(admin);
+                setVisible(false);
+                // 要求界面路由
+                App.requireRouting();
+            } else {
+                SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
+                txtPassword.setText("");
+            }
         }
     }
 
