@@ -20,6 +20,8 @@ import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.Student;
 
 /**
+ * 服务端主对象
+ *
  * @author Franklin Yang
  * @date 2021/7/12
  */
