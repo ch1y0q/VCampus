@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.vcampus.dao.IAdminMapper">
+
+    <!-- Used By Auth Module -->
+
+    <select id="verifyAdmin" parameterType="Admin"
+            resultType="boolean">
+        SELECT COUNT(*) FROM `admins` WHERE
+            `card_number`=#{cardNumber} AND `password`=#{password}
+    </select>
+    <select id="getAdminDetailByCardNumber" parameterType="String"
+            resultType="Admin">
+        SELECT * FROM `admins` WHERE
+            `card_number`=#{cardNumber}
+    </select>
+
+
+    <!-- Used By Auth Module -->
+
+</mapper>
