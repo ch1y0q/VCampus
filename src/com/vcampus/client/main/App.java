@@ -12,6 +12,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * @author Franklin Yang
@@ -25,6 +27,9 @@ public class App extends JFrame {
     private ResponseListener responseListener; // 前端响应监听器
 
     private JPanel contentPane;
+
+    private static Locale locale;
+    private static ResourceBundle res;
 
     /**
      * 要求进行界面路由
@@ -47,19 +52,21 @@ public class App extends JFrame {
 
 
         if (target == null) {
-            SwingUtils.showError(null, "界面路由失败！", "错误");
+            SwingUtils.showError(null, res.getString("routing_failure"), res.getString("error"));
             System.exit(1);
         }
         target.setVisible(true);
     }
 
     public App() throws IOException {
+        locale = Locale.getDefault();
+        res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
         // 连接到服务器
         App.connectionToServer = Utils.formConnection();
         // 报错，结束运行
         if (App.connectionToServer == null) {
-            SwingUtils.showError(null, "服务器连接失败！连接到：" + Utils.getServerHost() + ":" + Utils.getMainPort(), "错误");
+            SwingUtils.showError(null, String.format(res.getString("connection_to_server_failure") ,Utils.getServerHost() , Utils.getMainPort()), res.getString("error"));
             System.exit(0);
         }
         // 初始化响应队列

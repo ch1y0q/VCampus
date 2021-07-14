@@ -2,6 +2,8 @@ package com.vcampus.client;
 
 import com.vcampus.client.main.App;
 import com.vcampus.entity.Student;
+import com.vcampus.entity.Teacher;
+import com.vcampus.entity.Admin;
 import com.vcampus.entity.UserType;
 import com.vcampus.net.Session;
 import com.vcampus.util.SwingUtils;
@@ -62,16 +64,40 @@ public class LoginUI extends JFrame {
             }
         } else if (rdbTeacher.isSelected()) {
             type = UserType.TEACHER;
-            // TODO
+            Teacher teacher = Verifier.checkTeacher(txtCardNumber.getText(), new String(txtPassword.getPassword()));
+            if (teacher != null) {
+                SwingUtils.showMessage(null, res.getString("teacher_login_success"), res.getString("info"));
+                // 填充App.session
+                App.hasLogon = true;
+                App.session = new Session(teacher);
+                setVisible(false);
+                // 要求界面路由
+                App.requireRouting();
+            } else {
+                SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
+                txtPassword.setText("");
+            }
         } else if (rdbAdmin.isSelected()) {
             type = UserType.ADMIN;
-            // TODO
+            Admin admin = Verifier.checkAdmin(txtCardNumber.getText(), new String(txtPassword.getPassword()));
+            if (admin != null) {
+                SwingUtils.showMessage(null, res.getString("admin_login_success"), res.getString("info"));
+                // 填充App.session
+                App.hasLogon = true;
+                App.session = new Session(admin);
+                setVisible(false);
+                // 要求界面路由
+                App.requireRouting();
+            } else {
+                SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
+                txtPassword.setText("");
+            }
         }
     }
 
     public LoginUI() {
         locale = Locale.getDefault();
-        res = ResourceBundle.getBundle("com.vcampus.client.LoginResource", locale);
+        res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

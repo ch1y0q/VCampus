@@ -4,6 +4,8 @@ import com.vcampus.util.JSONUtils;
 import org.apache.ibatis.session.SqlSession;
 import com.vcampus.entity.*;
 import com.vcampus.dao.IStudentMapper;
+import com.vcampus.dao.ITeacherMapper;
+import com.vcampus.dao.IAdminMapper;
 import com.vcampus.server.App;
 
 import static com.alibaba.fastjson.JSON.toJSONString;
@@ -16,6 +18,7 @@ import static com.alibaba.fastjson.JSON.toJSONString;
  */
 
 public class Auth {
+    //用于学生登录使用的检查方法
     public static Student studentLoginChecker(Student student) {
         Student result = null;
         try {
@@ -35,6 +38,46 @@ public class Auth {
         }
         return result;
     }
-    //TODO
 
+    //用于教师登录的检查方法
+    public static Teacher teacherLoginChecker(Teacher teacher) {
+        Teacher result = null;
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            ITeacherMapper teacherMapper = sqlSession.getMapper(ITeacherMapper.class);
+            boolean verifyResult = teacherMapper.verifyTeacher(teacher);
+
+            if (!verifyResult) {
+                System.out.println("No result");
+                return null;
+            }
+            result = teacherMapper.getTeacherDetailByCardNumber(teacher.getCardNumber());
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //用于管理员登录使用的检查方法
+    public static Admin adminLoginChecker(Admin admin) {
+        Admin result = null;
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IAdminMapper adminMapper = sqlSession.getMapper(IAdminMapper.class);
+            boolean verifyResult = adminMapper.verifyAdmin(admin);
+
+            if (!verifyResult) {
+                System.out.println("No result");
+                return null;
+            }
+            result = adminMapper.getAdminDetailByCardNumber(admin.getCardNumber());
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

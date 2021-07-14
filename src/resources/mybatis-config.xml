@@ -40,6 +40,8 @@
     <!-- 关系映射文件 -->
     <mappers>
         <mapper resource="resources/mapper/studentMapper.xml" />
+        <mapper resource="resources/mapper/teacherMapper.xml" />
+        <mapper resource="resources/mapper/adminMapper.xml" />
     </mappers>
 
 </configuration>

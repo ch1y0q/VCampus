@@ -6,6 +6,8 @@ import java.util.Map;
 import com.vcampus.entity.Student;
 
 /**
+ * 一系列学生数据库操作的接口，用于mybatis的映射
+ *
  * @author Franklin Yang
  * @date 2021/7/12
  */
@@ -22,11 +24,11 @@ public interface IStudentMapper {
 
     public Boolean insertStudent(Student student);
 
-    public int deleteStudent(String cardnumber);
+    public int deleteStudent(String cardNumber);
 
-    public Integer searchStudentByCardNumber(String cardnumber);
+    public Integer searchStudentByCardNumber(String cardNumber);
 
-    public Integer searchStudentByStudentNumber(String studentnumber);
+    public Integer searchStudentByStudentNumber(String studentNumber);
 
     public int switchStudent(Student student);
 

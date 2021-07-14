@@ -9,10 +9,14 @@ import com.vcampus.entity.Student;
 import com.vcampus.server.App;
 
 /**
+ * 学生管理类
+ *
  * @author Franklin Yang
  * @date 2021/7/12
  */
 public class StudentManage {
+
+    //通过一卡通号检索返回姓名
     public static String getNameByCardNumber(String cardNumber) {
         String result = null;
         SqlSession sqlSession = null;
@@ -28,6 +32,7 @@ public class StudentManage {
         return result;
     }
 
+    //新建学生
     public static Boolean insertStudent(Student student) {
         Boolean result = false;
         SqlSession sqlSession = null;
@@ -44,6 +49,7 @@ public class StudentManage {
         return result;
     }
 
+    //删除学生
     public static Boolean deleteStudent(String cardnumber) {
         Boolean result = false;
         SqlSession sqlSession = null;
@@ -61,6 +67,7 @@ public class StudentManage {
         return (ret == 0 ? false : true);
     }
 
+    //更新学生的学院和学号
     public static String switchStudent(String cardnumber, String academy, String studentnumber) {
         SqlSession sqlSession = null;
         try {
@@ -95,6 +102,7 @@ public class StudentManage {
         return "...";
     }
 
+    //显示某学院学生列表
     public static List<Student> tableDisplay(String academy, String grade) {
         List<Student> result = null;
         SqlSession sqlSession = null;
@@ -112,6 +120,8 @@ public class StudentManage {
         return result;
     }
 
+    //重设密码
+    //TODO
     public static Boolean resetPassword(String cardNumber, String newPasswordMD5) {
         Boolean result = null;
         SqlSession sqlSession = null;
