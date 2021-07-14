@@ -44,13 +44,20 @@
         SELECT COUNT(*) FROM `teachers` WHERE `cardNumber` =
                                               #{cardnumber}
     </select>
-<!--
-    <update id="switchTeacher" parameterType="Teacher">
-        UPDATE `teachers` SET
-                              `school` = #{school}, `teacherNumber` = #{teacherNumber} WHERE
-            `cardNumber` = #{cardNumber}
-    </update>
--->
+
+    <select id="searchStudentByTeacherNumber" parameterType="String"
+            resultType="Integer">
+        SELECT COUNT(*) FROM `teachers` WHERE `teacherNumber` =
+                                              #{teacherNumber}
+    </select>
+
+    <!--
+        <update id="switchTeacher" parameterType="Teacher">
+            UPDATE `teachers` SET
+                                  `school` = #{school}, `teacherNumber` = #{teacherNumber} WHERE
+                `cardNumber` = #{cardNumber}
+        </update>
+    -->
     <!--
     <select id="tableDisplay" parameterType="Map"
             resultType="Teacher">

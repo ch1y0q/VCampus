@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.vcampus.entity.*;
 import com.vcampus.dao.IStudentMapper;
 import com.vcampus.dao.ITeacherMapper;
+import com.vcampus.dao.IAdminMapper;
 import com.vcampus.server.App;
 
 import static com.alibaba.fastjson.JSON.toJSONString;
@@ -57,5 +58,24 @@ public class Auth {
         }
         return result;
     }
-    // TODO adminLoginChecker
+
+    public static Admin adminLoginChecker(Admin admin) {
+        Admin result = null;
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IAdminMapper adminMapper = sqlSession.getMapper(IAdminMapper.class);
+            boolean verifyResult = adminMapper.verifyAdmin(admin);
+
+            if (!verifyResult) {
+                System.out.println("No result");
+                return null;
+            }
+            result = adminMapper.getAdminDetailByCardNumber(admin.getCardNumber());
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

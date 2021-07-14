@@ -24,7 +24,9 @@ public interface ITeacherMapper {
 
     public Integer searchTeacherByCardNumber(String cardNumber);
 
-    public int switchTeacher(Teacher teacher);
+    public Integer searchTeacherByTeacherNumber(String teacherNumber);
+
+    //public int switchTeacher(Teacher teacher);
 
     //public List<Teacher> tableDisplay(Map map);
 

@@ -24,6 +24,7 @@ public class Teacher {
         name = "";
         password = _password;
         cardNumber = _cardNumber;
+        teacherNumber="";
         balance = 0.0f;
     }
 

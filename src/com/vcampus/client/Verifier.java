@@ -22,23 +22,16 @@ public class Verifier {
 
     public static Teacher checkTeacher(String cardNumber, String password) {
         return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.Auth.teacherLoginChecker",
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.auth.Auth.teacherLoginChecker",
                         new Object[] { new Teacher(cardNumber, password) }).send())
                 .getReturn(Teacher.class);
     }
-/*
-    public static Teacher verifyTeacher(String cardNumber, String password) {
+
+    public static Admin checkAdmin(String cardNumber, String password) {
         return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.auth.Auth.teacherLoginChecker",
-                        new Object[] { new Student(cardNumber, null, OtherUtils.getMD5(password), null) }).send())
-                .getReturn(Teacher.class);
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.auth.Auth.adminLoginChecker",
+                        new Object[] { new Admin(cardNumber, password) }).send())
+                .getReturn(Admin.class);
     }
 
-    public static Manager verifyManager(String cardNumber, String password) {
-        return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.auth.Auth.managerLoginChecker",
-                        new Object[] { new Student(cardNumber, null, OtherUtils.getMD5(password), null) }).send())
-                .getReturn(Manager.class);
-    }
-*/
 }
