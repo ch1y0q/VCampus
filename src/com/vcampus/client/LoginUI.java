@@ -97,7 +97,7 @@ public class LoginUI extends JFrame {
 
     public LoginUI() {
         locale = Locale.getDefault();
-        res = ResourceBundle.getBundle("com.vcampus.client.LoginResource", locale);
+        res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
