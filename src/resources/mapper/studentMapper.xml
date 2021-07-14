@@ -36,19 +36,19 @@
 
     <delete id="deleteStudent" parameterType="String">
         DELETE FROM
-            `students` WHERE cardNumber = #{cardnumber}
+            `students` WHERE cardNumber = #{cardNumber}
     </delete>
 
     <select id="searchStudentByCardNumber" parameterType="String"
             resultType="Integer">
         SELECT COUNT(*) FROM `students` WHERE `cardNumber` =
-                                                #{cardnumber}
+                                                #{cardNumber}
     </select>
 
     <select id="searchStudentByStudentNumber" parameterType="String"
             resultType="Integer">
         SELECT COUNT(*) FROM `students` WHERE `studentNumber` =
-                                                #{studentnumber}
+                                                #{studentNumber}
     </select>
 
     <update id="switchStudent" parameterType="Student">

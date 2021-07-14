@@ -22,11 +22,11 @@ public interface IStudentMapper {
 
     public Boolean insertStudent(Student student);
 
-    public int deleteStudent(String cardnumber);
+    public int deleteStudent(String cardNumber);
 
-    public Integer searchStudentByCardNumber(String cardnumber);
+    public Integer searchStudentByCardNumber(String cardNumber);
 
-    public Integer searchStudentByStudentNumber(String studentnumber);
+    public Integer searchStudentByStudentNumber(String studentNumber);
 
     public int switchStudent(Student student);
 

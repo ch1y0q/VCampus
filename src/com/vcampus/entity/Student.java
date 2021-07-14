@@ -89,7 +89,7 @@ public class Student {
         this.studentNumber = studentNumber;
     }
 
-    public float setBalance() {
+    public float getBalance() {
         return balance;
     }
 
@@ -97,7 +97,7 @@ public class Student {
         this.balance = balance;
     }
 
-    public List<String> setCourses() {
+    public List<String> getCourses() {
         return courses;
     }
 
@@ -113,7 +113,7 @@ public class Student {
         this.email = email;
     }
 
-    public String setPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 

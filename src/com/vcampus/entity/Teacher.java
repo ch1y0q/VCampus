@@ -108,5 +108,4 @@ public class Teacher {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
 }

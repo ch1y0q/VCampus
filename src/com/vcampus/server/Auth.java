@@ -4,6 +4,7 @@ import com.vcampus.util.JSONUtils;
 import org.apache.ibatis.session.SqlSession;
 import com.vcampus.entity.*;
 import com.vcampus.dao.IStudentMapper;
+import com.vcampus.dao.ITeacherMapper;
 import com.vcampus.server.App;
 
 import static com.alibaba.fastjson.JSON.toJSONString;
@@ -35,6 +36,7 @@ public class Auth {
         }
         return result;
     }
+    //TODO
 
     public static Teacher teacherLoginChecker(Teacher teacher) {
         Teacher result = null;
