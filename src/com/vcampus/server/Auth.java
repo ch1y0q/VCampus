@@ -18,6 +18,7 @@ import static com.alibaba.fastjson.JSON.toJSONString;
  */
 
 public class Auth {
+    //用于学生登录使用的检查方法
     public static Student studentLoginChecker(Student student) {
         Student result = null;
         try {
@@ -37,8 +38,8 @@ public class Auth {
         }
         return result;
     }
-    //TODO
 
+    //用于教师登录的检查方法
     public static Teacher teacherLoginChecker(Teacher teacher) {
         Teacher result = null;
         try {
@@ -59,6 +60,7 @@ public class Auth {
         return result;
     }
 
+    //用于管理员登录使用的检查方法
     public static Admin adminLoginChecker(Admin admin) {
         Admin result = null;
         try {

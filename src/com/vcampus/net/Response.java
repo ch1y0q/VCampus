@@ -48,10 +48,10 @@ public class Response {
         }
 
         if (JSONUtils.isBasicClass(clazz)) {
-            // 对于基本类型，不解析
+            // 基本类型，不解析
             return clazz.cast(this.param);
         } else {
-            // 对于自定义类，嵌套解析
+            // 自定义类，嵌套解析
             JSONObject temp = (JSONObject) this.param;
             return JSON.parseObject(temp.toJSONString(), clazz);
         }
@@ -70,7 +70,7 @@ public class Response {
         List<Object> unparsedList = JSON.parseArray(tempParam.toJSONString());
         List<T> processedList = new ArrayList<T>();
 
-        // 对于基本类型，不解析
+        // 基本类型，不解析
         if (JSONUtils.isBasicClass(elementClazz)) {
             for (int i = 0; i < unparsedList.size(); i++) {
                 processedList.add(elementClazz.cast(unparsedList.get(i)));
@@ -100,7 +100,7 @@ public class Response {
         Map<String, Object> unparsedMap = JSON.parseObject(tempParam.toJSONString());
         Map<String, T> processedMap = new HashMap<>();
 
-        // 对于基本类型，不解析
+        // 基本类型，不解析
         if (JSONUtils.isBasicClass(valueClazz)) {
             for (String key : unparsedMap.keySet()) {
                 processedMap.put(key, valueClazz.cast(unparsedMap.get(key)));

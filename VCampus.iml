@@ -48,5 +48,14 @@
     <orderEntry type="library" exported="" name="fastjson-1.2.76" level="project" />
     <orderEntry type="library" exported="" name="c3p0-0.9.5.2" level="project" />
     <orderEntry type="library" exported="" name="mchange-commons-java-0.2.11" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/beautyeye_lnf.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

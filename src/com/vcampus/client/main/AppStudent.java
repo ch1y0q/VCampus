@@ -1,4 +1,5 @@
 package com.vcampus.client.main;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -6,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * @author Xiao Kaijie
@@ -13,28 +16,31 @@ import java.util.List;
  */
 
 public class AppStudent extends JFrame {
-    private JPanel contentPane;
+    private static Locale locale = Locale.getDefault();
+    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+
     public static JLabel lblBalance;
+
     public AppStudent() {
         setResizable(true);
         //setIconImage(Toolkit.getDefaultToolkit().getImage(AppStudent.class.getResource("/resources/assets/icon/fav.png")));
-        setTitle("学生主页 - VCampus");
+        setTitle(res.getString("student_main"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1151, 800);
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBackground(new Color(240, 255, 240));
         contentPane.setLocation(-871, -176);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblVcampus = new JLabel("学生主页 - VCampus");
+        JLabel lblVcampus = new JLabel(res.getString("student_main"));
         lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
         lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 43));
         lblVcampus.setBounds(50, 25, 800, 43);
         contentPane.add(lblVcampus);
 
-        JButton logout = new JButton("登出");
+        JButton logout = new JButton(res.getString("logout"));
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,7 +71,7 @@ public class AppStudent extends JFrame {
         btnTeaching.setBounds(374, 600, 220, 80);
         contentPane.add(btnTeaching);
 
-        JButton btnLibrary = new JButton(" 李文正图书馆");
+        JButton btnLibrary = new JButton("李文正图书馆");
         btnLibrary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -127,8 +133,8 @@ public class AppStudent extends JFrame {
         JLabel lblName = new JLabel("...");
         lblName.setBounds(104, 23, 149, 18);
         panel.add(lblName);
-        JButton namechange =new JButton("编辑");
-        namechange.setBounds(200,23,60,18);
+        JButton namechange = new JButton(res.getString("edit"));
+        namechange.setBounds(200, 23, 60, 18);
         namechange.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         namechange.addActionListener(new ActionListener() {
             @Override
@@ -138,11 +144,11 @@ public class AppStudent extends JFrame {
                 jd.setTitle("请输入修改的值");
                 jd.getContentPane().setLayout(new GridLayout(1, 1));
                 jd.add(new JLabel("姓名"));
-                JTextField tf=new JTextField(20);
+                JTextField tf = new JTextField(20);
                 jd.add(tf);
                 tf.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String s1=tf.getText();
+                        String s1 = tf.getText();
                         tf.setText("");
                         lblName.setText(s1);
                     }
@@ -156,22 +162,22 @@ public class AppStudent extends JFrame {
         JLabel lblCardNumber = new JLabel("...");
         lblCardNumber.setBounds(104, 54, 72, 18);
         panel.add(lblCardNumber);
-        JButton cardchange =new JButton("编辑");
-        cardchange.setBounds(200,54,60,18);
-        cardchange.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        cardchange.addActionListener(new ActionListener() {
+        JButton cardChange = new JButton(res.getString("edit"));
+        cardChange.setBounds(200, 54, 60, 18);
+        cardChange.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        cardChange.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog jd = new JDialog();
                 jd.setBounds(320, 180, 260, 100);
                 jd.setTitle("请输入修改的值");
                 jd.getContentPane().setLayout(new GridLayout(1, 1));
-                jd.add(new JLabel("一卡通号"));
-                JTextField tf=new JTextField(20);
+                jd.add(new JLabel(res.getString("card_number")));
+                JTextField tf = new JTextField(20);
                 jd.add(tf);
                 tf.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String s1=tf.getText();
+                        String s1 = tf.getText();
                         tf.setText("");
                         lblCardNumber.setText(s1);
                     }
@@ -180,13 +186,13 @@ public class AppStudent extends JFrame {
                 jd.setVisible(true);
             }
         });
-        panel.add(cardchange);
+        panel.add(cardChange);
 
         JLabel lblStudentNumber = new JLabel("...");
         lblStudentNumber.setBounds(104, 85, 149, 18);
         panel.add(lblStudentNumber);
-        JButton stunumchange =new JButton("编辑");
-        stunumchange.setBounds(200,85,60,18);
+        JButton stunumchange = new JButton(res.getString("edit"));
+        stunumchange.setBounds(200, 85, 60, 18);
         stunumchange.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         stunumchange.addActionListener(new ActionListener() {
             @Override
@@ -196,11 +202,11 @@ public class AppStudent extends JFrame {
                 jd.setTitle("请输入修改的值");
                 jd.getContentPane().setLayout(new GridLayout(1, 1));
                 jd.add(new JLabel("学号"));
-                JTextField tf=new JTextField(20);
+                JTextField tf = new JTextField(20);
                 jd.add(tf);
                 tf.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String s1=tf.getText();
+                        String s1 = tf.getText();
                         tf.setText("");
                         lblStudentNumber.setText(s1);
                     }
@@ -214,8 +220,8 @@ public class AppStudent extends JFrame {
         JLabel lblAcademy = new JLabel("...");
         lblAcademy.setBounds(104, 116, 149, 18);
         panel.add(lblAcademy);
-        JButton academychange =new JButton("编辑");
-        academychange.setBounds(200,116,60,18);
+        JButton academychange = new JButton(res.getString("edit"));
+        academychange.setBounds(200, 116, 60, 18);
         academychange.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         academychange.addActionListener(new ActionListener() {
             @Override
@@ -225,11 +231,11 @@ public class AppStudent extends JFrame {
                 jd.setTitle("请输入修改的值");
                 jd.getContentPane().setLayout(new GridLayout(1, 1));
                 jd.add(new JLabel("院系"));
-                JTextField tf=new JTextField(20);
+                JTextField tf = new JTextField(20);
                 jd.add(tf);
                 tf.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String s1=tf.getText();
+                        String s1 = tf.getText();
                         tf.setText("");
                         lblAcademy.setText(s1);
                     }
@@ -278,28 +284,28 @@ public class AppStudent extends JFrame {
         lblNewLabel_2.setBounds(806, 450, 64, 64);
         contentPane.add(lblNewLabel_2);
 
-        JLabel lblCI1 = new JLabel("无课程"); //1-2
+        JLabel lblCI1 = new JLabel(res.getString("no_course")); //1-2
         lblCI1.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         lblCI1.setBounds(884, 546, 222, 18);
         contentPane.add(lblCI1);
-        JLabel lblCI2 = new JLabel("无课程");//3-4
+        JLabel lblCI2 = new JLabel(res.getString("no_course"));//3-4
         lblCI2.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         lblCI2.setBounds(884, 583, 222, 18);
         contentPane.add(lblCI2);
-        JLabel lblCI3 = new JLabel("无课程");//5-6
+        JLabel lblCI3 = new JLabel(res.getString("no_course"));//5-6
         lblCI3.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         lblCI3.setBounds(884, 620, 222, 18);
         contentPane.add(lblCI3);
-        JLabel lblCI4 = new JLabel("无课程");//7-8
+        JLabel lblCI4 = new JLabel(res.getString("no_course"));//7-8
         lblCI4.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         lblCI4.setBounds(884, 657, 222, 18);
         contentPane.add(lblCI4);
-        JLabel lblCI5 = new JLabel("无课程");//9-10
+        JLabel lblCI5 = new JLabel(res.getString("no_course"));//9-10
         lblCI5.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         lblCI5.setBounds(884, 694, 222, 18);
         contentPane.add(lblCI5);
 
-        JLabel[] lblCourses = new JLabel[] { lblCI1, lblCI2, lblCI3, lblCI4, lblCI5 };
+        JLabel[] lblCourses = new JLabel[]{lblCI1, lblCI2, lblCI3, lblCI4, lblCI5};
 
 
         JLabel lblNewLabel_3 = new JLabel("1~2节");
