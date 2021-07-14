@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 一系列教师数据库操作的接口，用于mybatis的映射
  * @author Franklin Yang
  * @date 2021/7/14
  */
