@@ -120,7 +120,7 @@ public class App extends JFrame {
         App.requestHandler = new RequestHandler();
         App.requestHandler.start();
         App.paneLog.setText(
-                paneLog.getText() + (paneLog.getText().equals("") ? "" : "\n") + res.getString("start_listening_on") + ServerUtils.getMainPort());
+                paneLog.getText() + (paneLog.getText().equals("") ? "" : "\n") + String.format(res.getString("start_listening_on"), ServerUtils.getMainPort()));
         foreverSqlSession = sqlSessionFactory.openSession();
 
     }
