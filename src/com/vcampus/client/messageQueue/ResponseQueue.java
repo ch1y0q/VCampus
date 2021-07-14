@@ -38,4 +38,8 @@ public class ResponseQueue {
         return mp.containsKey(hash);
     }
 
+    @Override
+    public String toString(){
+        return mp.toString();
+    }
 }

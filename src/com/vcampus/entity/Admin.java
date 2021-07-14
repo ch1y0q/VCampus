@@ -24,7 +24,13 @@ public class Admin {
         cardNumber = _cardNumber;
         balance = _balance;
     }
-
+    public Admin(){}
+    public Admin(String _cardNumber,String _password)
+    {
+        name="";
+        cardNumber=_cardNumber;
+        password=_password;
+    }
     /* util */
 
 
@@ -45,7 +51,7 @@ public class Admin {
         this.password = password;
     }
 
-    public String setCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
@@ -53,7 +59,7 @@ public class Admin {
         this.cardNumber = cardNumber;
     }
 
-    public float setBalance() {
+    public float getBalance() {
         return balance;
     }
 
@@ -69,7 +75,7 @@ public class Admin {
         this.email = email;
     }
 
-    public String setPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 

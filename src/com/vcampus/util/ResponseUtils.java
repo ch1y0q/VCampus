@@ -10,6 +10,8 @@ import com.vcampus.net.Response;
  * @date 2021/7/12
  */
 public final class ResponseUtils {
+    static final long TIMEOUT_MS = 5000;
+
     @Deprecated
     /**
      * 阻塞并等待响应
@@ -26,15 +28,18 @@ public final class ResponseUtils {
     /**
      * 阻塞并获取具体响应，支持超时中断
      */
-    public final static Response getResponseByHash(String hash) {
+
+    public static Response getResponseByHash(String hash) {
         // support timeout
-        long shouldEnd = new Date().getTime() + 10000;
-        while (!ResponseQueue.getInstance().contain(hash)) {
-            if (ResponseQueue.getInstance().contain(hash)) {
-                break;
-            }
+        long shouldEnd = new Date().getTime() + TIMEOUT_MS;
+        boolean hasResponse = false;
+        while (!hasResponse) {
+            hasResponse = ResponseQueue.getInstance().contain(hash);
             if (new Date().getTime() >= shouldEnd) {
-                // TODO: uncomment this when release
+                if (hasResponse = ResponseQueue.getInstance().contain(hash)) {
+                    break;
+                }
+
                 SwingUtils.showError(null, "请求超时！Hash=" + hash, "错误");
                 return null;
             }
