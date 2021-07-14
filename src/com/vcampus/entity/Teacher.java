@@ -17,6 +17,13 @@ public class Teacher {
     private String gender;
 
     /* constructor */
+    public Teacher(){}
+    public Teacher(String _cardNumber,String _password){
+        name="";
+        cardNumber=_cardNumber;
+        password=_password;
+        balance=0;
+    }
     public Teacher(String _name, String _password, String _cardNumber, float _balance) {
         name = _name;
         password = _password;
@@ -40,11 +47,11 @@ public class Teacher {
         return password;
     }
 
-    public void setPassword(String Password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String setCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
@@ -52,7 +59,7 @@ public class Teacher {
         this.cardNumber = cardNumber;
     }
 
-    public float setBalance() {
+    public float getBalance() {
         return balance;
     }
 
@@ -68,7 +75,7 @@ public class Teacher {
         this.email = email;
     }
 
-    public String setPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
