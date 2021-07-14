@@ -9,12 +9,12 @@
     <select id="verifyAdmin" parameterType="Admin"
             resultType="boolean">
         SELECT COUNT(*) FROM `admins` WHERE
-            `card_number`=#{cardNumber} AND `password`=#{password}
+            `cardnumber`=#{cardNumber} AND `password`=#{password}
     </select>
     <select id="getAdminDetailByCardNumber" parameterType="String"
             resultType="Admin">
         SELECT * FROM `admins` WHERE
-            `card_number`=#{cardNumber}
+            `cardnumber`=#{cardNumber}
     </select>
 
 
