@@ -1,6 +1,7 @@
 package com.vcampus.test;
 
 
+import com.alee.laf.WebLookAndFeel;
 import com.vcampus.client.main.App;
 
 import java.awt.*;
@@ -19,6 +20,7 @@ public class ClientEntry {
             @Override
             public void run() {
                 try {
+                    WebLookAndFeel.install();
                     App app = new App();
                     //app.setVisible(true);
                 } catch (IOException e) {

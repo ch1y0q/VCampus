@@ -6,6 +6,8 @@ import com.vcampus.client.messageQueue.ResponseQueue;
 import com.vcampus.net.Response;
 
 /**
+ * 响应工具
+ *
  * @author Franklin Yang
  * @date 2021/7/12
  */

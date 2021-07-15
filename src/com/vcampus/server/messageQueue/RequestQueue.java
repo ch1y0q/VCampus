@@ -23,11 +23,13 @@ public class RequestQueue {
         vec = new Vector<>();
     }
 
+    //生产
     public void produce(Request request) {
         vec.add(request);
         App.appendLog("生产了一个请求, hash=" + request.getHash());
     }
 
+    //消费
     public Request consume() {
         Request request = vec.get(0);
         vec.remove(0);
