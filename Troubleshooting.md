@@ -2,6 +2,47 @@
 
 Some problems we encountered.
 
+## GUI
+在安装 [Weblaf](https://github.com/mgarin/weblaf) 时报错。
+
+同样是JDK 9的模块平台的原因。
+
+解决方法： 在JVM启动选项中添加：
+```java
+--add-opens java.base/java.util=ALL-UNNAMED
+--add-opens java.base/java.text=ALL-UNNAMED
+--add-opens java.base/java.lang.reflect=ALL-UNNAMED
+--add-opens java.base/java.net=ALL-UNNAMED
+--add-opens java.base/java.lang=ALL-UNNAMED
+--add-opens java.base/jdk.internal.loader=ALL-UNNAMED
+--add-opens java.desktop/javax.swing=ALL-UNNAMED
+--add-opens java.desktop/javax.swing.text=ALL-UNNAMED
+--add-opens java.desktop/java.awt.font=ALL-UNNAMED
+--add-opens java.desktop/java.awt.geom=ALL-UNNAMED
+--add-opens java.desktop/java.awt=ALL-UNNAMED
+--add-opens java.desktop/java.beans=ALL-UNNAMED
+--add-opens java.desktop/javax.swing.table=ALL-UNNAMED
+--add-opens java.desktop/com.sun.awt=ALL-UNNAMED
+--add-opens java.desktop/sun.awt=ALL-UNNAMED
+--add-opens java.desktop/sun.swing=ALL-UNNAMED
+--add-opens java.desktop/sun.font=ALL-UNNAMED
+--add-opens java.desktop/javax.swing.plaf.basic=ALL-UNNAMED
+--add-opens java.desktop/javax.swing.plaf.synth=ALL-UNNAMED
+--add-opens java.desktop/com.sun.java.swing.plaf.windows=ALL-UNNAMED
+--add-opens java.desktop/com.sun.java.swing.plaf.gtk=ALL-UNNAMED
+--add-opens java.desktop/com.apple.laf=ALL-UNNAMED
+```
+
+在添加后运行，控制台输出警告：
+```java
+WARNING: package com.sun.java.swing.plaf.gtk not in java.desktop
+WARNING: package com.apple.laf not in java.desktop
+WARNING: package com.sun.awt not in java.desktop
+```
+这是因为上述JVM启动选项是为跨平台运行考虑的，一些包在Windows环境并不存在。无视警告即可。
+
+参考：https://github.com/mgarin/weblaf#java-9
+
 ## Reflection
 点击登录按钮报错：`Unable to make field private boolean java.net.Socket.closed accessible: module java.base does not "opens java.net" to unnamed module @13969fbe`
 
@@ -70,7 +111,7 @@ Exception in thread "AWT-EventQueue-0" java.lang.reflect.InaccessibleObjectExcep
 
 `fastjson`包通过反射机制生成`connectionToServer`成员变量的`soket`成员变量的JSON String时出错。
 
-解决方法：添加JVM启动选项`--add-opens java.base/java.net=ALL-UNNAMED`。
+解决方法：经调查，发现由于JDK9以后引入了Module Platform，需要在JVM启动选项中添加`--add-opens java.base/java.net=ALL-UNNAMED`。
 
 参考： https://stackoverflow.com/questions/41265266/how-to-solve-inaccessibleobjectexception-unable-to-make-member-accessible-m
 

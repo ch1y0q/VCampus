@@ -1,5 +1,6 @@
 package com.vcampus.test;
 
+import com.alee.laf.WebLookAndFeel;
 import com.vcampus.client.main.AppStudent;
 import com.vcampus.server.App;
 
@@ -11,6 +12,7 @@ public class AppStudentEntry {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                WebLookAndFeel.install ();
                 AppStudent app = new AppStudent();
                 app.setVisible(true);
             }
