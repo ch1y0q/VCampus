@@ -9,7 +9,17 @@ import com.vcampus.entity.Admin;
  * @date 2021/7/14
  */
 public interface IAdminMapper {
+    @Deprecated
+    /**
+     * 仅在密码明文存储可用。
+     */
     public Boolean verifyAdmin(Admin admin);
 
     public Admin getAdminDetailByCardNumber(String cardNumber);
+
+    public String getSaltByCardNumber(String cardNumber);
+
+    public String getNameByCardNumber(String cardNumber);
+
+    public String getPasswordByCardNumber(String cardNumber);
 }

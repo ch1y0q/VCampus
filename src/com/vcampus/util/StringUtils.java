@@ -46,6 +46,7 @@ public class StringUtils {
      * @return MD5加密后的密文
      */
     public static String MD5Encode(String origin) {
+        assert (origin != null);
         String resultString = null;
         try {
             resultString = new String(origin);
@@ -66,8 +67,12 @@ public class StringUtils {
      * @return MD5加密后的密文
      */
     public static String MD5EncodeSalted(String origin, String salt) {
+        assert (origin != null);
         String resultString = null;
         try {
+            if (salt == null) {
+                salt = "";
+            }
             resultString = new String(origin + salt);
             MessageDigest md = MessageDigest.getInstance("MD5");
             resultString = byteArrayToHexString(md.digest(resultString
@@ -76,5 +81,9 @@ public class StringUtils {
             System.err.println(ex.getMessage());
         }
         return resultString;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(MD5EncodeSalted("123", ""));
     }
 }

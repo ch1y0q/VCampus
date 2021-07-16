@@ -26,14 +26,12 @@ public class AppCampusCard extends JFrame {
         JLabel CardNumLabel = new JLabel("一卡通号");
         CardNumLabel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         CardNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
         CardNumLabel.setBounds(5, 5, 100, 40);
         contentPane.add(CardNumLabel);
 
         JLabel CardNum = new JLabel("213191111");
         CardNum.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         CardNum.setHorizontalAlignment(SwingConstants.CENTER);
-        //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
         CardNum.setBounds(85, 5, 100, 40);
         contentPane.add(CardNum);
 
