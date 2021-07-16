@@ -14,13 +14,19 @@ import com.vcampus.entity.Student;
 
 public interface IStudentMapper {
 
+    @Deprecated
+    /**
+     * 仅在密码明文存储可用。
+     */
     public Boolean verifyStudent(Student student);
 
     public Student getStudentDetailByCardNumber(String cardNumber);
 
+    public String getSaltByCardNumber(String cardNumber);
+
     public String getNameByCardNumber(String cardNumber);
 
-    public String getPasswordByUsername(String cardNumber);
+    public String getPasswordByCardNumber(String cardNumber);
 
     public Boolean insertStudent(Student student);
 
@@ -36,7 +42,7 @@ public interface IStudentMapper {
 
     public Boolean chargeCard(Map map);
 
-    public String getBalance(String cardNumber);
+    public float getBalance(String cardNumber);
 
     public Boolean resetPassword(Map map);
 }

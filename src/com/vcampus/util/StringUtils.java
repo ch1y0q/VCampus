@@ -68,6 +68,9 @@ public class StringUtils {
     public static String MD5EncodeSalted(String origin, String salt) {
         String resultString = null;
         try {
+            if (salt == null) {
+                salt = "";
+            }
             resultString = new String(origin + salt);
             MessageDigest md = MessageDigest.getInstance("MD5");
             resultString = byteArrayToHexString(md.digest(resultString
@@ -76,5 +79,9 @@ public class StringUtils {
             System.err.println(ex.getMessage());
         }
         return resultString;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(MD5EncodeSalted("123", ""));
     }
 }

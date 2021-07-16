@@ -22,7 +22,13 @@
             `cardNumber`=#{cardNumber}
     </select>
 
-    <select id="getPasswordByUsername" parameterType="String"
+    <select id="getSaltByCardNumber" parameterType="String"
+            resultType="String">
+        SELECT `salt` FROM `teachers` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
+
+    <select id="getPasswordByCardNumber" parameterType="String"
             resultType="String">
         SELECT `password` FROM `teachers` WHERE
             `cardNumber`=#{cardNumber}

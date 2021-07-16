@@ -11,13 +11,19 @@ import java.util.Map;
  * @date 2021/7/14
  */
 public interface ITeacherMapper {
+    @Deprecated
+    /**
+     * 仅在密码明文存储可用。
+     */
     public Boolean verifyTeacher(Teacher teacher);
 
     public Teacher getTeacherDetailByCardNumber(String cardNumber);
 
     public String getNameByCardNumber(String cardNumber);
 
-    public String getPasswordByUsername(String cardNumber);
+    public String getPasswordByCardNumber(String cardNumber);
+
+    public String getSaltByCardNumber(String cardNumber);
 
     public Boolean insertTeacher(Teacher teacher);
 
@@ -33,7 +39,7 @@ public interface ITeacherMapper {
 
     public Boolean chargeCard(Map map);
 
-    public String getBalance(String cardNumber);
+    public float getBalance(String cardNumber);
 
     public Boolean resetPassword(Map map);
 }
