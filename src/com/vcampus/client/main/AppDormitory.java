@@ -91,5 +91,11 @@ public class AppDormitory extends JFrame{
         JTextField DormElectricityRate=new JTextField();
         DormElectricityRate.setBounds(265,201,60,30);
         contentPane.add(DormElectricityRate);
+
+        JLabel DormRepairReportLabel = new JLabel("宿舍报修");
+        DormRepairReportLabel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        DormRepairReportLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        DormRepairReportLabel.setBounds(40, 195, 100, 40);
+        contentPane.add(DormRepairReportLabel);
     }
 }
