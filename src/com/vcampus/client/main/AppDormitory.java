@@ -95,7 +95,43 @@ public class AppDormitory extends JFrame{
         JLabel lblDormRepairReport = new JLabel("宿舍报修");
         lblDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblDormRepairReport.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReport.setBounds(40, 195, 100, 40);
+        lblDormRepairReport.setBounds(390, 60, 100, 40);
         contentPane.add(lblDormRepairReport);
+
+        JLabel lblDormRepairReportThing = new JLabel("报修内容");
+        lblDormRepairReportThing.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        lblDormRepairReportThing.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDormRepairReportThing.setBounds(390, 100, 100, 40);
+        contentPane.add(lblDormRepairReportThing);
+
+        JTextField txtDormRepairReport=new JTextField();
+        txtDormRepairReport.setBounds(500,106,150,30);
+        contentPane.add(txtDormRepairReport);
+
+        JLabel lblDormRepairReportDate = new JLabel("报修日期");
+        lblDormRepairReportDate.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        lblDormRepairReportDate.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDormRepairReportDate.setBounds(390, 140, 100, 40);
+        contentPane.add(lblDormRepairReportDate);
+
+        JTextField txtDormRepairReportDate=new JTextField();
+        txtDormRepairReportDate.setBounds(500,146,150,30);
+        contentPane.add(txtDormRepairReportDate);
+
+        JLabel lblDormRepairReportDetail = new JLabel("具体信息");
+        lblDormRepairReportDetail.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        lblDormRepairReportDetail.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDormRepairReportDetail.setBounds(390, 180, 100, 40);
+        contentPane.add(lblDormRepairReportDetail);
+
+        JTextField txtDormRepairReportDetail=new JTextField();
+        txtDormRepairReportDetail.setBounds(500,186,150,30);
+        contentPane.add(txtDormRepairReportDetail);
+
+        JButton btnCardLossReport=new JButton("确认挂失");
+        contentPane.add(btnCardLossReport);
+        btnCardLossReport.setBounds(320,245,90,25);
+        
+
     }
 }
