@@ -1,7 +1,6 @@
 package com.vcampus.dao;
 
 import com.vcampus.entity.Admin;
-import com.vcampus.entity.Student;
 
 /**
  * 一系列管理员数据库操作的接口，用于mybatis的映射

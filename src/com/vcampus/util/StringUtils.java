@@ -46,6 +46,7 @@ public class StringUtils {
      * @return MD5加密后的密文
      */
     public static String MD5Encode(String origin) {
+        assert (origin != null);
         String resultString = null;
         try {
             resultString = new String(origin);
@@ -66,6 +67,7 @@ public class StringUtils {
      * @return MD5加密后的密文
      */
     public static String MD5EncodeSalted(String origin, String salt) {
+        assert (origin != null);
         String resultString = null;
         try {
             if (salt == null) {
