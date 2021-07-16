@@ -2,7 +2,7 @@
   <configuration default="false" name="client_test" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.vcampus.test.ClientEntry" />
     <module name="VCampus" />
-    <option name="VM_PARAMETERS" value="--add-opens java.base/java.net=ALL-UNNAMED" />
+    <option name="VM_PARAMETERS" value="--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/jdk.internal.loader=ALL-UNNAMED --add-opens java.desktop/javax.swing=ALL-UNNAMED --add-opens java.desktop/javax.swing.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens java.desktop/java.awt.geom=ALL-UNNAMED --add-opens java.desktop/java.awt=ALL-UNNAMED --add-opens java.desktop/java.beans=ALL-UNNAMED --add-opens java.desktop/javax.swing.table=ALL-UNNAMED --add-opens java.desktop/com.sun.awt=ALL-UNNAMED --add-opens java.desktop/sun.awt=ALL-UNNAMED --add-opens java.desktop/sun.swing=ALL-UNNAMED --add-opens java.desktop/sun.font=ALL-UNNAMED --add-opens java.desktop/javax.swing.plaf.basic=ALL-UNNAMED --add-opens java.desktop/javax.swing.plaf.synth=ALL-UNNAMED --add-opens java.desktop/com.sun.java.swing.plaf.windows=ALL-UNNAMED --add-opens java.desktop/com.sun.java.swing.plaf.gtk=ALL-UNNAMED --add-opens java.desktop/com.apple.laf=ALL-UNNAMED" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
