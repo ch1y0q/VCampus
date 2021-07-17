@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Xiao Kaijie
- * @date 2021-07-16
+ * @date 2021-07-17
  */
 
 public class AppTeacher extends JFrame {
@@ -103,7 +103,9 @@ public class AppTeacher extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                selfin.setForeground(Color.black);
+                selfin.setForeground(new Color(255,0,0,70));
+                selfin.setBackground(new Color(18, 52, 154, 30));
+                selfin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
             }
         });
         self.add(selfin,1);
@@ -114,6 +116,10 @@ public class AppTeacher extends JFrame {
         classicon.setBounds(300,70,400,300);
         JLabel classin=new JLabel("课程管理");
         classin.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+        classin.setForeground(new Color(255,0,0,70));
+        classin.setOpaque(true);
+        classin.setBackground(new Color(18, 52, 154, 30));
+        classin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
         classin.setBounds(300,250,100,30);
         classin.addMouseListener(new MouseListener() {
             @Override
@@ -135,7 +141,9 @@ public class AppTeacher extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                classin.setForeground(Color.black);
+                classin.setForeground(new Color(255,0,0,70));
+                classin.setBackground(new Color(18, 52, 154, 30));
+                classin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
             }
         });
         self.add(classin,1);
@@ -146,6 +154,10 @@ public class AppTeacher extends JFrame {
         cardicon.setBounds(700,70,400,300);
         JLabel cardin=new JLabel("一卡通");
         cardin.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+        cardin.setForeground(new Color(255,0,0,70));
+        cardin.setOpaque(true);
+        cardin.setBackground(new Color(18, 52, 154, 30));
+        cardin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
         cardin.setBounds(700,250,100,30);
         cardin.addMouseListener(new MouseListener() {
             @Override
@@ -167,7 +179,9 @@ public class AppTeacher extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                cardin.setForeground(Color.black);
+                cardin.setForeground(new Color(255,0,0,70));
+                cardin.setBackground(new Color(18, 52, 154, 30));
+                cardin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
             }
         });
         self.add(cardin,1);
@@ -199,7 +213,9 @@ public class AppTeacher extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                shopin.setForeground(Color.black);
+                shopin.setForeground(new Color(255,0,0,70));
+                shopin.setBackground(new Color(18, 52, 154, 30));
+                shopin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
             }
         });
         self.add(shopin,1);
@@ -231,7 +247,9 @@ public class AppTeacher extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                Libin.setForeground(Color.black);
+                Libin.setForeground(new Color(255,0,0,70));
+                Libin.setBackground(new Color(18, 52, 154, 30));
+                Libin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
             }
         });
         self.add(Libin,1);
