@@ -193,10 +193,9 @@ public class LoginUI extends JFrame {
 
         txtCardNumber.addKeyListener(loginKeyAdapter);
         txtPassword.addKeyListener(loginKeyAdapter);
-        rdbStudent.addKeyListener(loginKeyAdapter);
-        rdbTeacher.addKeyListener(loginKeyAdapter);
-        rdbAdmin.addKeyListener(loginKeyAdapter);
-        txtPassword.addKeyListener(loginKeyAdapter);
+        //rdbStudent.addKeyListener(loginKeyAdapter);
+        //rdbTeacher.addKeyListener(loginKeyAdapter);
+        //rdbAdmin.addKeyListener(loginKeyAdapter);
 
         JLabel label = new JLabel(res.getString("dialog_title"));
         label.setHorizontalAlignment(SwingConstants.CENTER);

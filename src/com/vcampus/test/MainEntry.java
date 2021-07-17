@@ -28,9 +28,5 @@ public class MainEntry {
             app.setVisible(true);
         });
 
-
-        //Student me = new Student("my_name", "1234", "213191111", "09019111", 0, new ArrayList<String>());
-        //System.out.println(me.getSchool());
-
     }
 }
