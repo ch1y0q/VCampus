@@ -23,7 +23,6 @@ public class AppStudent extends JFrame {
 
     public AppStudent() {
         setResizable(true);
-        //setIconImage(Toolkit.getDefaultToolkit().getImage(AppStudent.class.getResource("/resources/assets/icon/fav.png")));
         setTitle(res.getString("student_main"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1151, 800);
