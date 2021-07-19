@@ -1,4 +1,4 @@
-package com.vcampus.client.main;
+package com.vcampus.administrator.main;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -7,14 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * 管理员登录界面
  * @author Dong Ruojing
  * @date 2021/7/16
  */
-public class AppServer extends JFrame{
+public class AppAdmin extends JFrame{
     private JPanel contentPane;
-    public static JLabel lblServer;
+    public static JLabel lblAdmin;
 
-    public AppServer (){
+    public AppAdmin(){
         setResizable(true);
         setTitle("管理员登录");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,7 +83,7 @@ public class AppServer extends JFrame{
         PersonInfoLabel.setBounds(62, 265, 103, 103);
         contentPane.add(PersonInfoLabel);//先添加的label在最上层
 
-        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/serverImage/pic1.jpg")));
+        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic1.jpg")));
         bg.setPreferredSize(new Dimension(400,400));
         contentPane.add(bg);
         bg.setBounds(65, 65, 300, 300);
@@ -99,7 +100,7 @@ public class AppServer extends JFrame{
         ShopInfoLabel.setBounds(162, 382, 206, 91);
         contentPane.add(ShopInfoLabel);//先添加的label在最上层
 
-        JLabel bg2 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/serverImage/pic3.jpg")));
+        JLabel bg2 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic3.jpg")));
         contentPane.add(bg2);
         bg2.setBounds(65, 385, 300, 85);
 
@@ -114,7 +115,7 @@ public class AppServer extends JFrame{
         LifeInfoLabel.setBounds(490, 62, 93, 256);
         contentPane.add(LifeInfoLabel);//先添加的label在最上层
 
-        JLabel bg3 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/serverImage/pic2.jpg")));
+        JLabel bg3 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic2.jpg")));
         contentPane.add(bg3);
         bg3.setBounds(400, 65, 180, 250);
 
@@ -129,7 +130,7 @@ public class AppServer extends JFrame{
         CourseInfoLabel.setBounds(650, 162, 103, 103);
         contentPane.add(CourseInfoLabel);//先添加的label在最上层
 
-        JLabel bg4 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/serverImage/pic4.jpg")));
+        JLabel bg4 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic4.jpg")));
         contentPane.add(bg4);
         bg4.setBounds(585, 150, 180, 180);
 
@@ -144,20 +145,20 @@ public class AppServer extends JFrame{
         LibraryInfoLabel.setBounds(397, 332, 96, 141);
         contentPane.add(LibraryInfoLabel);//先添加的label在最上层
 
-        JLabel bg5 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/serverImage/pic5.jpg")));
+        JLabel bg5 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic5.jpg")));
         contentPane.add(bg5);
         bg5.setBounds(385, 335, 380, 135);
 
         JLabel TransLabel = new JLabel("");
         TransLabel.setHorizontalAlignment(SwingConstants.CENTER);
         TransLabel.setOpaque(true);
-        TransLabel.setBackground(new Color(255,255,255,150));
+        TransLabel.setBackground(new Color(255,255,255,100));
         TransLabel.setBorder(BorderFactory.createMatteBorder(2,2,2,2,
-                new Color(140, 226, 120, 114)));
+                new Color(41, 210, 190, 114)));
         TransLabel.setBounds(600, 63, 95, 95);
         contentPane.add(TransLabel);//先添加的label在最上层
 
-        JLabel bg6 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/serverImage/pic6.jpg")));
+        JLabel bg6 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic7.jpg")));
         contentPane.add(bg6);
         bg6.setBounds(603, 65, 90, 90);
         bg6.setForeground(new Color(255,255,255,255));
