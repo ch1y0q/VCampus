@@ -11,6 +11,11 @@ import java.awt.event.MouseEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-19
+ */
+
 public class ManLibrary extends JFrame {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);

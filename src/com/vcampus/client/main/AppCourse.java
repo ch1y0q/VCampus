@@ -275,7 +275,4 @@ public class AppCourse {
             }
         });
     }
-    public static void main(String args[]){
-        AppCourse course = new AppCourse();
-    }
 }
