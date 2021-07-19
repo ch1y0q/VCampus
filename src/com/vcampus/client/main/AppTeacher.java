@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Xiao Kaijie
- * @date 2021-07-17
+ * @date 2021-07-18
  */
 
 public class AppTeacher extends JFrame {
@@ -28,7 +28,7 @@ public class AppTeacher extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1151, 800);
         JPanel contentPane = new JPanel();
-        contentPane.setBackground(new Color(240, 255, 240));
+        contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setLocation(-871, -176);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -46,13 +46,13 @@ public class AppTeacher extends JFrame {
             }
         });
         back.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        back.setBounds(0, 25, 60, 25);
+        back.setBounds(0, 20, 60, 30);
         contentPane.add(back);
 
         JLabel tf = new JLabel();
         tf.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         tf.setText("欢迎你:" + "XXX");
-        tf.setBounds(800, 25, 200, 25);
+        tf.setBounds(800, 20, 200, 30);
         tf.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(tf);
 
@@ -68,21 +68,21 @@ public class AppTeacher extends JFrame {
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        logout.setBounds(1000, 25, 60, 25);
+        logout.setBounds(1000, 20, 60, 30);
         contentPane.add(logout);
 
         JLayeredPane self=new JLayeredPane();
-        self.setBounds(50,70,1000,800);
+        self.setBounds(50,50,1000,800);
         JLabel selficon=new JLabel("");
         selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teainformation.jpg")));
-        selficon.setBounds(50,70,200,300);
+        selficon.setBounds(50,50,200,300);
         JLabel selfin=new JLabel("个人信息");
         selfin.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        selfin.setForeground(new Color(255,0,0,70));
+        selfin.setForeground(new Color(0, 0, 0, 255));
         selfin.setOpaque(true);
-        selfin.setBackground(new Color(18, 52, 154, 30));
+        selfin.setBackground(new Color(255, 255, 255, 175));
         selfin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
-        selfin.setBounds(50,250,100,30);
+        selfin.setBounds(50,200,150,150);
         selfin.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -113,14 +113,14 @@ public class AppTeacher extends JFrame {
 
         JLabel classicon=new JLabel("");
         classicon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teaclass.jpg")));
-        classicon.setBounds(300,70,400,300);
+        classicon.setBounds(300,50,325,250);
         JLabel classin=new JLabel("课程管理");
         classin.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        classin.setForeground(new Color(255,0,0,70));
+        classin.setForeground(new Color(0, 0, 0, 255));
         classin.setOpaque(true);
-        classin.setBackground(new Color(18, 52, 154, 30));
+        classin.setBackground(new Color(255, 255, 255, 175));
         classin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
-        classin.setBounds(300,250,100,30);
+        classin.setBounds(480,50,140,125);
         classin.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -141,8 +141,9 @@ public class AppTeacher extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                classin.setForeground(new Color(255,0,0,70));
-                classin.setBackground(new Color(18, 52, 154, 30));
+                classin.setOpaque(true);
+                classin.setForeground(new Color(0, 0, 0, 255));
+                classin.setBackground(new Color(255, 255, 255, 100));
                 classin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
             }
         });
@@ -151,14 +152,14 @@ public class AppTeacher extends JFrame {
 
         JLabel cardicon=new JLabel("");
         cardicon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teacard.jpg")));
-        cardicon.setBounds(700,70,400,300);
+        cardicon.setBounds(650,50,325,250);
         JLabel cardin=new JLabel("一卡通");
         cardin.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        cardin.setForeground(new Color(255,0,0,70));
+        cardin.setForeground(new Color(0, 0, 0, 255));
         cardin.setOpaque(true);
-        cardin.setBackground(new Color(18, 52, 154, 30));
+        cardin.setBackground(new Color(255, 255, 255, 175));
         cardin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
-        cardin.setBounds(700,250,100,30);
+        cardin.setBounds(650,175,150,125);
         cardin.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -189,10 +190,14 @@ public class AppTeacher extends JFrame {
 
         JLabel shopicon=new JLabel("");
         shopicon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teashop.jpg")));
-        shopicon.setBounds(700,70,400,300);
-        JLabel shopin=new JLabel("一卡通");
+        shopicon.setBounds(50,370,300,300);
+        JLabel shopin=new JLabel("网上商店");
         shopin.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        shopin.setBounds(700,250,100,30);
+        shopin.setForeground(new Color(0, 0, 0, 255));
+        shopin.setOpaque(true);
+        shopin.setBackground(new Color(255, 255, 255, 175));
+        shopin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
+        shopin.setBounds(200,370,150,300);
         shopin.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -223,10 +228,14 @@ public class AppTeacher extends JFrame {
 
         JLabel Libicon=new JLabel("");
         Libicon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teaLib.jpg")));
-        Libicon.setBounds(700,70,400,300);
-        JLabel Libin=new JLabel("一卡通");
+        Libicon.setBounds(400,340,575,330);
+        JLabel Libin=new JLabel("图书馆");
         Libin.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        Libin.setBounds(700,250,100,30);
+        Libin.setForeground(new Color(0, 0, 0, 255));
+        Libin.setOpaque(true);
+        Libin.setBackground(new Color(255, 255, 255, 175));
+        Libin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
+        Libin.setBounds(800,340,175,330);
         Libin.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -255,6 +264,7 @@ public class AppTeacher extends JFrame {
         self.add(Libin,1);
         self.add(Libicon,2);
         contentPane.add(self);
+
 
     }
 }
