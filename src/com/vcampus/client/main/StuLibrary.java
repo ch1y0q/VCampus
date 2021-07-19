@@ -4,8 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 /**
  * @author Xiao Kaijie
@@ -52,13 +51,34 @@ public class StuLibrary extends JFrame {
         contentPane.add(back);
 
         String[] header = {"ISBN", "书名","作者","借阅时间","应当归还时间","备注","续借"};
-        String[][] data = {{"", "","","","","",""}};
+        String[][] data = {{"", "","","","","",""},{"", "","","","","",""}};
         DefaultTableModel model = new DefaultTableModel(data,header);
-        JTable table = new JTable(model);
+        JTable table = new JTable(model)
+        {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                this.setRowSelectionAllowed(false);
+                this.setColumnSelectionAllowed(false);
+                return false;
+            }
+        };
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int column = table.getSelectedColumn();
+                int row = table.getSelectedRow();
+                /**需增加
+                 * 判断逻辑
+                 */
+                if (column == 6) {
+                    table.setValueAt("<html><font color='rgb(110,110,110)'>无法续借</font></html>", row, column);
+                }
+            }
+        });
         JScrollPane jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(table);
         table.setGridColor(Color.BLACK);
-        table.setEnabled(false);
+        table.getTableHeader().setReorderingAllowed(false);
         jScrollPane.setBounds(0, 0, 980, 500);
         jp1.add(jScrollPane);
 
@@ -76,11 +96,32 @@ public class StuLibrary extends JFrame {
         String[] header2 = {"ISBN", "书名","作者","作者国籍","剩余数量","出版社","介绍","分类","借阅"};
         String[][] data2 = {{"", "","","","","", "","","","",""}};
         DefaultTableModel model2 = new DefaultTableModel(data2,header2);
-        JTable table2 = new JTable(model2);
+        JTable table2 = new JTable(model2)
+        {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                this.setRowSelectionAllowed(false);
+                this.setColumnSelectionAllowed(false);
+                return false;
+            }
+        };
+        table2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int column = table2.getSelectedColumn();
+                int row = table2.getSelectedRow();
+                /**需增加
+                 * 判断逻辑
+                */
+                if (column == 6) {
+                    table2.setValueAt("<html><font color='rgb(110,110,110)'>已借</font></html>", row, column);
+                }
+            }
+        });
         JScrollPane jScrollPane2 = new JScrollPane();
         jScrollPane2.setViewportView(table2);
         table2.setGridColor(Color.BLACK);
-        table2.setEnabled(false);
+        table2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setBounds(0, 50, 980, 500);
         jp2.add(search);
         jp2.add(txtfield1);
