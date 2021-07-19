@@ -10,4 +10,5 @@ public interface IAdminMapper {
     public Boolean verifyManager(Admin admin);
 
     public Admin getAdminDetailByCardNumber(String cardNumber);
+    public Boolean verifyAdmin(Admin admin);
 }
