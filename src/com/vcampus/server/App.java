@@ -20,6 +20,8 @@ import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.Student;
 
 /**
+ * 服务端主对象
+ *
  * @author Franklin Yang
  * @date 2021/7/12
  */
@@ -106,7 +108,9 @@ public class App extends JFrame {
         try {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
-            boolean verifyResult = studentMapper.verifyStudent(new Student(null, null));
+            //boolean verifyResult = studentMapper.verifyStudent(new Student(null, null));
+            Student verifyResult = studentMapper.getStudentDetailByCardNumber("");
+
             sqlSession.commit();
             App.paneLog.setText(res.getString("db_connection_success"));
         } catch (Exception e) {
@@ -120,7 +124,7 @@ public class App extends JFrame {
         App.requestHandler = new RequestHandler();
         App.requestHandler.start();
         App.paneLog.setText(
-                paneLog.getText() + (paneLog.getText().equals("") ? "" : "\n") + res.getString("start_listening_on") + ServerUtils.getMainPort());
+                paneLog.getText() + (paneLog.getText().equals("") ? "" : "\n") + String.format(res.getString("start_listening_on"), ServerUtils.getMainPort()));
         foreverSqlSession = sqlSessionFactory.openSession();
 
     }

@@ -1,6 +1,7 @@
 package com.vcampus.server;
 
 import com.vcampus.util.JSONUtils;
+import com.vcampus.util.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import com.vcampus.entity.*;
 import com.vcampus.dao.IStudentMapper;
@@ -18,12 +19,18 @@ import static com.alibaba.fastjson.JSON.toJSONString;
  */
 
 public class Auth {
+    //用于学生登录使用的检查方法
     public static Student studentLoginChecker(Student student) {
         Student result = null;
         try {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
-            boolean verifyResult = studentMapper.verifyStudent(student);
+            //boolean verifyResult = studentMapper.verifyStudent(student);
+
+            String cardNumber = student.getCardNumber();
+            boolean verifyResult =
+                    StringUtils.MD5EncodeSalted(student.getPassword(), studentMapper.getSaltByCardNumber(cardNumber))
+                            .equalsIgnoreCase(studentMapper.getPasswordByCardNumber(cardNumber));
 
             if (!verifyResult) {
                 System.out.println("No result");
@@ -37,14 +44,19 @@ public class Auth {
         }
         return result;
     }
-    //TODO
 
+    //用于教师登录的检查方法
     public static Teacher teacherLoginChecker(Teacher teacher) {
         Teacher result = null;
         try {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             ITeacherMapper teacherMapper = sqlSession.getMapper(ITeacherMapper.class);
-            boolean verifyResult = teacherMapper.verifyTeacher(teacher);
+            //boolean verifyResult = teacherMapper.verifyTeacher(teacher);
+
+            String cardNumber = teacher.getCardNumber();
+            boolean verifyResult =
+                    StringUtils.MD5EncodeSalted(teacher.getPassword(), teacherMapper.getSaltByCardNumber(cardNumber))
+                            .equalsIgnoreCase(teacherMapper.getPasswordByCardNumber(cardNumber));
 
             if (!verifyResult) {
                 System.out.println("No result");
@@ -59,12 +71,17 @@ public class Auth {
         return result;
     }
 
+    //用于管理员登录使用的检查方法
     public static Admin adminLoginChecker(Admin admin) {
         Admin result = null;
         try {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IAdminMapper adminMapper = sqlSession.getMapper(IAdminMapper.class);
-            boolean verifyResult = adminMapper.verifyAdmin(admin);
+            //boolean verifyResult = adminMapper.verifyAdmin(admin);
+            String cardNumber = admin.getCardNumber();
+            boolean verifyResult =
+                    StringUtils.MD5EncodeSalted(admin.getPassword(), adminMapper.getSaltByCardNumber(cardNumber))
+                            .equalsIgnoreCase(adminMapper.getPasswordByCardNumber(cardNumber));
 
             if (!verifyResult) {
                 System.out.println("No result");

@@ -12,6 +12,7 @@ import java.util.Properties;
 public final class ServerUtils {
     final static String CONFIG_PATH = "/resources/server.properties";
 
+    //返回服务器地址
     public static String getServerHost() {
         Properties prop = new Properties();
         try {
@@ -22,6 +23,7 @@ public final class ServerUtils {
         return prop.getProperty("server_host");
     }
 
+    //返回主端口号
     public static String getMainPort() {
         Properties prop = new Properties();
         try {
@@ -32,6 +34,7 @@ public final class ServerUtils {
         return prop.getProperty("mainport");
     }
 
+    //返回对话端口号
     public static String getChatPort() {
         Properties prop = new Properties();
         try {

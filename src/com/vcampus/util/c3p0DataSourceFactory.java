@@ -5,6 +5,8 @@ import org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
+ * c3p0数据库连接池
+ *
  * @author Franklin Yang
  * @date 2021/7/12
  */

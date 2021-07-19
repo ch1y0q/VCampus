@@ -6,19 +6,27 @@ import java.util.Map;
 import com.vcampus.entity.Student;
 
 /**
+ * 一系列学生数据库操作的接口，用于mybatis的映射
+ *
  * @author Franklin Yang
  * @date 2021/7/12
  */
 
 public interface IStudentMapper {
 
+    @Deprecated
+    /**
+     * 仅在密码明文存储可用。
+     */
     public Boolean verifyStudent(Student student);
 
     public Student getStudentDetailByCardNumber(String cardNumber);
 
+    public String getSaltByCardNumber(String cardNumber);
+
     public String getNameByCardNumber(String cardNumber);
 
-    public String getPasswordByUsername(String cardNumber);
+    public String getPasswordByCardNumber(String cardNumber);
 
     public Boolean insertStudent(Student student);
 
@@ -34,7 +42,7 @@ public interface IStudentMapper {
 
     public Boolean chargeCard(Map map);
 
-    public String getBalance(String cardNumber);
+    public float getBalance(String cardNumber);
 
     public Boolean resetPassword(Map map);
 }
