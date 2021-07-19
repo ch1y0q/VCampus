@@ -128,9 +128,23 @@ public class AppDormitory extends JFrame{
         txtDormRepairReportDetail.setBounds(500,186,150,30);
         contentPane.add(txtDormRepairReportDetail);
 
-        JButton btnCardLossReport=new JButton("确认挂失");
+        JButton btnCardLossReport=new JButton("确认报修");
         contentPane.add(btnCardLossReport);
-        btnCardLossReport.setBounds(320,245,90,25);
+        btnCardLossReport.setBounds(490,230,90,25);
+
+        JLabel lblDormRepairReportHistory = new JLabel("报修历史");
+        lblDormRepairReportHistory.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        lblDormRepairReportHistory.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDormRepairReportHistory.setBounds(390, 260, 100, 40);
+        contentPane.add(lblDormRepairReportHistory);
+
+        JTable tblWaterBill=new JTable(6,3);
+        tblWaterBill.setBounds(430,310,300,120);
+        tblWaterBill.setRowHeight(20);
+        tblWaterBill.getModel().setValueAt("时间",0,0);
+        tblWaterBill.getModel().setValueAt("内容",0,1);
+        tblWaterBill.getModel().setValueAt("状态",0,2);
+        contentPane.add(tblWaterBill);
         
 
     }
