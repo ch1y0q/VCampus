@@ -19,22 +19,25 @@ public class StuLibrary extends JFrame {
         setResizable(true);
         setTitle("东南大学图书馆");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1151, 1000);
+        setBounds(0, 0, 1151, 1000);
         this.setLayout(null);
         contentPane = new JPanel();
         jp1=new JPanel();
         jp2=new JPanel();
         jp3=new JPanel();
-        contentPane.setBackground(new Color(240, 255, 240));
+        contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBounds(0,0,1151,1000);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         jp1.setLayout(null);
-        jp1.setBounds(0,40,1151,900);
+        jp1.setBackground(new Color(255, 255, 255));
         contentPane.add(jp1);
         jp2.setLayout(null);
+        jp2.setBackground(new Color(255, 255, 255));
         jp3.setLayout(null);
+        jp3.setBackground(new Color(255, 255, 255));
+
         JButton back = new JButton("返回");
         back.addActionListener(new ActionListener() {
             @Override

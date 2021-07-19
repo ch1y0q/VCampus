@@ -28,7 +28,6 @@ public class AppStudent extends JFrame {
         setBounds(100, 100, 1151, 800);
         JPanel contentPane = new JPanel();
         contentPane.setBackground(new Color(240, 255, 240));
-        contentPane.setLocation(-871, -176);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
