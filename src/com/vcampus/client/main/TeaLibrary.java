@@ -2,7 +2,11 @@ package com.vcampus.client.main;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,15 +34,54 @@ public class TeaLibrary extends JFrame {
         jp2 = new JPanel();
         jp3 = new JPanel();
         contentPane.setBackground(new Color(240, 255, 240));
-        contentPane.setBounds(0, 0, 1151, 1000);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         jp1.setLayout(null);
-        jp1.setBounds(0, 40, 1151, 900);
-        contentPane.add(jp1);
         jp2.setLayout(null);
         jp3.setLayout(null);
+
+        DefaultMutableTreeNode login= new DefaultMutableTreeNode("教师登陆");
+        DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("课程管理");
+        DefaultMutableTreeNode library = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode card = new DefaultMutableTreeNode(   "一卡通");
+        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
+        login.add(information);
+        login.add(Class);
+        login.add(library);
+        login.add(card);
+        login.add(shop);
+
+        DefaultMutableTreeNode ClassLook = new DefaultMutableTreeNode("课程查看");
+        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩录入");
+        DefaultMutableTreeNode goods = new DefaultMutableTreeNode("商品");
+        DefaultMutableTreeNode shopcar = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode histoty = new DefaultMutableTreeNode("购买历史");
+        Class.add(ClassLook);
+        Class.add(Grades);
+        shop.add(goods);
+        shop.add(shopcar);
+        shop.add(histoty);
+
+        JTree jt = new JTree(login);
+        jt.setBounds(0,50,200,600);
+        contentPane.add(jt);
+
+        TreeSelectionModel treeSelectionModel;
+        treeSelectionModel=jt.getSelectionModel();
+        treeSelectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        jt.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                if (!jt.isSelectionEmpty()) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
+                    String name = node.toString();
+                    System.out.println(name);
+                }
+            }
+        });
+
         JButton back = new JButton("返回");
         back.addActionListener(new ActionListener() {
             @Override
@@ -85,6 +128,7 @@ public class TeaLibrary extends JFrame {
         table.getTableHeader().setReorderingAllowed(false);
         jScrollPane.setBounds(0, 0, 980, 600);
         jp1.add(jScrollPane);
+        contentPane.add(jp1);
 
         JTextField txtfield1 = new JTextField();    //创建文本框
         txtfield1.setText("输入书名或者ISBN号");
@@ -162,8 +206,8 @@ public class TeaLibrary extends JFrame {
         tabbedPane.add("已借图书", jp1);
         tabbedPane.add("图书查询借阅", jp2);
         tabbedPane.add("已还图书", jp3);
-        tabbedPane.setBounds(0, 50, 1000, 700);
-        this.add(tabbedPane);
+        tabbedPane.setBounds(200, 50, 1000, 700);
+        contentPane.add(tabbedPane);
 
     }
 }
