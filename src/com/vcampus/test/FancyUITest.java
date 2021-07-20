@@ -1,9 +1,6 @@
 package com.vcampus.test;
 
-/**
- * @author Huang Qiyue
- * @date 2021-07-19
- */
+
 /*
  * This file is part of WebLookAndFeel library.
  *
@@ -22,37 +19,20 @@ package com.vcampus.test;
  */
 
 import com.alee.api.annotations.NotNull;
-import com.alee.api.data.BoxOrientation;
-import com.alee.api.data.CompassDirection;
 import com.alee.api.jdk.SerializableSupplier;
-import com.alee.api.resource.ClassResource;
 import com.alee.api.version.Version;
-import com.alee.demo.DemoTaskGroup;
 import com.alee.demo.api.example.Example;
 import com.alee.demo.api.example.ExampleData;
 import com.alee.demo.content.ExamplesManager;
-import com.alee.demo.frames.examples.ExamplesFrame;
-import com.alee.demo.frames.inspector.InspectorFrame;
-import com.alee.demo.frames.source.SourceFrame;
-import com.alee.demo.frames.style.StyleFrame;
-import com.alee.demo.skin.*;
 import com.alee.demo.skin.decoration.FeatureStateBackground;
-import com.alee.demo.ui.tools.*;
-import com.alee.extended.behavior.ComponentResizeBehavior;
-import com.alee.extended.canvas.WebCanvas;
 import com.alee.extended.dock.SidebarButtonVisibility;
 import com.alee.extended.dock.WebDockableFrame;
 import com.alee.extended.dock.WebDockablePane;
 import com.alee.extended.label.TextWrap;
 import com.alee.extended.label.WebStyledLabel;
 import com.alee.extended.layout.AlignLayout;
-import com.alee.extended.link.UrlLinkAction;
-import com.alee.extended.link.WebLink;
-import com.alee.extended.memorybar.WebMemoryBar;
-import com.alee.extended.overlay.AlignedOverlay;
 import com.alee.extended.overlay.FillOverlay;
 import com.alee.extended.overlay.WebOverlay;
-import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.extended.tab.DocumentAdapter;
 import com.alee.extended.tab.DocumentData;
 import com.alee.extended.tab.PaneData;
@@ -61,18 +41,16 @@ import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.rootpane.WindowState;
 import com.alee.laf.tabbedpane.WebTabbedPane;
-import com.alee.laf.toolbar.WebToolBar;
 import com.alee.laf.window.WebFrame;
 import com.alee.managers.language.LM;
 import com.alee.managers.language.LanguageLocaleUpdater;
 import com.alee.managers.language.LanguageManager;
-import com.alee.managers.language.data.Dictionary;
-import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.settings.Configuration;
-import com.alee.managers.settings.SettingsManager;
+import com.alee.managers.style.ChildStyleId;
 import com.alee.managers.style.Skin;
 import com.alee.managers.style.StyleId;
 import com.alee.managers.style.StyleManager;
+import com.alee.managers.task.TaskGroup;
 import com.alee.managers.task.TaskManager;
 import com.alee.skin.dark.WebDarkSkin;
 import com.alee.utils.CollectionUtils;
@@ -86,9 +64,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * WebLaF demo application containing various component and feature examples.
- *
- * @author Mikle Garin
+ * @author Huang Qiyue
+ * @date 2021-07-19
  */
 public final class FancyUITest extends WebFrame
 {
@@ -111,8 +88,8 @@ public final class FancyUITest extends WebFrame
      * Demo application base UI elements.
      */
     private WebDockablePane dockablePane;
-    WebDocumentPane<DocumentData> examplesPane;
-    WebDockableFrame examplesFrame;
+    WebDocumentPane<DocumentData> mainPane;
+    WebDockableFrame categoryFrame;
 
     /**
      * Returns application instance.
@@ -164,7 +141,7 @@ public final class FancyUITest extends WebFrame
         title.append ( "vCampus " ).append ( version.toString () );
 
         // Opened example
-        final DocumentData doc = examplesPane != null ? examplesPane.getSelectedDocument () : null;
+        final DocumentData doc = mainPane != null ? mainPane.getSelectedDocument () : null;
         if ( doc != null )
         {
             title.append ( " - " ).append ( LM.get ( doc.getTitle () ) );
@@ -173,6 +150,7 @@ public final class FancyUITest extends WebFrame
         setTitle ( title.toString () );
     }
 
+    // TODO rewrite
     private void initializeDocks ()
     {
         /**
@@ -186,12 +164,12 @@ public final class FancyUITest extends WebFrame
          * Content.
          */
 
-        examplesPane = new WebDocumentPane<>();
-        examplesPane.setClosable ( true );
-        examplesPane.setDragEnabled ( true );
-        examplesPane.setDragBetweenPanesEnabled ( false );
-        examplesPane.setSplitEnabled ( true );
-        examplesPane.setTabbedPaneCustomizer ( new Customizer<WebTabbedPane> ()
+        mainPane = new WebDocumentPane<>();
+        mainPane.setClosable ( true );
+        mainPane.setDragEnabled ( true );
+        mainPane.setDragBetweenPanesEnabled ( false );
+        mainPane.setSplitEnabled ( true );
+        mainPane.setTabbedPaneCustomizer (new Customizer<WebTabbedPane> ()
         {
             @Override
             public void customize ( @NotNull final WebTabbedPane tabbedPane )
@@ -200,43 +178,45 @@ public final class FancyUITest extends WebFrame
             }
         } );
 
-        final WebOverlay overlay = new WebOverlay ( examplesPane );
+        final WebOverlay overlay = new WebOverlay (mainPane);
 
-        final WebPanel overlayContainer = new WebPanel ( DemoStyles.emptycontentPanel, new AlignLayout () );
+        final WebPanel overlayContainer = new WebPanel (new AlignLayout () );
 
-        final WebStyledLabel information = new WebStyledLabel ( DemoStyles.emptycontentInfoLabel.at ( overlayContainer ) );
+        final WebStyledLabel information = new WebStyledLabel ( );
         information.setHorizontalTextAlignment ( WebStyledLabel.CENTER );
         information.setWrap ( TextWrap.none );
         information.changeFontSize ( 3 );
+        information.setText("请从左侧选择要进行的操作");
+        /*
         information.setLanguage (
                 "demo.content.information.overlay.empty",
                 version.name (), version.toString (),
                 SystemUtils.getJavaName (),
                 SystemUtils.getJavaVersion ().versionString (), SystemUtils.getOsArch ()
-        );
+        );*/
         overlayContainer.add ( information );
 
         overlay.addOverlay ( new FillOverlay ( overlayContainer ) );
 
-        /*
-        examplesPane.addDocumentListener ( new DocumentAdapter<> ()
+
+        mainPane.addDocumentListener ( new DocumentAdapter<DocumentData>()
         {
             @Override
-            public void selected ( final ExampleData document, final PaneData<ExampleData> pane, final int index )
+            public void selected (final DocumentData document, final PaneData<DocumentData> pane, final int index )
             {
                 updateTitle ();
             }
 
             @Override
-            public void opened ( final ExampleData document, final PaneData<ExampleData> pane, final int index )
+            public void opened ( final DocumentData document, final PaneData<DocumentData> pane, final int index )
             {
                 overlayContainer.setVisible ( false );
             }
 
             @Override
-            public void closed ( final ExampleData document, final PaneData<ExampleData> pane, final int index )
+            public void closed ( final DocumentData document, final PaneData<DocumentData> pane, final int index )
             {
-                if ( examplesPane.getDocumentsCount () == 0 )
+                if ( mainPane.getDocumentsCount () == 0 )
                 {
                     overlayContainer.setVisible ( true );
                     updateTitle ();
@@ -244,7 +224,7 @@ public final class FancyUITest extends WebFrame
             }
         } );
 
-         */
+
 
         dockablePane.setContent ( overlay );
 
@@ -252,8 +232,8 @@ public final class FancyUITest extends WebFrame
          * Frames.
          */
 
-        examplesFrame = new WebDockableFrame(StyleId.dockableframeCompact,"FancyUITest","vCampus");
-        dockablePane.addFrame ( examplesFrame );
+        categoryFrame = new WebDockableFrame(StyleId.dockableframeCompact,"FancyUITest","vCampus");
+        dockablePane.addFrame (categoryFrame);
 
         /**
          * Dockable pane position.
@@ -269,9 +249,9 @@ public final class FancyUITest extends WebFrame
      * @return content pane
      */
     @NotNull
-    public WebDocumentPane<DocumentData> getExamplesPane ()
+    public WebDocumentPane<DocumentData> getMainPane()
     {
-        return examplesPane;
+        return mainPane;
     }
 
 
@@ -280,9 +260,10 @@ public final class FancyUITest extends WebFrame
      *
      * @param example example to open
      */
+    @Deprecated
     public void open ( @NotNull final Example example )
     {
-        examplesPane.openDocument ( ExampleData.forExample ( example ) );
+        mainPane.openDocument ( ExampleData.forExample ( example ) );
     }
 
     /**
@@ -291,7 +272,7 @@ public final class FancyUITest extends WebFrame
     public void display ()
     {
         setVisible ( true );
-        examplesFrame.requestFocusInWindow ();
+        categoryFrame.requestFocusInWindow ();
     }
 
     /**
@@ -307,10 +288,12 @@ public final class FancyUITest extends WebFrame
             @Override
             public void run ()
             {
+                /*
                 // Configuring settings location
                 SettingsManager.setDefaultSettingsDirName ( ".weblaf-demo" );
                 SettingsManager.setDefaultSettingsGroup ( "WebLookAndFeelDemo" );
                 SettingsManager.setSaveOnChange ( true );
+                */
 
                 // Adding demo data aliases before styles using it are read
                 XmlUtils.processAnnotations ( FeatureStateBackground.class );
@@ -322,22 +305,25 @@ public final class FancyUITest extends WebFrame
                 // Saving skins for reference
                 skins = CollectionUtils.asList ( StyleManager.getSkin (), new WebDarkSkin () );
 
-                // Custom ThreadGroup for demo application
-                TaskManager.registerGroup ( new DemoTaskGroup() );
 
+                // Custom ThreadGroup for demo application
+                TaskManager.registerGroup ( new TaskGroup("TaskGroup",4) );
+
+                /*
                 // Adding demo application skin extensions
                 // They contain all custom styles demo application uses
                 StyleManager.addExtensions ( new DemoAdaptiveExtension (), new DemoLightSkinExtension (), new DemoDarkSkinExtension () );
+                */
 
                 /* Adding demo language dictionary
                 LanguageManager.addDictionary ( new Dictionary (
                         new ClassResource ( com.vcampus.test.FancyUITest.class, "language/demo-language.xml" )
                 ) );
-
+*/
 
                 // Registering listener to update current Locale according to language changes
-                LanguageManager.addLanguageListener ( new LanguageLocaleUpdater () );
-*/
+                LanguageManager.addLanguageListener ( new LanguageLocaleUpdater() );
+
                 // Initializing demo application managers
                 ExamplesManager.initialize ();
 
