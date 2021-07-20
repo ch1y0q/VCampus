@@ -6,7 +6,6 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -18,8 +17,16 @@ import java.util.ResourceBundle;
 public class AppStudent extends JFrame {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
-
-    public static JLabel lblBalance;
+    static int index=0;
+    JLabel selficon=new JLabel("");
+    private class TimeListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(index==3) index=0;
+            else index++;
+            selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
+        }
+    }
 
     public AppStudent() {
         setResizable(true);
@@ -31,6 +38,41 @@ public class AppStudent extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        JLayeredPane self=new JLayeredPane();
+        self.setBounds(50,50,600,400);
+
+        selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic0.jpg")));
+        selficon.setBounds(50,50,600,400);
+        JButton addphoto=new JButton("增加");
+        addphoto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(index<3) index++;
+                else index=0;
+                selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
+            }
+        });
+        addphoto.setBounds(50,200,100,30);
+
+        JButton decreasephoto=new JButton("减少");
+        decreasephoto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(index>0)  index--;
+                else index=3;
+                selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
+            }
+        });
+        decreasephoto.setBounds(500,200,100,30);
+
+        self.add(addphoto,1);
+        self.add(decreasephoto,1);
+        self.add(selficon,2);
+        contentPane.add(self);
+
+        Timer timer=new Timer(5000,new TimeListener());
+        timer.start();
 
         JLabel lblVcampus = new JLabel(res.getString("student_main"));
         lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
@@ -131,120 +173,21 @@ public class AppStudent extends JFrame {
         JLabel lblName = new JLabel("...");
         lblName.setBounds(104, 23, 149, 18);
         panel.add(lblName);
-        JButton namechange = new JButton(res.getString("edit"));
-        namechange.setBounds(200, 23, 60, 18);
-        namechange.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        namechange.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog jd = new JDialog();
-                jd.setBounds(320, 180, 260, 100);
-                jd.setTitle("请输入修改的值");
-                jd.getContentPane().setLayout(new GridLayout(1, 1));
-                jd.add(new JLabel("姓名"));
-                JTextField tf = new JTextField(20);
-                jd.add(tf);
-                tf.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        String s1 = tf.getText();
-                        tf.setText("");
-                        lblName.setText(s1);
-                    }
-                });
-                jd.setModal(true);//确保弹出的窗口在其他窗口前面
-                jd.setVisible(true);
-            }
-        });
-        panel.add(namechange);
 
         JLabel lblCardNumber = new JLabel("...");
         lblCardNumber.setBounds(104, 54, 72, 18);
         panel.add(lblCardNumber);
-        JButton cardChange = new JButton(res.getString("edit"));
-        cardChange.setBounds(200, 54, 60, 18);
-        cardChange.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        cardChange.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog jd = new JDialog();
-                jd.setBounds(320, 180, 260, 100);
-                jd.setTitle("请输入修改的值");
-                jd.getContentPane().setLayout(new GridLayout(1, 1));
-                jd.add(new JLabel(res.getString("card_number")));
-                JTextField tf = new JTextField(20);
-                jd.add(tf);
-                tf.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        String s1 = tf.getText();
-                        tf.setText("");
-                        lblCardNumber.setText(s1);
-                    }
-                });
-                jd.setModal(true);//确保弹出的窗口在其他窗口前面
-                jd.setVisible(true);
-            }
-        });
-        panel.add(cardChange);
 
         JLabel lblStudentNumber = new JLabel("...");
         lblStudentNumber.setBounds(104, 85, 149, 18);
         panel.add(lblStudentNumber);
-        JButton stunumchange = new JButton(res.getString("edit"));
-        stunumchange.setBounds(200, 85, 60, 18);
-        stunumchange.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        stunumchange.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog jd = new JDialog();
-                jd.setBounds(320, 180, 260, 100);
-                jd.setTitle("请输入修改的值");
-                jd.getContentPane().setLayout(new GridLayout(1, 1));
-                jd.add(new JLabel("学号"));
-                JTextField tf = new JTextField(20);
-                jd.add(tf);
-                tf.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        String s1 = tf.getText();
-                        tf.setText("");
-                        lblStudentNumber.setText(s1);
-                    }
-                });
-                jd.setModal(true);//确保弹出的窗口在其他窗口前面
-                jd.setVisible(true);
-            }
-        });
-        panel.add(stunumchange);
+
 
         JLabel lblAcademy = new JLabel("...");
         lblAcademy.setBounds(104, 116, 149, 18);
         panel.add(lblAcademy);
-        JButton academychange = new JButton(res.getString("edit"));
-        academychange.setBounds(200, 116, 60, 18);
-        academychange.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        academychange.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog jd = new JDialog();
-                jd.setBounds(320, 180, 260, 100);
-                jd.setTitle("请输入修改的值");
-                jd.getContentPane().setLayout(new GridLayout(1, 1));
-                jd.add(new JLabel("院系"));
-                JTextField tf = new JTextField(20);
-                jd.add(tf);
-                tf.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        String s1 = tf.getText();
-                        tf.setText("");
-                        lblAcademy.setText(s1);
-                    }
-                });
-                jd.setModal(true);//确保弹出的窗口在其他窗口前面
-                jd.setVisible(true);
-            }
-        });
-        panel.add(academychange);
 
-        lblBalance = new JLabel("...");
+        JLabel lblBalance = new JLabel("...");
         lblBalance.setBounds(104, 147, 97, 18);
         panel.add(lblBalance);
 
@@ -332,4 +275,5 @@ public class AppStudent extends JFrame {
         contentPane.add(label_9);
 
     }
+
 }
