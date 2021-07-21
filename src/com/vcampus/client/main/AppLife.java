@@ -45,6 +45,13 @@ public class AppLife extends JFrame{
         this.add(tabbedPane);
 
 
+
+        /*
+        JLabel commodityPic = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/icon/bgcolor2.png")));
+        jp1.add(commodityPic);
+        commodityPic.setBounds(200, 200, 50, 50);
+         */
+
         //一卡通部分开始 - jp1
 
         JLabel lblCardNum = new JLabel("一卡通号");
@@ -89,9 +96,7 @@ public class AppLife extends JFrame{
         lblCardOp.setBounds(450, 130, 100, 40);
         jp1.add(lblCardOp);
 
-        JLabel commodityPic = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
-        jp1.add(commodityPic);
-        commodityPic.setBounds(500, 120, 100, 100);
+
 
         JLabel lblCardRecharge = new JLabel("一卡通充值");
         lblCardRecharge.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -201,124 +206,129 @@ public class AppLife extends JFrame{
         JLabel lblDormNum = new JLabel("宿舍号");
         lblDormNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormNum.setBounds(205, 5, 100, 40);
+        lblDormNum.setBounds(225, 30, 100, 40);
         jp2.add(lblDormNum);
 
         JLabel lblCurDormNum = new JLabel("M5C2412");
         lblCurDormNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurDormNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCurDormNum.setBounds(275, 5, 100, 40);
+        lblCurDormNum.setBounds(315, 30, 100, 40);
         jp2.add(lblCurDormNum);
 
         JLabel lblDormInfo = new JLabel("宿舍信息查询");
         lblDormInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormInfo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormInfo.setBounds(240, 60, 100, 40);
+        lblDormInfo.setBounds(380, 100, 150, 40);
         jp2.add(lblDormInfo);
 
         JLabel lblDormHygieneRate = new JLabel("卫生分数查询");
         lblDormHygieneRate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormHygieneRate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormHygieneRate.setBounds(240, 105, 100, 40);
+        lblDormHygieneRate.setBounds(250, 160, 150, 40);
         jp2.add(lblDormHygieneRate);
 
         JComboBox cmbDormHygieneRateWeek=new JComboBox();
         for(int i=1;i<17;i++) {
             cmbDormHygieneRateWeek.addItem("第"+i+"周");
         }
-        cmbDormHygieneRateWeek.setBounds(350,111,100,30);
+        cmbDormHygieneRateWeek.setBounds(420,166,100,30);
         jp2.add(cmbDormHygieneRateWeek);
 
         JTextField txtDormHygieneRate=new JTextField();
-        txtDormHygieneRate.setBounds(465,111,60,30);
+        txtDormHygieneRate.setBounds(560,166,70,30);
         jp2.add(txtDormHygieneRate);
 
         JLabel lblDormWaterRate = new JLabel("水费查询");
         lblDormWaterRate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormWaterRate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormWaterRate.setBounds(240, 150, 100, 40);
+        lblDormWaterRate.setBounds(275, 210, 100, 40);
         jp2.add(lblDormWaterRate);
 
         JComboBox cmbDormWaterRateMonth=new JComboBox();
         for(int i=1;i<13;i++) {
             cmbDormWaterRateMonth.addItem("第"+i+"月");
         }
-        cmbDormWaterRateMonth.setBounds(350,156,100,30);
+        cmbDormWaterRateMonth.setBounds(420,216,100,30);
         jp2.add(cmbDormWaterRateMonth);
 
         JTextField txtDormWaterRate=new JTextField();
-        txtDormWaterRate.setBounds(465,156,60,30);
+        txtDormWaterRate.setBounds(560,216,70,30);
         jp2.add(txtDormWaterRate);
 
         JLabel lblDormElectricityRate = new JLabel("电费查询");
         lblDormElectricityRate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormElectricityRate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormElectricityRate.setBounds(240, 195, 100, 40);
+        lblDormElectricityRate.setBounds(275, 260, 100, 40);
         jp2.add(lblDormElectricityRate);
 
         JComboBox cmbDormElectricityRateMonth=new JComboBox();
         for(int i=1;i<13;i++) {
             cmbDormElectricityRateMonth.addItem("第"+i+"月");
         }
-        cmbDormElectricityRateMonth.setBounds(350,201,100,30);
+        cmbDormElectricityRateMonth.setBounds(420,266,100,30);
         jp2.add(cmbDormElectricityRateMonth);
 
         JTextField txtDormElectricityRate=new JTextField();
-        txtDormElectricityRate.setBounds(465,201,60,30);
+        txtDormElectricityRate.setBounds(560,266,70,30);
         jp2.add(txtDormElectricityRate);
 
         JLabel lblDormRepairReport = new JLabel("宿舍报修");
         lblDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReport.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReport.setBounds(590, 60, 100, 40);
+        lblDormRepairReport.setBounds(405, 350, 100, 40);
         jp2.add(lblDormRepairReport);
 
         JLabel lblDormRepairReportThing = new JLabel("报修内容");
         lblDormRepairReportThing.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReportThing.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReportThing.setBounds(590, 100, 100, 40);
+        lblDormRepairReportThing.setBounds(275, 420, 100, 40);
         jp2.add(lblDormRepairReportThing);
 
         JTextField txtDormRepairReport=new JTextField();
-        txtDormRepairReport.setBounds(700,106,150,30);
+        txtDormRepairReport.setBounds(395,426,150,30);
         jp2.add(txtDormRepairReport);
 
         JLabel lblDormRepairReportDate = new JLabel("报修日期");
         lblDormRepairReportDate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReportDate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReportDate.setBounds(590, 140, 100, 40);
+        lblDormRepairReportDate.setBounds(275, 470, 100, 40);
         jp2.add(lblDormRepairReportDate);
 
         JTextField txtDormRepairReportDate=new JTextField();
-        txtDormRepairReportDate.setBounds(700,146,150,30);
+        txtDormRepairReportDate.setBounds(395,476,150,30);
         jp2.add(txtDormRepairReportDate);
 
         JLabel lblDormRepairReportDetail = new JLabel("具体信息");
         lblDormRepairReportDetail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReportDetail.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReportDetail.setBounds(590, 180, 100, 40);
+        lblDormRepairReportDetail.setBounds(275, 520, 100, 40);
         jp2.add(lblDormRepairReportDetail);
 
         JTextField txtDormRepairReportDetail=new JTextField();
-        txtDormRepairReportDetail.setBounds(700,186,150,30);
+        txtDormRepairReportDetail.setBounds(395,526,150,30);
         jp2.add(txtDormRepairReportDetail);
 
         JButton btnDormRepairReport=new JButton("确认报修");
+        btnDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         jp2.add(btnDormRepairReport);
-        btnDormRepairReport.setBounds(690,230,90,25);
+        btnDormRepairReport.setBounds(580,479,110,35);
 
         JLabel lblDormRepairReportHistory = new JLabel("报修历史");
         lblDormRepairReportHistory.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReportHistory.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReportHistory.setBounds(590, 260, 100, 40);
+        lblDormRepairReportHistory.setBounds(1000, 100, 100, 40);
         jp2.add(lblDormRepairReportHistory);
 
-        JTable tblDormRepairHistory=new JTable(6,3);
-        tblDormRepairHistory.setBounds(630,300,300,120);
-        tblDormRepairHistory.setRowHeight(20);
+        JTable tblDormRepairHistory=new JTable(9,3);
+        tblDormRepairHistory.setBounds(800,150,500,450);
+        tblDormRepairHistory.setRowHeight(50);
+        tblDormRepairHistory.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         tblDormRepairHistory.getModel().setValueAt("时间",0,0);
         tblDormRepairHistory.getModel().setValueAt("内容",0,1);
         tblDormRepairHistory.getModel().setValueAt("状态",0,2);
+        DefaultTableCellRenderer rDormRepairHistory =new DefaultTableCellRenderer();
+        rDormRepairHistory.setHorizontalAlignment(JLabel.CENTER);
+        tblDormRepairHistory.setDefaultRenderer(Object.class,rDormRepairHistory);
         jp2.add(tblDormRepairHistory);
 
         //宿舍部分结束
