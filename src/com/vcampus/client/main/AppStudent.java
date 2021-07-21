@@ -100,6 +100,12 @@ public class AppStudent extends JFrame {
         btnLibrary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnLibrary)
+                {
+                    StuLibrary app=new StuLibrary();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
             }
         });
         btnLibrary.setBackground(new Color(255, 255, 240));
@@ -111,12 +117,11 @@ public class AppStudent extends JFrame {
         btnOpencourse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-
-                    @Override
-                    public void run() {
-                    }
-                });
+                if(e.getSource()==btnOpencourse)
+                {
+                    setVisible(false);
+                    //app.setVisible(true);
+                }
             }
         });
         //btnOpencourse.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/opencourse.png")));
@@ -128,6 +133,11 @@ public class AppStudent extends JFrame {
         btnShop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnShop)
+                {
+                    setVisible(false);
+                    //app.setVisible(true);
+                }
             }
         });
         btnShop.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -139,11 +149,11 @@ public class AppStudent extends JFrame {
         btnTeaching.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
+                if(e.getSource()==btnLibrary)
+                {
+                    setVisible(false);
+                    //app.setVisible(true);
+                }
             }
         });
         btnTeaching.setFont(new Font("微软雅黑", Font.PLAIN, 18));

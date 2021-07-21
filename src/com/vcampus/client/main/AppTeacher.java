@@ -35,11 +35,11 @@ public class AppTeacher extends JFrame {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
+                if(e.getSource()==back)
+                {
+                    setVisible(false);
+                    //app.setVisible(true);
+                }
             }
         });
         back.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -83,7 +83,13 @@ public class AppTeacher extends JFrame {
         selfin.setBounds(0,210,170,210);
         selftext.setBounds(30,300,120,30);
         selfin.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) { }
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==selfin)
+                {
+                    setVisible(false);
+                    //app.setVisible(true);
+                }
+            }
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {
@@ -109,7 +115,13 @@ public class AppTeacher extends JFrame {
         classin.setBounds(660,0,150,180);
         classtext.setBounds(685,80,100,30);
         classin.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) { }
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==classin)
+                {
+                    setVisible(false);
+                    //app.setVisible(true);
+                }
+            }
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {
@@ -134,7 +146,13 @@ public class AppTeacher extends JFrame {
         cardin.setBounds(830,180,200,180);
         cardtext.setBounds(885,260,100,30);
         cardin.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) { }
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==cardin)
+                {
+                    setVisible(false);
+                    //app.setVisible(true);
+                }
+            }
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {
@@ -160,7 +178,12 @@ public class AppTeacher extends JFrame {
         shopin.setBounds(170,440,180,350);
         shoptext.setBounds(210,615,100,30);
         shopin.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) { }
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==shopin)
+                {
+                    setVisible(false);
+                    //app.setVisible(true);
+                }}
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {
@@ -186,7 +209,12 @@ public class AppTeacher extends JFrame {
         Libin.setBounds(1030,380,290,410);
         Libtext.setBounds(1130,580,100,30);
         Libin.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) { }
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==Libin) {
+                    TeaLibrary app=new TeaLibrary();
+                    app.setVisible(true);
+                }
+            }
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {

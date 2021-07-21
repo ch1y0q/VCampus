@@ -93,11 +93,12 @@ public class TeaLibrary extends JFrame {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
+                if(e.getSource()==back)
+                {
+                    AppTeacher app=new AppTeacher();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
             }
         });
         back.setFont(new Font("微软雅黑", Font.PLAIN, 18));
