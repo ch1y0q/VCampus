@@ -18,10 +18,11 @@ public class AppLife extends JFrame{
     private static JTabbedPane tabbedPane;
     private static JPanel jp1,jp2,jp3;
     public AppLife(){
-        setResizable(true);
+        setResizable(false);
         setTitle("生活服务 - Vcampus");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 800, 500);
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize(d.width, d.height);
         contentPane = new JPanel();
         jp1=new JPanel();
         jp2=new JPanel();
@@ -32,14 +33,17 @@ public class AppLife extends JFrame{
         setContentPane(contentPane);
         contentPane.setLayout(null);
         jp1.setLayout(null);
+        jp1.setBackground(new Color(240, 255, 240));
         jp2.setLayout(null);
+        jp2.setBackground(new Color(240, 255, 240));
         jp3.setLayout(null);
+        jp3.setBackground(new Color(240, 255, 240));
 
         tabbedPane = new JTabbedPane();
         tabbedPane.add("一卡通",jp1);
         tabbedPane.add("宿舍",jp2);
         tabbedPane.add("商店",jp3);
-        tabbedPane.setBounds(0,0,1000,700);
+        tabbedPane.setBounds(0,0,2000,1100);
         this.add(tabbedPane);
 
 
@@ -48,81 +52,81 @@ public class AppLife extends JFrame{
         JLabel lblCardNum = new JLabel("一卡通号");
         lblCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCardNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCardNum.setBounds(5, 5, 100, 40);
+        lblCardNum.setBounds(205, 5, 100, 40);
         jp1.add(lblCardNum);
 
         JLabel lblCurCardNum = new JLabel("213191111");
         lblCurCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCurCardNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCurCardNum.setBounds(85, 5, 100, 40);
+        lblCurCardNum.setBounds(285, 5, 100, 40);
         jp1.add(lblCurCardNum);
 
         JLabel lblCardStatus = new JLabel("一卡通状态");
         lblCardStatus.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCardStatus.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCardStatus.setBounds(200, 5, 100, 40);
+        lblCardStatus.setBounds(400, 5, 100, 40);
         jp1.add(lblCardStatus);
 
         JLabel lblCurCardStatus = new JLabel("正常");
         lblCurCardStatus.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCurCardStatus.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCurCardStatus.setBounds(260, 5, 100, 40);
+        lblCurCardStatus.setBounds(460, 5, 100, 40);
         jp1.add(lblCurCardStatus);
 
         JLabel lblCardBalance = new JLabel("一卡通余额");
         lblCardBalance.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCardBalance.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCardBalance.setBounds(360, 5, 100, 40);
+        lblCardBalance.setBounds(560, 5, 100, 40);
         jp1.add(lblCardBalance);
 
         JLabel lblCurCardBalance = new JLabel("230.58");
         lblCurCardBalance.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCurCardBalance.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCurCardBalance.setBounds(430, 5, 100, 40);
+        lblCurCardBalance.setBounds(630, 5, 100, 40);
         jp1.add(lblCurCardBalance);
 
         JLabel lblCardOp = new JLabel("一卡通业务");
         lblCardOp.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCardOp.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCardOp.setBounds(35, 55, 100, 40);
+        lblCardOp.setBounds(235, 55, 100, 40);
         jp1.add(lblCardOp);
 
         JLabel lblCardRecharge = new JLabel("一卡通充值");
         lblCardRecharge.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCardRecharge.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCardRecharge.setBounds(35, 85, 100, 40);
+        lblCardRecharge.setBounds(235, 85, 100, 40);
         jp1.add(lblCardRecharge);
 
         JLabel lblCardRechargeBankAccount = new JLabel("绑定的银行账号");
         lblCardRechargeBankAccount.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCardRechargeBankAccount.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCardRechargeBankAccount.setBounds(110, 85, 150, 40);
+        lblCardRechargeBankAccount.setBounds(310, 85, 150, 40);
         jp1.add(lblCardRechargeBankAccount);
 
         JLabel lblCurCardRechargeBankAccount = new JLabel("6216631200002070838");
         lblCurCardRechargeBankAccount.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCurCardRechargeBankAccount.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCurCardRechargeBankAccount.setBounds(230, 85, 200, 40);
+        lblCurCardRechargeBankAccount.setBounds(430, 85, 200, 40);
         jp1.add(lblCurCardRechargeBankAccount);
 
         JLabel lblCardRechargeBankAccountPassword = new JLabel("银行账号密码");
         lblCardRechargeBankAccountPassword.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCardRechargeBankAccountPassword.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCardRechargeBankAccountPassword.setBounds(110, 115, 150, 40);
+        lblCardRechargeBankAccountPassword.setBounds(310, 115, 150, 40);
         jp1.add(lblCardRechargeBankAccountPassword);
 
         JPasswordField txtPassword=new JPasswordField();
         txtPassword.setText("");
-        txtPassword.setBounds(250,122,160,30);
+        txtPassword.setBounds(450,122,160,30);
         jp1.add(txtPassword);
 
         /*JLabel CardRechargeBankAccountPassword = new JLabel("●●●●●●");
@@ -137,59 +141,59 @@ public class AppLife extends JFrame{
         lblCardRechargeAmount.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCardRechargeAmount.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCardRechargeAmount.setBounds(110, 145, 150, 40);
+        lblCardRechargeAmount.setBounds(310, 145, 150, 40);
         jp1.add(lblCardRechargeAmount);
 
         JTextField txtAmount=new JTextField();
         txtAmount.setText("请输入充值金额");
-        txtAmount.setBounds(250,152,160,30);
+        txtAmount.setBounds(450,152,160,30);
         jp1.add(txtAmount);
 
         JButton btnCardRecharge=new JButton("确认充值");
         jp1.add(btnCardRecharge);
-        btnCardRecharge.setBounds(220,190,90,25);
+        btnCardRecharge.setBounds(420,190,90,25);
 
         JLabel lblCardLossReport = new JLabel("一卡通挂失");
         lblCardLossReport.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblCardLossReport.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCardLossReport.setBounds(35, 235, 100, 40);
+        lblCardLossReport.setBounds(235, 235, 100, 40);
         jp1.add(lblCardLossReport);
 
         JTextField txtLossReport=new JTextField();
         txtLossReport.setText("挂失说明（非必要）");
-        txtLossReport.setBounds(145,242,160,30);
+        txtLossReport.setBounds(345,242,160,30);
         jp1.add(txtLossReport);
 
         JButton btnCardLossReport=new JButton("确认挂失");
         jp1.add(btnCardLossReport);
-        btnCardLossReport.setBounds(320,245,90,25);
+        btnCardLossReport.setBounds(520,245,90,25);
 
         JLabel CardFoundReportLabel = new JLabel("一卡通解挂");
         CardFoundReportLabel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         CardFoundReportLabel.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        CardFoundReportLabel.setBounds(35, 285, 100, 40);
+        CardFoundReportLabel.setBounds(235, 285, 100, 40);
         jp1.add(CardFoundReportLabel);
 
         JTextField txtFoundReport=new JTextField();
         txtFoundReport.setText("挂失说明（非必要）");
-        txtFoundReport.setBounds(145,292,160,30);
+        txtFoundReport.setBounds(345,292,160,30);
         jp1.add(txtFoundReport);
 
         JButton btnCardFoundReport=new JButton("确认解挂");
         jp1.add(btnCardFoundReport);
-        btnCardFoundReport.setBounds(320,295,90,25);
+        btnCardFoundReport.setBounds(520,295,90,25);
 
         JLabel lblWaterBillTable = new JLabel("一卡通交易记录");
         lblWaterBillTable.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         lblWaterBillTable.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblWaterBillTable.setBounds(520, 80, 150, 40);
+        lblWaterBillTable.setBounds(720, 80, 150, 40);
         jp1.add(lblWaterBillTable);
 
         JTable tblWaterBill=new JTable(10,3);
-        tblWaterBill.setBounds(500,120,200,200);
+        tblWaterBill.setBounds(700,120,200,200);
         tblWaterBill.setRowHeight(20);
         tblWaterBill.getModel().setValueAt("时间",0,0);
         tblWaterBill.getModel().setValueAt("金额",0,1);
@@ -396,7 +400,7 @@ public class AppLife extends JFrame{
         txtCommodityNum.setBounds(470,355,160,30);
         jp3.add(txtCommodityNum);
 
-        JButton btnAddToCart=new JButton("添加到购物车");
+        JButton btnAddToCart=new JButton("确认购买");
         jp3.add(btnAddToCart);
         btnAddToCart.setBounds(500,400,90,25);
     }
