@@ -7,12 +7,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
-public class AppCourse {
+public class AppStuCourse {
     private JFrame jf = new JFrame("课程管理");
     private double credit = 0;
     private int width = 1151;
     private int height = 800;
-    public AppCourse(){
+    public AppStuCourse(){
         jf.setVisible(true);
         jf.setLayout(null);
         jf.setResizable(true);
