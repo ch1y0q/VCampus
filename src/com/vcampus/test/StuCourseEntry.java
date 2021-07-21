@@ -1,6 +1,6 @@
 package com.vcampus.test;
 
-import com.vcampus.client.main.AppCourse;
+import com.vcampus.client.main.AppStuCourse;
 
 import java.awt.*;
 
@@ -10,7 +10,7 @@ public class StuCourseEntry {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                AppCourse app = new AppCourse();
+                AppStuCourse app = new AppStuCourse();
             }
         });
     }
