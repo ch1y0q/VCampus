@@ -16,7 +16,7 @@ import java.awt.event.KeyEvent;
 public class AppLife extends JFrame{
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
-    private static JPanel jp1,jp2,jp3;
+    private static JPanel jp1,jp2;
     public AppLife(){
         setResizable(false);
         setTitle("生活服务 - Vcampus");
@@ -26,7 +26,6 @@ public class AppLife extends JFrame{
         contentPane = new JPanel();
         jp1=new JPanel();
         jp2=new JPanel();
-        jp3=new JPanel();
         contentPane.setBackground(new Color(240, 255, 240));
         contentPane.setLocation(-871, -176);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -36,13 +35,10 @@ public class AppLife extends JFrame{
         jp1.setBackground(new Color(240, 255, 240));
         jp2.setLayout(null);
         jp2.setBackground(new Color(240, 255, 240));
-        jp3.setLayout(null);
-        jp3.setBackground(new Color(240, 255, 240));
 
         tabbedPane = new JTabbedPane();
         tabbedPane.add("一卡通",jp1);
         tabbedPane.add("宿舍",jp2);
-        tabbedPane.add("商店",jp3);
         tabbedPane.setBounds(0,0,2000,1100);
         this.add(tabbedPane);
 
@@ -329,79 +325,6 @@ public class AppLife extends JFrame{
 
         //宿舍部分结束
 
-        //商店部分开始 -jp3
-        JLabel lblCommoditySearch = new JLabel("商品查询");
-        lblCommoditySearch.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        lblCommoditySearch.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommoditySearch.setBounds(15, 15, 100, 40);
-        jp3.add(lblCommoditySearch);
 
-        JTextField txtCommoditySearch=new JTextField();
-        txtCommoditySearch.setBounds(110,21,160,30);
-        jp3.add(txtCommoditySearch);
-
-        JLabel lblCommodityKind = new JLabel("商品种类");
-        lblCommodityKind.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        lblCommodityKind.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityKind.setBounds(300, 15, 100, 40);
-        jp3.add(lblCommodityKind);
-
-        JComboBox cmbCommodityKind=new JComboBox();
-        cmbCommodityKind.addItem("食品");
-        cmbCommodityKind.addItem("日化");
-        cmbCommodityKind.addItem("文具");
-        cmbCommodityKind.setBounds(400,21,100,30);
-        jp3.add(cmbCommodityKind);
-
-        JTable tblCommodityList=new JTable(10,2);
-        tblCommodityList.setBounds(50,100,200,200);
-        tblCommodityList.setRowHeight(20);
-        tblCommodityList.getModel().setValueAt("商品名称",0,0);
-        tblCommodityList.getModel().setValueAt("价格",0,1);
-        tblCommodityList.setPreferredScrollableViewportSize(new Dimension(200, 100));
-        JScrollPane scrollPane=new JScrollPane(tblCommodityList);
-        jp3.add(tblCommodityList);
-
-        JLabel lblCommodityPic = new JLabel("商品图片");
-        lblCommodityPic.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        lblCommodityPic.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityPic.setBounds(300, 80, 100, 40);
-        jp3.add(lblCommodityPic);
-
-        JLabel commodityPic = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
-        jp3.add(commodityPic);
-        commodityPic.setBounds(500, 120, 100, 100);
-
-        JLabel lblCommodityInfo = new JLabel("商品信息");
-        lblCommodityInfo.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        lblCommodityInfo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityInfo.setBounds(300, 225, 100, 40);
-        jp3.add(lblCommodityInfo);
-
-        JLabel lblCommoditySpInfo = new JLabel("商品详细信息");
-        lblCommoditySpInfo.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        lblCommoditySpInfo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommoditySpInfo.setBounds(350, 255, 100, 40);
-        jp3.add(lblCommoditySpInfo);
-
-        JTextArea commodityDetail= new JTextArea("这里应该是商品详细信息",8,30);
-        commodityDetail.setLineWrap(true);
-        commodityDetail.setFont(new Font("微软雅黑",Font.PLAIN,14));
-        commodityDetail.setBounds(475,265,150,75);
-        jp3.add(commodityDetail);
-
-        JLabel lblCommodityNum = new JLabel("购买数量");
-        lblCommodityNum.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        lblCommodityNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityNum.setBounds(350, 350, 100, 40);
-        jp3.add(lblCommodityNum);
-
-        JTextField txtCommodityNum=new JTextField();
-        txtCommodityNum.setBounds(470,355,160,30);
-        jp3.add(txtCommodityNum);
-
-        JButton btnAddToCart=new JButton("确认购买");
-        jp3.add(btnAddToCart);
-        btnAddToCart.setBounds(500,400,90,25);
     }
 }
