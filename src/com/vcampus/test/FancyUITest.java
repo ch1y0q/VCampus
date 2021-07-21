@@ -19,37 +19,63 @@ package com.vcampus.test;
  */
 
 import com.alee.api.annotations.NotNull;
+import com.alee.api.data.BoxOrientation;
+import com.alee.api.data.CompassDirection;
 import com.alee.api.jdk.SerializableSupplier;
+import com.alee.api.resource.ClassResource;
 import com.alee.api.version.Version;
+import com.alee.demo.DemoApplication;
 import com.alee.demo.api.example.Example;
 import com.alee.demo.api.example.ExampleData;
 import com.alee.demo.content.ExamplesManager;
+import com.alee.demo.frames.examples.ExamplesTreeNode;
+import com.alee.demo.skin.*;
 import com.alee.demo.skin.decoration.FeatureStateBackground;
+import com.alee.demo.ui.tools.*;
+import com.alee.extended.behavior.ComponentResizeBehavior;
+import com.alee.extended.canvas.WebCanvas;
 import com.alee.extended.dock.SidebarButtonVisibility;
 import com.alee.extended.dock.WebDockableFrame;
 import com.alee.extended.dock.WebDockablePane;
 import com.alee.extended.label.TextWrap;
 import com.alee.extended.label.WebStyledLabel;
 import com.alee.extended.layout.AlignLayout;
+import com.alee.extended.link.UrlLinkAction;
+import com.alee.extended.link.WebLink;
+import com.alee.extended.memorybar.WebMemoryBar;
+import com.alee.extended.overlay.AlignedOverlay;
 import com.alee.extended.overlay.FillOverlay;
 import com.alee.extended.overlay.WebOverlay;
+import com.alee.extended.panel.GroupPanel;
+import com.alee.extended.panel.GroupingType;
+import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.extended.tab.DocumentAdapter;
 import com.alee.extended.tab.DocumentData;
 import com.alee.extended.tab.PaneData;
 import com.alee.extended.tab.WebDocumentPane;
+import com.alee.extended.tree.WebExTree;
+import com.alee.extended.tree.WebTreeFilterField;
 import com.alee.laf.WebLookAndFeel;
+import com.alee.laf.desktoppane.WebDesktopPane;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.rootpane.WindowState;
+import com.alee.laf.scroll.ScrollPaneState;
+import com.alee.laf.scroll.WebScrollPane;
+import com.alee.laf.separator.WebSeparator;
 import com.alee.laf.tabbedpane.WebTabbedPane;
+import com.alee.laf.toolbar.WebToolBar;
+import com.alee.laf.tree.TreeNodeEventRunnable;
+import com.alee.laf.tree.TreeSelectionStyle;
+import com.alee.laf.tree.TreeState;
 import com.alee.laf.window.WebFrame;
+import com.alee.managers.hotkey.Hotkey;
 import com.alee.managers.language.LM;
 import com.alee.managers.language.LanguageLocaleUpdater;
 import com.alee.managers.language.LanguageManager;
+import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.settings.Configuration;
-import com.alee.managers.style.ChildStyleId;
-import com.alee.managers.style.Skin;
-import com.alee.managers.style.StyleId;
-import com.alee.managers.style.StyleManager;
+import com.alee.managers.settings.SettingsManager;
+import com.alee.managers.style.*;
 import com.alee.managers.task.TaskGroup;
 import com.alee.managers.task.TaskManager;
 import com.alee.skin.dark.WebDarkSkin;
@@ -58,10 +84,13 @@ import com.alee.utils.CoreSwingUtils;
 import com.alee.utils.SystemUtils;
 import com.alee.utils.XmlUtils;
 import com.alee.utils.swing.Customizer;
+import com.alee.utils.swing.extensions.KeyEventRunnable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Huang Qiyue
@@ -118,6 +147,9 @@ public final class FancyUITest extends WebFrame
         updateTitle ();
 
         initializeDocks();
+        initializeStatus();
+        initializeToolBar();
+        initializeCategoryFrame();
 
         setDefaultCloseOperation ( WindowConstants.EXIT_ON_CLOSE );
         registerSettings ( new Configuration<WindowState> ( "application", new SerializableSupplier<WindowState> ()
@@ -150,7 +182,106 @@ public final class FancyUITest extends WebFrame
         setTitle ( title.toString () );
     }
 
-    // TODO rewrite
+
+    /**
+     * Initializes categoryFrame.
+     *
+     * @author Huang Qiyue
+     * @date 2021-07-20
+     */
+    private void initializeCategoryFrame()
+    {
+        categoryFrame.setPosition(CompassDirection.west);
+        categoryFrame.setPreferredSize(300,200);
+
+        final WebExTree appTree = new WebExTree();
+        appTree.setEditable(false);
+        appTree.setRootVisible(false);
+        appTree.setShowsRootHandles(true);
+        appTree.setMultipleSelectionAllowed(false);
+        appTree.setSelectionStyle(TreeSelectionStyle.line);
+        //TODO appTree.expandAll();
+        appTree.onKeyPress ( Hotkey.ENTER, new KeyEventRunnable()
+        {
+            @Override
+            public void run ( @NotNull final KeyEvent e )
+            {
+                //TODO
+                //open ( appTree.getSelectedNode () );
+            }
+        } );
+        appTree.onNodeDoubleClick ( new TreeNodeEventRunnable<ExamplesTreeNode>()
+        {
+            @Override
+            public void run ( @NotNull final ExamplesTreeNode node )
+            {
+                //TODO
+                //open ( node );
+            }
+        } );
+        appTree.registerSettings ( new Configuration<TreeState> ( "ExamplesTree" ) );
+        final WebScrollPane appTreeScroll = new WebScrollPane ( StyleId.scrollpaneTransparentHoveringExtending, appTree );
+        appTreeScroll.registerSettings ( new Configuration<ScrollPaneState> ( "ExamplesScroll" ) );
+
+        // Filtering field
+        // TODO
+        // final WebTreeFilterField filter = new WebTreeFilterField ( appTree );
+
+        // Frame UI composition
+        final WebSeparator separator = new WebSeparator ( StyleId.separatorHorizontal );
+        //categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, filter, separator, appTreeScroll ) );
+        categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, separator, appTreeScroll ) );
+
+    }
+
+    /**
+     * Initializes status bar and its content.
+     */
+    private void initializeStatus ()
+    {
+        final WebStatusBar statusBar = new WebStatusBar ();
+
+
+        statusBar.addSpacingToEnd ( 10 );
+
+        final WebOverlay memoryBarOverlay = new WebOverlay ();
+
+        memoryBarOverlay.setContent ( new WebMemoryBar().setPreferredWidth ( 150 ) );
+
+        final WebCanvas resizeCorner = new WebCanvas ( StyleId.canvasGripperSE );
+        new ComponentResizeBehavior( resizeCorner, CompassDirection.southEast ).install ();
+
+        memoryBarOverlay.addOverlay ( new AlignedOverlay(
+                resizeCorner,
+                BoxOrientation.right,
+                BoxOrientation.bottom,
+                new Insets ( 0, 0, -1, -1 )
+        ) );
+
+        statusBar.addToEnd ( memoryBarOverlay );
+
+        add ( statusBar, BorderLayout.SOUTH );
+
+        // Custom status bar margin for notification manager
+        NotificationManager.setMargin ( 0, 0, statusBar.getPreferredSize ().height, 0 );
+    }
+
+
+    /**
+     * Initializes demo application toolbar and its content.
+     */
+    private void initializeToolBar ()
+    {
+        final WebToolBar toolBar = new WebToolBar ( StyleId.toolbarAttachedNorth );
+        toolBar.setFloatable ( false );
+
+       // toolBar.add ( new SkinChooserTool() );
+        toolBar.addSeparator ();
+        //toolBar.add ( new LanguageChooserTool() );
+
+        add ( toolBar, BorderLayout.NORTH );
+    }
+
     private void initializeDocks ()
     {
         /**
@@ -198,7 +329,6 @@ public final class FancyUITest extends WebFrame
 
         overlay.addOverlay ( new FillOverlay ( overlayContainer ) );
 
-
         mainPane.addDocumentListener ( new DocumentAdapter<DocumentData>()
         {
             @Override
@@ -223,8 +353,6 @@ public final class FancyUITest extends WebFrame
                 }
             }
         } );
-
-
 
         dockablePane.setContent ( overlay );
 
@@ -288,12 +416,12 @@ public final class FancyUITest extends WebFrame
             @Override
             public void run ()
             {
-                /*
+
                 // Configuring settings location
                 SettingsManager.setDefaultSettingsDirName ( ".weblaf-demo" );
                 SettingsManager.setDefaultSettingsGroup ( "WebLookAndFeelDemo" );
                 SettingsManager.setSaveOnChange ( true );
-                */
+
 
                 // Adding demo data aliases before styles using it are read
                 XmlUtils.processAnnotations ( FeatureStateBackground.class );
@@ -309,11 +437,16 @@ public final class FancyUITest extends WebFrame
                 // Custom ThreadGroup for demo application
                 TaskManager.registerGroup ( new TaskGroup("TaskGroup",4) );
 
-                /*
+
                 // Adding demo application skin extensions
                 // They contain all custom styles demo application uses
-                StyleManager.addExtensions ( new DemoAdaptiveExtension (), new DemoLightSkinExtension (), new DemoDarkSkinExtension () );
+                /*
+                StyleManager.addExtensions ( new XmlSkinExtension( new ClassResource( com.alee.demo.skin.DemoAdaptiveExtension.class, "resources/demo-adaptive-extension.xml" )),
+                        new XmlSkinExtension(new ClassResource ( com.alee.demo.skin.DemoLightSkinExtension.class, "resources/demo-light-extension.xml" ) ),
+                        new XmlSkinExtension( new ClassResource ( com.alee.demo.skin.DemoDarkSkinExtension.class, "resources/demo-dark-extension.xml" )) );
                 */
+                StyleManager.setSkin(com.alee.skin.flat.FlatSkin.class);
+                System.out.println(StyleManager.getSkin());
 
                 /* Adding demo language dictionary
                 LanguageManager.addDictionary ( new Dictionary (
@@ -329,6 +462,8 @@ public final class FancyUITest extends WebFrame
 
                 // Starting demo application
                 FancyUITest.getInstance ().display ();
+
+
             }
         } );
     }
