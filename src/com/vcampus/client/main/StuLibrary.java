@@ -23,7 +23,8 @@ public class StuLibrary extends JFrame {
         setResizable(true);
         setTitle("东南大学图书馆");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(0, 0, 1151, 1000);
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize(d.width, d.height);
         this.setLayout(null);
         contentPane = new JPanel();
         jp1=new JPanel();
@@ -111,7 +112,7 @@ public class StuLibrary extends JFrame {
             }
         });
         back.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        back.setBounds(0, 25, 60, 18);
+        back.setBounds(0, 25, 60, 30);
         contentPane.add(back);
 
         String[] header = {"ISBN", "书名","作者","借阅时间","应当归还时间","备注","续借"};
@@ -143,14 +144,14 @@ public class StuLibrary extends JFrame {
         jScrollPane.setViewportView(table);
         table.setGridColor(Color.BLACK);
         table.getTableHeader().setReorderingAllowed(false);
-        jScrollPane.setBounds(0, 0, 980, 500);
+        jScrollPane.setBounds(0, 0, 980, 700);
         jp1.add(jScrollPane);
 
         JTextField txtfield1=new JTextField();    //创建文本框
         txtfield1.setText("输入书名或者ISBN号");
-        txtfield1.setBounds(0,20,400,30);
+        txtfield1.setBounds(0,10,400,30);
         JButton search=new JButton("查询");
-        search.setBounds(420,30,60,18);
+        search.setBounds(420,10,60,30);
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -186,7 +187,7 @@ public class StuLibrary extends JFrame {
         jScrollPane2.setViewportView(table2);
         table2.setGridColor(Color.BLACK);
         table2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setBounds(0, 50, 980, 500);
+        jScrollPane2.setBounds(0, 50, 980, 700);
         jp2.add(search);
         jp2.add(txtfield1);
         jp2.add(jScrollPane2);
@@ -199,7 +200,7 @@ public class StuLibrary extends JFrame {
         jScrollPane3.setViewportView(table3);
         table3.setGridColor(Color.BLACK);
         table3.setEnabled(false);
-        jScrollPane3.setBounds(0, 0, 980, 600);
+        jScrollPane3.setBounds(0, 0, 980, 700);
         jp3.add(jScrollPane3);
 
         JButton logout = new JButton("登出");
@@ -214,7 +215,7 @@ public class StuLibrary extends JFrame {
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        logout.setBounds(1000, 25, 60, 18);
+        logout.setBounds(1200, 25, 60, 30);
         contentPane.add(logout);
 
         // 创建选项卡面板

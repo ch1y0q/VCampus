@@ -28,7 +28,8 @@ public class ManLibrary extends JFrame {
         setResizable(true);
         setTitle("图书馆管理");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(0, 0, 1300, 800);
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize(d.width, d.height);
         JPanel contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -93,13 +94,13 @@ public class ManLibrary extends JFrame {
             }
         });
         bookadd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        bookadd.setBounds(200, 20, 100, 30);
+        bookadd.setBounds(800, 20, 100, 30);
         contentPane.add(bookadd);
 
         JLabel tf = new JLabel();
         tf.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         tf.setText("欢迎你:" + "XXX");
-        tf.setBounds(450, 20, 180, 30);
+        tf.setBounds(1000, 20, 180, 30);
         tf.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(tf);
 
@@ -115,7 +116,7 @@ public class ManLibrary extends JFrame {
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        logout.setBounds(1000, 20, 100, 30);
+        logout.setBounds(1200, 20, 100, 30);
         contentPane.add(logout);
 
         JLabel bookmanage=new JLabel("书籍信息管理");
@@ -214,8 +215,8 @@ public class ManLibrary extends JFrame {
         contentPane.add(detail);
 
         JLabel detailicon=new JLabel("");
-        detailicon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teainformation.jpg")));
-        detailicon.setBounds(800,230,200,300);
+        detailicon.setIcon(new ImageIcon());
+        detailicon.setBounds(800,230,180,200);
         contentPane.add(detailicon);
 
         JLabel ISBNnum=new JLabel("ISBN号");
