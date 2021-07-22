@@ -26,6 +26,7 @@ public class AppAdminCourse {
         container.add(jp);
         jp.setLayout(null);
         jp.setBounds(width*2/11,height/50,width*4/5,height*4/5);
+        jp.setBackground(Color.white);
 
 
 
