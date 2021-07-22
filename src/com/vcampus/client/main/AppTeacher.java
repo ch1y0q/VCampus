@@ -118,6 +118,7 @@ public class AppTeacher extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==classin)
                 {
+                    AppTeaCourse app = new AppTeaCourse();
                     setVisible(false);
                     //app.setVisible(true);
                 }
