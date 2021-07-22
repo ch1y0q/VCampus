@@ -95,6 +95,20 @@ public class AppDormAdmin extends JFrame {
         tblDormBill.setDefaultRenderer(Object.class,rDormBill);
         jp1.add(tblDormBill);
 
+        //jp1结束
 
+        JTable tblDormRepairState=new JTable(10,5);
+        tblDormRepairState.setBounds(250,150,1000,500);
+        tblDormRepairState.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
+        tblDormRepairState.setRowHeight(50);
+        tblDormRepairState.getModel().setValueAt("宿舍号",0,0);
+        tblDormRepairState.getModel().setValueAt("报修时间",0,1);
+        tblDormRepairState.getModel().setValueAt("报修内容",0,2);
+        tblDormRepairState.getModel().setValueAt("报修详细信息",0,3);
+        tblDormRepairState.getModel().setValueAt("报修状态",0,4);
+        DefaultTableCellRenderer rDormRepairState =new DefaultTableCellRenderer();
+        rDormRepairState.setHorizontalAlignment(JLabel.CENTER);
+        tblDormRepairState.setDefaultRenderer(Object.class,rDormRepairState);
+        jp2.add(tblDormRepairState);
     }
 }
