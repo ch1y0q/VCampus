@@ -22,14 +22,14 @@ public class Verifier {
 
     public static Teacher checkTeacher(String cardNumber, String password) {
         return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.auth.Auth.teacherLoginChecker",
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.Auth.teacherLoginChecker",
                         new Object[] { new Teacher(cardNumber, password) }).send())
                 .getReturn(Teacher.class);
     }
 
     public static Admin checkAdmin(String cardNumber, String password) {
         return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.auth.Auth.adminLoginChecker",
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.Auth.adminLoginChecker",
                         new Object[] { new Admin(cardNumber, password) }).send())
                 .getReturn(Admin.class);
     }
