@@ -20,6 +20,13 @@ public class AppLife extends JFrame{
     private static JTabbedPane tabbedPane;
     private static JPanel jp1,jp2;
     public AppLife(){
+        String studentCardNumber;
+        studentCardNumber= App.session.getStudent().getCardNumber();
+
+
+
+
+
         setResizable(false);
         setTitle("生活服务 - Vcampus");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +67,7 @@ public class AppLife extends JFrame{
         lblCardNum.setBounds(205, 30, 100, 40);
         jp1.add(lblCardNum);
 
-        JLabel lblCurCardNum = new JLabel("213191111");
+        JLabel lblCurCardNum = new JLabel(studentCardNumber);
         lblCurCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardNum.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurCardNum.setBounds(305, 30, 100, 40);
