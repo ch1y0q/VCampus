@@ -1,6 +1,8 @@
-package com.vcampus.administrator.main;
+package com.vcampus.client.administrator.main;
 
 /**
+ * JTree目录测试
+ *
  * @author Dong Ruojing
  * @date 2021/7/20
  */

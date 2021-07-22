@@ -1,23 +1,18 @@
 package com.vcampus.test;
 
 import com.alee.laf.WebLookAndFeel;
-import com.vcampus.client.main.StuLibrary;
+import com.vcampus.client.main.AppDormAdmin;
 
 import java.awt.*;
 
-/**
- * @author Xiao Kaijie
- * @date 2021-07-14
- */
-
-public class StuLibraryEntry {
+public class AppDormAdminEntry {
     public static void main(String args[]){
 
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 WebLookAndFeel.install ();
-                StuLibrary app = new StuLibrary();
+                AppDormAdmin app = new AppDormAdmin();
                 app.setVisible(true);
             }
         });
