@@ -43,5 +43,58 @@ public class AppDormAdmin extends JFrame {
         tabbedPane.add("宿舍报修处理",jp2);
         tabbedPane.setBounds(0,0,2000,1100);
         this.add(tabbedPane);
+
+        JLabel lblDormHygieneMarkEntering = new JLabel("宿舍卫生分数录入");
+        lblDormHygieneMarkEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblDormHygieneMarkEntering.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDormHygieneMarkEntering.setBounds(210, 70, 250, 40);
+        jp1.add(lblDormHygieneMarkEntering);
+
+        JComboBox cmbDormHygieneMarkWeek=new JComboBox();
+        for(int i=1;i<17;i++) {
+            cmbDormHygieneMarkWeek.addItem("第"+i+"周");
+        }
+        cmbDormHygieneMarkWeek.setBounds(430,77,100,30);
+        jp1.add(cmbDormHygieneMarkWeek);
+
+        JTable tblDormHygieneMark=new JTable(10,3);
+        tblDormHygieneMark.setBounds(210,170,400,500);
+        tblDormHygieneMark.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
+        tblDormHygieneMark.setRowHeight(50);
+        tblDormHygieneMark.getModel().setValueAt("宿舍号",0,0);
+        tblDormHygieneMark.getModel().setValueAt("分数",0,1);
+        tblDormHygieneMark.getModel().setValueAt("周数",0,2);
+        DefaultTableCellRenderer rHygieneMark =new DefaultTableCellRenderer();
+        rHygieneMark.setHorizontalAlignment(JLabel.CENTER);
+        tblDormHygieneMark.setDefaultRenderer(Object.class,rHygieneMark);
+        jp1.add(tblDormHygieneMark);
+
+        JLabel lblDormBillEntering = new JLabel("宿舍水电费录入");
+        lblDormBillEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblDormBillEntering.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDormBillEntering.setBounds(830, 70, 250, 40);
+        jp1.add(lblDormBillEntering);
+
+        JComboBox cmbDormBill=new JComboBox();
+        for(int i=1;i<13;i++) {
+            cmbDormBill.addItem("第"+i+"月");
+        }
+        cmbDormBill.setBounds(1050,77,100,30);
+        jp1.add(cmbDormBill);
+
+        JTable tblDormBill=new JTable(10,4);
+        tblDormBill.setBounds(750,170,600,500);
+        tblDormBill.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
+        tblDormBill.setRowHeight(50);
+        tblDormBill.getModel().setValueAt("宿舍号",0,0);
+        tblDormBill.getModel().setValueAt("水费",0,1);
+        tblDormBill.getModel().setValueAt("电费",0,2);
+        tblDormBill.getModel().setValueAt("月份",0,3);
+        DefaultTableCellRenderer rDormBill =new DefaultTableCellRenderer();
+        rDormBill.setHorizontalAlignment(JLabel.CENTER);
+        tblDormBill.setDefaultRenderer(Object.class,rDormBill);
+        jp1.add(tblDormBill);
+
+
     }
 }
