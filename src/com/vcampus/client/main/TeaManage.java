@@ -35,21 +35,20 @@ public class TeaManage extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        DefaultMutableTreeNode login= new DefaultMutableTreeNode("教师登陆");
-        DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
-        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("选课");
-        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩管理");
-        DefaultMutableTreeNode Library = new DefaultMutableTreeNode("图书馆");
-        DefaultMutableTreeNode card = new DefaultMutableTreeNode("一卡通");
-        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
-        login.add(information);login.add(Class);login.add(Grades);login.add(Library);login.add(card);login.add(shop);
+        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("管理员登陆");
+        DefaultMutableTreeNode nodInfor = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode nodClassManage = new DefaultMutableTreeNode("课程管理");
+        DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode nodDorm = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        nodLogin.add(nodInfor);nodLogin.add(nodClassManage);nodLogin.add(nodLibrary);nodLogin.add(nodDorm);nodLogin.add(nodShop);
 
-        DefaultMutableTreeNode goods = new DefaultMutableTreeNode("商品列表");
-        DefaultMutableTreeNode shopcar = new DefaultMutableTreeNode("购物车");
-        DefaultMutableTreeNode histoty = new DefaultMutableTreeNode("购买历史");
-        shop.add(goods);shop.add(shopcar);shop.add(histoty);
+        DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
+        DefaultMutableTreeNode nodShopCart = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode nodBuyHistory = new DefaultMutableTreeNode("购买历史");
+        nodShop.add(nodGoods);nodShop.add(nodShopCart);nodShop.add(nodBuyHistory);
 
-        JTree jt = new JTree(login);
+        JTree jt = new JTree(nodLogin);
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 
