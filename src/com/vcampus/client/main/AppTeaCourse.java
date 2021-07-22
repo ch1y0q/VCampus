@@ -230,8 +230,5 @@ public class AppTeaCourse {
 
 
     }
-    public static void main(String args[]){
-        AppTeaCourse course = new AppTeaCourse();
-    }
 }
 
