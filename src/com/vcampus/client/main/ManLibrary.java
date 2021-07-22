@@ -61,7 +61,8 @@ public class ManLibrary extends JFrame {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
                     String name = node.toString();
-                    System.out.println(name);
+                    if(name=="宿舍") {
+                    }
                 }
             }
         });

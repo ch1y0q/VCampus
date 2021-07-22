@@ -23,11 +23,12 @@ public class AppTeacher extends JFrame {
         setResizable(true);
         setTitle(res.getString("teacher_main"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setUndecorated(false);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(d.width, d.height);
+        System.out.println(d.width+" "+d.height);
         JPanel contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
@@ -57,11 +58,6 @@ public class AppTeacher extends JFrame {
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -118,7 +114,7 @@ public class AppTeacher extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==classin)
                 {
-                    AppTeaCourse app = new AppTeaCourse();
+                    AppTeaCourse app=new AppTeaCourse();
                     setVisible(false);
                     //app.setVisible(true);
                 }
