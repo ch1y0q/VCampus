@@ -1,8 +1,7 @@
-package com.vcampus.administrator.test;
+package com.vcampus.client.administrator.test;
 
 import com.alee.laf.WebLookAndFeel;
-import com.vcampus.administrator.main.AppAdmin;
-import com.vcampus.administrator.main.Category;
+import com.vcampus.client.administrator.main.Category;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,5 +1,6 @@
 package com.vcampus.test;
 
+import com.alee.laf.WebLookAndFeel;
 import com.vcampus.client.main.StuLibrary;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ public class StuLibraryEntry {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                WebLookAndFeel.install ();
                 StuLibrary app = new StuLibrary();
                 app.setVisible(true);
             }

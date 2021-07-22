@@ -1,4 +1,4 @@
-package com.vcampus.administrator.main;
+package com.vcampus.client.administrator.main;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,13 +15,19 @@ import java.awt.event.MouseListener;
  */
 public class AppAdmin extends JFrame{
     private JPanel contentPane;
-    public static JLabel lblAdmin;
+    //public static JLabel lblAdmin;
 
     public AppAdmin(){
+
         setResizable(true);
         setTitle("管理员登录");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(400, 200, 800, 550);
+        //setBounds(400, 200, 800, 550);
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        //System.out.println(d.width);1536
+        //System.out.println(d.height);864
+        //(true);
+        setSize(d.width, d.height);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(240, 255, 240));
         contentPane.setLocation(-871, -176);
@@ -36,7 +42,7 @@ public class AppAdmin extends JFrame{
         label.setOpaque(true);
         label.setForeground(new Color(33, 117, 206));
         label.setBackground(new Color(33,177,206,80));
-        label.setBounds(600, 5, 100, 30);
+        label.setBounds(1350, 5, 100, 30);
         contentPane.add(label);
 
 
@@ -48,7 +54,7 @@ public class AppAdmin extends JFrame{
 
         JButton LogoutButton = new JButton("登出");
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        LogoutButton.setBounds(720,5,50,30);
+        LogoutButton.setBounds(1450,5,50,30);
         LogoutButton.setForeground(new Color(33, 117, 206,100));
         contentPane.add(LogoutButton);
 
@@ -181,10 +187,10 @@ public class AppAdmin extends JFrame{
         contentPane.add(PersonInfoLabel);//先添加的label在最上层
 
 
-        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic1.jpg")));
+        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
         bg.setPreferredSize(new Dimension(400,400));
         contentPane.add(bg);
-        bg.setBounds(65, 65, 300, 300);
+        bg.setBounds(120, 65, 500, 500);
         //bg.setBorder(BorderFactory.createMatteBorder(5,5,5,5,new Color(255,255,255,80)));
 
         JLabel ShopInfoLabel1 = new JLabel("网上商店");
@@ -229,9 +235,9 @@ public class AppAdmin extends JFrame{
         ShopInfoLabel.setBounds(162, 382, 206, 91);
         contentPane.add(ShopInfoLabel);//先添加的label在最上层
 
-        JLabel bg2 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic3.jpg")));
+        JLabel bg2 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
         contentPane.add(bg2);
-        bg2.setBounds(65, 385, 300, 85);
+        bg2.setBounds(120, 585, 500, 200);
 
         JLabel LifeInfoLabel1 = new JLabel("生活管理");
         LifeInfoLabel1.setFont(new Font("微软雅黑", Font.BOLD, 14));
@@ -275,9 +281,9 @@ public class AppAdmin extends JFrame{
         LifeInfoLabel.setBounds(490, 62, 93, 256);
         contentPane.add(LifeInfoLabel);//先添加的label在最上层
 
-        JLabel bg3 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic2.jpg")));
+        JLabel bg3 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
         contentPane.add(bg3);
-        bg3.setBounds(400, 65, 180, 250);
+        bg3.setBounds(680, 65, 400, 400);
 
         JLabel CourseInfoLabel1 = new JLabel("课程管理");
         CourseInfoLabel1.setFont(new Font("微软雅黑", Font.BOLD, 14));
@@ -321,9 +327,9 @@ public class AppAdmin extends JFrame{
         CourseInfoLabel.setBounds(650, 162, 103, 103);
         contentPane.add(CourseInfoLabel);//先添加的label在最上层
 
-        JLabel bg4 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic4.jpg")));
+        JLabel bg4 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
         contentPane.add(bg4);
-        bg4.setBounds(585, 150, 180, 180);
+        bg4.setBounds(1100, 165, 250, 250);
 
         JLabel LibraryInfoLabel1 = new JLabel("图书馆");
         LibraryInfoLabel1.setFont(new Font("微软雅黑", Font.BOLD, 14));
@@ -368,9 +374,9 @@ public class AppAdmin extends JFrame{
         LibraryInfoLabel.setBounds(397, 332, 96, 141);
         contentPane.add(LibraryInfoLabel);//先添加的label在最上层
 
-        JLabel bg5 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic5.jpg")));
+        JLabel bg5 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
         contentPane.add(bg5);
-        bg5.setBounds(385, 335, 380, 135);
+        bg5.setBounds(680, 450, 700, 330);
 
         JLabel TransLabel = new JLabel("");
         TransLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -378,12 +384,12 @@ public class AppAdmin extends JFrame{
         TransLabel.setBackground(new Color(255,255,255,100));
         TransLabel.setBorder(BorderFactory.createMatteBorder(2,2,2,2,
                 new Color(41, 210, 190, 114)));
-        TransLabel.setBounds(600, 63, 95, 95);
+        TransLabel.setBounds(1150, 63, 150, 150);
         contentPane.add(TransLabel);//先添加的label在最上层
 
-        JLabel bg6 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic7.jpg")));
+        JLabel bg6 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
         contentPane.add(bg6);
-        bg6.setBounds(603, 65, 90, 90);
+        bg6.setBounds(1150, 63, 150, 150);
         bg6.setForeground(new Color(255,255,255,255));
 
     }
