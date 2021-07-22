@@ -23,7 +23,7 @@ public class StuLibrary extends JFrame {
         setResizable(true);
         setTitle("东南大学图书馆");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();//获取屏幕大小
         setSize(d.width, d.height);
         this.setLayout(null);
         contentPane = new JPanel();
@@ -42,46 +42,46 @@ public class StuLibrary extends JFrame {
         jp3.setLayout(null);
         jp3.setBackground(new Color(255, 255, 255));
 
-        DefaultMutableTreeNode login= new DefaultMutableTreeNode("学生登陆");
-        DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
-        DefaultMutableTreeNode library = new DefaultMutableTreeNode("图书馆");
-        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("课程管理");
-        DefaultMutableTreeNode life = new DefaultMutableTreeNode(   "生活服务");
-        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
-        login.add(information);
-        login.add(Class);
-        login.add(library);
-        login.add(life);
-        login.add(shop);
+        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("学生登陆");
+        DefaultMutableTreeNode nodPersonalInfo = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode nodCourses = new DefaultMutableTreeNode("课程管理");
+        DefaultMutableTreeNode nodLivingServices = new DefaultMutableTreeNode(   "生活服务");
+        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        nodLogin.add(nodPersonalInfo);
+        nodLogin.add(nodCourses);
+        nodLogin.add(nodLibrary);
+        nodLogin.add(nodLivingServices);
+        nodLogin.add(nodShop);
 
-        DefaultMutableTreeNode inforLook = new DefaultMutableTreeNode("个人信息查询");
-        DefaultMutableTreeNode informanage = new DefaultMutableTreeNode("个人信息维护");
-        information.add(inforLook);
-        information.add(informanage);
-        DefaultMutableTreeNode BorrowLook = new DefaultMutableTreeNode("借阅查询");
-        DefaultMutableTreeNode BookLook = new DefaultMutableTreeNode("书籍查询");
-        DefaultMutableTreeNode BorrowHistory = new DefaultMutableTreeNode("借阅历史");
-        library.add(BorrowLook);
-        library.add(BookLook);
-        library.add(BorrowHistory);
-        DefaultMutableTreeNode timetable = new DefaultMutableTreeNode("课表");
-        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩查询");
-        DefaultMutableTreeNode Classchoose = new DefaultMutableTreeNode("选课");
-        Class.add(timetable);
-        Class.add(Grades);
-        Class.add(Classchoose);
-        DefaultMutableTreeNode card = new DefaultMutableTreeNode("一卡通");
-        DefaultMutableTreeNode living = new DefaultMutableTreeNode("宿舍管理");
-        life.add(card);
-        life.add(living);
-        DefaultMutableTreeNode goods = new DefaultMutableTreeNode("商品列表");
-        DefaultMutableTreeNode shopcar = new DefaultMutableTreeNode("购物车");
-        DefaultMutableTreeNode histoty = new DefaultMutableTreeNode("购买历史");
-        shop.add(goods);
-        shop.add(shopcar);
-        shop.add(histoty);
+        DefaultMutableTreeNode nodInfoLookup = new DefaultMutableTreeNode("个人信息查询");
+        DefaultMutableTreeNode nodInfoManage = new DefaultMutableTreeNode("个人信息维护");
+        nodPersonalInfo.add(nodInfoLookup);
+        nodPersonalInfo.add(nodInfoManage);
+        DefaultMutableTreeNode nodBorrowLookup = new DefaultMutableTreeNode("借阅查询");
+        DefaultMutableTreeNode nodBookLookup = new DefaultMutableTreeNode("书籍查询");
+        DefaultMutableTreeNode nodBorrowHistory = new DefaultMutableTreeNode("借阅历史");
+        nodLibrary.add(nodBorrowLookup);
+        nodLibrary.add(nodBookLookup);
+        nodLibrary.add(nodBorrowHistory);
+        DefaultMutableTreeNode nodTimetable = new DefaultMutableTreeNode("课表");
+        DefaultMutableTreeNode nodGrades = new DefaultMutableTreeNode("成绩查询");
+        DefaultMutableTreeNode nodChooseCourses = new DefaultMutableTreeNode("选课");
+        nodCourses.add(nodTimetable);
+        nodCourses.add(nodGrades);
+        nodCourses.add(nodChooseCourses);
+        DefaultMutableTreeNode nodCard = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode nodDormManage = new DefaultMutableTreeNode("宿舍管理");
+        nodLivingServices.add(nodCard);
+        nodLivingServices.add(nodDormManage);
+        DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
+        DefaultMutableTreeNode nodCart = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode nodShoppingHistoty = new DefaultMutableTreeNode("购买历史");
+        nodShop.add(nodGoods);
+        nodShop.add(nodCart);
+        nodShop.add(nodShoppingHistoty);
 
-        JTree jt = new JTree(login);
+        JTree jt = new JTree(nodLogin);
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 
@@ -100,11 +100,11 @@ public class StuLibrary extends JFrame {
         });
 
 
-        JButton back = new JButton("返回");
-        back.addActionListener(new ActionListener() {
+        JButton btnBack = new JButton("返回");
+        btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==back)
+                if(e.getSource()==btnBack)
                 {
                     AppStudent app=new AppStudent();
                     setVisible(false);
@@ -112,9 +112,9 @@ public class StuLibrary extends JFrame {
                 }
             }
         });
-        back.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        back.setBounds(0, 25, 60, 30);
-        contentPane.add(back);
+        btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack.setBounds(0, 25, 60, 30);
+        contentPane.add(btnBack);
 
         String[] header = {"ISBN", "书名","作者","借阅时间","应当归还时间","备注","续借"};
         String[][] data = {{"", "","","","","",""},{"", "","","","","",""}};
@@ -133,9 +133,7 @@ public class StuLibrary extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 int column = table.getSelectedColumn();
                 int row = table.getSelectedRow();
-                /**需增加
-                 * 判断逻辑
-                 */
+                /* TODO 需增加判断逻辑*/
                 if (column == 6) {
                     table.setValueAt("<html><font color='rgb(110,110,110)'>无法续借</font></html>", row, column);
                 }
@@ -148,15 +146,15 @@ public class StuLibrary extends JFrame {
         jScrollPane.setBounds(0, 0, 980, 700);
         jp1.add(jScrollPane);
 
-        JTextField txtfield1=new JTextField();    //创建文本框
-        txtfield1.setText("输入书名或者ISBN号");
-        txtfield1.setBounds(0,10,400,30);
-        JButton search=new JButton("查询");
-        search.setBounds(420,10,60,30);
-        search.addActionListener(new ActionListener() {
+        JTextField txtBookOrIsbn=new JTextField();    //创建文本框
+        txtBookOrIsbn.setText("输入书名或者ISBN号");
+        txtBookOrIsbn.setBounds(0,10,400,30);
+        JButton btnQuery=new JButton("查询");
+        btnQuery.setBounds(420,10,60,30);
+        btnQuery.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //TODO
             }
         });
         String[] header2 = {"ISBN", "书名","作者","作者国籍","剩余数量","出版社","介绍","分类","借阅"};
@@ -176,9 +174,7 @@ public class StuLibrary extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 int column = table2.getSelectedColumn();
                 int row = table2.getSelectedRow();
-                /**需增加
-                 * 判断逻辑
-                */
+                /* TODO 需增加判断逻辑*/
                 if (column == 6) {
                     table2.setValueAt("<html><font color='rgb(110,110,110)'>已借</font></html>", row, column);
                 }
@@ -189,8 +185,8 @@ public class StuLibrary extends JFrame {
         table2.setGridColor(Color.BLACK);
         table2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setBounds(0, 50, 980, 700);
-        jp2.add(search);
-        jp2.add(txtfield1);
+        jp2.add(btnQuery);
+        jp2.add(txtBookOrIsbn);
         jp2.add(jScrollPane2);
 
         String[] header3 = {"ISBN", "书名","作者","借阅时间","归还时间"};
@@ -204,8 +200,8 @@ public class StuLibrary extends JFrame {
         jScrollPane3.setBounds(0, 0, 980, 700);
         jp3.add(jScrollPane3);
 
-        JButton logout = new JButton("登出");
-        logout.addActionListener(new ActionListener() {
+        JButton btnLogout = new JButton("登出");
+        btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
@@ -215,9 +211,9 @@ public class StuLibrary extends JFrame {
                 });
             }
         });
-        logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        logout.setBounds(1200, 25, 60, 30);
-        contentPane.add(logout);
+        btnLogout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnLogout.setBounds(1200, 25, 60, 30);
+        contentPane.add(btnLogout);
 
         // 创建选项卡面板
         tabbedPane = new JTabbedPane();
@@ -226,6 +222,5 @@ public class StuLibrary extends JFrame {
         tabbedPane.add("已还图书",jp3);
         tabbedPane.setBounds(200,50,1000,700);
         contentPane.add(tabbedPane);
-
     }
 }

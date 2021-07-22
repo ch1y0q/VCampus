@@ -1,8 +1,12 @@
 package com.vcampus.client.main;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
@@ -20,7 +24,7 @@ public class AppStuCourse {
         Container container = jf.getContentPane();
         container.setBackground(new Color(0xD8F6F6));
         JTabbedPane tp = new JTabbedPane();
-        tp.setBounds(width/50,height/50,width*4/5,height*4/5);
+        tp.setBounds(width*2/11,height/50,width*4/5,height*4/5);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         container.add(tp);
         JPanel jp0 = new JPanel();
@@ -40,6 +44,64 @@ public class AppStuCourse {
         jp1.setBackground(Color.white);
         jp2.setBackground(Color.white);
         jp3.setBackground(Color.white);
+
+
+
+        //侧边栏
+        DefaultMutableTreeNode login= new DefaultMutableTreeNode("学生登陆");
+        DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode library = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("课程管理");
+        DefaultMutableTreeNode life = new DefaultMutableTreeNode(   "生活服务");
+        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
+        login.add(information);
+        login.add(Class);
+        login.add(library);
+        login.add(life);
+        login.add(shop);
+        DefaultMutableTreeNode inforLook = new DefaultMutableTreeNode("个人信息查询");
+        DefaultMutableTreeNode informanage = new DefaultMutableTreeNode("个人信息维护");
+        information.add(inforLook);
+        information.add(informanage);
+        DefaultMutableTreeNode BorrowLook = new DefaultMutableTreeNode("借阅查询");
+        DefaultMutableTreeNode BookLook = new DefaultMutableTreeNode("书籍查询");
+        DefaultMutableTreeNode BorrowHistory = new DefaultMutableTreeNode("借阅历史");
+        library.add(BorrowLook);
+        library.add(BookLook);
+        library.add(BorrowHistory);
+        DefaultMutableTreeNode timetable = new DefaultMutableTreeNode("课表");
+        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩查询");
+        DefaultMutableTreeNode Classchoose = new DefaultMutableTreeNode("选课");
+        Class.add(timetable);
+        Class.add(Grades);
+        Class.add(Classchoose);
+        DefaultMutableTreeNode card = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode living = new DefaultMutableTreeNode("宿舍管理");
+        life.add(card);
+        life.add(living);
+        DefaultMutableTreeNode goods = new DefaultMutableTreeNode("商品列表");
+        DefaultMutableTreeNode shopcar = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode histoty = new DefaultMutableTreeNode("购买历史");
+        shop.add(goods);
+        shop.add(shopcar);
+        shop.add(histoty);
+        JTree jt = new JTree(login);
+        container.add(jt);
+        jt.setBounds(0,height/50,width*2/11,height);
+        TreeSelectionModel treeSelectionModel;
+        treeSelectionModel=jt.getSelectionModel();
+        treeSelectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        jt.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                if (!jt.isSelectionEmpty()) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
+                    String name = node.toString();
+                    System.out.println(name);
+                }
+            }
+        });
+
 
         //课程表
         JScrollPane sp0 = new JScrollPane();
@@ -194,7 +256,7 @@ public class AppStuCourse {
             public void componentResized(ComponentEvent e) {
                 int currentWidth = jf.getWidth();
                 int currentHeight = jf.getHeight();
-                tp.setBounds(currentWidth/50,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
+                tp.setBounds(currentWidth*2/11,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
                 //jp0
                 {
                     jp0.setSize(currentWidth, currentHeight);
