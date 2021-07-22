@@ -187,7 +187,7 @@ public class AppAdmin extends JFrame{
         contentPane.add(PersonInfoLabel);//先添加的label在最上层
 
 
-        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
+        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (51).jpg")));
         bg.setPreferredSize(new Dimension(400,400));
         contentPane.add(bg);
         bg.setBounds(120, 65, 500, 500);
@@ -235,7 +235,7 @@ public class AppAdmin extends JFrame{
         ShopInfoLabel.setBounds(162, 382, 206, 91);
         contentPane.add(ShopInfoLabel);//先添加的label在最上层
 
-        JLabel bg2 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
+        JLabel bg2 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (49).jpg")));
         contentPane.add(bg2);
         bg2.setBounds(120, 585, 500, 200);
 
@@ -281,9 +281,9 @@ public class AppAdmin extends JFrame{
         LifeInfoLabel.setBounds(490, 62, 93, 256);
         contentPane.add(LifeInfoLabel);//先添加的label在最上层
 
-        JLabel bg3 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
+        JLabel bg3 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (57).jpg")));
         contentPane.add(bg3);
-        bg3.setBounds(680, 65, 400, 400);
+        bg3.setBounds(700, 65, 380, 380);
 
         JLabel CourseInfoLabel1 = new JLabel("课程管理");
         CourseInfoLabel1.setFont(new Font("微软雅黑", Font.BOLD, 14));
@@ -327,9 +327,9 @@ public class AppAdmin extends JFrame{
         CourseInfoLabel.setBounds(650, 162, 103, 103);
         contentPane.add(CourseInfoLabel);//先添加的label在最上层
 
-        JLabel bg4 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
+        JLabel bg4 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (42).jpg")));
         contentPane.add(bg4);
-        bg4.setBounds(1100, 165, 250, 250);
+        bg4.setBounds(1140, 190, 250, 250);
 
         JLabel LibraryInfoLabel1 = new JLabel("图书馆");
         LibraryInfoLabel1.setFont(new Font("微软雅黑", Font.BOLD, 14));
@@ -374,9 +374,9 @@ public class AppAdmin extends JFrame{
         LibraryInfoLabel.setBounds(397, 332, 96, 141);
         contentPane.add(LibraryInfoLabel);//先添加的label在最上层
 
-        JLabel bg5 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
+        JLabel bg5 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (31).jpg")));
         contentPane.add(bg5);
-        bg5.setBounds(680, 450, 700, 330);
+        bg5.setBounds(700, 465, 690, 320);
 
         JLabel TransLabel = new JLabel("");
         TransLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -384,12 +384,12 @@ public class AppAdmin extends JFrame{
         TransLabel.setBackground(new Color(255,255,255,100));
         TransLabel.setBorder(BorderFactory.createMatteBorder(2,2,2,2,
                 new Color(41, 210, 190, 114)));
-        TransLabel.setBounds(1150, 63, 150, 150);
+        TransLabel.setBounds(1140, 63, 110, 110);
         contentPane.add(TransLabel);//先添加的label在最上层
 
-        JLabel bg6 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic (39).jpg")));
+        JLabel bg6 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/pic7.jpg")));
         contentPane.add(bg6);
-        bg6.setBounds(1150, 63, 150, 150);
+        bg6.setBounds(1140, 63, 110, 110);
         bg6.setForeground(new Color(255,255,255,255));
 
     }
