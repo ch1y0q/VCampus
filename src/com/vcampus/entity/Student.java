@@ -24,6 +24,7 @@ public class Student {
     private String email;
     private String phoneNumber;
     private String gender;
+    private String bankAccount;
 
     /* constructor */
     public Student(){}
@@ -127,5 +128,11 @@ public class Student {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getBankAccount(){return bankAccount;}
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
     }
 }

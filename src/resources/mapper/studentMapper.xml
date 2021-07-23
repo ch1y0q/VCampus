@@ -90,4 +90,10 @@
                                                = #{cardNumber}
         LIMIT 1
     </update>
+
+    <select id="getBankAccountByCardNumber" parameterType="String"
+            resultType="String">
+        SELECT `bankAccount` FROM `students` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
 </mapper>
