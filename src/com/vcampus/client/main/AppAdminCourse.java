@@ -15,7 +15,6 @@ public class AppAdminCourse {
     private int width = 1151;
     private int height = 800;
     public AppAdminCourse(){
-        jf.setVisible(true);
         jf.setLayout(null);
         jf.setResizable(true);
         jf.setBounds(0, 0, width, height);
@@ -29,46 +28,20 @@ public class AppAdminCourse {
         jp.setBackground(Color.white);
 
 
-
         //侧边栏
-        DefaultMutableTreeNode login= new DefaultMutableTreeNode("学生登陆");
-        DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
-        DefaultMutableTreeNode library = new DefaultMutableTreeNode("图书馆");
-        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("课程管理");
-        DefaultMutableTreeNode life = new DefaultMutableTreeNode(   "生活服务");
-        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
-        login.add(information);
-        login.add(Class);
-        login.add(library);
-        login.add(life);
-        login.add(shop);
-        DefaultMutableTreeNode inforLook = new DefaultMutableTreeNode("个人信息查询");
-        DefaultMutableTreeNode informanage = new DefaultMutableTreeNode("个人信息维护");
-        information.add(inforLook);
-        information.add(informanage);
-        DefaultMutableTreeNode BorrowLook = new DefaultMutableTreeNode("借阅查询");
-        DefaultMutableTreeNode BookLook = new DefaultMutableTreeNode("书籍查询");
-        DefaultMutableTreeNode BorrowHistory = new DefaultMutableTreeNode("借阅历史");
-        library.add(BorrowLook);
-        library.add(BookLook);
-        library.add(BorrowHistory);
-        DefaultMutableTreeNode timetable = new DefaultMutableTreeNode("课表");
-        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩查询");
-        DefaultMutableTreeNode Classchoose = new DefaultMutableTreeNode("选课");
-        Class.add(timetable);
-        Class.add(Grades);
-        Class.add(Classchoose);
-        DefaultMutableTreeNode card = new DefaultMutableTreeNode("一卡通");
-        DefaultMutableTreeNode living = new DefaultMutableTreeNode("宿舍管理");
-        life.add(card);
-        life.add(living);
-        DefaultMutableTreeNode goods = new DefaultMutableTreeNode("商品列表");
-        DefaultMutableTreeNode shopcar = new DefaultMutableTreeNode("购物车");
-        DefaultMutableTreeNode histoty = new DefaultMutableTreeNode("购买历史");
-        shop.add(goods);
-        shop.add(shopcar);
-        shop.add(histoty);
-        JTree jt = new JTree(login);
+        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("管理员登陆");
+        DefaultMutableTreeNode nodInfor = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode nodClassManage = new DefaultMutableTreeNode("课程管理");
+        DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode nodDorm = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        nodLogin.add(nodInfor);nodLogin.add(nodClassManage);nodLogin.add(nodLibrary);nodLogin.add(nodDorm);nodLogin.add(nodShop);
+
+        DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
+        DefaultMutableTreeNode nodShopCart = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode nodBuyHistory = new DefaultMutableTreeNode("购买历史");
+        nodShop.add(nodGoods);nodShop.add(nodShopCart);nodShop.add(nodBuyHistory);
+        JTree jt = new JTree(nodLogin);
         container.add(jt);
         jt.setBounds(0,height/50,width*2/11,height);
         TreeSelectionModel treeSelectionModel;

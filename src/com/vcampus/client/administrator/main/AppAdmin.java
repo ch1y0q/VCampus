@@ -3,6 +3,7 @@ package com.vcampus.client.administrator.main;
 import com.alee.demo.api.example.FeatureState;
 import com.alee.extended.label.WebStyledLabel;
 import com.alee.managers.style.StyleId;
+import com.vcampus.client.main.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -70,7 +71,12 @@ public class AppAdmin extends JFrame{
         TeacherInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                if(e.getSource()==TeacherInfoLabel1)
+                {
+                    TeaManage app=new TeaManage();
+                    //setVisible(false);
+                    app.setVisible(true);
+                }
             }
 
             @Override
@@ -113,7 +119,12 @@ public class AppAdmin extends JFrame{
         StudentInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                if(e.getSource()==StudentInfoLabel1)
+                {
+                    StuManage app=new StuManage();
+                    //setVisible(false);
+                    app.setVisible(true);
+                }
             }
 
             @Override
@@ -155,7 +166,12 @@ public class AppAdmin extends JFrame{
         PersonInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                if(e.getSource()==PersonInfoLabel1)
+                {
+                    AppAdminInfo app=new AppAdminInfo();
+                    //setVisible(false);
+                    app.setVisible(true);
+                }
             }
 
             @Override
@@ -205,7 +221,12 @@ public class AppAdmin extends JFrame{
         ShopInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                if(e.getSource()== ShopInfoLabel1)
+                {
+                    AppShop app=new AppShop();
+                    //setVisible(false);
+                    app.setVisible(true);
+                }
             }
 
             @Override
@@ -251,7 +272,12 @@ public class AppAdmin extends JFrame{
         LifeInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                if(e.getSource()==LifeInfoLabel1)
+                {
+                    AppDormAdmin app=new AppDormAdmin();
+                    //setVisible(false);
+                    app.setVisible(true);
+                }
             }
 
             @Override
@@ -297,7 +323,13 @@ public class AppAdmin extends JFrame{
         CourseInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                if(e.getSource()==CourseInfoLabel1)
+                {
+                    AppAdminCourse app=new AppAdminCourse();
+                    //setVisible(false);
+                    /*need setVisiable
+                     */
+                }
             }
 
             @Override
@@ -343,7 +375,12 @@ public class AppAdmin extends JFrame{
         LibraryInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                if(e.getSource()==LibraryInfoLabel1)
+                {
+                    ManLibrary app=new ManLibrary();
+                    //setVisible(false);
+                    app.setVisible(true);
+                }
             }
 
             @Override

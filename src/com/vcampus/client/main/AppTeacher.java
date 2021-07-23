@@ -32,21 +32,6 @@ public class AppTeacher extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JButton back = new JButton("返回");
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==back)
-                {
-                    setVisible(false);
-                    //app.setVisible(true);
-                }
-            }
-        });
-        back.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        back.setBounds(0, 20, 60, 30);
-        contentPane.add(back);
-
         JLabel tf = new JLabel();
         tf.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         tf.setText("欢迎你:" + "XXX");
@@ -82,8 +67,9 @@ public class AppTeacher extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==selfin)
                 {
-                    setVisible(false);
-                    //app.setVisible(true);
+                    AppTeaInfo app=new AppTeaInfo();
+                    //setVisible(false);
+                    app.setVisible(true);
                 }
             }
             public void mousePressed(MouseEvent e) { }
@@ -115,7 +101,7 @@ public class AppTeacher extends JFrame {
                 if(e.getSource()==classin)
                 {
                     AppTeaCourse app=new AppTeaCourse();
-                    setVisible(false);
+                    //setVisible(false);
                     //app.setVisible(true);
                 }
             }
@@ -146,8 +132,9 @@ public class AppTeacher extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==cardin)
                 {
-                    setVisible(false);
-                    //app.setVisible(true);
+                    AppLife app=new AppLife();
+                    //setVisible(false);
+                    app.setVisible(true);
                 }
             }
             public void mousePressed(MouseEvent e) { }
@@ -178,8 +165,9 @@ public class AppTeacher extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==shopin)
                 {
-                    setVisible(false);
-                    //app.setVisible(true);
+                    AppShop app=new AppShop();
+                    //setVisible(false);
+                    app.setVisible(true);
                 }}
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
@@ -209,6 +197,7 @@ public class AppTeacher extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==Libin) {
                     TeaLibrary app=new TeaLibrary();
+                    //setVisible(false);
                     app.setVisible(true);
                 }
             }

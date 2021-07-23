@@ -6,6 +6,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -103,7 +105,7 @@ public class AppStudent extends JFrame {
                 if(e.getSource()==btnLibrary)
                 {
                     StuLibrary app=new StuLibrary();
-                    setVisible(false);
+                    //setVisible(false);
                     app.setVisible(true);
                 }
             }
@@ -120,9 +122,8 @@ public class AppStudent extends JFrame {
                 if(e.getSource()==btnOpencourse)
                 {
                     AppLife app=new AppLife();
-                    setVisible(false);
+                    //setVisible(false);
                     app.setVisible(true);
-                    //app.setVisible(true);
                 }
             }
         });
@@ -137,8 +138,9 @@ public class AppStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnShop)
                 {
-                    setVisible(false);
-                    //app.setVisible(true);
+                    AppShop app=new AppShop();
+                    //etVisible(false);
+                    app.setVisible(true);
                 }
             }
         });
@@ -153,7 +155,8 @@ public class AppStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnLibrary)
                 {
-                    setVisible(false);
+                    AppStuCourse app=new AppStuCourse();
+                    //setVisible(false);
                     //app.setVisible(true);
                 }
             }
@@ -164,10 +167,21 @@ public class AppStudent extends JFrame {
         contentPane.add(btnTeaching);
 
 
-        JLabel lblNewLabel_1 = new JLabel("关于我");
+        JLabel lblNewLabel_1 = new JLabel("关于我(点击可进行编辑)");
         lblNewLabel_1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
         lblNewLabel_1.setBounds(1006, 143, 122, 64);
+        lblNewLabel_1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==lblNewLabel_1)
+                {
+                    AppStuInfo app=new AppStuInfo();
+                    //setVisible(false);
+                    app.setVisible(true);
+                }
+            }
+        });
         contentPane.add(lblNewLabel_1);
 
         JPanel panel = new JPanel();

@@ -1,5 +1,7 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.administrator.main.AppAdmin;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
@@ -70,14 +72,15 @@ public class ManLibrary extends JFrame {
 
 
         JButton back = new JButton("返回");
-        back.addActionListener(new ActionListener() {
+        back.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==back)
+                {
+                    AppAdmin app=new AppAdmin();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
             }
         });
         back.setFont(new Font("微软雅黑", Font.PLAIN, 18));

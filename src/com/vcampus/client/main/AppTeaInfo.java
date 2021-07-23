@@ -2,7 +2,13 @@ package com.vcampus.client.main;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * 教师信息界面
@@ -25,11 +31,52 @@ public class AppTeaInfo  extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        DefaultMutableTreeNode login= new DefaultMutableTreeNode("教师登陆");
+        DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("选课");
+        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩管理");
+        DefaultMutableTreeNode Library = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode card = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
+        login.add(information);login.add(Class);login.add(Grades);login.add(Library);login.add(card);login.add(shop);
+
+        DefaultMutableTreeNode goods = new DefaultMutableTreeNode("商品列表");
+        DefaultMutableTreeNode shopcar = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode histoty = new DefaultMutableTreeNode("购买历史");
+        shop.add(goods);shop.add(shopcar);shop.add(histoty);
+
+        JTree jt = new JTree(login);
+        jt.setBounds(0,50,200,600);
+        contentPane.add(jt);
+
+        TreeSelectionModel treeSelectionModel;
+        treeSelectionModel=jt.getSelectionModel();
+        treeSelectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        jt.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                if (!jt.isSelectionEmpty()) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
+                }
+            }
+        });
+
         JButton returnButton = new JButton("← 返回");//返回按钮
         returnButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
         returnButton.setBounds(220,5,80,30);
         returnButton.setForeground(new Color(33, 117, 206,100));
         contentPane.add(returnButton);
+        returnButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==returnButton)
+                {
+                    AppTeacher app=new AppTeacher();
+                    //setVisible(false);
+                    app.setVisible(true);
+                }
+            }
+        });
 
         JButton LogoutButton = new JButton("登出");//登出按钮
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
