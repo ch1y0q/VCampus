@@ -5,7 +5,11 @@ import org.apache.ibatis.jdbc.Null;
 import javax.swing.JPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Objects;
@@ -33,6 +37,38 @@ public class AppDormAdmin extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("管理员登陆");
+        DefaultMutableTreeNode nodInfor = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode nodClassManage = new DefaultMutableTreeNode("课程管理");
+        DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode nodDorm = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        nodLogin.add(nodInfor);nodLogin.add(nodClassManage);nodLogin.add(nodLibrary);nodLogin.add(nodDorm);nodLogin.add(nodShop);
+
+        DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
+        DefaultMutableTreeNode nodShopCart = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode nodBuyHistory = new DefaultMutableTreeNode("购买历史");
+        nodShop.add(nodGoods);nodShop.add(nodShopCart);nodShop.add(nodBuyHistory);
+
+        JTree jt = new JTree(nodLogin);
+        jt.setBounds(0,50,200,600);
+        contentPane.add(jt);
+
+        TreeSelectionModel treeSelectionModel;
+        treeSelectionModel=jt.getSelectionModel();
+        treeSelectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        jt.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                if (!jt.isSelectionEmpty()) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
+                    String name = node.toString();
+                    System.out.println(name);
+                }
+            }
+        });
+
         jp1.setLayout(null);
         jp1.setBackground(new Color(240, 255, 240));
         jp2.setLayout(null);

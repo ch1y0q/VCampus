@@ -93,8 +93,27 @@ public class StuLibrary extends JFrame {
             public void valueChanged(TreeSelectionEvent e) {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
-                    String name = node.toString();
-                    System.out.println(name);
+                    if(node==nodPersonalInfo||node==nodInfoLookup||node==nodInfoManage){
+                        AppStuInfo app=new AppStuInfo();
+                        //setVisible(false);
+                        app.setVisible(true);
+                    }
+                    else if(node==nodLibrary||node==nodBorrowLookup||node==nodBookLookup||node==nodBorrowHistory){
+                    }
+                    else if(node==nodCourses||node==nodTimetable||node==nodGrades||node==nodChooseCourses){
+                        AppStuCourse app=new AppStuCourse();
+                        //setVisible(false);
+                    }
+                    else if(node==nodLivingServices||node==nodCard||node==nodDormManage){
+                        AppLife app=new AppLife();
+                        //setVisible(false);
+                        app.setVisible(true);
+                    }
+                    else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
+                        AppShop app=new AppShop();
+                        //setVisible(false);
+                        app.setVisible(true);
+                    }
                 }
             }
         });

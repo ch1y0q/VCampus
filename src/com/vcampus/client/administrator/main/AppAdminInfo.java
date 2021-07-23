@@ -2,6 +2,7 @@ package com.vcampus.client.administrator.main;
 
 import com.mysql.cj.protocol.Message;
 //import com.mysql.cj.xdevapi.Client;
+import com.vcampus.client.main.AppDormAdmin;
 import org.apache.ibatis.javassist.bytecode.ByteArray;
 
 import javax.imageio.ImageIO;
@@ -11,6 +12,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -44,6 +47,17 @@ public class AppAdminInfo  extends JFrame {
         returnButton.setBounds(220,5,80,30);
         returnButton.setForeground(new Color(33, 117, 206,100));
         contentPane.add(returnButton);
+        returnButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==returnButton)
+                {
+                    AppAdmin app=new AppAdmin();
+                    //setVisible(false);
+                    app.setVisible(true);
+                }
+            }
+        });
 
         JButton LogoutButton = new JButton("登出");
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
