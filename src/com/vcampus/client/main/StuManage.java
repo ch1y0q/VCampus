@@ -71,7 +71,7 @@ public class StuManage extends JFrame{
                 if(e.getSource()==back)
                 {
                     AppAdmin app=new AppAdmin();
-                    setVisible(false);
+                    //setVisible(false);
                     app.setVisible(true);
                 }
             }
