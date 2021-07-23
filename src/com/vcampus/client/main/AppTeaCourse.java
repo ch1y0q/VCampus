@@ -44,46 +44,46 @@ public class AppTeaCourse {
 
 
         //侧边栏
-        DefaultMutableTreeNode login= new DefaultMutableTreeNode("学生登陆");
-        DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
-        DefaultMutableTreeNode library = new DefaultMutableTreeNode("图书馆");
-        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("课程管理");
-        DefaultMutableTreeNode life = new DefaultMutableTreeNode(   "生活服务");
-        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
-        login.add(information);
-        login.add(Class);
-        login.add(library);
-        login.add(life);
-        login.add(shop);
-        DefaultMutableTreeNode inforLook = new DefaultMutableTreeNode("个人信息查询");
-        DefaultMutableTreeNode informanage = new DefaultMutableTreeNode("个人信息维护");
-        information.add(inforLook);
-        information.add(informanage);
-        DefaultMutableTreeNode BorrowLook = new DefaultMutableTreeNode("借阅查询");
-        DefaultMutableTreeNode BookLook = new DefaultMutableTreeNode("书籍查询");
-        DefaultMutableTreeNode BorrowHistory = new DefaultMutableTreeNode("借阅历史");
-        library.add(BorrowLook);
-        library.add(BookLook);
-        library.add(BorrowHistory);
-        DefaultMutableTreeNode timetable = new DefaultMutableTreeNode("课表");
-        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩查询");
-        DefaultMutableTreeNode Classchoose = new DefaultMutableTreeNode("选课");
-        Class.add(timetable);
-        Class.add(Grades);
-        Class.add(Classchoose);
-        DefaultMutableTreeNode card = new DefaultMutableTreeNode("一卡通");
-        DefaultMutableTreeNode living = new DefaultMutableTreeNode("宿舍管理");
-        life.add(card);
-        life.add(living);
-        DefaultMutableTreeNode goods = new DefaultMutableTreeNode("商品列表");
-        DefaultMutableTreeNode shopcar = new DefaultMutableTreeNode("购物车");
-        DefaultMutableTreeNode histoty = new DefaultMutableTreeNode("购买历史");
-        shop.add(goods);
-        shop.add(shopcar);
-        shop.add(histoty);
-        JTree jt = new JTree(login);
-        container.add(jt);
+        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("学生登陆");
+        DefaultMutableTreeNode nodPersonalInfo = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode nodCourses = new DefaultMutableTreeNode("课程管理");
+        DefaultMutableTreeNode nodLivingServices = new DefaultMutableTreeNode(   "生活服务");
+        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        nodLogin.add(nodPersonalInfo);
+        nodLogin.add(nodCourses);
+        nodLogin.add(nodLibrary);
+        nodLogin.add(nodLivingServices);
+        nodLogin.add(nodShop);
+        DefaultMutableTreeNode nodInfoLookup = new DefaultMutableTreeNode("个人信息查询");
+        DefaultMutableTreeNode nodInfoManage = new DefaultMutableTreeNode("个人信息维护");
+        nodPersonalInfo.add(nodInfoLookup);
+        nodPersonalInfo.add(nodInfoManage);
+        DefaultMutableTreeNode nodBorrowLookup = new DefaultMutableTreeNode("借阅查询");
+        DefaultMutableTreeNode nodBookLookup = new DefaultMutableTreeNode("书籍查询");
+        DefaultMutableTreeNode nodBorrowHistory = new DefaultMutableTreeNode("借阅历史");
+        nodLibrary.add(nodBorrowLookup);
+        nodLibrary.add(nodBookLookup);
+        nodLibrary.add(nodBorrowHistory);
+        DefaultMutableTreeNode nodTimetable = new DefaultMutableTreeNode("课表");
+        DefaultMutableTreeNode nodGrades = new DefaultMutableTreeNode("成绩查询");
+        DefaultMutableTreeNode nodChooseCourses = new DefaultMutableTreeNode("选课");
+        nodCourses.add(nodTimetable);
+        nodCourses.add(nodGrades);
+        nodCourses.add(nodChooseCourses);
+        DefaultMutableTreeNode nodCard = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode nodDormManage = new DefaultMutableTreeNode("宿舍管理");
+        nodLivingServices.add(nodCard);
+        nodLivingServices.add(nodDormManage);
+        DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
+        DefaultMutableTreeNode nodCart = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode nodShoppingHistoty = new DefaultMutableTreeNode("购买历史");
+        nodShop.add(nodGoods);
+        nodShop.add(nodCart);
+        nodShop.add(nodShoppingHistoty);
+        JTree jt = new JTree(nodLogin);
         jt.setBounds(0,height/50,width*2/11,height);
+        jf.add(jt);
         TreeSelectionModel treeSelectionModel;
         treeSelectionModel=jt.getSelectionModel();
         treeSelectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -92,8 +92,27 @@ public class AppTeaCourse {
             public void valueChanged(TreeSelectionEvent e) {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
-                    String name = node.toString();
-                    System.out.println(name);
+                    if(node==nodPersonalInfo||node==nodInfoLookup||node==nodInfoManage){
+                        AppStuInfo app=new AppStuInfo();
+                        //setVisible(false);
+                        app.setVisible(true);
+                    }
+                    else if(node==nodLibrary||node==nodBorrowLookup||node==nodBookLookup||node==nodBorrowHistory){
+                    }
+                    else if(node==nodCourses||node==nodTimetable||node==nodGrades||node==nodChooseCourses){
+                        AppStuCourse app=new AppStuCourse();
+                        //setVisible(false);
+                    }
+                    else if(node==nodLivingServices||node==nodCard||node==nodDormManage){
+                        AppLife app=new AppLife();
+                        //setVisible(false);
+                        app.setVisible(true);
+                    }
+                    else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
+                        AppShop app=new AppShop();
+                        //setVisible(false);
+                        app.setVisible(true);
+                    }
                 }
             }
         });
@@ -262,7 +281,16 @@ public class AppTeaCourse {
                 //jp1
                 {
                     jp1.setSize(currentWidth, currentHeight);
+                    sp1_0.setBounds(currentWidth / 50, 60 + currentHeight / 20, currentWidth * 3 / 5, currentHeight / 10);
                     sp1_1.setBounds(currentWidth / 50, currentHeight / 50, currentWidth * 3 / 5, currentHeight * 3 / 5);
+                    sp1_1.setBounds(currentWidth / 50, 90 + currentHeight * 7 / 40, currentWidth * 3 / 5, currentHeight * 2 / 5);
+                    semesterLabel_tab1.setBounds(currentWidth / 50, currentHeight / 40, 40, 30);
+                    chooseSemester_tab1.setBounds(currentWidth / 50 + 60, currentHeight / 40, 120, 30);
+                    selectCourseLabel.setBounds(currentWidth / 25 + 240, currentHeight / 40, 60, 30);
+                    selectCourse.setBounds(currentWidth / 25 + 315, currentHeight / 40, 120, 30);
+                    courseInformationLabel.setBounds(currentWidth / 50, currentHeight / 20 + 30, 65, 30);
+                    enterScoreLabel.setBounds(currentWidth / 50, 60 + currentHeight * 7 / 40, 90, 30);
+                    
                 }
 
                 //jp2
