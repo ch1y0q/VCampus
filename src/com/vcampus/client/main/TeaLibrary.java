@@ -45,28 +45,15 @@ public class TeaLibrary extends JFrame {
         jp3.setLayout(null);
         jp3.setBackground(new Color(255, 255, 255));
 
-        DefaultMutableTreeNode login= new DefaultMutableTreeNode("学生登陆");
+        DefaultMutableTreeNode login= new DefaultMutableTreeNode("教师登陆");
         DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
-        DefaultMutableTreeNode library = new DefaultMutableTreeNode("图书馆");
-        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("课程管理");
-        DefaultMutableTreeNode life = new DefaultMutableTreeNode(   "生活服务");
-        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
-        login.add(information);login.add(Class);login.add(library);login.add(life);login.add(shop);
-
-        DefaultMutableTreeNode inforLook = new DefaultMutableTreeNode("个人信息查询");
-        DefaultMutableTreeNode informanage = new DefaultMutableTreeNode("个人信息维护");
-        information.add(inforLook);information.add(informanage);
-        DefaultMutableTreeNode BorrowLook = new DefaultMutableTreeNode("借阅查询");
-        DefaultMutableTreeNode BookLook = new DefaultMutableTreeNode("书籍查询");
-        DefaultMutableTreeNode BorrowHistory = new DefaultMutableTreeNode("借阅历史");
-        library.add(BorrowLook);library.add(BookLook);library.add(BorrowHistory);
-        DefaultMutableTreeNode timetable = new DefaultMutableTreeNode("课表");
-        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩查询");
-        DefaultMutableTreeNode Classchoose = new DefaultMutableTreeNode("选课");
-        Class.add(timetable);Class.add(Grades);Class.add(Classchoose);
+        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("选课");
+        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩管理");
+        DefaultMutableTreeNode Library = new DefaultMutableTreeNode("图书馆");
         DefaultMutableTreeNode card = new DefaultMutableTreeNode("一卡通");
-        DefaultMutableTreeNode living = new DefaultMutableTreeNode("宿舍管理");
-        life.add(card);life.add(living);
+        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
+        login.add(information);login.add(Class);login.add(Grades);login.add(Library);login.add(card);login.add(shop);
+
         DefaultMutableTreeNode goods = new DefaultMutableTreeNode("商品列表");
         DefaultMutableTreeNode shopcar = new DefaultMutableTreeNode("购物车");
         DefaultMutableTreeNode histoty = new DefaultMutableTreeNode("购买历史");

@@ -45,4 +45,6 @@ public interface IStudentMapper {
     public float getBalance(String cardNumber);
 
     public Boolean resetPassword(Map map);
+
+    public String getBankAccountByCardNumber(String cardNumber);
 }

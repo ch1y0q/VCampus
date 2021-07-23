@@ -36,19 +36,20 @@ public class ManLibrary extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        DefaultMutableTreeNode login= new DefaultMutableTreeNode("管理员登陆");
-        DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
-        DefaultMutableTreeNode StuTeain = new DefaultMutableTreeNode("学生、教师信息");
-        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
-        DefaultMutableTreeNode library = new DefaultMutableTreeNode("图书馆");
-        DefaultMutableTreeNode living = new DefaultMutableTreeNode(   "宿舍");
-        login.add(information);
-        login.add(StuTeain);
-        login.add(library);
-        login.add(shop);
-        login.add(living);
+        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("管理员登陆");
+        DefaultMutableTreeNode nodInfor = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode nodClassManage = new DefaultMutableTreeNode("课程管理");
+        DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode nodDorm = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        nodLogin.add(nodInfor);nodLogin.add(nodClassManage);nodLogin.add(nodLibrary);nodLogin.add(nodDorm);nodLogin.add(nodShop);
 
-        JTree jt = new JTree(login);
+        DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
+        DefaultMutableTreeNode nodShopCart = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode nodBuyHistory = new DefaultMutableTreeNode("购买历史");
+        nodShop.add(nodGoods);nodShop.add(nodShopCart);nodShop.add(nodBuyHistory);
+
+        JTree jt = new JTree(nodLogin);
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 
@@ -61,7 +62,8 @@ public class ManLibrary extends JFrame {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
                     String name = node.toString();
-                    System.out.println(name);
+                    if(name=="宿舍") {
+                    }
                 }
             }
         });

@@ -119,7 +119,9 @@ public class AppStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnOpencourse)
                 {
+                    AppLife app=new AppLife();
                     setVisible(false);
+                    app.setVisible(true);
                     //app.setVisible(true);
                 }
             }

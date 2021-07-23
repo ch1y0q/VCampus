@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 /**
@@ -20,6 +21,20 @@ public class AppLife extends JFrame{
     private static JTabbedPane tabbedPane;
     private static JPanel jp1,jp2;
     public AppLife(){
+
+        String studentCardNumber;
+        studentCardNumber= App.session.getStudent().getStudentNumber();
+
+        float studentCardBalance;
+        studentCardBalance=App.session.getStudent().getBalance();
+        String studentCardBalanceText = studentCardBalance+"";
+
+        String studentBankAccount;
+        studentBankAccount=App.session.getStudent().getBankAccount();
+
+
+
+
         setResizable(false);
         setTitle("生活服务 - Vcampus");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +75,7 @@ public class AppLife extends JFrame{
         lblCardNum.setBounds(205, 30, 100, 40);
         jp1.add(lblCardNum);
 
-        JLabel lblCurCardNum = new JLabel("213191111");
+        JLabel lblCurCardNum = new JLabel(studentCardNumber);
         lblCurCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardNum.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurCardNum.setBounds(305, 30, 100, 40);
@@ -84,7 +99,7 @@ public class AppLife extends JFrame{
         lblCardBalance.setBounds(610, 30, 100, 40);
         jp1.add(lblCardBalance);
 
-        JLabel lblCurCardBalance = new JLabel("230.58");
+        JLabel lblCurCardBalance = new JLabel(studentCardBalanceText);
         lblCurCardBalance.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardBalance.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurCardBalance.setBounds(700, 30, 100, 40);
@@ -110,7 +125,7 @@ public class AppLife extends JFrame{
         lblCardRechargeBankAccount.setBounds(340, 210, 150, 40);
         jp1.add(lblCardRechargeBankAccount);
 
-        JLabel lblCurCardRechargeBankAccount = new JLabel("6216631200002070838");
+        JLabel lblCurCardRechargeBankAccount = new JLabel(studentBankAccount);
         lblCurCardRechargeBankAccount.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardRechargeBankAccount.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurCardRechargeBankAccount.setBounds(500, 210, 200, 40);
