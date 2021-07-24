@@ -9,7 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 /**
  * @author Xiao Kaijie
- * @date 2021-07-13
+ * @date 2021-07-20
  */
 public class ManCategory extends JTree {
     public JTree init()

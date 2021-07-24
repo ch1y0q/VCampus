@@ -23,7 +23,6 @@ public class AppTeacher extends JFrame {
         setResizable(true);
         setTitle(res.getString("teacher_main"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setUndecorated(false);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(d.width, d.height);
         System.out.println(d.width+" "+d.height);

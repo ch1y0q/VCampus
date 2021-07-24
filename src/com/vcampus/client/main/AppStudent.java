@@ -192,11 +192,13 @@ public class AppStudent extends JFrame {
         });
         contentPane.add(lblNewLabel_1);
 
-        JPanel jplStuInfo=new StuInfoPanel().init();
+        StuInfoPanel jplStuInfo=new StuInfoPanel();
+        jplStuInfo.init();
         jplStuInfo.setBounds(1006,230,350,230);
         contentPane.add(jplStuInfo);
 
-        JPanel jplStuCorse=new StuCoursePanel().init();
+        StuCoursePanel jplStuCorse=new StuCoursePanel();
+        jplStuCorse.init();
         jplStuCorse.setBounds(1006,500,400,230);
         contentPane.add(jplStuCorse);
     }
