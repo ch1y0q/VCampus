@@ -35,29 +35,29 @@ public class AppShop extends JFrame {
         JLabel lblCommoditySearch = new JLabel("商品查询");
         lblCommoditySearch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommoditySearch.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommoditySearch.setBounds(70, 60, 100, 40);
+        lblCommoditySearch.setBounds(270, 60, 100, 40);
         contentPane.add(lblCommoditySearch);
 
         JTextField txtCommoditySearch=new JTextField();
         txtCommoditySearch.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        txtCommoditySearch.setBounds(190,67,160,30);
+        txtCommoditySearch.setBounds(390,67,160,30);
         contentPane.add(txtCommoditySearch);
 
         JLabel lblCommodityKind = new JLabel("商品种类");
         lblCommodityKind.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommodityKind.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityKind.setBounds(420, 60, 100, 40);
+        lblCommodityKind.setBounds(620, 60, 100, 40);
         contentPane.add(lblCommodityKind);
 
         JComboBox cmbCommodityKind=new JComboBox();
         cmbCommodityKind.addItem("食品");
         cmbCommodityKind.addItem("日化");
         cmbCommodityKind.addItem("文具");
-        cmbCommodityKind.setBounds(570,67,100,30);
+        cmbCommodityKind.setBounds(770,67,100,30);
         contentPane.add(cmbCommodityKind);
 
         JTable tblCommodityList=new JTable(12,2);
-        tblCommodityList.setBounds(130,150,500,600);
+        tblCommodityList.setBounds(330,150,500,600);
         tblCommodityList.setRowHeight(50);
         tblCommodityList.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         tblCommodityList.getModel().setValueAt("商品名称",0,0);
