@@ -227,7 +227,13 @@ public class AppTeaCourse {
             }
         });
 
+        //成绩录入
+        /* TODO  Course.setStudentScore(String studentName, int score)*/
 
+
+    }
+    private void refreshCourseTable(){
+        /* TODO Teacher.getCourses()  返回该老师所有课程，return List<Course> */
     }
 }
 
