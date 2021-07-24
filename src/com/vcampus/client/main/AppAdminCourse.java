@@ -113,11 +113,11 @@ public class AppAdminCourse {
 
 
         //保存编辑
-        /* TODO update() */
+
 
     }
     private void refreshCourseTable(){
-        /* TODO getAllCourse()  返回所有课程，return List<Course>*/
+
     }
     private void close(){
         jf.setVisible(false);

@@ -1,5 +1,6 @@
 package com.vcampus.entity;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Student {
     private String password;
     private String cardNumber;
     private String studentNumber;
-    private float balance;
+    private BigDecimal balance;
     private List<String> courses;
 
     /* optional */
@@ -34,11 +35,11 @@ public class Student {
         password = _password;
         cardNumber = _cardNumber;
         studentNumber = "";
-        balance = 0.0f;
+        balance = new BigDecimal(0);
         courses = null;
     }
 
-    public Student(String _name, String _password, String _cardNumber, String _studentNumber, float _balance, List<String> _courses) {
+    public Student(String _name, String _password, String _cardNumber, String _studentNumber, BigDecimal _balance, List<String> _courses) {
         name = _name;
         password = _password;
         cardNumber = _cardNumber;
@@ -91,11 +92,11 @@ public class Student {
         this.studentNumber = studentNumber;
     }
 
-    public float getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -136,5 +137,9 @@ public class Student {
     public void setBankAccount(String bankAccount) {
         this.bankAccount = bankAccount;
     }
+
+    /* TODO getScore()  返回该学生某门课程的成绩
+    *       dropCourse() 学生退课
+    *       addCourse() 学生选课，检验冲突 */
 
 }

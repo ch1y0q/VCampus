@@ -74,7 +74,7 @@
     </select>
 -->
     <select id="getBalance" parameterType="String"
-            resultType="String">
+            resultType="BigDecimal">
         SELECT `balance` FROM `teachers` WHERE `cardNumber` =
                                                #{cardNumber} LIMIT 1
     </select>
