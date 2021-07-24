@@ -28,5 +28,9 @@ public class Course {
         credit = _credit;
     }
 
-    /* TODO getters and setters */
+    /* TODO getters and setters
+    *       setStudentScore(String studentName, int score)
+    *       update() 更新课程信息
+    *       getAllCourses()  */
+
 }

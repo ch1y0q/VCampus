@@ -137,4 +137,8 @@ public class Student {
         this.bankAccount = bankAccount;
     }
 
+    /* TODO getScore()  返回该学生某门课程的成绩
+    *       dropCourse() 学生退课
+    *       addCourse() 学生选课，检验冲突 */
+
 }
