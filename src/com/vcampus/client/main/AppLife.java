@@ -41,16 +41,10 @@ public class AppLife extends JFrame {
         String studentBankAccount;
         studentBankAccount = App.session.getStudent().getBankAccount();
 
-        //String studentCardLossStatus="Error";
-
         String lossJudge;
         lossJudge=App.session.getStudent().getLossStatus();
 
-        /*if(lossJudge=="0")
-            studentCardLossStatus="正常";
-        else
-            studentCardLossStatus="挂失";
-         */
+
 
 
         setResizable(false);
@@ -217,8 +211,9 @@ public class AppLife extends JFrame {
         btnCardLossReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String lossStatus="0";
-
+                AppLifeHelper.lossJudge(studentCardNumber);
+                lblCurCardStatus.setText("挂失");
+                JOptionPane.showMessageDialog(null, "挂失成功");
             }
         });
         jp1.add(btnCardLossReport);
@@ -239,6 +234,14 @@ public class AppLife extends JFrame {
 
         JButton btnCardFoundReport = new JButton("确认解挂");
         btnCardFoundReport.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
+        btnCardFoundReport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AppLifeHelper.foundJudge(studentCardNumber);
+                lblCurCardStatus.setText("正常");
+                JOptionPane.showMessageDialog(null, "解挂成功");
+            }
+        });
         jp1.add(btnCardFoundReport);
         btnCardFoundReport.setBounds(360, 557, 110, 30);
 

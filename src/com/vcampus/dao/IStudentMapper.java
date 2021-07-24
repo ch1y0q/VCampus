@@ -54,4 +54,8 @@ public interface IStudentMapper {
     public void chargeCard(Map map);
 
     public String getLossStatusByCardNumber(String cardNumber);
+
+    public void setLossStatusByCardNumber(String cardNumber);
+
+    public void setFoundStatusByCardNumber(String cardNumber);
 }

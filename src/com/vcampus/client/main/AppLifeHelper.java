@@ -16,11 +16,18 @@ public class AppLifeHelper {
                 .getReturn(BigDecimal.class);
     }
 
-    /*public static BigDecimal lossJudge(String string){
+    public static String lossJudge(String string){
         return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.chargeCard",
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.lossJudge",
                         new Object[]{string}).send())
-                .getReturn(BigDecimal.class);
+                .getReturn(String.class);
     }
-     */
+
+    public static String foundJudge(String string){
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.foundJudge",
+                        new Object[]{string}).send())
+                .getReturn(String.class);
+    }
+
 }
