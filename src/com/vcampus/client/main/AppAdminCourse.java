@@ -16,6 +16,7 @@ public class AppAdminCourse {
     private int height = 800;
     public AppAdminCourse(){
         jf.setLayout(null);
+        jf.setVisible(true);
         jf.setResizable(true);
         jf.setBounds(0, 0, width, height);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,5 +105,14 @@ public class AppAdminCourse {
             }
         });
 
+        //编辑课程
+
+
+        //保存编辑
+        /* TODO update() */
+
+    }
+    private void refreshCourseTable(){
+        /* TODO getAllCourse()  返回所有课程，return List<Course>*/
     }
 }
