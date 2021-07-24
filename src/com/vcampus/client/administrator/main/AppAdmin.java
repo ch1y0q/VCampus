@@ -1,8 +1,5 @@
 package com.vcampus.client.administrator.main;
 
-import com.alee.demo.api.example.FeatureState;
-import com.alee.extended.label.WebStyledLabel;
-import com.alee.managers.style.StyleId;
 import com.vcampus.client.main.*;
 
 import javax.swing.*;
@@ -433,6 +430,8 @@ public class AppAdmin extends JFrame{
         contentPane.add(bg6);
         bg6.setBounds(1140, 63, 110, 110);
         bg6.setForeground(new Color(255,255,255,255));
+
+
 
     }
 
