@@ -72,7 +72,7 @@
     </select>
 
     <select id="getBalance" parameterType="String"
-            resultType="String">
+            resultType="BigDecimal">
         SELECT `balance` FROM `students` WHERE `cardNumber` =
                                                  #{cardNumber} LIMIT 1
     </select>
@@ -97,7 +97,7 @@
             `cardNumber`=#{cardNumber}
     </select>
 
-    <update id="setBalance" parameterType="int">
+    <update id="setBalance" parameterType="BigDecimal">
         UPDATE `students` SET
             `balance` = `balance` + #{money} WHERE `cardNumber`
                                                        = #{cardNumber}

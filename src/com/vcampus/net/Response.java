@@ -44,6 +44,7 @@ public class Response {
         }
 
         if (this.param == null) {
+            System.err.println("No param passed...");
             return null;
         }
 

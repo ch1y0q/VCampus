@@ -1,5 +1,6 @@
 package com.vcampus.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public interface IStudentMapper {
 
     //public Boolean chargeCard(Map map);
 
-    public float getBalance(String cardNumber);
+    public BigDecimal getBalance(String cardNumber);
 
     public Boolean resetPassword(Map map);
 
