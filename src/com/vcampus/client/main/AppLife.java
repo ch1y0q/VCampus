@@ -43,7 +43,8 @@ public class AppLife extends JFrame {
 
         //String studentCardLossStatus="Error";
 
-        String lossJudge=App.session.getStudent().getLossStatus();
+        String lossJudge;
+        lossJudge=App.session.getStudent().getLossStatus();
 
         /*if(lossJudge=="0")
             studentCardLossStatus="正常";

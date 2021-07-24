@@ -104,7 +104,7 @@
         LIMIT 1
     </update>
 
-    <select id="getLossStatus" parameterType="String"
+    <select id="getLossStatusByCardNumber" parameterType="String"
             resultType="String">
         SELECT `lossStatus` FROM `students` WHERE
             `cardNumber`=#{cardNumber}
