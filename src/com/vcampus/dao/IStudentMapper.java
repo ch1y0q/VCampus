@@ -52,4 +52,6 @@ public interface IStudentMapper {
     public Boolean setBalance(int balanceAdded);
 
     public void chargeCard(Map map);
+
+    public String getLossStatus(String cardNumber);
 }

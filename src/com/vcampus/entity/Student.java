@@ -27,6 +27,7 @@ public class Student {
     private String phoneNumber;
     private String gender;
     private String bankAccount;
+    private String lossStatus;
 
     /* constructor */
     public Student(){}
@@ -136,6 +137,12 @@ public class Student {
 
     public void setBankAccount(String bankAccount) {
         this.bankAccount = bankAccount;
+    }
+
+    public String getLossStatus(){return lossStatus;}
+
+    public void setLossStatus(String lossStatus) {
+        this.lossStatus=lossStatus;
     }
 
     /* TODO getScore()  返回该学生某门课程的成绩

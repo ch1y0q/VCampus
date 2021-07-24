@@ -103,4 +103,10 @@
                                                        = #{cardNumber}
         LIMIT 1
     </update>
+
+    <select id="getLossStatus" parameterType="String"
+            resultType="String">
+        SELECT `lossStatus` FROM `students` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
 </mapper>
