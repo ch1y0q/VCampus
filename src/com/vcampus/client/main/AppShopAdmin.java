@@ -29,26 +29,26 @@ public class AppShopAdmin extends JFrame {
         JLabel lblCommoditySearch = new JLabel("商品查询");
         lblCommoditySearch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommoditySearch.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommoditySearch.setBounds(70, 60, 100, 40);
+        lblCommoditySearch.setBounds(270, 60, 100, 40);
         contentPane.add(lblCommoditySearch);
 
         JTextField txtCommoditySearch=new JTextField("输入商品编号...");
         txtCommoditySearch.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        txtCommoditySearch.setBounds(190,67,160,30);
+        txtCommoditySearch.setBounds(390,67,160,30);
         contentPane.add(txtCommoditySearch);
 
         JButton btnCommoditySearch=new JButton("查询");
         btnCommoditySearch.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         contentPane.add(btnCommoditySearch);
-        btnCommoditySearch.setBounds(385,67,100,30);
+        btnCommoditySearch.setBounds(585,67,100,30);
 
         JButton btnCommodityEntering=new JButton("商品信息录入...");
         btnCommodityEntering.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         contentPane.add(btnCommodityEntering);
-        btnCommodityEntering.setBounds(80,122,140,30);
+        btnCommodityEntering.setBounds(280,122,140,30);
 
         JTable tblCommodityList=new JTable(6,6);
-        tblCommodityList.setBounds(130,200,1200,35*6);
+        tblCommodityList.setBounds(330,200,1000,35*6);
         tblCommodityList.setRowHeight(35);
         tblCommodityList.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         tblCommodityList.getModel().setValueAt("商品编号",0,0);
@@ -72,67 +72,67 @@ public class AppShopAdmin extends JFrame {
         JLabel lblCommodityInfoDetail = new JLabel("商品详细信息");
         lblCommodityInfoDetail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommodityInfoDetail.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityInfoDetail.setBounds(80, 460, 190, 40);
+        lblCommodityInfoDetail.setBounds(180, 460, 190, 40);
         contentPane.add(lblCommodityInfoDetail);
 
         JLabel lblCommodityInfoNum = new JLabel("商品编号");
         lblCommodityInfoNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommodityInfoNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityInfoNum.setBounds(270, 460, 190, 40);
+        lblCommodityInfoNum.setBounds(370, 460, 190, 40);
         contentPane.add(lblCommodityInfoNum);
 
         JTextField txtCommodityInfoNum=new JTextField();
         txtCommodityInfoNum.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        txtCommodityInfoNum.setBounds(420,467,160,30);
+        txtCommodityInfoNum.setBounds(520,467,160,30);
         contentPane.add(txtCommodityInfoNum);
 
         JLabel lblCommodityInfoName = new JLabel("名称");
         lblCommodityInfoName.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommodityInfoName.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityInfoName.setBounds(270, 510, 190, 40);
+        lblCommodityInfoName.setBounds(370, 510, 190, 40);
         contentPane.add(lblCommodityInfoName);
 
         JTextField txtCommodityInfoName=new JTextField();
         txtCommodityInfoName.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        txtCommodityInfoName.setBounds(420,517,160,30);
+        txtCommodityInfoName.setBounds(520,517,160,30);
         contentPane.add(txtCommodityInfoName);
 
         JLabel lblCommodityInfoPrice = new JLabel("售价");
         lblCommodityInfoPrice.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommodityInfoPrice.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityInfoPrice.setBounds(270, 560, 190, 40);
+        lblCommodityInfoPrice.setBounds(370, 560, 190, 40);
         contentPane.add(lblCommodityInfoPrice);
 
         JTextField txtCommodityInfoPrice=new JTextField();
         txtCommodityInfoPrice.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        txtCommodityInfoPrice.setBounds(420,567,160,30);
+        txtCommodityInfoPrice.setBounds(520,567,160,30);
         contentPane.add(txtCommodityInfoPrice);
 
         JLabel lblCommodityInfoAmount = new JLabel("库存数量");
         lblCommodityInfoAmount.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommodityInfoAmount.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityInfoAmount.setBounds(270, 610, 190, 40);
+        lblCommodityInfoAmount.setBounds(370, 610, 190, 40);
         contentPane.add(lblCommodityInfoAmount);
 
         JTextField txtCommodityInfoAmount=new JTextField();
         txtCommodityInfoAmount.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        txtCommodityInfoAmount.setBounds(420,617,160,30);
+        txtCommodityInfoAmount.setBounds(520,617,160,30);
         contentPane.add(txtCommodityInfoAmount);
 
         JLabel lblCommodityInfoSaleState = new JLabel("是否下架");
         lblCommodityInfoSaleState.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommodityInfoSaleState.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCommodityInfoSaleState.setBounds(270, 660, 190, 40);
+        lblCommodityInfoSaleState.setBounds(370, 660, 190, 40);
         contentPane.add(lblCommodityInfoSaleState);
 
         JTextField txtCommoditySaleState=new JTextField();
         txtCommoditySaleState.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        txtCommoditySaleState.setBounds(420,667,160,30);
+        txtCommoditySaleState.setBounds(520,667,160,30);
         contentPane.add(txtCommoditySaleState);
 
         JLabel commodityPic = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
         contentPane.add(commodityPic);
-        commodityPic.setBounds(150, 500, 100, 100);
+        commodityPic.setBounds(250, 500, 100, 100);
 
         JLabel lblCommoditySaleInfo = new JLabel("商品销售情况查询");
         lblCommoditySaleInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
