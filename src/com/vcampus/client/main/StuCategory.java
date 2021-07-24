@@ -4,9 +4,11 @@ import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
-
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-20
+ */
 public class StuCategory extends JTree{
     public JTree jt;
     public JTree init () {

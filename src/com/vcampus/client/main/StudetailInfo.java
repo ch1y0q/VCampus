@@ -23,7 +23,6 @@ public class StudetailInfo extends JPanel {
     public JTextField txtemail;
     public JTextField txtEntry;
     public JTextField txtphone;
-
     public StudetailInfo()
     {
         setBackground(new Color(255, 255, 255));

@@ -42,7 +42,6 @@
         <mapper resource="resources/mapper/studentMapper.xml" />
         <mapper resource="resources/mapper/teacherMapper.xml" />
         <mapper resource="resources/mapper/adminMapper.xml" />
-        <mapper resource="resources/mapper/classMapper.xml" />
     </mappers>
 
 </configuration>
