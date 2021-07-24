@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
  */
 
 public class StudetailInfo extends JPanel {
+    String[] strText=new String[11];
     public JLabel detailicon;
     public JTextField txtname;
     public JTextField txtcard;
@@ -44,8 +45,8 @@ public class StudetailInfo extends JPanel {
         Teaname.setBorder(new EmptyBorder(0,0,0,0));
         add(Teaname);
         txtname = new JTextField();    //创建文本框
-        txtname.setText("姓名");
         txtname.setBounds(190, 10, 100, 30);
+        txtname.setEditable(false);
         add(txtname);
         JLabel cardnumber=new JLabel("一卡通号");
         cardnumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -53,8 +54,8 @@ public class StudetailInfo extends JPanel {
         cardnumber.setBorder(new EmptyBorder(0,0,0,0));
         add(cardnumber);
         txtcard = new JTextField();    //创建文本框
-        txtcard.setText("一卡通号");
         txtcard.setBounds(190, 40, 100, 30);
+        txtcard.setEditable(false);
         add(txtcard);
         JLabel Sex=new JLabel("性别");
         Sex.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -62,8 +63,8 @@ public class StudetailInfo extends JPanel {
         Sex.setBorder(new EmptyBorder(0,0,0,0));
         add(Sex);
         txtSex = new JTextField();    //创建文本框
-        txtSex.setText("性别");
         txtSex.setBounds(190, 70, 100, 30);
+        txtSex.setEditable(false);
         add(txtSex);
         JLabel Teaacademy=new JLabel("学院");
         Teaacademy.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -71,8 +72,8 @@ public class StudetailInfo extends JPanel {
         Teaacademy.setBorder(new EmptyBorder(0,0,0,0));
         add(Teaacademy);
         txtacademy = new JTextField();    //创建文本框
-        txtacademy.setText("学院");
         txtacademy.setBounds(190, 100, 100, 30);
+        txtacademy.setEditable(false);
         add(txtacademy);
         JLabel Stunumber=new JLabel("学号");
         Stunumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -80,8 +81,8 @@ public class StudetailInfo extends JPanel {
         Stunumber.setBorder(new EmptyBorder(0,0,0,0));
         add(Stunumber);
         Stunum = new JTextField();    //创建文本框
-        Stunum.setText("学号");
         Stunum.setBounds(190, 130, 100, 30);
+        Stunum.setEditable(false);
         add(Stunum);
         JLabel StuClass=new JLabel("班级");
         StuClass.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -89,8 +90,8 @@ public class StudetailInfo extends JPanel {
         StuClass.setBorder(new EmptyBorder(0,0,0,0));
         add(StuClass);
         StuClass1 = new JTextField();    //创建文本框
-        StuClass1.setText("班级");
         StuClass1.setBounds(190, 160, 100, 30);
+        StuClass1.setEditable(false);
         add(StuClass1);
         JLabel bodynumber=new JLabel("身份证号");
         bodynumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -98,8 +99,8 @@ public class StudetailInfo extends JPanel {
         bodynumber.setBorder(new EmptyBorder(0,0,0,0));
         add(bodynumber);
         txtbodynumber = new JTextField();    //创建文本框
-        txtbodynumber.setText("身份证号");
         txtbodynumber.setBounds(460, 10, 100, 30);
+        txtbodynumber.setEditable(false);
         add(txtbodynumber);
         JLabel TeaBirth=new JLabel("出生日期");
         TeaBirth.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -107,8 +108,8 @@ public class StudetailInfo extends JPanel {
         TeaBirth.setBorder(new EmptyBorder(0,0,0,0));
         add(TeaBirth);
         txtBirth = new JTextField();    //创建文本框
-        txtBirth.setText("出生日期");
         txtBirth.setBounds(460, 40, 100, 30);
+        txtBirth.setEditable(false);
         add(txtBirth);
         JLabel Teaemail=new JLabel("邮箱");
         Teaemail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -116,8 +117,8 @@ public class StudetailInfo extends JPanel {
         Teaemail.setBorder(new EmptyBorder(0,0,0,0));
         add(Teaemail);
         txtemail = new JTextField();    //创建文本框
-        txtemail.setText("邮箱");
         txtemail.setBounds(460, 70, 100, 30);
+        txtemail.setEditable(false);
         add(txtemail);
         JLabel zhuanye=new JLabel("专业");
         zhuanye.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -125,8 +126,8 @@ public class StudetailInfo extends JPanel {
         zhuanye.setBorder(new EmptyBorder(0,0,0,0));
         add(zhuanye);
         txtEntry = new JTextField();    //创建文本框
-        txtEntry.setText("专业");
         txtEntry.setBounds(460, 100, 100, 30);
+        txtEntry.setEditable(false);
         add(txtEntry);
         JLabel phone=new JLabel("电话");
         phone.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -134,8 +135,8 @@ public class StudetailInfo extends JPanel {
         phone.setBorder(new EmptyBorder(0,0,0,0));
         add(phone);
         txtphone = new JTextField();    //创建文本框
-        txtphone.setText("电话");
         txtphone.setBounds(460, 130, 100, 30);
+        txtphone.setEditable(false);
         add(txtphone);
 
         JButton edit = new JButton("启动编辑");
@@ -144,7 +145,31 @@ public class StudetailInfo extends JPanel {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if(e.getSource()==edit)
+                {
+                    txtname.setEditable(true);
+                    strText[0]=txtname.getText();
+                    txtcard.setEditable(true);
+                    strText[1]=txtcard.getText();
+                    txtSex.setEditable(true);
+                    strText[2]=txtSex.getText();
+                    Stunum.setEditable(true);
+                    strText[3]=Stunum.getText();
+                    txtacademy.setEditable(true);
+                    strText[4]=txtacademy.getText();
+                    StuClass1.setEditable(true);
+                    strText[5]=StuClass1.getText();
+                    txtbodynumber.setEditable(true);
+                    strText[6]=txtbodynumber.getText();
+                    txtBirth.setEditable(true);
+                    strText[7]=txtBirth.getText();
+                    txtemail.setEditable(true);
+                    strText[8]=txtemail.getText();
+                    txtEntry.setEditable(true);
+                    strText[9]=txtEntry.getText();
+                    txtphone.setEditable(true);
+                    strText[10]=txtphone.getText();
+                }
             }
         });
         add(edit);
@@ -154,8 +179,12 @@ public class StudetailInfo extends JPanel {
         save.setBounds(600, 50, 200, 30);
         save.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
+                if(e.getSource()==save)
+                {
 
+                }
             }
         });
         add(save);
@@ -166,20 +195,25 @@ public class StudetailInfo extends JPanel {
         Studelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==Studelete)
+                {
+
+                }
             }
         });
         add(Studelete);
     }
     public void init(){
-
-    }
-    public void edit(){
-
-    }
-    public void save(){
-
-    }
-    public void deleteStu(){
-
+        txtname.setText("xkk");
+        txtcard.setText("");
+        txtSex.setText("");
+        txtacademy.setText("");
+        Stunum.setText("");
+        StuClass1.setText("");
+        txtbodynumber.setText("");
+        txtBirth.setText("");
+        txtemail.setText("");
+        txtEntry.setText("");
+        txtphone.setText("");
     }
 }

@@ -64,34 +64,34 @@ public class StuCategory extends JTree{
                         if(this.getClass().getName()!="com.vcampus.client.main.AppStuInfo")
                         {
                             AppStuInfo app=new AppStuInfo();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodLibrary||node==nodBorrowLookup||node==nodBookLookup||node==nodBorrowHistory){
                         if(this.getClass().getName()!="com.vcampus.client.main.StuLibrary") {
                             StuLibrary app = new StuLibrary();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodCourses||node==nodTimetable||node==nodGrades||node==nodChooseCourses){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppStuCourse") {
                             AppStuCourse app = new AppStuCourse();
-                            //setVisible(false);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodLivingServices||node==nodCard||node==nodDormManage){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppLife") {
                             AppLife app = new AppLife();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppShop") {
                             AppShop app = new AppShop();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }

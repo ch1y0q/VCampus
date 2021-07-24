@@ -22,8 +22,8 @@ public class ManLibrarydetailPanel extends JPanel {
         ISBNnum.setBorder(new EmptyBorder(0,0,0,0));
         add(ISBNnum);
         txtISBN = new JTextField();    //创建文本框
-        txtISBN.setText("ISBN号");
         txtISBN.setBounds(160, 10, 100, 30);
+        txtISBN.setEditable(false);
         add(txtISBN);
         JLabel Bookname=new JLabel("书名");
         Bookname.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -31,8 +31,8 @@ public class ManLibrarydetailPanel extends JPanel {
         Bookname.setBorder(new EmptyBorder(0,0,0,0));
         add(Bookname);
         txtBook = new JTextField();    //创建文本框
-        txtBook.setText("书名");
         txtBook.setBounds(160, 40, 100, 30);
+        txtBook.setEditable(false);
         add(txtBook);
         JLabel Writer=new JLabel("作者");
         Writer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -40,8 +40,8 @@ public class ManLibrarydetailPanel extends JPanel {
         Writer.setBorder(new EmptyBorder(0,0,0,0));
         add(Writer);
         txtWriter = new JTextField();    //创建文本框
-        txtWriter.setText("作者");
         txtWriter.setBounds(160, 70, 100, 30);
+        txtWriter.setEditable(false);
         add(txtWriter);
         JLabel Country=new JLabel("作者国籍");
         Country.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -49,8 +49,8 @@ public class ManLibrarydetailPanel extends JPanel {
         Country.setBorder(new EmptyBorder(0,0,0,0));
         add(Country);
         txtCountry = new JTextField();    //创建文本框
-        txtCountry.setText("作者国籍");
         txtCountry.setBounds(160, 100, 100, 30);
+        txtCountry.setEditable(false);
         add(txtCountry);
         JLabel Print=new JLabel("出版社");
         Print.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -58,8 +58,8 @@ public class ManLibrarydetailPanel extends JPanel {
         Print.setBorder(new EmptyBorder(0,0,0,0));
         add(Print);
         txtPrint = new JTextField();    //创建文本框
-        txtPrint.setText("出版社");
         txtPrint.setBounds(160, 130, 100, 30);
+        txtPrint.setEditable(false);
         add(txtPrint);
         JLabel Classify=new JLabel("分类");
         Classify.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -67,8 +67,8 @@ public class ManLibrarydetailPanel extends JPanel {
         Classify.setBorder(new EmptyBorder(0,0,0,0));
         add(Classify);
         txtClassify = new JTextField();    //创建文本框
-        txtClassify.setText("分类");
         txtClassify.setBounds(160, 160, 100, 30);
+        txtClassify.setEditable(false);
         add(txtClassify);
         JLabel RemainNum=new JLabel("剩余数量");
         RemainNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -76,8 +76,8 @@ public class ManLibrarydetailPanel extends JPanel {
         RemainNum.setBorder(new EmptyBorder(0,0,0,0));
         add(RemainNum);
         txtRemain = new JTextField();    //创建文本框
-        txtRemain.setText("剩余数量");
         txtRemain.setBounds(160, 190, 100, 30);
+        txtRemain.setEditable(false);
         add(txtRemain);
         JLabel Place=new JLabel("摆放位置");
         Place.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -85,8 +85,8 @@ public class ManLibrarydetailPanel extends JPanel {
         Place.setBorder(new EmptyBorder(0,0,0,0));
         add(Place);
         txtPlace = new JTextField();    //创建文本框
-        txtPlace.setText("摆放位置");
         txtPlace.setBounds(160, 220, 100, 30);
+        txtPlace.setEditable(false);
         add(txtPlace);
         JLabel Intro=new JLabel("介绍");
         Intro.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -94,13 +94,21 @@ public class ManLibrarydetailPanel extends JPanel {
         Intro.setBorder(new EmptyBorder(0,0,0,0));
         add(Intro);
         txtIntro = new JTextField();    //创建文本框
-        txtIntro.setText("介绍");
         txtIntro.setBounds(160, 250, 100, 30);
+        txtIntro.setEditable(false);
         add(txtIntro);
     }
     public void init()
     {
-
+        txtISBN.setText("");
+        txtBook.setText("");
+        txtWriter.setText("");
+        txtCountry.setText("");
+        txtPrint.setText("");
+        txtClassify.setText("");
+        txtRemain.setText("");
+        txtPlace.setText("");
+        txtIntro.setText("");
     }
     public void edit(){
 

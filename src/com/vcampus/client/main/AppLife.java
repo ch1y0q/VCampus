@@ -53,7 +53,7 @@ public class AppLife extends JFrame {
          */
 
 
-        setResizable(false);
+        setResizable(true);
         setTitle("生活服务 - Vcampus");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -62,7 +62,6 @@ public class AppLife extends JFrame {
         jp1 = new JPanel();
         jp2 = new JPanel();
         contentPane.setBackground(new Color(240, 255, 240));
-        contentPane.setLocation(-871, -176);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -78,6 +77,7 @@ public class AppLife extends JFrame {
         this.add(tabbedPane);
 
         JTree jt = new StuCategory().init();
+        jt.setBackground(new Color(240, 255, 240));
         jt.setBounds(0, 50, 200, 600);
         contentPane.add(jt);
 

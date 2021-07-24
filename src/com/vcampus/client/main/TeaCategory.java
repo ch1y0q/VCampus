@@ -16,7 +16,7 @@ public class TeaCategory extends JTree {
         DefaultMutableTreeNode nodChooseCourses = new DefaultMutableTreeNode("课程管理");
         DefaultMutableTreeNode nodGrades = new DefaultMutableTreeNode("成绩录入");
         DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
-        DefaultMutableTreeNode nodCard = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode nodCard = new DefaultMutableTreeNode("生活管理");
         DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
         nodLogin.add(nodPersonalInfo);nodLogin.add(nodChooseCourses);nodLogin.add(nodGrades);
         nodLogin.add(nodLibrary);nodLogin.add(nodCard);nodLogin.add(nodShop);
@@ -38,37 +38,37 @@ public class TeaCategory extends JTree {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
                     if(node==nodPersonalInfo){
-                        while(this.getClass().getName()!="com.vcampus.client.main.AppTeaInfo")
+                        if(this.getClass().getName()!="com.vcampus.client.main.AppTeaInfo")
                         {
                             AppTeaInfo app=new AppTeaInfo();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodLibrary){
-                        while(this.getClass().getName()!="com.vcampus.client.main.StuLibrary") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.StuLibrary") {
                             StuLibrary app = new StuLibrary();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodGrades||node==nodChooseCourses){
-                        while(this.getClass().getName()!="com.vcampus.client.main.AppStuCourse") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.AppStuCourse") {
                             AppTeaCourse app = new AppTeaCourse();
-                            //setVisible(false);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodCard){
-                        while(this.getClass().getName()!="com.vcampus.client.main.AppLife") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.AppLife") {
                             AppLife app = new AppLife();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
-                        while(this.getClass().getName()!="com.vcampus.client.main.AppShop") {
-                            AppShop app = new AppShop();
-                            //setVisible(false);
+                        if(this.getClass().getName()!="com.vcampus.client.main.AppShopTeacher") {
+                            AppShopTeacher app = new AppShopTeacher();
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }

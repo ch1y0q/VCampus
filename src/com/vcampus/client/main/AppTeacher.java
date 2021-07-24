@@ -41,7 +41,9 @@ public class AppTeacher extends JFrame {
         JButton logout = new JButton(res.getString("logout"));
         logout.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
+
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -67,7 +69,7 @@ public class AppTeacher extends JFrame {
                 if(e.getSource()==selfin)
                 {
                     AppTeaInfo app=new AppTeaInfo();
-                    //setVisible(false);
+                    setVisible(false);
                     app.setVisible(true);
                 }
             }
@@ -100,8 +102,8 @@ public class AppTeacher extends JFrame {
                 if(e.getSource()==classin)
                 {
                     AppTeaCourse app=new AppTeaCourse();
-                    //setVisible(false);
-                    //app.setVisible(true);
+                    setVisible(false);
+                    app.close();
                 }
             }
             public void mousePressed(MouseEvent e) { }
@@ -132,7 +134,7 @@ public class AppTeacher extends JFrame {
                 if(e.getSource()==cardin)
                 {
                     AppLife app=new AppLife();
-                    //setVisible(false);
+                    setVisible(false);
                     app.setVisible(true);
                 }
             }
@@ -165,7 +167,7 @@ public class AppTeacher extends JFrame {
                 if(e.getSource()==shopin)
                 {
                     AppShop app=new AppShop();
-                    //setVisible(false);
+                    setVisible(false);
                     app.setVisible(true);
                 }}
             public void mousePressed(MouseEvent e) { }
@@ -196,7 +198,7 @@ public class AppTeacher extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==Libin) {
                     TeaLibrary app=new TeaLibrary();
-                    //setVisible(false);
+                    setVisible(false);
                     app.setVisible(true);
                 }
             }

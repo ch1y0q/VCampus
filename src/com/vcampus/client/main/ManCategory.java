@@ -37,41 +37,41 @@ public class ManCategory extends JTree {
                         if(this.getClass().getName()!="com.vcampus.client.administrator.AppAdminInfo")
                         {
                             AppAdminInfo app=new AppAdminInfo();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodTeaInfor){
                         if(this.getClass().getName()!="com.vcampus.client.main.TeaManage") {
                             TeaManage app = new TeaManage();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodStuInfor){
                         if(this.getClass().getName()!="com.vcampus.client.main.StuManage") {
                             StuManage app = new StuManage();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodLibrary){
                         if(this.getClass().getName()!="com.vcampus.client.main.ManLibrary") {
                             ManLibrary app = new ManLibrary();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodClassManage){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppAdminCourse") {
+                            setVisible(false);
                             AppAdminCourse app = new AppAdminCourse();
-                            //setVisible(false);
                         }
                     }
                     else if(node==nodDorm){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppDormAdmin") {
                             AppLife app = new AppLife();
-                            //setVisible(false);
+                            setVisible(false);
                             app.setVisible(true);
                         }
                     }
