@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.vcampus.dao.ICourseMapper">
+    <update id="takeCourse" parameterType="Student">
+        UPDATE students SET
+            selected_course=#{courseList} WHERE
+            cardNumber=#{cardNumber}
+    </update>
+    <select id="getCourseSelection" parameterType="Student"
+            resultType="String">
+        SELECT selected_course FROM `students` WHERE
+            cardNumber=#{cardNumber}
+    </select>
+    <select id="getOneCourse" parameterType="String"
+            resultType="ClassInfo">
+        SELECT `id`,courseName,`time`,`teacher`,`classroom`,
+               `teacherCard` FROM
+            `courses` WHERE id=#{id} LIMIT 1
+    </select>
+    <select id="getClassOfOneTeacher" parameterType="String"
+            resultType="ClassInfo">
+        SELECT `id`,`courseName`,`time`,`teacher`,`classroom`,
+               `teacherCard` FROM
+            `courses` WHERE teacherCard=#{card}
+    </select>
+    <insert id="insertNewCourse" parameterType="Course">
+        INSERT INTO
+            `courses` VALUES (#{id}, #{courseName}, #{time}, #{teacher},
+                               #{classroom},  #{teacherCard})
+    </insert>
+    <delete id="deleteCourse" parameterType="String">
+        DELETE FROM
+            `courses`
+        WHERE `id` = #{id} LIMIT 1
+    </delete>
+
+    <select id="getStudentOfOneCourse" parameterType="String"
+            resultType="String">
+        SELECT `students` FROM `courses` WHERE id=#{id} LIMIT 1
+    </select>
+    <update id="updateScoreOfOneCourse" parameterType="Map">
+        UPDATE courses
+        SET `students` = #{content} WHERE `id` = #{classId} LIMIT 1
+    </update>
+
+
+
+</mapper>
