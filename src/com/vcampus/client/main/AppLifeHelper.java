@@ -1,7 +1,6 @@
 package com.vcampus.client.main;
 
 import com.alee.api.annotations.NotNull;
-import com.vcampus.entity.Student;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 
@@ -16,4 +15,19 @@ public class AppLifeHelper {
                         new Object[]{map}).send())
                 .getReturn(BigDecimal.class);
     }
+
+    public static String lossJudge(String string){
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.lossJudge",
+                        new Object[]{string}).send())
+                .getReturn(String.class);
+    }
+
+    public static String foundJudge(String string){
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.foundJudge",
+                        new Object[]{string}).send())
+                .getReturn(String.class);
+    }
+
 }

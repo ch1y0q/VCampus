@@ -23,4 +23,36 @@ public class AppLife {
         }
         return result;
     }
+
+    public static String lossJudge(String cardNumber){
+        String curLossStatus="挂失";
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+
+            studentMapper.setLossStatusByCardNumber(cardNumber);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return curLossStatus;
+    }
+
+    public static String foundJudge(String cardNumber){
+        String curFoundStatus="正常";
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+
+            studentMapper.setFoundStatusByCardNumber(cardNumber);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return curFoundStatus;
+    }
 }

@@ -35,6 +35,7 @@ public class AppDormAdmin extends JFrame {
         contentPane.setLayout(null);
 
         JTree jt=new ManCategory().init();
+        jt.setBackground(new Color(240, 255, 240));
         jt.setBounds(0,60,200,400);
         contentPane.add(jt);
 
@@ -46,24 +47,24 @@ public class AppDormAdmin extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.add("宿舍信息管理",jp1);
         tabbedPane.add("宿舍报修处理",jp2);
-        tabbedPane.setBounds(0,0,2000,1100);
+        tabbedPane.setBounds(200,0,2000,1100);
         this.add(tabbedPane);
 
         JLabel lblDormHygieneMarkEntering = new JLabel("宿舍卫生分数录入");
         lblDormHygieneMarkEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormHygieneMarkEntering.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormHygieneMarkEntering.setBounds(210, 70, 250, 40);
+        lblDormHygieneMarkEntering.setBounds(20, 70, 250, 40);
         jp1.add(lblDormHygieneMarkEntering);
 
         JComboBox cmbDormHygieneMarkWeek=new JComboBox();
         for(int i=1;i<17;i++) {
             cmbDormHygieneMarkWeek.addItem("第"+i+"周");
         }
-        cmbDormHygieneMarkWeek.setBounds(430,77,100,30);
+        cmbDormHygieneMarkWeek.setBounds(230,77,100,30);
         jp1.add(cmbDormHygieneMarkWeek);
 
         JTable tblDormHygieneMark=new JTable(10,3);
-        tblDormHygieneMark.setBounds(210,170,400,500);
+        tblDormHygieneMark.setBounds(20,170,400,500);
         tblDormHygieneMark.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblDormHygieneMark.setRowHeight(50);
         tblDormHygieneMark.getModel().setValueAt("宿舍号",0,0);
@@ -77,18 +78,18 @@ public class AppDormAdmin extends JFrame {
         JLabel lblDormBillEntering = new JLabel("宿舍水电费录入");
         lblDormBillEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormBillEntering.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormBillEntering.setBounds(830, 70, 250, 40);
+        lblDormBillEntering.setBounds(630, 70, 250, 40);
         jp1.add(lblDormBillEntering);
 
         JComboBox cmbDormBill=new JComboBox();
         for(int i=1;i<13;i++) {
             cmbDormBill.addItem("第"+i+"月");
         }
-        cmbDormBill.setBounds(1050,77,100,30);
+        cmbDormBill.setBounds(850,77,100,30);
         jp1.add(cmbDormBill);
 
         JTable tblDormBill=new JTable(10,4);
-        tblDormBill.setBounds(750,170,600,500);
+        tblDormBill.setBounds(550,170,600,500);
         tblDormBill.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblDormBill.setRowHeight(50);
         tblDormBill.getModel().setValueAt("宿舍号",0,0);
@@ -103,7 +104,7 @@ public class AppDormAdmin extends JFrame {
         //jp1结束
 
         JTable tblDormRepairState=new JTable(10,5);
-        tblDormRepairState.setBounds(250,150,1000,500);
+        tblDormRepairState.setBounds(50,150,1000,500);
         tblDormRepairState.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblDormRepairState.setRowHeight(50);
         tblDormRepairState.getModel().setValueAt("宿舍号",0,0);

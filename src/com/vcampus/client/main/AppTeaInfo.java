@@ -28,6 +28,7 @@ public class AppTeaInfo  extends JFrame {
         contentPane.setLayout(null);
 
         JTree jt=new TeaCategory().init();
+        jt.setBackground(new Color(240, 255, 240));
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 

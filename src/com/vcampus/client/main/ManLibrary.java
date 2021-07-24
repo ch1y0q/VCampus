@@ -60,11 +60,10 @@ public class ManLibrary extends JFrame {
         bookadd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
+                if(e.getSource()==bookadd)
+                {
+
+                }
             }
         });
         bookadd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -82,11 +81,10 @@ public class ManLibrary extends JFrame {
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
+                if(e.getSource()==logout)
+                {
+
+                }
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -108,7 +106,10 @@ public class ManLibrary extends JFrame {
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==search)
+                {
 
+                }
             }
         });
         contentPane.add(txtfield);

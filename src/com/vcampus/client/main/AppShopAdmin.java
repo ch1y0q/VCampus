@@ -24,6 +24,7 @@ public class AppShopAdmin extends JFrame {
 
         JTree jt=new ManCategory().init();
         jt.setBounds(0,60,200,400);
+        jt.setBackground(new Color(240, 255, 240));
         contentPane.add(jt);
 
         JLabel lblCommoditySearch = new JLabel("商品查询");

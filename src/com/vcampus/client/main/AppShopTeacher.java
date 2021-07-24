@@ -1,21 +1,15 @@
 package com.vcampus.client.main;
 
-import javax.swing.JPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
-/**
- * @author Y
- * @date 2021/7/21
- */
-
-public class AppShop extends JFrame {
+public class AppShopTeacher extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
     private static JPanel jp1,jp2;
-    public AppShop(){
+    public AppShopTeacher(){
         setResizable(false);
         setTitle("商店 - Vcampus");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
