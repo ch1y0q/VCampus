@@ -1,5 +1,7 @@
 package com.vcampus.entity;
 
+import java.math.BigDecimal;
+
 import static com.vcampus.util.CommonUtils.getSchoolByCode;
 
 /**
@@ -12,7 +14,7 @@ public class Teacher {
     private String password;
     private String cardNumber;
     private String teacherNumber;
-    private float balance;
+    private BigDecimal balance;
 
     /* optional */
     private String email;
@@ -25,10 +27,10 @@ public class Teacher {
         password = _password;
         cardNumber = _cardNumber;
         teacherNumber="";
-        balance = 0.0f;
+        balance = new BigDecimal(0);
     }
 
-    public Teacher(String _name, String _password, String _cardNumber, float _balance) {
+    public Teacher(String _name, String _password, String _cardNumber, BigDecimal _balance) {
         name = _name;
         password = _password;
         cardNumber = _cardNumber;
@@ -78,11 +80,11 @@ public class Teacher {
         this.teacherNumber = teacherNumber;
     }
 
-    public float getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 

@@ -2,6 +2,7 @@ package com.vcampus.dao;
 
 import com.vcampus.entity.Teacher;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public interface ITeacherMapper {
 
     public Boolean chargeCard(Map map);
 
-    public float getBalance(String cardNumber);
+    public BigDecimal getBalance(String cardNumber);
 
     public Boolean resetPassword(Map map);
 }
