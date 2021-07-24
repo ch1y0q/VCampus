@@ -5,7 +5,10 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
-
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-13
+ */
 public class TeaCategory extends JTree {
     public JTree init(){
         DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("教师登陆");
