@@ -79,7 +79,7 @@
 
     <update id="chargeCard" parameterType="Map">
         UPDATE `students` SET
-            `balance` = `balance` + #{money} WHERE `cardNumber`
+            `balance` =  #{money} WHERE `cardNumber`
                                                        = #{cardNumber}
         LIMIT 1
     </update>
@@ -96,4 +96,11 @@
         SELECT `bankAccount` FROM `students` WHERE
             `cardNumber`=#{cardNumber}
     </select>
+
+    <update id="setBalance" parameterType="int">
+        UPDATE `students` SET
+            `balance` = `balance` + #{money} WHERE `cardNumber`
+                                                       = #{cardNumber}
+        LIMIT 1
+    </update>
 </mapper>

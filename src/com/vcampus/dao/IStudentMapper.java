@@ -40,11 +40,15 @@ public interface IStudentMapper {
 
     public List<Student> tableDisplay(Map map);
 
-    public Boolean chargeCard(Map map);
+    //public Boolean chargeCard(Map map);
 
     public float getBalance(String cardNumber);
 
     public Boolean resetPassword(Map map);
 
     public String getBankAccountByCardNumber(String cardNumber);
+
+    public Boolean setBalance(int balanceAdded);
+
+    public void chargeCard(Map map);
 }

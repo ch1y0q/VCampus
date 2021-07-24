@@ -245,6 +245,7 @@ public class AppStuCourse {
                 int column = selectCourseTable.getSelectedColumn();
                 int row = selectCourseTable.getSelectedRow();
                 if(column == 9&&model1.getValueAt(row,column)=="选择"){
+                    /* TODO Student.addCourse(Course) */
                     model1.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>",row,column);
                     model2.addRow(emptyData);
                     for(int i = 0;i<selectedCourseTable.getRowCount();i++){
@@ -269,6 +270,7 @@ public class AppStuCourse {
                 int row = selectedCourseTable.getSelectedRow();
                 if(column == 9){
                     model2.removeRow(row);
+                    /* TODO Student.dropCourse(Course) */
                     for(int i = 0;i<selectedCourseTable.getRowCount();i++){
                         Object n = model2.getValueAt(i,2);
                         if(n!=null){
@@ -281,5 +283,8 @@ public class AppStuCourse {
                 }
             }
         });
+    }
+    private void refreshCourseTable(){
+        /* TODO Student.getCourses()  返回该学生已选课程，return List<Course>*/
     }
 }
