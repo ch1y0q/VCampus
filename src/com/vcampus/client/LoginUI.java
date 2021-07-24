@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
  * @author Huang Qiyue
  * @date 2021-07-07
  */
+
 public class LoginUI extends JFrame {
     private JPanel loginPanel;
     private JButton btnLogin;
