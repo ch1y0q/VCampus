@@ -53,7 +53,7 @@ public class TeaLibrary extends JFrame {
                 if(e.getSource()==back)
                 {
                     AppTeacher app=new AppTeacher();
-                    //setVisible(false);
+                    setVisible(false);
                     app.setVisible(true);
                 }
             }

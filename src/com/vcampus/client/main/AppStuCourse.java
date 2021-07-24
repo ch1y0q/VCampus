@@ -308,7 +308,7 @@ public class AppStuCourse {
     private void refreshCourseTable(){
         List<String> courseIdList = student.getCourses();
     }
-    private void close(){
+    public void close(){
         jf.setVisible(false);
     }
 }

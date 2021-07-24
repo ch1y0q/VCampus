@@ -65,6 +65,10 @@ public class TeaManage extends JFrame {
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==logout)
+                {
+
+                }
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -84,6 +88,10 @@ public class TeaManage extends JFrame {
         addTea.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==addTea)
+                {
+
+                }
             }
         });
         contentPane.add(addTea);
@@ -103,6 +111,10 @@ public class TeaManage extends JFrame {
         Teaserch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==Teaserch)
+                {
+
+                }
             }
         });
         contentPane.add(Teaserch);
@@ -146,7 +158,7 @@ public class TeaManage extends JFrame {
         sex.setBounds(300,140,150,30);
         Teainforselect.add(sex);
 
-        JPanel Teadetail=new TeaMandetailPanel().init();
+        TeaMandetailPanel Teadetail=new TeaMandetailPanel();
         Teadetail.setBackground(new Color(255, 255, 255));
         Teadetail.setBounds(210,610,800,180);
         Teadetail.setVisible(false);
@@ -189,7 +201,5 @@ public class TeaManage extends JFrame {
         table.getTableHeader().setReorderingAllowed(false);
         jScrollPane.setBounds(210, 300, 980, 300);
         contentPane.add(jScrollPane);
-
-
     }
 }

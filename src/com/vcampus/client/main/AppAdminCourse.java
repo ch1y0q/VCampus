@@ -35,6 +35,7 @@ public class AppAdminCourse {
         //侧边栏
         JTree jt=new ManCategory().init();
         jf.add(jt);
+        jt.setBackground(Color.white);
         jt.setBounds(0,height/50,width*2/11,height);
 
 

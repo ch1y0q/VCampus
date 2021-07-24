@@ -5,7 +5,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 /**
  * @author Xiao Kaijie
- * @date 2021-07-13
+ * @date 2021-07-20
  */
 public class StuInfoPanel extends JPanel {
     public JLabel lblName;

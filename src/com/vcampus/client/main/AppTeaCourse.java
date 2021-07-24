@@ -240,7 +240,7 @@ public class AppTeaCourse {
     private void refreshCourseTable(){
 
     }
-    private void close(){
+    public void close(){
         jf.setVisible(false);
     }
 }

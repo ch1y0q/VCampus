@@ -67,6 +67,10 @@ public class StuCoursePanel extends JPanel {
     }
     public void init()
     {
-
+        lblCI1.setText("校企实训");
+        lblCI2.setText("校企实训");
+        lblCI3.setText("校企实训");
+        lblCI4.setText("校企实训");
+        lblCI5.setText("校企实训");
     }
 }

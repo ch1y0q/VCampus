@@ -13,7 +13,6 @@ import java.awt.event.MouseEvent;
  */
 public class AppStuInfo  extends JFrame {
     private JPanel contentPane;
-
     public AppStuInfo() {
         setResizable(true);//允许窗口大小更改
         setTitle("个人信息管理");
@@ -42,7 +41,7 @@ public class AppStuInfo  extends JFrame {
                 if(e.getSource()==returnButton)
                 {
                     AppStudent app=new AppStudent();
-                    //setVisible(false);
+                    setVisible(false);
                     app.setVisible(true);
                 }
             }
