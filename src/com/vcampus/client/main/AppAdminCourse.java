@@ -15,6 +15,9 @@ public class AppAdminCourse {
     private int width = 1151;
     private int height = 800;
     public AppAdminCourse(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        width = screenSize.width;
+        height = screenSize.height;
         jf.setLayout(null);
         jf.setVisible(true);
         jf.setResizable(true);
@@ -31,7 +34,8 @@ public class AppAdminCourse {
 
         //侧边栏
         JTree jt=new ManCategory().init();
-        //jt.setBounds(0,60,100,400);
+        jf.add(jt);
+        jt.setBounds(0,height/50,width*2/11,height);
 
 
         //管理员课程管理
@@ -114,5 +118,8 @@ public class AppAdminCourse {
     }
     private void refreshCourseTable(){
         /* TODO getAllCourse()  返回所有课程，return List<Course>*/
+    }
+    private void close(){
+        jf.setVisible(false);
     }
 }
