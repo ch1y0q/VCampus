@@ -1,5 +1,6 @@
 package com.vcampus.entity;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static com.vcampus.util.CommonUtils.getSchoolByCode;
@@ -135,4 +136,5 @@ public class Student {
     public void setBankAccount(String bankAccount) {
         this.bankAccount = bankAccount;
     }
+
 }

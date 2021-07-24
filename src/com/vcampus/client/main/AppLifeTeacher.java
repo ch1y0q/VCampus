@@ -1,19 +1,18 @@
 package com.vcampus.client.main;
 
-import com.vcampus.dao.IStudentMapper;
 import org.apache.ibatis.jdbc.Null;
-import org.apache.ibatis.session.SqlSession;
 
 import javax.swing.JPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -21,22 +20,11 @@ import java.util.Objects;
  * @date 2021/7/21
  */
 
-public class AppLife extends JFrame{
+public class AppLifeTeacher extends JFrame{
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
     private static JPanel jp1,jp2;
-    public AppLife(){
-
-        String studentCardNumber;
-        studentCardNumber= App.session.getStudent().getStudentNumber();
-
-        float studentCardBalance;
-        studentCardBalance=App.session.getStudent().getBalance();
-        String studentCardBalanceText = studentCardBalance+"";
-
-        String studentBankAccount;
-        studentBankAccount=App.session.getStudent().getBankAccount();
-
+    public AppLifeTeacher(){
 
         setResizable(false);
         setTitle("生活服务 - Vcampus");
@@ -80,7 +68,7 @@ public class AppLife extends JFrame{
         lblCardNum.setBounds(205, 30, 100, 40);
         jp1.add(lblCardNum);
 
-        JLabel lblCurCardNum = new JLabel(studentCardNumber);
+        JLabel lblCurCardNum = new JLabel("213191111");
         lblCurCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardNum.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurCardNum.setBounds(305, 30, 100, 40);
@@ -104,7 +92,7 @@ public class AppLife extends JFrame{
         lblCardBalance.setBounds(610, 30, 100, 40);
         jp1.add(lblCardBalance);
 
-        JLabel lblCurCardBalance = new JLabel(studentCardBalanceText);
+        JLabel lblCurCardBalance = new JLabel("100.0");
         lblCurCardBalance.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardBalance.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurCardBalance.setBounds(700, 30, 100, 40);
@@ -130,7 +118,7 @@ public class AppLife extends JFrame{
         lblCardRechargeBankAccount.setBounds(340, 210, 150, 40);
         jp1.add(lblCardRechargeBankAccount);
 
-        JLabel lblCurCardRechargeBankAccount = new JLabel(studentBankAccount);
+        JLabel lblCurCardRechargeBankAccount = new JLabel("6102321312342142322");
         lblCurCardRechargeBankAccount.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardRechargeBankAccount.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurCardRechargeBankAccount.setBounds(500, 210, 200, 40);
@@ -161,24 +149,6 @@ public class AppLife extends JFrame{
 
         JButton btnCardRecharge=new JButton("确认充值");
         btnCardRecharge.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
-        btnCardRecharge.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String balanceAddedText = txtAmount.getText().trim();
-                float balanceAdded=Float.parseFloat(balanceAddedText);
-                System.out.println(balanceAdded);
-                if(balanceAdded>0&&balanceAdded<=1000)
-                {
-                    HashMap<String, Object> map = new HashMap<String, Object>();
-                    map.put("cardNumber",studentCardNumber);
-                    map.put("money",studentCardBalance+balanceAdded);
-                    float result = AppLifeHelper.chargeCard(map);
-                    if(result==(studentCardBalance+balanceAdded)) JOptionPane.showMessageDialog(null,"充值成功");
-                    lblCurCardBalance.setText(String.valueOf(result));
-                    // TODO 更新studentCardBalance
-                }
-            }
-        });
         jp1.add(btnCardRecharge);
         btnCardRecharge.setBounds(460,380,110,35);
 
