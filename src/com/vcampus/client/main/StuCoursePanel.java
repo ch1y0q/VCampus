@@ -47,21 +47,19 @@ public class StuCoursePanel extends JPanel {
         label_6.setBounds(0, 40, 64, 30);
         jPanel.add(label_6);
 
-        JLabel label_7 = new JLabel("5~6节");
+        JLabel label_7 = new JLabel("6~7节");
         label_7.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         label_7.setBounds(0, 70, 64, 30);
         jPanel.add(label_7);
-
-        JLabel label_8 = new JLabel("7~8节");
+        JLabel label_8 = new JLabel("8~9节");
         label_8.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         label_8.setBounds(0, 100, 64, 30);
         jPanel.add(label_8);
 
-        JLabel label_9 = new JLabel("9~10节");
+        JLabel label_9 = new JLabel("11~12节");
         label_9.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         label_9.setBounds(0, 130, 64, 30);
         jPanel.add(label_9);
-
         return jPanel;
     }
 }

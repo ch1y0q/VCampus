@@ -22,6 +22,9 @@ public class AppShopAdmin extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        JTree jt=new ManCategory().init();
+        jt.setBounds(0,60,100,400);
+        contentPane.add(jt);
 
         JLabel lblCommoditySearch = new JLabel("商品查询");
         lblCommoditySearch.setFont(new Font("微软雅黑", Font.PLAIN, 18));

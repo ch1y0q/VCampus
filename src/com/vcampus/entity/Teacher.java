@@ -109,4 +109,6 @@ public class Teacher {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    /* TODO getCourses()  返回该老师所有课程 */
 }

@@ -1,6 +1,7 @@
 package com.vcampus.client.main;
 
 import com.vcampus.client.administrator.main.AppAdmin;
+import com.vcampus.entity.Book;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -126,6 +127,12 @@ public class ManLibrary extends JFrame {
         jc.setBounds(1000,50,150,30);
         contentPane.add(jc);
 
+        JPanel Bookdetail=new ManLibrarydetailPanel().init();
+        Bookdetail.setBackground(new Color(255, 255, 255));
+        Bookdetail.setBounds(1000,210,800,300);
+        Bookdetail.setVisible(true);
+        contentPane.add(Bookdetail);
+
         String[] header = {"序号","ISBN号", "书籍名称", "剩余数量", "作者","详细信息"};
         String[][] data = {{"", "", "", "", "", ""}};
         DefaultTableModel model = new DefaultTableModel(data, header);
@@ -183,7 +190,7 @@ public class ManLibrary extends JFrame {
 
         JLabel detail=new JLabel("详细信息");
         detail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        detail.setBounds(800, 180, 150, 30);
+        detail.setBounds(800, 180, 100, 30);
         detail.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(detail);
 
@@ -191,88 +198,6 @@ public class ManLibrary extends JFrame {
         detailicon.setIcon(new ImageIcon());
         detailicon.setBounds(800,230,180,200);
         contentPane.add(detailicon);
-
-        JLabel ISBNnum=new JLabel("ISBN号");
-        ISBNnum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        ISBNnum.setBounds(1000, 220, 150, 30);
-        ISBNnum.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(ISBNnum);
-        JTextField txtISBN = new JTextField();    //创建文本框
-        txtISBN.setText("ISBN号");
-        txtISBN.setBounds(1200, 220, 100, 30);
-        contentPane.add(txtISBN);
-        JLabel Bookname=new JLabel("书名");
-        Bookname.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Bookname.setBounds(1000, 250, 150, 30);
-        Bookname.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(Bookname);
-        JTextField txtBook = new JTextField();    //创建文本框
-        txtBook.setText("书名");
-        txtBook.setBounds(1200, 250, 100, 30);
-        contentPane.add(txtBook);
-        JLabel Writer=new JLabel("作者");
-        Writer.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Writer.setBounds(1000, 280, 150, 30);
-        Writer.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(Writer);
-        JTextField txtWriter = new JTextField();    //创建文本框
-        txtWriter.setText("作者");
-        txtWriter.setBounds(1200, 280, 100, 30);
-        contentPane.add(txtWriter);
-        JLabel Country=new JLabel("作者国籍");
-        Country.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Country.setBounds(1000, 310, 150, 30);
-        Country.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(Country);
-        JTextField txtCountry = new JTextField();    //创建文本框
-        txtCountry.setText("作者国籍");
-        txtCountry.setBounds(1200, 310, 100, 30);
-        contentPane.add(txtCountry);
-        JLabel Print=new JLabel("出版社");
-        Print.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Print.setBounds(1000, 340, 150, 30);
-        Print.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(Print);
-        JTextField txtPrint = new JTextField();    //创建文本框
-        txtPrint.setText("出版社");
-        txtPrint.setBounds(1200, 340, 100, 30);
-        contentPane.add(txtPrint);
-        JLabel Classify=new JLabel("分类");
-        Classify.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Classify.setBounds(1000, 370, 150, 30);
-        Classify.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(Classify);
-        JTextField txtClassify = new JTextField();    //创建文本框
-        txtClassify.setText("分类");
-        txtClassify.setBounds(1200, 370, 100, 30);
-        contentPane.add(txtClassify);
-        JLabel RemainNum=new JLabel("剩余数量");
-        RemainNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        RemainNum.setBounds(1000, 400, 150, 30);
-        RemainNum.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(RemainNum);
-        JTextField txtRemain = new JTextField();    //创建文本框
-        txtRemain.setText("剩余数量");
-        txtRemain.setBounds(1200, 400, 100, 30);
-        contentPane.add(txtRemain);
-        JLabel Place=new JLabel("摆放位置");
-        Place.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Place.setBounds(1000, 430, 150, 30);
-        Place.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(Place);
-        JTextField txtPlace = new JTextField();    //创建文本框
-        txtPlace.setText("摆放位置");
-        txtPlace.setBounds(1200, 430, 100, 30);
-        contentPane.add(txtPlace);
-        JLabel Intro=new JLabel("介绍");
-        Intro.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Intro.setBounds(1000, 460, 150, 30);
-        Intro.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(Intro);
-        JTextField txtIntro = new JTextField();    //创建文本框
-        txtIntro.setText("介绍");
-        txtIntro.setBounds(1200, 460, 100, 30);
-        contentPane.add(txtIntro);
 
         JLabel Borrow=new JLabel("借书记录");
         Borrow.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -283,7 +208,7 @@ public class ManLibrary extends JFrame {
         DefaultTableModel model2 = new DefaultTableModel(data2, header2);
         JTable table2 = new JTable(model2);
         JScrollPane jScrollPane2 = new JScrollPane();
-        jScrollPane2.setViewportView(table);
+        jScrollPane2.setViewportView(table2);
         table2.setGridColor(Color.BLACK);
         table2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setBounds(800, 550, 500, 200);
