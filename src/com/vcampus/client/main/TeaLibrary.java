@@ -45,37 +45,11 @@ public class TeaLibrary extends JFrame {
         jp3.setLayout(null);
         jp3.setBackground(new Color(255, 255, 255));
 
-        DefaultMutableTreeNode login= new DefaultMutableTreeNode("教师登陆");
-        DefaultMutableTreeNode information = new DefaultMutableTreeNode("个人信息");
-        DefaultMutableTreeNode Class = new DefaultMutableTreeNode("选课");
-        DefaultMutableTreeNode Grades = new DefaultMutableTreeNode("成绩管理");
-        DefaultMutableTreeNode Library = new DefaultMutableTreeNode("图书馆");
-        DefaultMutableTreeNode card = new DefaultMutableTreeNode("一卡通");
-        DefaultMutableTreeNode shop = new DefaultMutableTreeNode(   "网上商店");
-        login.add(information);login.add(Class);login.add(Grades);login.add(Library);login.add(card);login.add(shop);
-
-        DefaultMutableTreeNode goods = new DefaultMutableTreeNode("商品列表");
-        DefaultMutableTreeNode shopcar = new DefaultMutableTreeNode("购物车");
-        DefaultMutableTreeNode histoty = new DefaultMutableTreeNode("购买历史");
-        shop.add(goods);shop.add(shopcar);shop.add(histoty);
-
-        JTree jt = new JTree(login);
+        JTree jt=new TeaCategory().init();
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 
-        TreeSelectionModel treeSelectionModel;
-        treeSelectionModel=jt.getSelectionModel();
-        treeSelectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        jt.addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
-                if (!jt.isSelectionEmpty()) {
-                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
-                    String name = node.toString();
-                    System.out.println(name);
-                }
-            }
-        });
+
         JButton back = new JButton("返回");
         back.addActionListener(new ActionListener() {
             @Override

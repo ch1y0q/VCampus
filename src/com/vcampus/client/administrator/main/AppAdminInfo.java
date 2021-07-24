@@ -3,6 +3,7 @@ package com.vcampus.client.administrator.main;
 import com.mysql.cj.protocol.Message;
 //import com.mysql.cj.xdevapi.Client;
 import com.vcampus.client.main.AppDormAdmin;
+import com.vcampus.client.main.ManCategory;
 import org.apache.ibatis.javassist.bytecode.ByteArray;
 
 import javax.imageio.ImageIO;
@@ -41,6 +42,10 @@ public class AppAdminInfo  extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        JTree jt=new ManCategory().init();
+        jt.setBounds(0,60,100,400);
+        contentPane.add(jt);
 
         JButton returnButton = new JButton("← 返回");
         returnButton.setFont(new Font("微软雅黑", Font.BOLD, 14));

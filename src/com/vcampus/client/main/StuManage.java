@@ -33,36 +33,9 @@ public class StuManage extends JFrame{
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("管理员登陆");
-        DefaultMutableTreeNode nodInfor = new DefaultMutableTreeNode("个人信息");
-        DefaultMutableTreeNode nodClassManage = new DefaultMutableTreeNode("课程管理");
-        DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
-        DefaultMutableTreeNode nodDorm = new DefaultMutableTreeNode("一卡通");
-        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
-        nodLogin.add(nodInfor);nodLogin.add(nodClassManage);nodLogin.add(nodLibrary);nodLogin.add(nodDorm);nodLogin.add(nodShop);
-
-        DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
-        DefaultMutableTreeNode nodShopCart = new DefaultMutableTreeNode("购物车");
-        DefaultMutableTreeNode nodBuyHistory = new DefaultMutableTreeNode("购买历史");
-        nodShop.add(nodGoods);nodShop.add(nodShopCart);nodShop.add(nodBuyHistory);
-
-        JTree jt = new JTree(nodLogin);
-        jt.setBounds(0,50,200,600);
+        JTree jt=new ManCategory().init();
+        jt.setBounds(0,60,100,400);
         contentPane.add(jt);
-
-        TreeSelectionModel treeSelectionModel;
-        treeSelectionModel=jt.getSelectionModel();
-        treeSelectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        jt.addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
-                if (!jt.isSelectionEmpty()) {
-                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
-                    String name = node.toString();
-                    System.out.println(name);
-                }
-            }
-        });
 
         JButton back = new JButton("返回");
         back.addMouseListener(new MouseAdapter() {
