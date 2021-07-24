@@ -68,7 +68,7 @@ public class ManLibrary extends JFrame {
             }
         });
         bookadd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        bookadd.setBounds(800, 20, 100, 30);
+        bookadd.setBounds(800, 20, 200, 30);
         contentPane.add(bookadd);
 
         JLabel tf = new JLabel();
@@ -127,10 +127,11 @@ public class ManLibrary extends JFrame {
         jc.setBounds(1000,50,150,30);
         contentPane.add(jc);
 
-        JPanel Bookdetail=new ManLibrarydetailPanel().init();
+        ManLibrarydetailPanel Bookdetail=new ManLibrarydetailPanel();
         Bookdetail.setBackground(new Color(255, 255, 255));
         Bookdetail.setBounds(1000,210,800,300);
         Bookdetail.setVisible(true);
+        Bookdetail.init();
         contentPane.add(Bookdetail);
 
         String[] header = {"序号","ISBN号", "书籍名称", "剩余数量", "作者","详细信息"};

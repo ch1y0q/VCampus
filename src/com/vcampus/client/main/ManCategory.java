@@ -21,8 +21,7 @@ public class ManCategory extends JTree {
         DefaultMutableTreeNode nodClassManage = new DefaultMutableTreeNode("课程管理");
         DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
         DefaultMutableTreeNode nodDorm = new DefaultMutableTreeNode("生活管理");
-        nodLogin.add(nodInfor);nodLogin.add(nodClassManage);nodLogin.add(nodLibrary);nodLogin.add(nodDorm);
-        nodLogin.add(nodTeaInfor); nodLogin.add(nodStuInfor);
+        nodLogin.add(nodInfor);nodLogin.add(nodTeaInfor); nodLogin.add(nodStuInfor);nodLogin.add(nodClassManage);nodLogin.add(nodLibrary);nodLogin.add(nodDorm);
 
         JTree jt = new JTree(nodLogin);
 
@@ -35,7 +34,7 @@ public class ManCategory extends JTree {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
                     if(node==nodInfor){
-                        while(this.getClass().getName()!="com.vcampus.client.administrator.AppAdminInfo")
+                        if(this.getClass().getName()!="com.vcampus.client.administrator.AppAdminInfo")
                         {
                             AppAdminInfo app=new AppAdminInfo();
                             //setVisible(false);
@@ -43,34 +42,34 @@ public class ManCategory extends JTree {
                         }
                     }
                     else if(node==nodTeaInfor){
-                        while(this.getClass().getName()!="com.vcampus.client.main.TeaManage") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.TeaManage") {
                             TeaManage app = new TeaManage();
                             //setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodStuInfor){
-                        while(this.getClass().getName()!="com.vcampus.client.main.StuManage") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.StuManage") {
                             StuManage app = new StuManage();
                             //setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodLibrary){
-                        while(this.getClass().getName()!="com.vcampus.client.main.ManLibrary") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.ManLibrary") {
                             ManLibrary app = new ManLibrary();
                             //setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodClassManage){
-                        while(this.getClass().getName()!="com.vcampus.client.main.AppAdminCourse") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.AppAdminCourse") {
                             AppAdminCourse app = new AppAdminCourse();
                             //setVisible(false);
                         }
                     }
                     else if(node==nodDorm){
-                        while(this.getClass().getName()!="com.vcampus.client.main.AppDormAdmin") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.AppDormAdmin") {
                             AppLife app = new AppLife();
                             //setVisible(false);
                             app.setVisible(true);

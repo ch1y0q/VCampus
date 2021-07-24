@@ -35,7 +35,7 @@ public class StuManage extends JFrame{
         contentPane.setLayout(null);
 
         JTree jt=new ManCategory().init();
-        jt.setBounds(0,60,100,400);
+        jt.setBounds(0,60,200,400);
         contentPane.add(jt);
 
         JButton back = new JButton("返回");
@@ -73,7 +73,7 @@ public class StuManage extends JFrame{
         contentPane.add(logout);
 
         JTextField txtfield1=new JTextField();    //创建文本框
-        txtfield1.setText("输入教师一卡通号或姓名");
+        txtfield1.setText("输入学生一卡通号或姓名");
         txtfield1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         txtfield1.setBounds(210,50,300,30);
         contentPane.add(txtfield1);
@@ -146,7 +146,7 @@ public class StuManage extends JFrame{
         sex.setBounds(300,140,150,30);
         Stuinforselect.add(sex);
 
-        JPanel Studetail=new StudetailInfo().init();
+        StudetailInfo Studetail=new StudetailInfo();
         Studetail.setBounds(210,610,800,180);
         Studetail.setVisible(false);
         contentPane.add(Studetail);

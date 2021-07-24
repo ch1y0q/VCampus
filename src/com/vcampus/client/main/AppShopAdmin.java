@@ -23,7 +23,7 @@ public class AppShopAdmin extends JFrame {
         contentPane.setLayout(null);
 
         JTree jt=new ManCategory().init();
-        jt.setBounds(0,60,100,400);
+        jt.setBounds(0,60,200,400);
         contentPane.add(jt);
 
         JLabel lblCommoditySearch = new JLabel("商品查询");

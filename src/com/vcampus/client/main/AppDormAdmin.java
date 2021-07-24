@@ -35,7 +35,7 @@ public class AppDormAdmin extends JFrame {
         contentPane.setLayout(null);
 
         JTree jt=new ManCategory().init();
-        jt.setBounds(0,60,100,400);
+        jt.setBounds(0,60,200,400);
         contentPane.add(jt);
 
         jp1.setLayout(null);
