@@ -11,6 +11,9 @@ public class AppTeaCourse {
     private int width = 1151;
     private int height = 800;
     public AppTeaCourse() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        width = screenSize.width;
+        height = screenSize.height;
         jf.setVisible(true);
         jf.setLayout(null);
         jf.setResizable(true);
@@ -39,7 +42,9 @@ public class AppTeaCourse {
 
         //侧边栏
         JTree jt=new TeaCategory().init();
-        //jt.setBounds(0,50,200,600);
+        jf.add(jt);
+        jt.setBounds(0,height/50,width*2/11,height);
+
 
         //课程表
         JScrollPane sp0 = new JScrollPane();
@@ -234,6 +239,9 @@ public class AppTeaCourse {
     }
     private void refreshCourseTable(){
         /* TODO Teacher.getCourses()  返回该老师所有课程，return List<Course> */
+    }
+    private void close(){
+        jf.setVisible(false);
     }
 }
 

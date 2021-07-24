@@ -13,6 +13,9 @@ public class AppStuCourse {
     private int width = 1151;
     private int height = 800;
     public AppStuCourse(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        width = screenSize.width;
+        height = screenSize.height;
         jf.setVisible(true);
         jf.setLayout(null);
         jf.setResizable(true);
@@ -31,7 +34,6 @@ public class AppStuCourse {
         tp.addTab("选课系统",jp1);
         tp.addTab("已选课程",jp2);
         tp.addTab("成绩查询",jp3);
-
         jp0.setLayout(null);
         jp1.setLayout(null);
         jp2.setLayout(null);
@@ -44,12 +46,13 @@ public class AppStuCourse {
 
         //侧边栏
         JTree jt= new StuCategory().init();
-        //jt.setBounds(0,50,200,600);
+        jf.add(jt);
+        jt.setBounds(0,height/50,width*2/11,height);
 
 
         //课程表
         JScrollPane sp0 = new JScrollPane();
-        sp0.setBounds(width/50, height/40, width * 3 / 5, height * 3 / 5);
+        sp0.setBounds(width / 50, 30 + height / 20, width * 3 / 5, height * 3 / 5);
         sp0.setBorder(BorderFactory.createLineBorder(new Color(0x0B3F44), 1));
         sp0.setBackground(Color.white);
         jp0.add(sp0);
@@ -70,6 +73,16 @@ public class AppStuCourse {
                 return false;
             }
         };
+        JLabel semesterLabel0 = new JLabel("学期", JLabel.CENTER);
+        semesterLabel0.setBounds(width / 50, height / 40, 40, 30);
+        jp0.add(semesterLabel0);
+        JComboBox chooseSemester0 = new JComboBox();
+        String[] semesters = {"2020-2021-1", "2020-2021-2", "2020-2021-3", "2020-2021-4"};
+        for (String s : semesters) {
+            chooseSemester0.addItem(s);
+        }
+        chooseSemester0.setBounds(width / 50 + 60, height / 40, 120, 30);
+        jp0.add(chooseSemester0);
         courseTable.setRowHeight(30);
         sp0.setViewportView(courseTable);
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
@@ -172,7 +185,6 @@ public class AppStuCourse {
         jp3.add(semesterLabel);
 
         JComboBox chooseSemester = new JComboBox();
-        String[] semesters = {"2020-2021-1","2020-2021-2","2020-2021-3","2020-2021-4"};
         for (String s : semesters) {
             chooseSemester.addItem(s);
         }
@@ -181,15 +193,15 @@ public class AppStuCourse {
         JLabel creditInSemesterLabel = new JLabel("学分",JLabel.CENTER);
         creditInSemesterLabel.setBounds(width/25+240,height/40,40,30);
         jp3.add(creditInSemesterLabel);
-        JTextArea numOfCreditInSemesterText = new JTextArea();
-        numOfCreditInSemesterText.setBounds(width/25+295,height/40,40,30);
-        jp3.add(numOfCreditInSemesterText);
+        JLabel numOfCreditInSemesterLabel = new JLabel();
+        numOfCreditInSemesterLabel.setBounds(width/25+295,height/40,40,30);
+        jp3.add(numOfCreditInSemesterLabel);
         JLabel scoreLabel = new JLabel("绩点",JLabel.CENTER);
         scoreLabel.setBounds(width*2/25+395,height/40,40,30);
         jp3.add(scoreLabel);
-        JTextArea numOfScoreText = new JTextArea();
-        numOfScoreText.setBounds(width*2/25+450,height/40,40,30);
-        jp3.add(numOfScoreText);
+        JLabel numOfScoreLabel = new JLabel();
+        numOfScoreLabel.setBounds(width*2/25+450,height/40,40,30);
+        jp3.add(numOfScoreLabel);
 
 
         //事件
@@ -205,7 +217,10 @@ public class AppStuCourse {
                 //jp0
                 {
                     jp0.setSize(currentWidth, currentHeight);
-                    sp0.setBounds(currentWidth / 50, currentHeight / 50, currentWidth * 3 / 5, currentHeight * 3 / 5);
+                    //sp0.setBounds(currentWidth / 50, currentHeight / 50, currentWidth * 3 / 5, currentHeight * 3 / 5);
+                    sp0.setBounds(currentWidth / 50, 30 + currentHeight / 20, currentWidth * 3 / 5, currentHeight * 3 / 5);
+                    semesterLabel0.setBounds(currentWidth / 50, currentHeight / 40, 40, 30);
+                    chooseSemester0.setBounds(currentWidth / 50 + 60, currentHeight / 40, 120, 30);
                 }
                 //jp1
                 {
@@ -226,9 +241,9 @@ public class AppStuCourse {
                     semesterLabel.setBounds(currentWidth/50,currentHeight/40,40,30);
                     chooseSemester.setBounds(currentWidth/50+60,currentHeight/40,120,30);
                     creditInSemesterLabel.setBounds(currentWidth/25+240,currentHeight/40,40,30);
-                    numOfCreditInSemesterText.setBounds(currentWidth/25+295,currentHeight/40,40,30);
+                    numOfCreditInSemesterLabel.setBounds(currentWidth/25+295,currentHeight/40,40,30);
                     scoreLabel.setBounds(currentWidth*2/25+395,currentHeight/40,40,30);
-                    numOfScoreText.setBounds(currentWidth*2/25+450,currentHeight/40,40,30);
+                    numOfScoreLabel.setBounds(currentWidth*2/25+450,currentHeight/40,40,30);
                     int h = chooseSemester.getHeight();
                     sp3.setBounds(currentWidth / 50, h+currentHeight / 20, currentWidth * 3 / 5, currentHeight * 3 / 5);
 
@@ -283,8 +298,14 @@ public class AppStuCourse {
                 }
             }
         });
+
+        //成绩查询页面选择学期
+        /* TODO Student.getScore(String courseName, String studentName)  返回该学生这门课程的成绩 */
     }
     private void refreshCourseTable(){
         /* TODO Student.getCourses()  返回该学生已选课程，return List<Course>*/
+    }
+    private void close(){
+        jf.setVisible(false);
     }
 }
