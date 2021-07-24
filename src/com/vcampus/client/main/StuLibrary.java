@@ -2,11 +2,7 @@ package com.vcampus.client.main;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -45,6 +41,7 @@ public class StuLibrary extends JFrame {
         JTree jt= new StuCategory().init();
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);
+
         JButton btnBack = new JButton("返回");
         btnBack.addActionListener(new ActionListener() {
             @Override
