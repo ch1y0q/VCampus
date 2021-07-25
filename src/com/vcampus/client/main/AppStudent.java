@@ -1,5 +1,7 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.LoginUI;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -96,11 +98,12 @@ public class AppStudent extends JFrame {
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
+                if(e.getSource()==logout)
+                {
+                    LoginUI app=new LoginUI();
+                    app.setVisible(true);
+                    setVisible(false);
+                }
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
