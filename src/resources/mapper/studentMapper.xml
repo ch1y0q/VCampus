@@ -112,14 +112,14 @@
 
     <update id="setLossStatusByCardNumber" parameterType="String">
         UPDATE `students` SET
-            `lossStatus` = '挂失' WHERE `cardNumber`
+            `lossStatus` = 'LOST' WHERE `cardNumber`
                                                        = #{cardNumber}
         LIMIT 1
     </update>
 
     <update id="setFoundStatusByCardNumber" parameterType="String">
         UPDATE `students` SET
-            `lossStatus` = '正常' WHERE `cardNumber`
+            `lossStatus` = 'NORMAL' WHERE `cardNumber`
                                           = #{cardNumber}
         LIMIT 1
     </update>
