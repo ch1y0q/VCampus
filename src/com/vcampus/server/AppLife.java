@@ -18,6 +18,7 @@ public class AppLife {
             studentMapper.chargeCard(map);
 
             result = studentMapper.getBalance((String) map.get("cardNumber"));
+
             sqlSession.commit();
             sqlSession.close();
         } catch (Exception e) {
@@ -64,9 +65,9 @@ public class AppLife {
         try {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IDealHistoryMapper dealHistoryMapper =sqlSession.getMapper(IDealHistoryMapper.class);
-            System.out.println(4);
+
             dealHistoryMapper.insertDealHistory(dealHistory);
-            System.out.println(5);
+
             sqlSession.commit();
             sqlSession.close();
         } catch (Exception e) {

@@ -18,6 +18,7 @@ public class Course {
     private String capacity;
     private String selectedNumber;
     private String major;
+    private String students;
 
     public Course() {
     }
@@ -99,8 +100,16 @@ public class Course {
 
     public void setMajor(String major) {this.major = major;}
 
+    public String getStudents() {
+        return students;
+    }
+
+    public void setStudents(String students) {
+        this.students = students;
+    }
+
     public Course(String id, String courseName, String time, String teacher, String classroom, String teacherCard
-            ,String credit,String capacity,String semester,String selectedNumber,String major) {
+            , String credit, String capacity, String semester, String selectedNumber, String major,String students) {
         super();
         this.id = id;
         this.courseName = courseName;
@@ -113,12 +122,13 @@ public class Course {
         this.semester = semester;
         this.selectedNumber = selectedNumber;
         this.major = major;
+        this.students=students;
     }
 
     @Override
     public String toString() {
         return "Course [id=" + id + ", courseName=" + courseName + ", time=" + time + ", teacher=" + teacher
                 + ", classroom=" + classroom + ", teacherCard=" + teacherCard +", credit=" + credit +", semester="+
-                semester+", capacity="+capacity+", selectedNumber="+selectedNumber+", major="+major+"]";
+                semester+", capacity="+capacity+", selectedNumber="+selectedNumber+", major="+major+", students="+students+"]";
     }
 }

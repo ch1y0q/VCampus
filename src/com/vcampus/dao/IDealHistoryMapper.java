@@ -10,5 +10,5 @@ public interface IDealHistoryMapper {
 
     public void insertDealHistory(DealHistory dealHistory);
 
-    public String getDealHistory(DealHistory dealHistory);
+    public DealHistory getDealHistory(DealHistory dealHistory);
 }

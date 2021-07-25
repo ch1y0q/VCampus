@@ -14,13 +14,13 @@
             cardNumber=#{cardNumber}
     </select>
     <select id="getOneCourse" parameterType="String"
-            resultType="ClassInfo">
+            resultType="Course">
         SELECT `id`,courseName,`time`,`teacher`,`classroom`,
                `teacherCard` FROM
             `courses` WHERE id=#{id} LIMIT 1
     </select>
     <select id="getClassOfOneTeacher" parameterType="String"
-            resultType="ClassInfo">
+            resultType="Course">
         SELECT `id`,`courseName`,`time`,`teacher`,`classroom`,
                `teacherCard` FROM
             `courses` WHERE teacherCard=#{card}
