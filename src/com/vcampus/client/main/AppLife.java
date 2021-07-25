@@ -45,8 +45,11 @@ public class AppLife extends JFrame {
         String lossJudge;
         lossJudge=App.session.getStudent().getLossStatus();
 
-
-
+        String lossJudgeChinese="ERROR";
+        if(lossJudge.equals("LOST"))
+            lossJudgeChinese="挂失";
+        else if(lossJudge.equals("NORMAL"))
+            lossJudgeChinese="正常";
 
         setResizable(true);
         setTitle("生活服务 - Vcampus");
@@ -102,7 +105,7 @@ public class AppLife extends JFrame {
         lblCardStatus.setBounds(220, 30, 100, 40);
         jp1.add(lblCardStatus);
 
-        JLabel lblCurCardStatus = new JLabel(lossJudge);
+        JLabel lblCurCardStatus = new JLabel(lossJudgeChinese);
         lblCurCardStatus.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardStatus.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurCardStatus.setBounds(300, 30, 100, 40);
