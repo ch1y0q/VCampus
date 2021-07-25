@@ -21,6 +21,7 @@ public class Student {
     private String studentNumber;
     private BigDecimal balance;
     private List<String> courses;
+    private String courseList;
 
     /* optional */
     private String email;
@@ -143,6 +144,14 @@ public class Student {
 
     public void setLossStatus(String lossStatus) {
         this.lossStatus=lossStatus;
+    }
+
+    public String getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(String courseList) {
+        this.courseList = courseList;
     }
 
     /* TODO getScore()  返回该学生某门课程的成绩
