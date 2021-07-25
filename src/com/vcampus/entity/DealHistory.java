@@ -13,10 +13,11 @@ import java.util.Map;
  */
 
 public class DealHistory {
-    private String cardNumber;
-    private String dealTime;
-    private BigDecimal dealAmount;
-    private String dealType;
+    public String cardNumber;
+    public String dealTime;
+    public BigDecimal dealAmount;
+    public String dealType;
+    public int rowOrder;
 
     public DealHistory(){}
 
@@ -26,12 +27,11 @@ public class DealHistory {
         cardNumber=_cardNumber;
         dealAmount=_dealAmount;
         dealType=_dealType;
-        System.out.println(cardNumber);
-        System.out.println(dealTime);
-        System.out.println(dealAmount);
-        System.out.println(dealType);
+
     }
 
     public Boolean insertDealHistory(Map map){return true;}
+
+
 
 }

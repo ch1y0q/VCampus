@@ -42,6 +42,8 @@ public class AppLife extends JFrame {
         String studentBankAccount;
         studentBankAccount = App.session.getStudent().getBankAccount();
 
+
+
         String lossJudge;
         lossJudge=App.session.getStudent().getLossStatus();
 
@@ -50,6 +52,11 @@ public class AppLife extends JFrame {
             lossJudgeChinese="挂失";
         else if(lossJudge.equals("NORMAL"))
             lossJudgeChinese="正常";
+
+        int dealHistoryLineNum=0;
+
+
+
 
         setResizable(true);
         setTitle("生活服务 - Vcampus");
@@ -193,8 +200,7 @@ public class AppLife extends JFrame {
                     App.session.getStudent().setBalance(result);
                 }
 
-                System.out.println(1);
-                Boolean flag= AppLifeHelper.insertDealHistory(studentCardNumber,balanceAdded,"收入");
+                Boolean flag= AppLifeHelper.insertDealHistory(studentCardNumber,balanceAdded,"INCOME");
 
 
             }

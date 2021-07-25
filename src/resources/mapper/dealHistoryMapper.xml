@@ -11,4 +11,5 @@
                (#{cardNumber},NOW(),#{dealAmount},#{dealType})
     </insert>
 
+
 </mapper>

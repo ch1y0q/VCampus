@@ -26,7 +26,7 @@ public class Student {
     private String email;
     private String phoneNumber;
     private String gender;
-    private String bankAccount;
+    public String bankAccount;
     private String lossStatus;
 
     /* constructor */
