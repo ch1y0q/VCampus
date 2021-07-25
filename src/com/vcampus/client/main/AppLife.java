@@ -1,6 +1,7 @@
 package com.vcampus.client.main;
 
 import com.vcampus.dao.IStudentMapper;
+import com.vcampus.entity.DealHistory;
 import org.apache.ibatis.jdbc.Null;
 import org.apache.ibatis.session.SqlSession;
 
@@ -177,17 +178,20 @@ public class AppLife extends JFrame {
                 if (balanceAdded.compareTo(new BigDecimal(0)) == 1 // larger than 0
                         && balanceAdded.compareTo(new BigDecimal(1000)) == -1) // upper bound
                 {
-                    HashMap<String, Object> map = new HashMap<String, Object>();
-                    map.put("cardNumber", studentCardNumber);
+                    HashMap<String, Object> mapCardNum_BalanceAdded = new HashMap<String, Object>();
+                    mapCardNum_BalanceAdded.put("cardNumber", studentCardNumber);
                     BigDecimal _balance = App.session.getStudent().getBalance();
-                    map.put("money", _balance.add(balanceAdded));
-                    BigDecimal result = AppLifeHelper.chargeCard(map);
+                    mapCardNum_BalanceAdded.put("money", _balance.add(balanceAdded));
+                    BigDecimal result = AppLifeHelper.chargeCard(mapCardNum_BalanceAdded);
                     if (result.compareTo(_balance.add(balanceAdded)) == 0) { // equals
                         JOptionPane.showMessageDialog(null, "充值成功");
                     }
                     lblCurCardBalance.setText(String.valueOf(result));
                     App.session.getStudent().setBalance(result);
                 }
+
+                AppLifeHelper.insertDealHistory(studentCardNumber,balanceAdded,"收入");
+
             }
         });
         jp1.add(btnCardRecharge);

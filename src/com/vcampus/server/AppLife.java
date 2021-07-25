@@ -1,6 +1,8 @@
 package com.vcampus.server;
 
+import com.vcampus.dao.IDealHistoryMapper;
 import com.vcampus.dao.IStudentMapper;
+import com.vcampus.entity.DealHistory;
 import org.apache.ibatis.session.SqlSession;
 
 import java.math.BigDecimal;
@@ -54,5 +56,21 @@ public class AppLife {
             e.printStackTrace();
         }
         return curFoundStatus;
+    }
+
+    public static Boolean insertDealHistory(DealHistory dealHistory) {
+
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IDealHistoryMapper dealHistoryMapper =sqlSession.getMapper(IDealHistoryMapper.class);
+
+            dealHistoryMapper.insertDealHistory(dealHistory);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }

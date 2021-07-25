@@ -58,4 +58,6 @@ public interface IStudentMapper {
     public void setLossStatusByCardNumber(String cardNumber);
 
     public void setFoundStatusByCardNumber(String cardNumber);
+
+
 }
