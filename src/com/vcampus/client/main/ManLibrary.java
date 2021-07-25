@@ -185,7 +185,10 @@ public class ManLibrary extends JFrame {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if(e.getSource()==search){
+                    String bookName = txtfield.getText();
+                    //Search
+                }
             }
         });
         contentPane.add(save);

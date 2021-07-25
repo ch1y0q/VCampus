@@ -1,6 +1,7 @@
 package com.vcampus.client.main;
 
 import com.alee.api.annotations.NotNull;
+import com.vcampus.entity.DealHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 
@@ -28,6 +29,15 @@ public class AppLifeHelper {
                 .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.foundJudge",
                         new Object[]{string}).send())
                 .getReturn(String.class);
+    }
+
+    public static Boolean insertDealHistory(String cardNumber,BigDecimal dealAmount,String dealType) {
+        System.out.println(2);
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.insertDealHistory",
+                        new Object[]{new DealHistory(cardNumber,dealAmount,dealType)}).send())
+                .getReturn(Boolean.class);
+
     }
 
 }

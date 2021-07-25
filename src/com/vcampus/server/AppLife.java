@@ -1,6 +1,8 @@
 package com.vcampus.server;
 
+import com.vcampus.dao.IDealHistoryMapper;
 import com.vcampus.dao.IStudentMapper;
+import com.vcampus.entity.DealHistory;
 import org.apache.ibatis.session.SqlSession;
 
 import java.math.BigDecimal;
@@ -43,6 +45,7 @@ public class AppLife {
     public static String foundJudge(String cardNumber){
         String curFoundStatus="正常";
         try {
+            System.out.println(10);
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
 
@@ -55,4 +58,21 @@ public class AppLife {
         }
         return curFoundStatus;
     }
+
+    public static Boolean insertDealHistory(DealHistory dealHistory) {
+
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IDealHistoryMapper dealHistoryMapper =sqlSession.getMapper(IDealHistoryMapper.class);
+            System.out.println(4);
+            dealHistoryMapper.insertDealHistory(dealHistory);
+            System.out.println(5);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

@@ -229,6 +229,7 @@ public class AppTeaCourse {
                     sp2.setBounds(currentWidth / 50, h + currentHeight / 20, currentWidth * 3 / 5, currentHeight * 3 / 5);
 
                 }
+
             }
         });
 
