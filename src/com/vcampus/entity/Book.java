@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Book implements java.io.Serializable{
 
-    private static String serialVersionUID ;//ISBN号
+    private String serialVersionUID ;//ISBN号
     private String _name;                //书名
     private String _introduction;       //书介绍
     private String _number;             //剩余数量
@@ -39,6 +39,8 @@ public class Book implements java.io.Serializable{
     }
 
     /* setters and getters */
+    public String getSerialVersionUID(){return serialVersionUID;}
+    public void setSerialVersionUID(String serialVersionUID1){this.serialVersionUID=serialVersionUID1;}
     public String getName() {
         return _name;
     }

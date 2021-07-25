@@ -1,10 +1,16 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.LoginUI;
+import com.vcampus.entity.Book;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 /**
  * @author Xiao Kaijie
@@ -15,6 +21,7 @@ public class StuLibrary extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
     private static JPanel jp1,jp2,jp3;
+    private List<Book> list = null;
     public StuLibrary() {
         setResizable(true);
         setTitle("东南大学图书馆");
@@ -24,7 +31,6 @@ public class StuLibrary extends JFrame {
         this.setLayout(null);
         contentPane = new JPanel();
         jp1=new JPanel();
-        jp2=new JPanel();
         jp3=new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -32,9 +38,6 @@ public class StuLibrary extends JFrame {
         contentPane.setLayout(null);
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
-        contentPane.add(jp1);
-        jp2.setLayout(null);
-        jp2.setBackground(new Color(255, 255, 255));
         jp3.setLayout(null);
         jp3.setBackground(new Color(255, 255, 255));
 
@@ -75,9 +78,8 @@ public class StuLibrary extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 int column = table.getSelectedColumn();
                 int row = table.getSelectedRow();
-                /* TODO 需增加判断逻辑*/
                 if (column == 6) {
-                    table.setValueAt("<html><font color='rgb(110,110,110)'>无法续借</font></html>", row, column);
+                    table.setValueAt("<html><font color='rgb(110,110,110)'>成功续借</font></html>", row, column);
                 }
             }
         });
@@ -88,48 +90,7 @@ public class StuLibrary extends JFrame {
         jScrollPane.setBounds(0, 0, 980, 700);
         jp1.add(jScrollPane);
 
-        JTextField txtBookOrIsbn=new JTextField();    //创建文本框
-        txtBookOrIsbn.setText("输入书名或者ISBN号");
-        txtBookOrIsbn.setBounds(0,10,400,30);
-        JButton btnQuery=new JButton("查询");
-        btnQuery.setBounds(420,10,60,30);
-        btnQuery.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO
-            }
-        });
-        String[] header2 = {"ISBN", "书名","作者","作者国籍","剩余数量","出版社","介绍","分类","借阅"};
-        String[][] data2 = {{"", "","","","","", "","","","",""}};
-        DefaultTableModel model2 = new DefaultTableModel(data2,header2);
-        JTable table2 = new JTable(model2)
-        {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                this.setRowSelectionAllowed(false);
-                this.setColumnSelectionAllowed(false);
-                return false;
-            }
-        };
-        table2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int column = table2.getSelectedColumn();
-                int row = table2.getSelectedRow();
-                /* TODO 需增加判断逻辑*/
-                if (column == 6) {
-                    table2.setValueAt("<html><font color='rgb(110,110,110)'>已借</font></html>", row, column);
-                }
-            }
-        });
-        JScrollPane jScrollPane2 = new JScrollPane();
-        jScrollPane2.setViewportView(table2);
-        table2.setGridColor(Color.BLACK);
-        table2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setBounds(0, 50, 980, 700);
-        jp2.add(btnQuery);
-        jp2.add(txtBookOrIsbn);
-        jp2.add(jScrollPane2);
+        jp2=new AppStuLibborrow();
 
         String[] header3 = {"ISBN", "书名","作者","借阅时间","归还时间"};
         String[][] data3 = {{"","","","",""}};
@@ -146,11 +107,12 @@ public class StuLibrary extends JFrame {
         btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
+                if(e.getSource()==btnLogout)
+                {
+                    LoginUI app=new LoginUI();
+                    app.setVisible(true);
+                    setVisible(false);
+                }
             }
         });
         btnLogout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -164,5 +126,23 @@ public class StuLibrary extends JFrame {
         tabbedPane.add("已还图书",jp3);
         tabbedPane.setBounds(200,50,1000,700);
         contentPane.add(tabbedPane);
+
+        list = ResponseUtils.getResponseByHash(
+                new Request(App.connectionToServer, null, "com.vcampus.server.library.AddoneBook.getBorrowedBookList",
+                        new Object[] { App.session.getStudent().getCardNumber() }).send())
+                .getListReturn(Book.class);
+
+        if (list == null || list.size() == 0) {
+            System.out.println("error");
+        } else {
+            model.setRowCount(0);
+            int len = list.size();
+            for (int i = 0; i < len; i++) {
+                Object[] toAdd = { list.get(i).getSerialVersionUID(), list.get(i).getName(), list.get(i).getAuthor(),
+                        list.get(i).get_borrowTime(),"2020-01-01","000" };
+                model.addRow(toAdd);
+            }
+        }
+
     }
 }

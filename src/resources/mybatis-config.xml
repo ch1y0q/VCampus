@@ -45,6 +45,7 @@
         <mapper resource="resources/mapper/teacherMapper.xml" />
         <mapper resource="resources/mapper/adminMapper.xml" />
         <mapper resource="resources/mapper/dealHistoryMapper.xml"/>
+        <mapper resource="resources/mapper/bookMapper.xml"/>
         <!-- <mapper resource="resources/mapper/classMapper.xml" /> -->
     </mappers>
 

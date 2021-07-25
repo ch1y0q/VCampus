@@ -90,8 +90,7 @@
     <select id="fuzzySearchByTitleAndAuthor" parameterType="Book"
             resultType="Book">
         SELECT *FROM tb_book WHERE _name LIKE '%${_name}%' AND
-                author LIKE
-                '%${_author}%'
+                _author LIKE '%${_author}%'
     </select>
 
     <update id="changeBorrowerByISBN" parameterType="Map">
