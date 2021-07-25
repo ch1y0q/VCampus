@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Book implements java.io.Serializable{
 
-    private static final String serialVersionUID = "7-118-01984-4";//ISBN号
+    private static String serialVersionUID ;//ISBN号
     private String _name;                //书名
     private String _introduction;       //书介绍
     private String _number;             //剩余数量
