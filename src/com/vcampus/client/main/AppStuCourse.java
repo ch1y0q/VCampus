@@ -6,8 +6,17 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
+
+import com.vcampus.net.Request;
+import com.vcampus.util.*;
+import com.vcampus.server.teaching.*;
+
 import com.vcampus.entity.*;
+import com.vcampus.server.StudentManage;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class AppStuCourse {
     private JFrame jf = new JFrame("课程管理");
@@ -15,6 +24,10 @@ public class AppStuCourse {
     private int width = 1151;
     private int height = 800;
     private Student student;
+    private DefaultTableModel model0; //课表
+    private DefaultTableModel model1; //选课
+    private DefaultTableModel model2; //已选课
+    private JComboBox chooseSemester0;
     public AppStuCourse(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         width = screenSize.width;
@@ -62,7 +75,7 @@ public class AppStuCourse {
         String[] columnNames0 = {"", "一", "二", "三", "四", "五", "六", "七"};
         String[][] emptyTable = {};
         String[] emptyData = {};
-        DefaultTableModel model0 = new DefaultTableModel(emptyTable, columnNames0);
+        model0 = new DefaultTableModel(emptyTable, columnNames0);
         for (int i = 0; i < 13; i++) {
             model0.addRow(emptyData);
         }
@@ -79,7 +92,7 @@ public class AppStuCourse {
         JLabel semesterLabel0 = new JLabel("学期", JLabel.CENTER);
         semesterLabel0.setBounds(width / 50, height / 40, 40, 30);
         jp0.add(semesterLabel0);
-        JComboBox chooseSemester0 = new JComboBox();
+        chooseSemester0 = new JComboBox();
         String[] semesters = {"2020-2021-1", "2020-2021-2", "2020-2021-3", "2020-2021-4"};
         for (String s : semesters) {
             chooseSemester0.addItem(s);
@@ -99,9 +112,9 @@ public class AppStuCourse {
         sp1.setBorder(BorderFactory.createLineBorder(Color.red, 1));
         sp1.setBackground(Color.white);
         jp1.add(sp1);
-        String[] columnName1={"课程编号","课程名称","学分","教师","上课时间","上课地点",
+        String[] columnName1={"课程编号","课程名称","学期","学分","教师","上课时间","上课地点",
                 "所属专业","课容量","已选学生数量",""};
-        DefaultTableModel model1 = new DefaultTableModel(emptyTable,columnName1);
+        model1 = new DefaultTableModel(emptyTable,columnName1);
         JTable selectCourseTable = new JTable(model1){
             public boolean isCellEditable(int row, int column){
                 this.setRowSelectionAllowed(false);
@@ -114,7 +127,7 @@ public class AppStuCourse {
             model1.addRow(emptyData);
         }
         for (int i = 0; i < 5; i++) {
-            model1.setValueAt("选择", i, 9);
+            model1.setValueAt("选择", i, 10);
         }
 
 
@@ -126,7 +139,7 @@ public class AppStuCourse {
         jp2.add(sp2);
         String[] columnName2={"课程编号","课程名称","学分","教师","上课时间","上课地点",
                 "所属专业","课容量","已选学生数量",""};
-        DefaultTableModel model2 = new DefaultTableModel(emptyTable,columnName2);
+        model2 = new DefaultTableModel(emptyTable,columnName2);
         JTable selectedCourseTable = new JTable(model2){
             public boolean isCellEditable(int row, int column){
                 this.setRowSelectionAllowed(false);
@@ -262,9 +275,19 @@ public class AppStuCourse {
             public void mouseClicked(MouseEvent e) {
                 int column = selectCourseTable.getSelectedColumn();
                 int row = selectCourseTable.getSelectedRow();
-                if(column == 9&&model1.getValueAt(row,column)=="选择"){
+                if(column == 10&&model1.getValueAt(row,column)=="选择"){
                     model1.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>",row,column);
-                    model2.addRow(emptyData);
+                    Object courseId = model1.getValueAt(row,0);
+                    Boolean IsTakeCourse = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                            null,"com.vcampus.server.teaching.CourseSelection.takeCourse",
+                            new Object[] {student,courseId}).send()).getReturn(Boolean.class);
+                    Course course = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                            null,"com.vcampus.server.teaching.CourseSelection.getOneClass",
+                            new Object[] {courseId}).send()).getReturn(Course.class);
+                    String[] courseInfo = {course.getID(),course.getClassName(),course.getSemester(),course.getCredit()
+                            ,course.getTeacher(),course.getTime(),course.getClassroom(),course.getMajor(),course.getCapacity()
+                            ,course.getSelectedNumber(),"退课"};
+                    model2.addRow(courseInfo);
                     for(int i = 0;i<selectedCourseTable.getRowCount();i++){
                         Object n = model2.getValueAt(i,2);
                         if(n!=null){
@@ -306,7 +329,13 @@ public class AppStuCourse {
 
     }
     private void refreshCourseTable(){
+
         List<String> courseIdList = student.getCourses();
+        Object semester = chooseSemester0.getSelectedItem();
+        Iterator<String> iterator = courseIdList.iterator();
+        while(iterator.hasNext()){
+            //Course course =
+        }
     }
     public void close(){
         jf.setVisible(false);
