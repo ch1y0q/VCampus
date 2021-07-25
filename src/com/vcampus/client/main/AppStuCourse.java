@@ -58,7 +58,7 @@ public class AppStuCourse {
         jp1.setBackground(Color.white);
         jp2.setBackground(Color.white);
         jp3.setBackground(Color.white);
-
+        student = App.session.getStudent();
 
         //侧边栏
         JTree jt= new StuCategory().init();
@@ -277,12 +277,13 @@ public class AppStuCourse {
                 int row = selectCourseTable.getSelectedRow();
                 if(column == 10&&model1.getValueAt(row,column)=="选择"){
                     model1.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>",row,column);
-                    Object courseId = model1.getValueAt(row,0);
+                    String courseId = "12345";
+                    //Object courseId = model1.getValueAt(row,0);
                     Boolean IsTakeCourse = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
                             null,"com.vcampus.server.teaching.CourseSelection.takeCourse",
                             new Object[] {student,courseId}).send()).getReturn(Boolean.class);
                     Course course = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
-                            null,"com.vcampus.server.teaching.CourseSelection.getOneClass",
+                            null,"com.vcampus.server.teaching.CourseSelection.getOneCourse",
                             new Object[] {courseId}).send()).getReturn(Course.class);
                     String[] courseInfo = {course.getID(),course.getClassName(),course.getSemester(),course.getCredit()
                             ,course.getTeacher(),course.getTime(),course.getClassroom(),course.getMajor(),course.getCapacity()
