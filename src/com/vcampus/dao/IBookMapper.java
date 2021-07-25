@@ -10,27 +10,27 @@ import java.util.Map;
  */
 public interface IBookMapper {
 
-    public String searchAuthorByTitle(String title);
+    public String searchAuthorByTitle(String _name);
 
-    public List<String> searchByTitle(String title);
+    public List<String> searchByTitle(String _name);
 
-    public int searchHowManyByISBN(String ISBN);
+    public int searchHowManyByISBN(String serialVersionUID);
 
-    public int searchChargableByISBN(String ISBN);
+    public int searchChargableByISBN(String serialVersionUID);
 
-    public Boolean changeChargableByISBN(String ISBN);
+    public Boolean changeChargableByISBN(String serialVersionUID);
 
-    public String searchTitleByISBN(String ISBN);
+    public String searchTitleByISBN(String serialVersionUID);
 
-    public Boolean changeNumberByTitle(String title);
+    public Boolean changeNumberByTitle(String _name);
 
-    public Boolean returnBookByISBN(String ISBN);
+    public Boolean returnBookByISBN(String serialVersionUID);
 
     public List<Book> searchBeBorrowed(String borrower);
 
-    public List<Book> fuzzySearchByTitle(String title);
+    public List<Book> fuzzySearchByTitle(String _name);
 
-    public List<Book> fuzzySearchByAuthor(String author);
+    public List<Book> fuzzySearchByAuthor(String _author);
 
     public List<Book> fuzzySearchByTitleAndAuthor(Book book);
 
@@ -40,17 +40,17 @@ public interface IBookMapper {
 
     public Boolean deleteBook(Book book);
 
-    public String searchPicture(String ISBN);
+    public String searchPicture(String serialVersionUID);
 
     public List<Book> searchHotBook();
 
     public int changeBorrowerByISBN(Map<String, String> map);
 
-    public String getBorrowerByISBN(String ISBN);
+    public String getBorrowerByISBN(String serialVersionUID);
 
     public List<Book> getBorrowedBook(String cardNumber);
 
-    public int checkBorrowTime(String ISBN);
-    public int checkRenewOrNot(String ISBN);
-    public Boolean renewBook(String ISBN);
+    public int checkBorrowTime(String serialVersionUID);
+    public int checkRenewOrNot(String serialVersionUID);
+    public Boolean renewBook(String serialVersionUID);
 }
