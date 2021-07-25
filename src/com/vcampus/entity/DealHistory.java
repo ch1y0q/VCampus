@@ -22,9 +22,14 @@ public class DealHistory {
 
     public DealHistory(String _cardNumber,BigDecimal _dealAmount,String _dealType)
     {
+
         cardNumber=_cardNumber;
         dealAmount=_dealAmount;
         dealType=_dealType;
+        System.out.println(cardNumber);
+        System.out.println(dealTime);
+        System.out.println(dealAmount);
+        System.out.println(dealType);
     }
 
     public Boolean insertDealHistory(Map map){return true;}

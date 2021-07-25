@@ -31,11 +31,13 @@ public class AppLifeHelper {
                 .getReturn(String.class);
     }
 
-    public static BigDecimal insertDealHistory(String cardNumber,BigDecimal dealAmount,String dealType) {
+    public static Boolean insertDealHistory(String cardNumber,BigDecimal dealAmount,String dealType) {
+        System.out.println(2);
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.insertDealHistory",
                         new Object[]{new DealHistory(cardNumber,dealAmount,dealType)}).send())
-                .getReturn(BigDecimal.class);
+                .getReturn(Boolean.class);
+
     }
 
 }

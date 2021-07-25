@@ -190,7 +190,9 @@ public class AppLife extends JFrame {
                     App.session.getStudent().setBalance(result);
                 }
 
-                AppLifeHelper.insertDealHistory(studentCardNumber,balanceAdded,"收入");
+                System.out.println(1);
+                Boolean flag= AppLifeHelper.insertDealHistory(studentCardNumber,balanceAdded,"收入");
+
 
             }
         });

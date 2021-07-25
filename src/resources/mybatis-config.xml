@@ -19,6 +19,7 @@
         <typeAlias type="com.vcampus.entity.Teacher" alias="Teacher" />
         <typeAlias type="com.vcampus.entity.Book" alias="Book" />
         <typeAlias type="com.vcampus.entity.Admin" alias="Admin" />
+        <typeAlias type="com.vcampus.entity.DealHistory" alias="DealHistory" />
     </typeAliases>
 
     <!-- 环境配置 -->
@@ -43,7 +44,8 @@
         <mapper resource="resources/mapper/studentMapper.xml" />
         <mapper resource="resources/mapper/teacherMapper.xml" />
         <mapper resource="resources/mapper/adminMapper.xml" />
-        <mapper resource="resources/mapper/courseMapper.xml" />
+        <mapper resource="resources/mapper/dealHistoryMapper.xml"/>
+        <!-- <mapper resource="resources/mapper/classMapper.xml" /> -->
     </mappers>
 
 </configuration>
