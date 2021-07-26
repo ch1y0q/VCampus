@@ -2,10 +2,14 @@ package com.vcampus.client.main;
 
 import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.DealHistory;
+import com.vcampus.net.Request;
+import com.vcampus.net.Response;
+import com.vcampus.util.ResponseUtils;
 import org.apache.ibatis.jdbc.Null;
 import org.apache.ibatis.session.SqlSession;
 
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -24,6 +28,27 @@ import org.apache.ibatis.session.SqlSession;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import javax.swing.JEditorPane;
+import javax.swing.JTextArea;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+
 /**
  * @author Y
  * @date 2021/7/21
@@ -33,8 +58,12 @@ public class AppLife extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
     private static JPanel jp1, jp2;
+    public List<DealHistory> list =null;
+    public DefaultTableModel model;
 
     public AppLife() {
+
+        System.out.println(1);
 
         String studentCardNumber;
         studentCardNumber = App.session.getStudent().getCardNumber();
@@ -267,17 +296,57 @@ public class AppLife extends JFrame {
         lblWaterBillTable.setBounds(820, 130, 150, 40);
         jp1.add(lblWaterBillTable);
 
+        String[] head ={"时间","金额","类型"};
+        model=new DefaultTableModel(null,head);
+
         JTable tblWaterBill = new JTable(10, 3);
+        tblWaterBill.setModel(model);
         tblWaterBill.setBounds(600, 180, 600, 500);
         tblWaterBill.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblWaterBill.setRowHeight(50);
+        /*
         tblWaterBill.getModel().setValueAt("时间", 0, 0);
         tblWaterBill.getModel().setValueAt("金额", 0, 1);
         tblWaterBill.getModel().setValueAt("属性", 0, 2);
+         */
         DefaultTableCellRenderer rWaterBill = new DefaultTableCellRenderer();
         rWaterBill.setHorizontalAlignment(JLabel.CENTER);
         tblWaterBill.setDefaultRenderer(Object.class, rWaterBill);
         jp1.add(tblWaterBill);
+
+
+        list= ResponseUtils.getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.AppLife.getDealHistory",
+                new Object[]{studentCardNumber}).send()).getListReturn(DealHistory.class);
+
+        model.setRowCount(0);
+        String[][] listData =null;
+        if(list==null){
+            listData =new String[1][3];
+            listData[0][0]="无交易记录..";
+            listData[0][1]=listData[0][2]="";
+        }
+        else{
+            listData = new String[list.size()][3];
+            for(int i=0;i<list.size();i++){
+                listData[i][0]=list.get(i).dealTime;
+                listData[i][1]=String.valueOf(list.get(i).dealAmount);
+                String dealTypeEnglish=list.get(i).dealType;
+                String dealTypeChinese=null;
+                if(dealTypeEnglish.equals("INCOME"))
+                    dealTypeChinese="收入";
+                else if(dealTypeEnglish.equals("OUTCOME"))
+                    dealTypeChinese="支出";
+                else
+                    dealTypeChinese="ERROR";
+                listData[i][2]=dealTypeChinese;
+            }
+        }
+        model=new DefaultTableModel(listData,head){
+            @Override
+            public boolean isCellEditable(int a,int b){return false;}
+        };
+        tblWaterBill.setModel(model);
+
 
         //一卡通部分结束
 

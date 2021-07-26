@@ -5,8 +5,11 @@ import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.DealHistory;
 import org.apache.ibatis.session.SqlSession;
 
+import java.awt.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class AppLife {
     public static BigDecimal chargeCard(HashMap map) {
@@ -75,5 +78,27 @@ public class AppLife {
         }
         return true;
     }
+
+    public static List<DealHistory> getDealHistory(String cardNumber){
+        List<DealHistory> list =new ArrayList<>();
+        SqlSession sqlSession=null;
+        try{
+            sqlSession = App.sqlSessionFactory.openSession();
+            IDealHistoryMapper dealHistoryMapper =sqlSession.getMapper(IDealHistoryMapper.class);
+
+            //DealHistory dealHistory=new DealHistory();
+            //dealHistory.cardNumber=cardNumber;
+
+            list=dealHistoryMapper.getDealHistory(cardNumber);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
 
 }

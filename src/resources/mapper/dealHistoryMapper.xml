@@ -11,5 +11,10 @@
                (#{cardNumber},NOW(),#{dealAmount},#{dealType})
     </insert>
 
+    <select id="getDealHistory" parameterType="String"
+            resultType="DealHistory">
+        SELECT * FROM dealHistory WHERE cardNumber= #{cardNumber} ORDER BY dealTime DESC
+    </select>
+
 
 </mapper>
