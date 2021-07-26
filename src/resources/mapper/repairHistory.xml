@@ -3,10 +3,16 @@
         "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="com.vcampus.dao.IRepairHistoryMapper">
+
     <insert id="insertRepairHistory" parameterType="RepairHistory">
         INSERT INTO `repairHistory`
             (dormAddress,reportTime,reportContent,repairStatus)
         VALUES
             (#{dormAddress},NOW(),#{reportContent},#{repairStatus})
     </insert>
+
+    <select id="getRepairHistory" parameterType="String"
+            resultType="RepairHistory">
+        SELECT * FROM repairHistory WHERE dormAddress= #{dormAddress} ORDER BY reportTime DESC
+    </select>
 </mapper>
