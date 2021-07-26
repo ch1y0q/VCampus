@@ -1,20 +1,31 @@
 package com.vcampus.client.main.StudentInfo;
 
 import com.vcampus.client.main.App;
+import com.vcampus.client.main.IOForImage.ByteArray;
+import com.vcampus.client.main.IOForImage.Client;
+import com.vcampus.client.main.IOForImage.MessageForImage;
 import com.vcampus.client.main.Student.AppStudent;
 import com.vcampus.client.main.Student.StuCategory;
 import com.vcampus.util.StringUtils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
-
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 /**
  * 学生信息界面
  * @author Dong Ruojing
@@ -59,7 +70,7 @@ public class AppStuInfo  extends JFrame {
         contentPane.add(EditButton);
 
 
-                JButton btnLoadPortrait = new JButton("上传头像");//上传头像按钮
+        JButton btnLoadPortrait = new JButton("上传头像");//上传头像按钮
         btnLoadPortrait.setFont(new Font("微软雅黑", Font.BOLD, 14));
         btnLoadPortrait.setBounds(690,375,80,30);
         btnLoadPortrait.setForeground(new Color(58, 51, 168,100));
@@ -311,8 +322,6 @@ public class AppStuInfo  extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-
                 String txtStudentPhoneNumber = txt_8.getText().trim();//获取修改后的电话
                 String txtStudentEmail = txt_9.getText().trim();//获取修改后的邮箱
                 String txtStudentPassword = txt_10.getText().trim();//获取修改后的密码
@@ -340,10 +349,64 @@ public class AppStuInfo  extends JFrame {
                 txt_10.setForeground(Color.GRAY);
                 txt_10.setEditable(false);//密码
                 txt_10.setText("输入重置密码");
+
+
                 JOptionPane.showMessageDialog(null, "保存成功");
 
             }
         });
+
+
+        //上传头像
+        btnLoadPortrait.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //读取图片  修改类型
+                JFileChooser chooser = new JFileChooser();
+                chooser.setSize(510, 327);
+                chooser.setFileFilter(new FileNameExtensionFilter("JPG","jpg"));
+                String imgPath = null;
+                int returnVal = chooser.showOpenDialog(contentPane);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    imgPath = chooser.getSelectedFile().getAbsolutePath();
+                }
+                ByteArray byteArray = new ByteArray();
+                byte[] imageData = null;
+                try {
+                    BufferedImage image = ImageIO.read(new FileInputStream(imgPath));
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(image, "jpg", baos);
+                    imageData = baos.toByteArray();
+                    byteArray.setImageData(imageData);
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
+                //发送图片信息
+                MessageForImage senderMessage = new MessageForImage(studentCardNumber);
+                senderMessage.setByteArray(byteArray);
+
+                try {
+                    MessageForImage messageBack =  new Client().start(senderMessage);
+                    //更新界面的图片
+                    HeadPortrait.setIcon(new ImageIcon(imgPath));
+                    TransLabel.setText("");
+                    bg.setIcon(new ImageIcon(imgPath));
+                 //validate();
+                 contentPane.repaint();//重新绘制实现刷新
+
+
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+
+            }
+        });
+
     }
 
 }
