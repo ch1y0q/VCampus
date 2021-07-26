@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 public class ManLibrarydetailPanel extends JPanel {
     public JTextField txtISBN;
@@ -28,11 +29,25 @@ public class ManLibrarydetailPanel extends JPanel {
         bookadd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                initnow();
+                startedit();
             }
         });
         bookadd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         bookadd.setBounds(0, 0, 150, 30);
         add(bookadd);
+
+        JButton btnSure = new JButton("sure");
+        btnSure.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               addbook();
+            }
+        });
+        btnSure.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnSure.setBounds(480, 0, 150, 30);
+        add(btnSure);
+
 
         JButton edit = new JButton("启动编辑");
         edit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -40,7 +55,7 @@ public class ManLibrarydetailPanel extends JPanel {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                edit();
+                startedit();
             }
         });
         add(edit);
@@ -51,7 +66,7 @@ public class ManLibrarydetailPanel extends JPanel {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                save();
+                if(e.getSource()==save) savechange();
             }
         });
         add(save);
@@ -150,12 +165,12 @@ public class ManLibrarydetailPanel extends JPanel {
     }
     public void init()
     {
-        Book book;
+        Book book=new Book();
         book= ResponseUtils.getResponseByHash(
                 new Request(App.connectionToServer, null, "com.vcampus.server.library.BookServer.searchBookDetail",
-                        new Object[] { "12345" }).send())
+                        new Object[] { "666" }).send())
                 .getReturn(Book.class);
-        txtISBN.setText(book.getSerialVersionUID());
+        txtISBN.setText(book.getISBN());
         txtBook.setText(book.getName());
         txtWriter.setText(book.getAuthor());
         txtCountry.setText(book.getAuthorCountry());
@@ -165,7 +180,7 @@ public class ManLibrarydetailPanel extends JPanel {
         txtPlace.setText(book.getPlace());
         txtIntro.setText(book.getIntroduction());
     }
-    public void edit(){
+    public void startedit(){
         txtISBN.setEditable(true);
         txtBook.setEditable(true);
         txtWriter.setEditable(true);
@@ -176,11 +191,60 @@ public class ManLibrarydetailPanel extends JPanel {
         txtPlace.setEditable(true);
         txtIntro.setEditable(true);
     }
-    public void save(){
+    public void savechange(){
+        String serialVersionUID="666";
 
+        String txtTabs=txtClassify.getText();
+        String txtNum=txtRemain.getText();
+        String txtPla=txtPlace.getText();
+        HashMap<String,String> mapResetTabs = new HashMap<String, String>();
+        mapResetTabs.put("serialVersionUID", serialVersionUID);
+        mapResetTabs.put("_tabs",txtTabs);
+        ManlibdetailHelper.resetTabsByISBN(mapResetTabs);
 
+        HashMap<String,String> mapResetNum = new HashMap<String, String>();
+        mapResetNum.put("serialVersionUID", serialVersionUID);
+        mapResetNum.put("_number",txtNum);
+        ManlibdetailHelper.resetNumByISBN(mapResetNum);
+
+        HashMap<String,String> mapResetPlace = new HashMap<String, String>();
+        mapResetPlace.put("serialVersionUID", serialVersionUID);
+        mapResetPlace.put("_place",txtPla);
+        ManlibdetailHelper.resetPlaceByISBN(mapResetPlace);
     }
     public void addbook(){
-
+        String txt1=txtISBN.getText();
+        String txt2=txtBook.getText();
+        String txt3=txtWriter.getText();
+        String txt4=txtCountry.getText();
+        String txt5=txtPrint.getText();
+        String txt6=txtClassify.getText();
+        String txt7=txtRemain.getText();
+        String txt8=txtPlace.getText();
+        String txt9=txtIntro.getText();
+        Boolean ret = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.library.BookServer.addBook",
+                        new Object[] { txt1, txt2, txt3,
+                                txt4, txt5, txt6,txt7,txt8,txt9 })
+                        .send())
+                .getReturn(Boolean.class);
+        if (ret) {
+            System.out.println("新增成功！");
+        } else {
+            System.out.println("新增失败！");
+        }
     }
+    public void initnow()
+    {
+        txtISBN.setText("");
+        txtBook.setText("");
+        txtWriter.setText("");
+        txtCountry.setText("");
+        txtPrint.setText("");
+        txtClassify.setText("");
+        txtRemain.setText("");
+        txtPlace.setText("");
+        txtIntro.setText("");
+    }
+
 }

@@ -93,7 +93,7 @@ public class StuLibrary extends JFrame {
                         model.setRowCount(0);
                         int len = list.size();
                         for (int i = 0; i < len; i++) {
-                            listData[i][0]=list.get(i).getSerialVersionUID();
+                            listData[i][0]=list.get(i).getISBN();
                             listData[i][1]=list.get(i).getName();
                             listData[i][2]=list.get(i).getAuthor();
                             listData[i][3]=list.get(i).get_borrowTime();
