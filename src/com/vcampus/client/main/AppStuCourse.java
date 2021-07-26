@@ -56,7 +56,6 @@ public class AppStuCourse {
         jp1.setBackground(Color.white);
         jp2.setBackground(Color.white);
         jp3.setBackground(Color.white);
-        student = App.session.getStudent();
 
         //侧边栏
         JTree jt= new StuCategory().init();
@@ -121,12 +120,7 @@ public class AppStuCourse {
             }
         };
         sp1.setViewportView(selectCourseTable);
-        for (int i = 0; i < 5; i++) {
-            model1.addRow(emptyData);
-        }
-        for (int i = 0; i < 5; i++) {
-            model1.setValueAt("选择", i, 10);
-        }
+        refreshSelectCourseTable();
 
 
 
@@ -135,7 +129,7 @@ public class AppStuCourse {
         sp2.setBorder(BorderFactory.createLineBorder(Color.red, 1));
         sp2.setBackground(Color.white);
         jp2.add(sp2);
-        String[] columnName2={"课程编号","课程名称","学分","教师","上课时间","上课地点",
+        String[] columnName2={"课程编号","课程名称","学期","学分","教师","上课时间","上课地点",
                 "所属专业","课容量","已选学生数量",""};
         model2 = new DefaultTableModel(emptyTable,columnName2);
         JTable selectedCourseTable = new JTable(model2){
@@ -150,7 +144,7 @@ public class AppStuCourse {
             model2.addRow(emptyData);
         }
         for (int i = 0; i < 5; i++) {
-            model2.setValueAt("退选", i, 9);
+            model2.setValueAt("退选", i, 10);
         }
         JLabel selectedCreditLabel = new JLabel("已选学分");
         selectedCreditLabel.setBorder(BorderFactory.createLineBorder(Color.black,1));
@@ -275,11 +269,13 @@ public class AppStuCourse {
                 int row = selectCourseTable.getSelectedRow();
                 if(column == 10&&model1.getValueAt(row,column)=="选择"){
                     model1.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>",row,column);
-                    String courseId = "12345";
-                    //Object courseId = model1.getValueAt(row,0);
+                    //String courseId = "12345";
+                    Object courseIdO = model1.getValueAt(row,0);
+                    System.out.println(courseIdO);
+                    String courseId = (String)courseIdO;
                     Boolean IsTakeCourse = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
                             null,"com.vcampus.server.teaching.CourseSelection.takeCourse",
-                            new Object[] {student,courseId}).send()).getReturn(Boolean.class);
+                            new Object[] {App.session.getStudent(),courseId}).send()).getReturn(Boolean.class);
                     Course course = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
                             null,"com.vcampus.server.teaching.CourseSelection.getOneCourse",
                             new Object[] {courseId}).send()).getReturn(Course.class);
@@ -307,7 +303,7 @@ public class AppStuCourse {
             public void mousePressed(MouseEvent e) {
                 int column = selectedCourseTable.getSelectedColumn();
                 int row = selectedCourseTable.getSelectedRow();
-                if(column == 9){
+                if(column == 10){
                     model2.removeRow(row);
 
                     for(int i = 0;i<selectedCourseTable.getRowCount();i++){
@@ -329,12 +325,26 @@ public class AppStuCourse {
     }
     private void refreshCourseTable(){
 
-        List<String> courseIdList = student.getCourses();
+
         Object semester = chooseSemester0.getSelectedItem();
-        Iterator<String> iterator = courseIdList.iterator();
-        while(iterator.hasNext()){
-            //Course course =
+
+
+    }
+    private void refreshSelectCourseTable(){
+        List<Course> list = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null,
+                        "com.vcampus.server.teaching.CourseSelection.getAllCourses",
+                        new Object[] {}).send())
+                .getListReturn(Course.class);
+        ListIterator<Course> iter = list.listIterator();
+        while(iter.hasNext()){
+            Course course = iter.next();
+            String[] courseInfo = {course.getID(),course.getClassName(),course.getSemester(),course.getCredit()
+                    ,course.getTeacher(),course.getTime(),course.getClassroom(),course.getMajor(),course.getCapacity()
+                    ,course.getSelectedNumber(),"选择"};
+            model1.addRow(courseInfo);
         }
+
     }
     public void close(){
         jf.setVisible(false);

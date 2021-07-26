@@ -130,6 +130,17 @@
             `cardNumber`=#{cardNumber}
     </select>
 
+    <select id="getSelectedCourses" parameterType="String"
+            resultType="String">
+        SELECT `selectedCourse` FROM `students` WHERE
+            `cardNumber`=#{cardNumber} LIMIT 1
+    </select>
+
+    <update id="setSelectedCourses" parameterType="Map">
+        UPDATE students
+        SET `selectedCourse` = #{content} WHERE `cardNumber` = #{cardNumber} LIMIT 1
+    </update>
+
 
     <update id="resetPhoneNumber" parameterType="Map">
         UPDATE `students` SET

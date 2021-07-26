@@ -20,6 +20,7 @@
         <typeAlias type="com.vcampus.entity.Book" alias="Book" />
         <typeAlias type="com.vcampus.entity.Admin" alias="Admin" />
         <typeAlias type="com.vcampus.entity.DealHistory" alias="DealHistory" />
+        <typeAlias type="com.vcampus.entity.Course" alias="Course" />
         <typeAlias type="com.vcampus.entity.DormLife" alias="DormLife" />
         <typeAlias type="com.vcampus.entity.RepairHistory" alias="RepairHistory" />
     </typeAliases>
@@ -50,6 +51,7 @@
         <mapper resource="resources/mapper/bookMapper.xml"/>
         <mapper resource="resources/mapper/dormLife.xml"/>
         <mapper resource="resources/mapper/repairHistory.xml"/>
+        <mapper resource="resources/mapper/courseMapper.xml"/>
         <!-- <mapper resource="resources/mapper/classMapper.xml" /> -->
     </mappers>
 

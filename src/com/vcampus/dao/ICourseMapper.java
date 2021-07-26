@@ -29,4 +29,9 @@ public interface ICourseMapper {
     public String getStudentOfOneCourse(String id);
 
     public Boolean updateScoreOfOneCourse(Map map);
+
+    public void setSelectedNumber(Course course);
+
+    public List<Course> getAllCourses();
+
 }

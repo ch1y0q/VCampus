@@ -5,18 +5,18 @@
 <mapper namespace="com.vcampus.dao.ICourseMapper">
     <update id="takeCourse" parameterType="Student">
         UPDATE students SET
-            selected_course=#{courseList} WHERE
+            selectedCourse=#{courseList} WHERE
             cardNumber=#{cardNumber}
     </update>
     <select id="getCourseSelection" parameterType="Student"
             resultType="String">
-        SELECT selected_course FROM `students` WHERE
+        SELECT selectedCourse FROM students WHERE
             cardNumber=#{cardNumber}
     </select>
     <select id="getOneCourse" parameterType="String"
             resultType="Course">
         SELECT `id`,courseName,`time`,`teacher`,`classroom`,
-               `teacherCard` FROM
+               `teacherCard`,`credit`,`semester`,`capacity`,`selectedNumber`,`major`,`students` FROM
             `courses` WHERE id=#{id} LIMIT 1
     </select>
     <select id="getClassOfOneTeacher" parameterType="String"
@@ -44,6 +44,17 @@
         UPDATE courses
         SET `students` = #{content} WHERE `id` = #{classId} LIMIT 1
     </update>
+
+    <update id="setSelectedNumber" parameterType="Course">
+        UPDATE courses SET
+            `selectedNumber`=#{selectedNumber} WHERE
+            `id`=#{id}
+    </update>
+
+    <select id="getAllCourses"
+            resultType="Course">
+        SELECT *FROM courses
+    </select>
 
 
 
