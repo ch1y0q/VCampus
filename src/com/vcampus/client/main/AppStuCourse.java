@@ -15,6 +15,7 @@ import com.vcampus.entity.*;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class AppStuCourse {
     private JFrame jf = new JFrame("课程管理");

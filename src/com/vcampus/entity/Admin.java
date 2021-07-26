@@ -1,5 +1,9 @@
 package com.vcampus.entity;
 
+import java.math.BigDecimal;
+
+import static com.alibaba.fastjson.JSON.toJSONString;
+
 /**
  * @author Huang Qiyue
  * @date 2021-07-12
@@ -10,7 +14,7 @@ public class Admin {
     private String name;
     private String password;
     private String cardNumber;
-    private float balance;
+    private BigDecimal balance;
 
     /* optional */
     private String email;
@@ -18,7 +22,7 @@ public class Admin {
     private String gender;
 
     /* constructor */
-    public Admin(String _name, String _password, String _cardNumber, float _balance) {
+    public Admin(String _name, String _password, String _cardNumber, BigDecimal _balance) {
         name = _name;
         password = _password;
         cardNumber = _cardNumber;
@@ -30,6 +34,7 @@ public class Admin {
         name="";
         cardNumber=_cardNumber;
         password=_password;
+        balance = new BigDecimal(0);
     }
     /* util */
 
@@ -47,7 +52,7 @@ public class Admin {
         return password;
     }
 
-    public void setPassword(String Password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -59,11 +64,11 @@ public class Admin {
         this.cardNumber = cardNumber;
     }
 
-    public float getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
