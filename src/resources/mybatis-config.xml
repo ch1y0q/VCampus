@@ -21,6 +21,7 @@
         <typeAlias type="com.vcampus.entity.Admin" alias="Admin" />
         <typeAlias type="com.vcampus.entity.DealHistory" alias="DealHistory" />
         <typeAlias type="com.vcampus.entity.DormLife" alias="DormLife" />
+        <typeAlias type="com.vcampus.entity.RepairHistory" alias="RepairHistory" />
     </typeAliases>
 
     <!-- 环境配置 -->
@@ -48,6 +49,7 @@
         <mapper resource="resources/mapper/dealHistoryMapper.xml"/>
         <mapper resource="resources/mapper/bookMapper.xml"/>
         <mapper resource="resources/mapper/dormLife.xml"/>
+        <mapper resource="resources/mapper/repairHistory.xml"/>
         <!-- <mapper resource="resources/mapper/classMapper.xml" /> -->
     </mappers>
 

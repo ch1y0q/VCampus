@@ -2,6 +2,7 @@ package com.vcampus.client.main;
 
 import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.DealHistory;
+import com.vcampus.entity.RepairHistory;
 import com.vcampus.net.Request;
 import com.vcampus.net.Response;
 import com.vcampus.util.ResponseUtils;
@@ -69,16 +70,11 @@ public class AppLife extends JFrame {
         String studentBankAccount;
         studentBankAccount = App.session.getStudent().getBankAccount();
 
-
         String studentDormAddress;
         studentDormAddress = ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getDormAddress",
                         new Object[]{studentCardNumber}).send())
                 .getReturn(String.class);
-
-
-
-
 
 
         String lossJudge;
@@ -530,8 +526,21 @@ public class AppLife extends JFrame {
 
         JButton btnDormRepairReport = new JButton("确认报修");
         btnDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jp2.add(btnDormRepairReport);
         btnDormRepairReport.setBounds(380, 479, 110, 35);
+        btnDormRepairReport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String reportContent;
+                reportContent=txtDormRepairReport.getText().trim();
+                String repairStatus="TODO";
+                ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.insertRepairHistory",
+                                new Object[]{new RepairHistory(studentDormAddress,reportContent,repairStatus)}).send())
+                        .getReturn(Boolean.class);
+            }
+        });
+        jp2.add(btnDormRepairReport);
+
 
         JLabel lblDormRepairReportHistory = new JLabel("报修历史");
         lblDormRepairReportHistory.setFont(new Font("微软雅黑", Font.PLAIN, 18));

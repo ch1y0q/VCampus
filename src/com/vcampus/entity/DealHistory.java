@@ -17,7 +17,6 @@ public class DealHistory {
     public String dealTime;
     public BigDecimal dealAmount;
     public String dealType;
-    public int rowOrder;
 
     public DealHistory(){}
 
