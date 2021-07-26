@@ -37,7 +37,7 @@ public class ManLibrarydetailPanel extends JPanel {
         bookadd.setBounds(0, 0, 150, 30);
         add(bookadd);
 
-        JButton btnSure = new JButton("sure");
+        JButton btnSure = new JButton("确认");
         btnSure.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -163,12 +163,12 @@ public class ManLibrarydetailPanel extends JPanel {
         txtIntro.setEditable(false);
         add(txtIntro);
     }
-    public void init()
+    public void init(String ISBN)
     {
         Book book=new Book();
         book= ResponseUtils.getResponseByHash(
                 new Request(App.connectionToServer, null, "com.vcampus.server.library.BookServer.searchBookDetail",
-                        new Object[] { "666" }).send())
+                        new Object[] { ISBN }).send())
                 .getReturn(Book.class);
         txtISBN.setText(book.getISBN());
         txtBook.setText(book.getName());
@@ -192,23 +192,22 @@ public class ManLibrarydetailPanel extends JPanel {
         txtIntro.setEditable(true);
     }
     public void savechange(){
-        String serialVersionUID="666";
-
+        String ISBN=txtISBN.getText();
         String txtTabs=txtClassify.getText();
         String txtNum=txtRemain.getText();
         String txtPla=txtPlace.getText();
         HashMap<String,String> mapResetTabs = new HashMap<String, String>();
-        mapResetTabs.put("serialVersionUID", serialVersionUID);
+        mapResetTabs.put("ISBN", ISBN );
         mapResetTabs.put("_tabs",txtTabs);
         ManlibdetailHelper.resetTabsByISBN(mapResetTabs);
 
         HashMap<String,String> mapResetNum = new HashMap<String, String>();
-        mapResetNum.put("serialVersionUID", serialVersionUID);
+        mapResetNum.put("ISBN", ISBN);
         mapResetNum.put("_number",txtNum);
         ManlibdetailHelper.resetNumByISBN(mapResetNum);
 
         HashMap<String,String> mapResetPlace = new HashMap<String, String>();
-        mapResetPlace.put("serialVersionUID", serialVersionUID);
+        mapResetPlace.put("ISBN", ISBN);
         mapResetPlace.put("_place",txtPla);
         ManlibdetailHelper.resetPlaceByISBN(mapResetPlace);
     }
@@ -224,9 +223,7 @@ public class ManLibrarydetailPanel extends JPanel {
         String txt9=txtIntro.getText();
         Boolean ret = ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.library.BookServer.addBook",
-                        new Object[] { txt1, txt2, txt3,
-                                txt4, txt5, txt6,txt7,txt8,txt9 })
-                        .send())
+                        new Object[] { txt1, txt2, txt3, txt4, txt5, txt6,txt7,txt8,txt9 }).send())
                 .getReturn(Boolean.class);
         if (ret) {
             System.out.println("新增成功！");

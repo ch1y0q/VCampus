@@ -158,7 +158,7 @@ public class AppStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnLibrary)
                 {
-                    ManLibrary app=new ManLibrary();
+                    StuLibrary app=new StuLibrary();
                     setVisible(false);
                     app.setVisible(true);
                 }

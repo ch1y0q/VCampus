@@ -169,7 +169,7 @@ public class ManLibrary extends JFrame {
                 int row = table.getSelectedRow();
                 if (column == 5) {
                     Bookdetail.initnow();
-                    Bookdetail.init();
+                    Bookdetail.init(table.getValueAt(row,0).toString());
                     Bookdetail.setVisible(true);
                 }
             }

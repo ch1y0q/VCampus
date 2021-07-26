@@ -77,14 +77,14 @@ public class AppStuLibborrow extends JPanel {
                 int column = table2.getSelectedColumn();
                 int row = table2.getSelectedRow();
                 if (column == 8) {
-                    table2.setValueAt("<html><font color='rgb(110,110,110)'>已借</font></html>", row, column);
                     int result = ResponseUtils
                             .getResponseByHash(
                                     new Request(App.connectionToServer, null, "com.vcampus.server.library.BookServer.borrowBook",
-                                            new Object[] { App.session.getStudent().getCardNumber(), "12345"}).send())
+                                            new Object[] { App.session.getStudent().getCardNumber(), table2.getValueAt(row,0)}).send())
                             .getReturn(Integer.class);
                     if (result >0 ) {
                         System.out.println("success");
+                        table2.setValueAt("<html><font color='rgb(110,110,110)'>已借</font></html>", row, column);
                     }
                     if (result == 0) {
                         System.out.println("error");

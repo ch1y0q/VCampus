@@ -20,7 +20,7 @@ import java.util.List;
 public class StuLibrary extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
-    private static JPanel jp1,jp2,jp3;
+    private static JPanel jp1,jp2;
     private List<Book> list = null;
     private DefaultTableModel model;
     public StuLibrary() {
@@ -40,7 +40,7 @@ public class StuLibrary extends JFrame {
         jp1.setBackground(new Color(255, 255, 255));
 
         JTree jt= new StuCategory().init();
-        jt.setBounds(0,50,200,600);
+        jt.setBounds(0,60,200,600);
         contentPane.add(jt);
 
         JButton btnBack = new JButton("返回");
@@ -96,9 +96,9 @@ public class StuLibrary extends JFrame {
                             listData[i][0]=list.get(i).getISBN();
                             listData[i][1]=list.get(i).getName();
                             listData[i][2]=list.get(i).getAuthor();
-                            listData[i][3]=list.get(i).get_borrowTime();
+                            listData[i][3]=list.get(i).getBorrowtime();
                             listData[i][4]=list.get(i).getSrTime();
-                            listData[i][5]="";
+                            listData[i][5]="无";
                             listData[i][6]="<html><font color='rgb(110,110,110)'>续借</font></html>";
                         }
                         model = new DefaultTableModel(listData, header){
@@ -120,10 +120,12 @@ public class StuLibrary extends JFrame {
                 if (column == 6) {
                     int result = ResponseUtils
                             .getResponseByHash(new Request(App.connectionToServer, null,
-                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { "8888" }).send())
+                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { table.getValueAt(row,0) }).send())
                             .getReturn(Integer.class);
                     if (result == 0)
-                        System.out.println("error");
+                    {   System.out.println("error");
+                        JOptionPane.showMessageDialog(null,"超时还书 无法续借 请至图书馆及时还书");
+                    }
                     else
                     {
                         System.out.println("noerror");
@@ -163,7 +165,5 @@ public class StuLibrary extends JFrame {
         tabbedPane.add("图书查询借阅",jp2);
         tabbedPane.setBounds(200,50,1000,700);
         contentPane.add(tabbedPane);
-
-
     }
 }

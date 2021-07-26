@@ -18,7 +18,7 @@ public class Book implements java.io.Serializable{
     private String _place;              //摆放位置
     private int chargable=1;
     private String borrower;
-    private String _borrowTime;
+    private String borrowtime;
     private String pictureURL;
     private String srTime;
 
@@ -34,12 +34,12 @@ public class Book implements java.io.Serializable{
         setPlace(null);                        //设置摆放位置
         setChargable(1);
         setBorrower(null);
-        set_borrowTime(null);
+        setBorrowtime(null);
         setPictureURL(null);
         setsrTime(null);
     }
 
-    public Book(String ISBN, String _name, String _introduction, int _number, String _author, String _authorCountry, String _publishingHouse, String _tabs, String _place, int chargable, String borrower, String _borrowTime, String pictureURL, String srTime)
+    public Book(String ISBN, String _name, String _introduction, int _number, String _author, String _authorCountry, String _publishingHouse, String _tabs, String _place, int chargable, String borrower, String borrowtime, String pictureURL, String srTime)
     {
         super();
         this.ISBN = ISBN;
@@ -53,7 +53,7 @@ public class Book implements java.io.Serializable{
         this._place=_place;
         this.chargable=chargable;
         this.borrower=borrower;
-        this._borrowTime=_borrowTime;
+        this.borrowtime = borrowtime;
         this.pictureURL=pictureURL;
         this.srTime=srTime;
     }
@@ -118,7 +118,7 @@ public class Book implements java.io.Serializable{
     }
 
     public String getborrower(){return borrower;}
-    public String get_borrowTime(){return _borrowTime ;}
+    public String getBorrowtime(){return borrowtime;}
     public String getpictureURL(){ return pictureURL;}
     public String getSrTime(){return srTime;}
     public void setsrTime(String srTime){this.srTime=srTime;}
@@ -128,7 +128,7 @@ public class Book implements java.io.Serializable{
     }
     public void setChargable(int chargable){this.chargable=chargable;}
     public void setBorrower(String borrower){this.borrower=borrower;}
-    public void set_borrowTime(String _borrowTime){this._borrowTime=_borrowTime;}
+    public void setBorrowtime(String borrowtime){this.borrowtime = borrowtime;}
     public void setPictureURL(String pictureURL){this.pictureURL=pictureURL;}
 
 }

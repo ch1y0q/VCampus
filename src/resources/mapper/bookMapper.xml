@@ -16,7 +16,7 @@
         <result property="_place" column="_place"/>
         <result property="chargable" column="chargable"/>
         <result property="borrower" column="borrower"/>
-        <result property="_borrowTime" column="_borrowTime"/>
+        <result property="borrowtime" column="borrowtime"/>
         <result property="pictureURL" column="pictureURL"/>
         <result property="srTime" column="srTime"/>
     </resultMap>-->
@@ -27,7 +27,7 @@
     </select>
 
     <update id="changeChargableByISBN" parameterType="String">
-        UPDATE tb_book
+        UPDATE librarybook
         SET _number=_number-1 WHERE ISBN=#{ISBN}
     </update>
 
@@ -58,7 +58,7 @@
 
     <insert id="addBook" parameterType="Book">
         INSERT INTO librarybook
-        (ISBN,_name,_author,_authorCountry,_number,chargable,_publishingHouse,_tabs,_introduction,borrower,_borrowTime,_place,pictureURL,srTime)
+        (ISBN,_name,_author,_authorCountry,_number,chargable,_publishingHouse,_tabs,_introduction,borrower,borrowtime,_place,pictureURL,srTime)
         VALUES(#{ISBN},#{_name},#{_author},#{_authorCountry},#{_number},1,#{_publishingHouse},#{_tabs},#{_introduction},"", "",#{_place},"","")
     </insert>
 
@@ -83,7 +83,7 @@
 
     <select id="searchBookDetail" resultType="Book">
         SELECT
-            `ISBN`,`_name`,`_author`,`_authorCountry`,`_number`,`chargable`,`_publishingHouse`,`_tabs`,`_introduction`,`borrower`,`_borrowTime`,`_place`,`pictureURL` FROM
+            `ISBN`,`_name`,`_author`,`_authorCountry`,`_number`,`chargable`,`_publishingHouse`,`_tabs`,`_introduction`,`borrower`,`borrowtime`,`_place`,`pictureURL` FROM
             librarybook WHERE ISBN=#{ISBN} LIMIT 1
     </select>
 
@@ -129,7 +129,7 @@
 
     <update id="changeBorrowerByISBN" parameterType="Map">
         UPDATE librarybook
-        SET `borrower` = #{borrower} ,chargable=0,_borrowTime=(SELECT CURDATE()), srTime=date_add(CURDATE(),interval 1 MONTH) WHERE ISBN=#{ISBN} AND chargable =1 LIMIT 1
+        SET `borrower` = #{borrower} ,chargable=0,borrowtime=(SELECT CURDATE()), srTime=date_add(CURDATE(),interval 1 MONTH) WHERE ISBN=#{ISBN} AND chargable =1 LIMIT 1
     </update>
 
     <update id="changeTabsByISBN" parameterType="Map">
@@ -156,7 +156,7 @@
     </select>
     <select id="checkBorrowTime" parameterType="String"
             resultType="Integer">
-        SELECT DATEDIFF((SELECT CURDATE()),(SELECT _borrowTime FROM
+        SELECT DATEDIFF((SELECT CURDATE()),(SELECT borrowtime FROM
             librarybook WHERE ISBN=#{ISBN}))
     </select>
 
@@ -167,7 +167,7 @@
 
     <update id="renewBook" parameterType="String">
         UPDATE librarybook
-        SET _borrowTime=(SELECT CURDATE()),srTime=DATE_ADD(SELECT CURDATE(),INTERVAL 1 MONTH) WHERE ISBN=#{ISBN}
+        SET borrowtime=(SELECT CURDATE()),srTime=DATE_ADD(SELECT CURDATE(),INTERVAL 1 MONTH) WHERE ISBN=#{ISBN}
     </update>
 
 </mapper>
