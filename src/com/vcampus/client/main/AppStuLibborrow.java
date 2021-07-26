@@ -52,7 +52,7 @@ public class AppStuLibborrow extends JPanel {
                 } else {
                     for (int i = 0; i < list.size(); i++)
                     {
-                        listData[i][0]=list.get(i).getSerialVersionUID();
+                        listData[i][0]=list.get(i).getISBN();
                         listData[i][1]=list.get(i).getName();
                         listData[i][2]=list.get(i).getAuthor();
                         listData[i][3]=list.get(i).getAuthorCountry();

@@ -1,7 +1,5 @@
 package com.vcampus.entity;
 
-import java.util.ArrayList;
-
 /**
  * Book 类
  * @author Dong Ruojing
@@ -9,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Book implements java.io.Serializable{
 
-    private String serialVersionUID;   //ISBN号
+    private String ISBN;   //ISBN号
     private String _name;                //书名
     private String _introduction;       //书介绍
     private int _number;             //剩余数量
@@ -25,7 +23,7 @@ public class Book implements java.io.Serializable{
     private String srTime;
 
     public Book() {
-        setSerialVersionUID(null);
+        setISBN(null);
         setName(null);                    //设置书名
         setIntroduction(null);              //设置介绍
         setNumber(0);                   //设置剩余数量
@@ -41,10 +39,10 @@ public class Book implements java.io.Serializable{
         setsrTime(null);
     }
 
-    public Book(String serialVersionUID,String _name,String _introduction,int _number,String _author,String _authorCountry,String _publishingHouse,String _tabs,String _place,int chargable,String borrower,String _borrowTime,String pictureURL,String srTime)
+    public Book(String ISBN, String _name, String _introduction, int _number, String _author, String _authorCountry, String _publishingHouse, String _tabs, String _place, int chargable, String borrower, String _borrowTime, String pictureURL, String srTime)
     {
         super();
-        this.serialVersionUID=serialVersionUID;
+        this.ISBN = ISBN;
         this._name=_name;
         this._introduction=_introduction;
         this._number=_number;
@@ -61,8 +59,8 @@ public class Book implements java.io.Serializable{
     }
 
     /* setters and getters */
-    public String getSerialVersionUID(){return serialVersionUID;}
-    public void setSerialVersionUID(String serialVersionUID){this.serialVersionUID=serialVersionUID;}
+    public String getISBN(){return ISBN;}
+    public void setISBN(String ISBN){this.ISBN = ISBN;}
 
 
     public String getName() {

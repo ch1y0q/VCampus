@@ -5,7 +5,7 @@
 <mapper namespace="com.vcampus.dao.IBookMapper">
 
     <!--<resultMap id="book" type="com.vcampus.entity.Book">
-        <result property="serialVersionUID" column="serialVersionUID"/>
+        <result property="ISBN" column="ISBN"/>
         <result property="_name" column="_name"/>
         <result property="_introduction" column="_introduction"/>
         <result property="_number" column="_number"/>
@@ -23,139 +23,151 @@
 
     <select id="searchAuthorByTitle" parameterType="String"
             resultType="String">
-        SELECT `_author` FROM `tb_book` WHERE `_name` = #{_name}
+        SELECT `_author` FROM `librarybook` WHERE `_name` = #{_name}
     </select>
 
     <update id="changeChargableByISBN" parameterType="String">
         UPDATE tb_book
-        SET _number=_number-1 WHERE serialVersionUID=#{serialVersionUID}
+        SET _number=_number-1 WHERE ISBN=#{ISBN}
     </update>
 
     <select id="searchTitleByISBN" parameterType="String"
             resultType="String">
-        SELECT _name from tb_book WHERE serialVersionUID=#{serialVersionUID}  LIMIT 1
+        SELECT _name from librarybook WHERE ISBN=#{ISBN}  LIMIT 1
     </select>
 
     <select id="searchChargableByISBN" parameterType="String"
             resultType="Integer">
-        SELECT _number FROM tb_book WHERE serialVersionUID=#{serialVersionUID} LIMIT 1
+        SELECT _number FROM librarybook WHERE ISBN=#{ISBN} LIMIT 1
     </select>
 
     <update id="changeNumberByTitle" parameterType="String">
-        UPDATE tb_book
+        UPDATE librarybook
         SET _number=_number+1 WHERE _name=#{_name}
     </update>
 
     <select id="searchBeBorrowed" parameterType="String"
             resultType="Book">
-        SELECT * FROM tb_book WHERE borrower=#{borrower}
+        SELECT * FROM librarybook WHERE borrower=#{borrower}
     </select>
 
     <update id="returnBookByISBN" parameterType="String">
-        UPDATE tb_book SET
+        UPDATE librarybook SET
             chargable=1, borrower="" WHERE serialVersionUID=#{serialVersionUID}
     </update>
 
     <insert id="addBook" parameterType="Book">
-        INSERT INTO tb_book
-        (serialVersionUID,_name,_author,_authorCountry,_number,chargable,_publishHouse,_tabs,_introduction,borrower,_borrowTime,_place,pictureURL)
-        VALUES(#{serialVersionUID},#{_name},#{_author},#{_authorCountry},1,1,#{_publishHouse},#{_tabs},#{_introduction},#{borrower}, "2000-01-01",#{_place},#{pictureURL})
+        INSERT INTO librarybook
+        (ISBN,_name,_author,_authorCountry,_number,chargable,_publishingHouse,_tabs,_introduction,borrower,_borrowTime,_place,pictureURL,srTime)
+        VALUES(#{ISBN},#{_name},#{_author},#{_authorCountry},#{_number},1,#{_publishingHouse},#{_tabs},#{_introduction},"", "",#{_place},"","")
     </insert>
 
     <delete id="deleteBook" parameterType="Book">
-        DELETE from tb_book WHERE
-            serialVersionUID=#{serialVersionUID}
+        DELETE from librarybook WHERE
+            ISBN=#{ISBN}
     </delete>
 
     <select id="searchHowManyByISBN" parameterType="String"
             resultType="Integer">
-        SELECT COUNT(*) AS number FROM tb_book WHERE serialVersionUID=#{serialVersionUID}
+        SELECT COUNT(*) AS number FROM librarybook WHERE ISBN=#{ISBN}
     </select>
 
     <select id="searchSimilarBook" parameterType="Book"
             resultType="Book">
-        SELECT DISTINCT `serialVersionUID`,`_name`,`_author`,`_number` AS
+        SELECT DISTINCT `ISBN`,`_name`,`_author`,`_number` AS
             "numofborrowed" FROM
-            tb_book WHERE
+            librarybook WHERE
             _tabs=#{_tabs} AND
             _name!=#{_name} ORDER BY _number DESC LIMIT 2
     </select>
 
     <select id="searchBookDetail" resultType="Book">
         SELECT
-            `serialVersionUID`,`_name`,`_author`,`_authorCountry`,`_number`,`chargable`,`_publishingHouse`,`_tabs`,`_introduction`,`borrower`,`_borrowTime`,`_place`,`pictureURL` FROM
-            tb_book WHERE serialVersionUID=#{serialVersionUID} LIMIT 1
+            `ISBN`,`_name`,`_author`,`_authorCountry`,`_number`,`chargable`,`_publishingHouse`,`_tabs`,`_introduction`,`borrower`,`_borrowTime`,`_place`,`pictureURL` FROM
+            librarybook WHERE ISBN=#{ISBN} LIMIT 1
     </select>
 
     <select id="searchPicture" parameterType="String"
             resultType="String">
-        SELECT pictureURL from tb_book WHERE serialVersionUID=#{serialVersionUID}
+        SELECT pictureURL from librarybook WHERE ISBN=#{ISBN}
     </select>
 
     <select id="searchHotBook" resultType="Book">
         SELECT DISTINCT
             `_name`,`_author`,`_number`AS "numofborrowed",`pictureURL` FROM
-            tb_book
+            librarybook
         ORDER BY _number DESC LIMIT 5
     </select>
 
 
     <select id="fuzzySearchByTitle" parameterType="String"
             resultType="Book">
-        SELECT *FROM tb_book WHERE _name LIKE '%${_name}%'
+        SELECT *FROM librarybook WHERE _name LIKE '%${_name}%'
     </select>
 
     <select id="fuzzySearchByAuthor" parameterType="String"
             resultType="Book">
-        SELECT *FROM tb_book WHERE _author LIKE '%${_author}%'
+        SELECT *FROM librarybook WHERE _author LIKE '%${_author}%'
     </select>
 
     <select id="fuzzySearchByTabs" parameterType="String"
             resultType="Book">
-        SELECT *FROM tb_book WHERE _tabs LIKE '%${_tabs}%'
+        SELECT *FROM librarybook WHERE _tabs LIKE '%${_tabs}%'
     </select>
 
     <select id="fuzzySearchByTitleAndAuthor" parameterType="Book"
             resultType="Book">
-        SELECT *FROM tb_book WHERE _name LIKE '%${_name}%' AND
+        SELECT *FROM librarybook WHERE _name LIKE '%${_name}%' AND
                 _author LIKE '%${_author}%'
     </select>
 
     <select id="fuzzySearchByTitleAndTabs" parameterType="Book"
             resultType="Book">
-        SELECT *FROM tb_book WHERE _name LIKE '%${_name}%' AND
+        SELECT *FROM librarybook WHERE _name LIKE '%${_name}%' AND
             _tabs LIKE '%${_tabs}%'
     </select>
 
     <update id="changeBorrowerByISBN" parameterType="Map">
-        UPDATE tb_book
-        SET `borrower` = #{borrower} ,chargable=0,_borrowTime=(SELECT CURDATE()), srTime=date_add(CURDATE(),interval 1 MONTH) WHERE serialVersionUID=#{serialVersionUID} AND chargable =1 LIMIT 1
+        UPDATE librarybook
+        SET `borrower` = #{borrower} ,chargable=0,_borrowTime=(SELECT CURDATE()), srTime=date_add(CURDATE(),interval 1 MONTH) WHERE ISBN=#{ISBN} AND chargable =1 LIMIT 1
     </update>
 
+    <update id="changeTabsByISBN" parameterType="Map">
+        UPDATE librarybook
+        SET `_tabs` = #{_tabs} WHERE ISBN=#{ISBN}
+    </update>
+    <update id="changeNumByISBN" parameterType="Map">
+        UPDATE librarybook
+        SET `_number` = #{_number} WHERE ISBN=#{ISBN}
+    </update>
+    <update id="changePlaceByISBN" parameterType="Map">
+        UPDATE librarybook
+        SET `_place` = #{_place} WHERE ISBN=#{ISBN}
+    </update>
     <select id="getBorrowerByISBN" parameterType="String"
             resultType="String">
-        SELECT `borrower` FROM `tb_book` WHERE `serialVersionUID` = #{serialVersionUID}
+        SELECT `borrower` FROM `librarybook` WHERE `ISBN` = #{ISBN}
         LIMIT 1
     </select>
 
     <select id="getBorrowedBook" parameterType="String"
             resultType="Book">
-        SELECT * FROM `tb_book` WHERE `borrower` = #{cardNumber}
+        SELECT * FROM `librarybook` WHERE `borrower` = #{cardNumber}
     </select>
     <select id="checkBorrowTime" parameterType="String"
             resultType="Integer">
         SELECT DATEDIFF((SELECT CURDATE()),(SELECT _borrowTime FROM
-            tb_book WHERE serialVersionUID=#{serialVersionUID}))
+            librarybook WHERE ISBN=#{ISBN}))
     </select>
 
     <select id="checkRenewOrNot" parameterType="String"
             resultType="Integer">
-        SELECT _number FROM `tb_book` WHERE serialVersionUID=#{serialVersionUID}
+        SELECT _number FROM `librarybook` WHERE ISBN=#{ISBN}
     </select>
 
     <update id="renewBook" parameterType="String">
-        UPDATE tb_book
-        SET _borrowTime=(SELECT CURDATE()),srTime=DATE_ADD(SELECT CURDATE(),INTERVAL 1 MONTH) WHERE serialVersionUID=#{serialVersionUID}
+        UPDATE librarybook
+        SET _borrowTime=(SELECT CURDATE()),srTime=DATE_ADD(SELECT CURDATE(),INTERVAL 1 MONTH) WHERE ISBN=#{ISBN}
     </update>
 
 </mapper>

@@ -94,7 +94,7 @@ public class ManLibrary extends JFrame {
         txtfield.setBounds(470, 50, 300, 30);
         JButton search = new JButton("查询");
         search.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        search.setBounds(770, 50, 60, 18);
+        search.setBounds(770, 50, 60, 30);
         contentPane.add(txtfield);
         contentPane.add(search);
 
@@ -103,7 +103,7 @@ public class ManLibrary extends JFrame {
         recall.setBounds(850, 50, 200, 30);
         recall.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(recall);
-        String[] recalltxt={"分类","中国文学","外国文学","小说诗歌"};
+        String[] recalltxt={"","1","2","小说诗歌"};
         JComboBox jc=new JComboBox(recalltxt);
         jc.setBounds(1000,50,150,30);
         contentPane.add(jc);
@@ -112,7 +112,7 @@ public class ManLibrary extends JFrame {
         Bookdetail.setBackground(new Color(255, 255, 255));
         Bookdetail.setBounds(800,120,600,350);
         Bookdetail.setVisible(false);
-        Bookdetail.init();
+        contentPane.add(Bookdetail);
 
         String[] header = {"序号","ISBN号", "书籍名称", "剩余数量", "作者","详细信息"};
         model = new DefaultTableModel(null, header);
@@ -130,7 +130,8 @@ public class ManLibrary extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==search)
                 {
-                    String str="";
+                    String str=jc.getSelectedItem().toString();
+                    System.out.println(str);
                     list = ResponseUtils
                             .getResponseByHash(new Request(App.connectionToServer, null,
                                     "com.vcampus.server.library.BookServer.fuzzySearchByTitleAndTabs",
@@ -145,7 +146,7 @@ public class ManLibrary extends JFrame {
                         int len = list.size();
                         for (int i = 0; i < len; i++) {
                             listData[i][0]=String.valueOf(i);
-                            listData[i][1]=list.get(i).getSerialVersionUID();
+                            listData[i][1]=list.get(i).getISBN();
                             listData[i][2]=list.get(i).getName();
                             listData[i][3]=String.valueOf(list.get(i).getNumber());
                             listData[i][4]=list.get(i).getAuthor();
@@ -167,9 +168,9 @@ public class ManLibrary extends JFrame {
                 int column = table.getSelectedColumn();
                 int row = table.getSelectedRow();
                 if (column == 5) {
-                    contentPane.add(Bookdetail);
-                    Bookdetail.setVisible(true);
+                    Bookdetail.initnow();
                     Bookdetail.init();
+                    Bookdetail.setVisible(true);
                 }
             }
         });
