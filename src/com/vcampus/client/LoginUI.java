@@ -121,8 +121,8 @@ public class LoginUI extends JFrame {
         pBody.add(lblUsername);
 
         txtCardNumber = new JTextField();
-        txtCardNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-        txtCardNumber.setBounds(555, 214, 180, 24);
+        txtCardNumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        txtCardNumber.setBounds(555, 212, 180, 26);
         pBody.add(txtCardNumber);
         txtCardNumber.setColumns(8);
 
@@ -132,7 +132,7 @@ public class LoginUI extends JFrame {
 
         txtPassword = new JPasswordField();
         txtPassword.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        txtPassword.setBounds(555, 266, 180, 24);
+        txtPassword.setBounds(555, 265, 180, 26);
         pBody.add(txtPassword);
 
         rdbStudent = new JRadioButton(res.getString("student"));

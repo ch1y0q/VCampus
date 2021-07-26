@@ -1,5 +1,7 @@
 package com.vcampus.client.main.Student;
 
+import com.alee.managers.language.UILanguageManager;
+import com.alee.managers.style.StyleId;
 import com.vcampus.UI.myJLabel;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.AppLife;
@@ -115,13 +117,14 @@ public class AppStudent extends JFrame {
                 }
             }
         });
-        logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        logout.setBounds(1200, 25, 60, 30);
+        logout.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        logout.setBounds(1450,5,50,30);
+        logout.setForeground(new Color(33, 117, 206,100));
         contentPane.add(logout);
 
         myJLabel lblNews = new myJLabel();
         lblNews.setText("每日新闻");
-        lblNews.setBounds(780,500,165,100);
+        lblNews.setBounds(780,470,165,85);
         lblNews.setFont(new Font("微软雅黑", Font.BOLD, 18));
         lblNews.setForeground(new Color(17, 70, 123));
         lblNews.setHorizontalAlignment(SwingConstants.CENTER);
@@ -155,7 +158,14 @@ public class AppStudent extends JFrame {
         });
 
 
-        JButton btnLibrary = new JButton("李文正图书馆");
+        final JButton btnLibrary = new JButton ();//美化，使用weblaf的button
+        btnLibrary.putClientProperty ( StyleId.STYLE_PROPERTY, StyleId.buttonHover );
+        btnLibrary.setText("李文正图书馆");btnLibrary.setBounds(120, 510, 150, 150);
+        btnLibrary.setOpaque(true);
+        btnLibrary.setFont( new Font("微软雅黑", Font.BOLD, 18));
+        btnLibrary.setBackground(new Color(0xDA9E9EF1, true));
+        btnLibrary.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
         btnLibrary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -167,12 +177,17 @@ public class AppStudent extends JFrame {
                 }
             }
         });
-        btnLibrary.setBackground(new Color(255, 255, 240));
-        btnLibrary.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnLibrary.setBounds(120, 600, 220, 80);
         contentPane.add(btnLibrary);
 
-        JButton btnOpencourse = new JButton("生活服务");
+
+        final JButton btnOpencourse = new JButton("生活服务");
+        btnOpencourse.putClientProperty( StyleId.STYLE_PROPERTY, StyleId.buttonHover);
+        btnOpencourse.setBounds(270, 600, 150, 150);
+        btnOpencourse.setOpaque(true);
+        btnOpencourse.setFont( new Font("微软雅黑", Font.BOLD, 18));
+        btnOpencourse.setBackground(new Color(0xDA61A4B8, true));
+        btnOpencourse.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
         btnOpencourse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -184,12 +199,16 @@ public class AppStudent extends JFrame {
                 }
             }
         });
-        //btnOpencourse.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/opencourse.png")));
-        btnOpencourse.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnOpencourse.setBounds(400, 600, 220, 80);
         contentPane.add(btnOpencourse);
 
-        JButton btnShop = new JButton("苏果在线商店");
+        final JButton btnShop = new JButton("苏果在线商店");
+        btnShop.putClientProperty( StyleId.STYLE_PROPERTY, StyleId.buttonHover);
+        btnShop.setBounds(420, 510, 150, 150);
+        btnShop.setOpaque(true);
+        btnShop.setFont( new Font("微软雅黑", Font.BOLD, 18));
+        btnShop.setBackground(new Color(0xDAF1AA7C, true));
+        btnShop.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
         btnShop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -201,12 +220,16 @@ public class AppStudent extends JFrame {
                 }
             }
         });
-        btnShop.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        //btnShop.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/shop.png")));
-        btnShop.setBounds(120, 700, 220, 80);
         contentPane.add(btnShop);
 
-        JButton btnTeaching = new JButton("教务平台");
+        final JButton btnTeaching = new JButton("教务平台");
+        btnTeaching.putClientProperty( StyleId.STYLE_PROPERTY, StyleId.buttonHover);
+        btnTeaching.setBounds(570, 600, 150, 150);
+        btnTeaching.setOpaque(true);
+        btnTeaching.setFont( new Font("微软雅黑", Font.BOLD, 18));
+        btnTeaching.setBackground(new Color(0xDAE76180, true));
+        btnTeaching.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
         btnTeaching.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -218,15 +241,33 @@ public class AppStudent extends JFrame {
                 }
             }
         });
-        btnTeaching.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        //btnTeaching.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/teaching.png")));
-        btnTeaching.setBounds(400, 700, 220, 80);
         contentPane.add(btnTeaching);
 
-        JLabel lblNewLabel_1 = new JLabel("关于我(点击可进行编辑)");
-        lblNewLabel_1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        final JButton btnReport = new JButton("每日上报");
+        btnReport.putClientProperty( StyleId.STYLE_PROPERTY, StyleId.buttonHover);
+        btnReport.setBounds(720, 555, 120, 120);
+        btnReport.setOpaque(true);
+        btnReport.setFont( new Font("微软雅黑", Font.BOLD, 18));
+        btnReport.setBackground(new Color(0xDAEAEC97, true));
+        btnReport.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
+        btnReport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO
+            }
+        });
+        contentPane.add(btnReport);
+
+
+
+        myJLabel lblNewLabel_1 = new myJLabel();
+        lblNewLabel_1.setText("关于我(点击可进行编辑)");
+        lblNewLabel_1.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
+        lblNewLabel_1.setForeground(new Color(21, 85, 151));
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblNewLabel_1.setBounds(1006, 143, 300, 64);
+        lblNewLabel_1.setBounds(1006, 103, 300, 80);
         lblNewLabel_1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -242,12 +283,21 @@ public class AppStudent extends JFrame {
 
         StuInfoPanel jplStuInfo=new StuInfoPanel();
         jplStuInfo.init();
-        jplStuInfo.setBounds(1006,230,350,230);
+        jplStuInfo.setBounds(1006,170,350,230);
         contentPane.add(jplStuInfo);
+
+        myJLabel lblNewLabel_2 = new myJLabel();
+        lblNewLabel_2.setText("今日课程");
+        lblNewLabel_2.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
+        lblNewLabel_2.setForeground(new Color(21, 85, 151));
+        //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
+        lblNewLabel_2.setBounds(1006, 430, 200, 80);
+        contentPane.add(lblNewLabel_2);
 
         StuCoursePanel jplStuCorse=new StuCoursePanel();
         jplStuCorse.init();
-        jplStuCorse.setBounds(1006,500,400,230);
+        jplStuCorse.setBounds(1006,500,350,230);
         contentPane.add(jplStuCorse);
     }
 
