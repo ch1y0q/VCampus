@@ -26,6 +26,21 @@ public class BookServer {
         }
         return result;
     }
+    public static Book searchBookDetail(String serialVersionUID) {
+        Book book =new Book();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
+            book=bookMapper.searchBookDetail(serialVersionUID);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return book;
+    }
 
     public static int borrowBook(String borrower, String serialVersionUID) {
         int result = 0;
@@ -37,17 +52,14 @@ public class BookServer {
             if (TITLE != null)
             {
                 int chargable = bookMapper.searchChargableByISBN(serialVersionUID);
-                result = 1;
-                if (chargable == 1) {
-                    String nowborrower = bookMapper.getBorrowerByISBN(serialVersionUID);
+                System.out.println(chargable);
+                if (chargable >0 ) {
                     bookMapper.changeChargableByISBN(serialVersionUID);
-                    String _name = bookMapper.searchTitleByISBN(serialVersionUID);
-                    bookMapper.changeNumberByTitle(_name);
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("borrower", borrower);
                     map.put("serialVersionUID", serialVersionUID);
                     bookMapper.changeBorrowerByISBN(map);
-                    result = 2;
+                    result = 1;
                 }
             }
             sqlSession.commit();
@@ -75,6 +87,7 @@ public class BookServer {
         return list;
     }
 
+
     public static List<Book> fuzzySearchByTitleAndAuthor(String _name, String _author) {
         List<Book> list = new ArrayList<>();
         SqlSession sqlSession = null;
@@ -96,6 +109,38 @@ public class BookServer {
                 book.setName(_name);
                 book.setAuthor(_author);
                 list = bookMapper.fuzzySearchByTitleAndAuthor(book);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<Book> fuzzySearchByTitleAndTabs(String _name, String _tabs) {
+        List<Book> list = new ArrayList<>();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
+            if (_tabs == null) {
+                list = bookMapper.fuzzySearchByTitle(_name);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            } else if (_name == null) {
+                list = bookMapper.fuzzySearchByTabs(_tabs);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            } else {
+                Book book = new Book();
+                book.setName(_name);
+                book.setTabs(_tabs);
+                list = bookMapper.fuzzySearchByTitleAndTabs(book);
                 sqlSession.commit();
                 sqlSession.close();
                 return list;
@@ -267,13 +312,8 @@ public class BookServer {
             if (result >= 30)
                 result = 0;
             else {
-                int renewornot = bookMapper.checkRenewOrNot(serialVersionUID);
-                if (renewornot == 1)
-                    result = 1;
-                else {
-                    bookMapper.renewBook(serialVersionUID);
-                    result = 2;
-                }
+                bookMapper.renewBook(serialVersionUID);
+                result = 1;
             }
             sqlSession.commit();
             sqlSession.close();

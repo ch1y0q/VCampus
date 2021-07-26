@@ -21,7 +21,7 @@ public class AppStuLibborrow extends JPanel {
         setLayout(null);
         setBackground(new Color(255, 255, 255));
         JTextField txtBookOrIsbn=new JTextField();    //创建文本框
-        txtBookOrIsbn.setText("输入书名或者ISBN号");
+        txtBookOrIsbn.setText("输入书名");
         txtBookOrIsbn.setBounds(0,10,400,30);
         JButton btnQuery=new JButton("查询");
         btnQuery.setBounds(420,10,60,30);
@@ -81,9 +81,9 @@ public class AppStuLibborrow extends JPanel {
                     int result = ResponseUtils
                             .getResponseByHash(
                                     new Request(App.connectionToServer, null, "com.vcampus.server.library.BookServer.borrowBook",
-                                            new Object[] { App.session.getStudent().getCardNumber(), "8888"}).send())
+                                            new Object[] { App.session.getStudent().getCardNumber(), "12345"}).send())
                             .getReturn(Integer.class);
-                    if (result == 2) {
+                    if (result >0 ) {
                         System.out.println("success");
                     }
                     if (result == 0) {

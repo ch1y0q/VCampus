@@ -28,12 +28,15 @@ public interface IBookMapper {
 
     public List<Book> searchBeBorrowed(String borrower);
 
+    public Book searchBookDetail(String serialVersionUID);
+
     public List<Book> fuzzySearchByTitle(String _name);
 
     public List<Book> fuzzySearchByAuthor(String _author);
+    public List<Book> fuzzySearchByTabs(String _tabs);
 
     public List<Book> fuzzySearchByTitleAndAuthor(Book book);
-
+    public List<Book> fuzzySearchByTitleAndTabs(Book book);
     public List<Book> searchSimilarBook(Book book);
 
     public Boolean addBook(Book book);

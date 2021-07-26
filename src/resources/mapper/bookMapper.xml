@@ -3,7 +3,8 @@
         "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="com.vcampus.dao.IBookMapper">
-    <resultMap id="book" type="com.vcampus.entity.Book">
+
+    <!--<resultMap id="book" type="com.vcampus.entity.Book">
         <result property="serialVersionUID" column="serialVersionUID"/>
         <result property="_name" column="_name"/>
         <result property="_introduction" column="_introduction"/>
@@ -17,7 +18,8 @@
         <result property="borrower" column="borrower"/>
         <result property="_borrowTime" column="_borrowTime"/>
         <result property="pictureURL" column="pictureURL"/>
-    </resultMap>
+        <result property="srTime" column="srTime"/>
+    </resultMap>-->
 
     <select id="searchAuthorByTitle" parameterType="String"
             resultType="String">
@@ -26,17 +28,17 @@
 
     <update id="changeChargableByISBN" parameterType="String">
         UPDATE tb_book
-        SET chargable = 0 WHERE serialVersionUID=#{serialVersionUID}
+        SET _number=_number-1 WHERE serialVersionUID=#{serialVersionUID}
     </update>
 
     <select id="searchTitleByISBN" parameterType="String"
             resultType="String">
-        SELECT _name from tb_book WHERE serialVersionUID=#{serialVersionUID}
+        SELECT _name from tb_book WHERE serialVersionUID=#{serialVersionUID}  LIMIT 1
     </select>
 
     <select id="searchChargableByISBN" parameterType="String"
             resultType="Integer">
-        SELECT _number FROM tb_book WHERE serialVersionUID=#{serialVersionUID} AND _number>0
+        SELECT _number FROM tb_book WHERE serialVersionUID=#{serialVersionUID} LIMIT 1
     </select>
 
     <update id="changeNumberByTitle" parameterType="String">
@@ -71,7 +73,7 @@
     </select>
 
     <select id="searchSimilarBook" parameterType="Book"
-            resultMap="book">
+            resultType="Book">
         SELECT DISTINCT `serialVersionUID`,`_name`,`_author`,`_number` AS
             "numofborrowed" FROM
             tb_book WHERE
@@ -79,37 +81,55 @@
             _name!=#{_name} ORDER BY _number DESC LIMIT 2
     </select>
 
+    <select id="searchBookDetail" resultType="Book">
+        SELECT
+            `serialVersionUID`,`_name`,`_author`,`_authorCountry`,`_number`,`chargable`,`_publishingHouse`,`_tabs`,`_introduction`,`borrower`,`_borrowTime`,`_place`,`pictureURL` FROM
+            tb_book WHERE serialVersionUID=#{serialVersionUID} LIMIT 1
+    </select>
+
     <select id="searchPicture" parameterType="String"
             resultType="String">
         SELECT pictureURL from tb_book WHERE serialVersionUID=#{serialVersionUID}
     </select>
 
-    <select id="searchHotBook" resultMap="book">
+    <select id="searchHotBook" resultType="Book">
         SELECT DISTINCT
             `_name`,`_author`,`_number`AS "numofborrowed",`pictureURL` FROM
             tb_book
         ORDER BY _number DESC LIMIT 5
     </select>
 
+
     <select id="fuzzySearchByTitle" parameterType="String"
-            resultMap="book">
+            resultType="Book">
         SELECT *FROM tb_book WHERE _name LIKE '%${_name}%'
     </select>
 
     <select id="fuzzySearchByAuthor" parameterType="String"
-            resultMap="book">
+            resultType="Book">
         SELECT *FROM tb_book WHERE _author LIKE '%${_author}%'
     </select>
 
+    <select id="fuzzySearchByTabs" parameterType="String"
+            resultType="Book">
+        SELECT *FROM tb_book WHERE _tabs LIKE '%${_tabs}%'
+    </select>
+
     <select id="fuzzySearchByTitleAndAuthor" parameterType="Book"
-            resultMap="book">
+            resultType="Book">
         SELECT *FROM tb_book WHERE _name LIKE '%${_name}%' AND
                 _author LIKE '%${_author}%'
     </select>
 
+    <select id="fuzzySearchByTitleAndTabs" parameterType="Book"
+            resultType="Book">
+        SELECT *FROM tb_book WHERE _name LIKE '%${_name}%' AND
+            _tabs LIKE '%${_tabs}%'
+    </select>
+
     <update id="changeBorrowerByISBN" parameterType="Map">
         UPDATE tb_book
-        SET `borrower` = #{borrower} WHERE serialVersionUID=#{serialVersionUID} LIMIT 1
+        SET `borrower` = #{borrower} ,chargable=0,_borrowTime=(SELECT CURDATE()), srTime=date_add(CURDATE(),interval 1 MONTH) WHERE serialVersionUID=#{serialVersionUID} AND chargable =1 LIMIT 1
     </update>
 
     <select id="getBorrowerByISBN" parameterType="String"
@@ -119,7 +139,7 @@
     </select>
 
     <select id="getBorrowedBook" parameterType="String"
-            resultMap="book">
+            resultType="Book">
         SELECT * FROM `tb_book` WHERE `borrower` = #{cardNumber}
     </select>
     <select id="checkBorrowTime" parameterType="String"
@@ -135,8 +155,7 @@
 
     <update id="renewBook" parameterType="String">
         UPDATE tb_book
-        SET _borrowTime=(SELECT CURDATE()) WHERE serialVersionUID=#{serialVersionUID};
-        SET srTime=DATE_ADD(SELECT CURDATE(),1 MONTH) WHERE serialVersionUID=#{serialVersionUID};
+        SET _borrowTime=(SELECT CURDATE()),srTime=DATE_ADD(SELECT CURDATE(),INTERVAL 1 MONTH) WHERE serialVersionUID=#{serialVersionUID}
     </update>
 
 </mapper>
