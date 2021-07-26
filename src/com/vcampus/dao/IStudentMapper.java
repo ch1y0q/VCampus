@@ -59,5 +59,9 @@ public interface IStudentMapper {
 
     public void setFoundStatusByCardNumber(String cardNumber);
 
+    public Boolean resetPhoneNumber(Map map);
 
+    public String getDormAddress(String cardNumber);
+
+    public Boolean resetEmail(Map map);
 }

@@ -1,6 +1,7 @@
 package com.vcampus.server;
 
 import com.vcampus.dao.IDealHistoryMapper;
+import com.vcampus.dao.IDormLifeMapper;
 import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.DealHistory;
 import org.apache.ibatis.session.SqlSession;
@@ -49,7 +50,6 @@ public class AppLife {
     public static String foundJudge(String cardNumber){
         String curFoundStatus="正常";
         try {
-            System.out.println(10);
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
 
@@ -86,8 +86,6 @@ public class AppLife {
             sqlSession = App.sqlSessionFactory.openSession();
             IDealHistoryMapper dealHistoryMapper =sqlSession.getMapper(IDealHistoryMapper.class);
 
-            //DealHistory dealHistory=new DealHistory();
-            //dealHistory.cardNumber=cardNumber;
 
             list=dealHistoryMapper.getDealHistory(cardNumber);
 
@@ -99,6 +97,67 @@ public class AppLife {
         return list;
     }
 
+    public static String getDormAddress(String cardNumber) {
+        String dormAddress="ERROR";
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
 
+            dormAddress=studentMapper.getDormAddress(cardNumber);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dormAddress;
+    }
+
+    public static Integer getDormHygieneMark(HashMap map){
+        int hygienemark = 1000;
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IDormLifeMapper dormLifeMapper=sqlSession.getMapper(IDormLifeMapper.class);
+
+            hygienemark=dormLifeMapper.getHygieneMark(map);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hygienemark;
+    }
+
+    public static float getDormWaterRate(HashMap map) {
+        float waterRate = 1000;
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IDormLifeMapper dormLifeMapper = sqlSession.getMapper(IDormLifeMapper.class);
+
+            waterRate = dormLifeMapper.getWaterRate(map);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return waterRate;
+    }
+        public static float getDormElectricityRate(HashMap map){
+            float electricityRate = 1000;
+            try {
+                SqlSession sqlSession = App.sqlSessionFactory.openSession();
+                IDormLifeMapper dormLifeMapper=sqlSession.getMapper(IDormLifeMapper.class);
+
+                electricityRate=dormLifeMapper.getElectricityRate(map);
+
+                sqlSession.commit();
+                sqlSession.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return electricityRate;
+    }
 
 }
