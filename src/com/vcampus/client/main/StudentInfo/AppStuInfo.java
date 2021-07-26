@@ -1,20 +1,29 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.StudentInfo;
+
+import com.vcampus.client.main.App;
+import com.vcampus.client.main.AppStudent;
+import com.vcampus.client.main.StuCategory;
+import com.vcampus.client.main.StudentInfo.AppStudentInfoHelper;
+import com.vcampus.util.StringUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.util.HashMap;
 
 /**
- * 教师信息界面
+ * 学生信息界面
  * @author Dong Ruojing
  * @date 2021/7/23
  */
-public class AppTeaInfo  extends JFrame {
+public class AppStuInfo  extends JFrame {
     private JPanel contentPane;
-
-    public AppTeaInfo() {
+    public AppStuInfo() {
         setResizable(true);//允许窗口大小更改
         setTitle("个人信息管理");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,8 +36,7 @@ public class AppTeaInfo  extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt=new TeaCategory().init();
-        jt.setBackground(new Color(240, 255, 240));
+        JTree jt= new StuCategory().init();
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 
@@ -37,17 +45,7 @@ public class AppTeaInfo  extends JFrame {
         returnButton.setBounds(220,5,80,30);
         returnButton.setForeground(new Color(33, 117, 206,100));
         contentPane.add(returnButton);
-        returnButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if(e.getSource()==returnButton)
-                {
-                    AppTeacher app=new AppTeacher();
-                    //setVisible(false);
-                    app.setVisible(true);
-                }
-            }
-        });
+
 
         JButton LogoutButton = new JButton("登出");//登出按钮
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
@@ -61,7 +59,8 @@ public class AppTeaInfo  extends JFrame {
         EditButton.setForeground(new Color(58, 51, 168,100));
         contentPane.add(EditButton);
 
-        JButton btnLoadPortrait = new JButton("上传头像");//上传头像按钮
+
+                JButton btnLoadPortrait = new JButton("上传头像");//上传头像按钮
         btnLoadPortrait.setFont(new Font("微软雅黑", Font.BOLD, 14));
         btnLoadPortrait.setBounds(690,375,80,30);
         btnLoadPortrait.setForeground(new Color(58, 51, 168,100));
@@ -74,34 +73,87 @@ public class AppTeaInfo  extends JFrame {
         SaveButton.setForeground(new Color(58, 51, 168,100));
         contentPane.add(SaveButton);
 
+        String studentName = App.session.getStudent().getName();//获取姓名
+        String studentCardNumber = App.session.getStudent().getCardNumber();//获取一卡通号
+        String studentGender = App.session.getStudent().getGender();//获取性别
+        String studentSchool = App.session.getStudent().getSchool();//获取学院
+        String studentEmail = App.session.getStudent().getEmail();//获取邮箱
+        String studentPassword = App.session.getStudent().getPassword();//获取登录密码
+        String studentPhoneNumber = App.session.getStudent().getPhoneNumber();//获取电话号码
+        String studentNumber = App.session.getStudent().getStudentNumber();//获取学号
+        String studentBankAccount = App.session.getStudent().getBankAccount();//获取银行账户
+        BigDecimal studentBalance = App.session.getStudent().getBalance();//获取存款
+
         //输入框
         JTextField txt_1=new JTextField();
         txt_1.setBounds(1130,100,170,40);
+        txt_1.setEditable(false);
+        txt_1.setText(studentName);
+        txt_1.setForeground(Color.GRAY);
         contentPane.add(txt_1);
+
         JTextField txt_2=new JTextField();
         txt_2.setBounds(1130,160,170,40);
+        txt_2.setEditable(false);
+        txt_2.setText(studentCardNumber);
+        txt_2.setForeground(Color.GRAY);
         contentPane.add(txt_2);
+
         JTextField txt_3=new JTextField();
         txt_3.setBounds(1130,220,170,40);
+        txt_3.setEditable(false);
+        txt_3.setText(studentGender);
+        txt_3.setForeground(Color.GRAY);
         contentPane.add(txt_3);
+
         JTextField txt_4=new JTextField();
         txt_4.setBounds(1130,280,170,40);
+        txt_4.setEditable(false);
+        txt_4.setText(studentSchool);
+        txt_4.setForeground(Color.GRAY);
         contentPane.add(txt_4);
+
         JTextField txt_5=new JTextField();
         txt_5.setBounds(1130,340,170,40);
+        txt_5.setEditable(false);
+        txt_5.setText(studentNumber);
+        txt_5.setForeground(Color.GRAY);
         contentPane.add(txt_5);
+
         JTextField txt_6=new JTextField();
         txt_6.setBounds(1130,400,170,40);
+        txt_6.setEditable(false);
+        txt_6.setText(studentBankAccount);
+        txt_6.setForeground(Color.GRAY);
         contentPane.add(txt_6);
+
         JTextField txt_7=new JTextField();
         txt_7.setBounds(1130,460,170,40);
+        txt_7.setEditable(false);
+        txt_7.setText(String.valueOf(studentBalance));
+        txt_7.setForeground(Color.GRAY);
         contentPane.add(txt_7);
+
         JTextField txt_8=new JTextField();
         txt_8.setBounds(1130,520,170,40);
+        txt_8.setEditable(false);
+        txt_8.setText(studentPhoneNumber);
+        txt_8.setForeground(Color.GRAY);
         contentPane.add(txt_8);
+
         JTextField txt_9=new JTextField();
         txt_9.setBounds(1130,580,170,40);
+        txt_9.setEditable(false);
+        txt_9.setText(studentEmail);
+        txt_9.setForeground(Color.GRAY);
         contentPane.add(txt_9);
+
+        JTextField txt_10=new JTextField();
+        txt_10.setBounds(1130,640,170,40);
+        txt_10.setEditable(false);
+        txt_10.setText("输入重置密码");
+        txt_10.setForeground(Color.GRAY);
+        contentPane.add(txt_10);
 
 
         JLabel label = new JLabel("姓名：");
@@ -128,7 +180,7 @@ public class AppTeaInfo  extends JFrame {
         label_2.setBounds(945, 220, 100, 40);
         contentPane.add(label_2);
 
-        JLabel label_3 = new JLabel("电子邮箱：");
+        JLabel label_3 = new JLabel("学院：");
         label_3.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_3.setOpaque(true);
         label_3.setForeground(new Color(19, 188, 210));
@@ -136,7 +188,7 @@ public class AppTeaInfo  extends JFrame {
         label_3.setBounds(945, 280, 100, 40);
         contentPane.add(label_3);
 
-        JLabel label_4 = new JLabel("电话：");
+        JLabel label_4 = new JLabel("学号：");
         label_4.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_4.setOpaque(true);
         label_4.setForeground(new Color(19, 188, 210));
@@ -144,7 +196,7 @@ public class AppTeaInfo  extends JFrame {
         label_4.setBounds(945, 340, 100, 40);
         contentPane.add(label_4);
 
-        JLabel label_5 = new JLabel("身份证号：");
+        JLabel label_5 = new JLabel("银行账户：");
         label_5.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_5.setOpaque(true);
         label_5.setForeground(new Color(19, 188, 210));
@@ -152,7 +204,7 @@ public class AppTeaInfo  extends JFrame {
         label_5.setBounds(945, 400, 100, 40);
         contentPane.add(label_5);
 
-        JLabel label_6 = new JLabel("地址：");
+        JLabel label_6 = new JLabel("账户存款：");
         label_6.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_6.setOpaque(true);
         label_6.setForeground(new Color(19, 188, 210));
@@ -160,7 +212,7 @@ public class AppTeaInfo  extends JFrame {
         label_6.setBounds(945, 460, 100, 40);
         contentPane.add(label_6);
 
-        JLabel label_7 = new JLabel("学院：");
+        JLabel label_7 = new JLabel("电话：");
         label_7.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_7.setOpaque(true);
         label_7.setForeground(new Color(19, 188, 210));
@@ -168,7 +220,7 @@ public class AppTeaInfo  extends JFrame {
         label_7.setBounds(945, 520, 100, 40);
         contentPane.add(label_7);
 
-        JLabel label_8 = new JLabel("职称：");
+        JLabel label_8 = new JLabel("邮箱：");
         label_8.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_8.setOpaque(true);
         label_8.setForeground(new Color(19, 188, 210));
@@ -176,8 +228,15 @@ public class AppTeaInfo  extends JFrame {
         label_8.setBounds(945, 580, 100, 40);
         contentPane.add(label_8);
 
+        JLabel label_9 = new JLabel("登录密码：");
+        label_9.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        label_9.setOpaque(true);
+        label_9.setForeground(new Color(19, 188, 210));
+        label_9.setBackground(new Color(255,255,255,80));
+        label_9.setBounds(945, 640, 100, 40);
+        contentPane.add(label_9);
 
-        JLabel HeadPortrait= new JLabel(new ImageIcon(getClass().getResource("/resources/assets/Teacher/TeaInfo.jpg")));
+        JLabel HeadPortrait= new JLabel(new ImageIcon(getClass().getResource("/resources/assets/Student/StuInfo.jpg")));
         HeadPortrait.setOpaque(true);
         HeadPortrait.setBorder(BorderFactory.createMatteBorder(8,8,8,8,
                 new Color(255, 255, 255, 255)));
@@ -195,10 +254,10 @@ public class AppTeaInfo  extends JFrame {
         TransLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         TransLabel2.setOpaque(true);
         TransLabel2.setBackground(new Color(255,255,255,70));
-        TransLabel2.setBounds(1100, 98, 230, 525);
+        TransLabel2.setBounds(1100, 98, 230, 585);
         contentPane.add(TransLabel2);//先添加的label在最上层
 
-        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/Teacher/TeaInfo.jpg")));
+        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/Student/StuInfo.jpg")));
         bg.setOpaque(true);
         bg.setBounds(220, 50, 600, 700);
         contentPane.add(bg);//背景
@@ -211,7 +270,81 @@ public class AppTeaInfo  extends JFrame {
         contentPane.add(underLabel);//总在最底层，代码段写在最后
 
 
+        //事件响应
+        //返回
+        returnButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==returnButton)
+                {
+                    AppStudent app=new AppStudent();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
+            }
+        });
+
+        txt_1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        //启动编辑
+        EditButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //设置可编辑
+                txt_8.setForeground(Color.BLACK);
+                txt_8.setEditable(true);//电话
+                txt_9.setForeground(Color.BLACK);
+                txt_9.setEditable(true);//邮箱
+                txt_10.setForeground(Color.BLACK);
+                txt_10.setText("");
+                txt_10.setEditable(true);//密码
+
+
+            }
+        });
+
+        //保存
+        SaveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+
+                String txtStudentPhoneNumber = txt_8.getText().trim();//获取修改后的电话
+                String txtStudentEmail = txt_9.getText().trim();//获取修改后的邮箱
+                String txtStudentPassword = txt_10.getText().trim();//获取修改后的密码
+                HashMap<String,String>mapCardNum_StudentPhoneNumber = new HashMap<String, String>();
+                mapCardNum_StudentPhoneNumber.put("cardNumber", studentCardNumber);
+                mapCardNum_StudentPhoneNumber.put("phoneNumber",txtStudentPhoneNumber);
+                AppStudentInfoHelper.resetPhoneNumber(mapCardNum_StudentPhoneNumber);
+
+                HashMap<String,String>mapCardNum_StudentEmail = new HashMap<String, String>();
+                mapCardNum_StudentEmail.put("cardNumber", studentCardNumber);
+                mapCardNum_StudentEmail.put("email",txtStudentEmail );
+                AppStudentInfoHelper.resetEmail(mapCardNum_StudentEmail);
+
+                HashMap<String,String>mapCardNum_StudentPassword = new HashMap<String, String>();
+                mapCardNum_StudentPassword.put("cardNumber", studentCardNumber);
+                System.out.println(StringUtils.MD5EncodeSalted(txtStudentPassword, ""));
+                String tempStudentPassword=StringUtils.MD5EncodeSalted(txtStudentPassword, "");
+                mapCardNum_StudentPassword.put("password", tempStudentPassword);
+                //AppStudentInfoHelper.resetPassword(mapCardNum_StudentPassword);//会超时，待解决
+
+                txt_8.setForeground(Color.GRAY);
+                txt_8.setEditable(false);//电话
+                txt_9.setForeground(Color.GRAY);
+                txt_9.setEditable(false);//邮箱
+                txt_10.setForeground(Color.GRAY);
+                txt_10.setEditable(false);//密码
+                txt_10.setText("输入重置密码");
+                JOptionPane.showMessageDialog(null, "保存成功");
+
+            }
+        });
     }
 
 }
-

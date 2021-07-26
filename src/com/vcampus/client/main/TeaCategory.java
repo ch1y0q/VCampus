@@ -1,5 +1,6 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.main.TeacherInfo.AppTeaInfo;
 import com.vcampus.client.main.shop.AppShop;
 
 import javax.swing.*;
@@ -40,7 +41,7 @@ public class TeaCategory extends JTree {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
                     if(node==nodPersonalInfo){
-                        if(!this.getClass().getName().equals("com.vcampus.client.main.AppTeaInfo"))
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.TeacherInfo.AppTeaInfo"))
                         {
                             AppTeaInfo app=new AppTeaInfo();
                             setVisible(false);
