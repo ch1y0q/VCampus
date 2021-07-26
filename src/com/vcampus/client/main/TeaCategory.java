@@ -1,5 +1,7 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.main.shop.AppShop;
+
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -38,7 +40,7 @@ public class TeaCategory extends JTree {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
                     if(node==nodPersonalInfo){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppTeaInfo")
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.AppTeaInfo"))
                         {
                             AppTeaInfo app=new AppTeaInfo();
                             setVisible(false);
@@ -46,28 +48,28 @@ public class TeaCategory extends JTree {
                         }
                     }
                     else if(node==nodLibrary){
-                        if(this.getClass().getName()!="com.vcampus.client.main.StuLibrary") {
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.StuLibrary")) {
                             StuLibrary app = new StuLibrary();
                             setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodGrades||node==nodChooseCourses){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppStuCourse") {
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.AppStuCourse")) {
                             AppTeaCourse app = new AppTeaCourse();
                             setVisible(false);
                         }
                     }
                     else if(node==nodCard){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppLife") {
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.AppLife")) {
                             AppLife app = new AppLife();
                             setVisible(false);
                             app.setVisible(true);
                         }
                     }
                     else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppShopTeacher") {
-                            AppShopTeacher app = new AppShopTeacher();
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.AppShopTeacher")) {
+                            AppShop app = new AppShop();
                             setVisible(false);
                             app.setVisible(true);
                         }

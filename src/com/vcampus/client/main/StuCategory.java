@@ -1,5 +1,7 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.main.shop.AppShop;
+
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -89,7 +91,7 @@ public class StuCategory extends JTree{
                         }
                     }
                     else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppShop") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.shop.AppShop") {
                             AppShop app = new AppShop();
                             setVisible(false);
                             app.setVisible(true);

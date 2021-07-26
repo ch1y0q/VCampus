@@ -2,8 +2,10 @@ package com.vcampus.server;
 
 import com.vcampus.dao.IDealHistoryMapper;
 import com.vcampus.dao.IDormLifeMapper;
+import com.vcampus.dao.IRepairHistoryMapper;
 import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.DealHistory;
+import com.vcampus.entity.RepairHistory;
 import org.apache.ibatis.session.SqlSession;
 
 import java.awt.*;
@@ -158,6 +160,22 @@ public class AppLife {
                 e.printStackTrace();
             }
             return electricityRate;
+    }
+
+    public static Boolean insertRepairHistory(RepairHistory repairHistory) {
+
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IRepairHistoryMapper repairHistoryMapper=sqlSession.getMapper(IRepairHistoryMapper.class);
+
+            repairHistoryMapper.insertRepairHistory(repairHistory);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
 }

@@ -11,12 +11,12 @@ import com.vcampus.UI.DropShadowBorder;
 public class myJLabel extends JLabel {
     public  myJLabel(){
         DropShadowBorder shadow = new DropShadowBorder();
-        shadow.setShadowSize(20);
+        shadow.setShadowSize(25);
         //shadow.setShadowColor(Color.BLACK);
-       shadow.setShowLeftShadow(true);
+       shadow.setShowLeftShadow(false);
         shadow.setShowRightShadow(true);
         shadow.setShowBottomShadow(true);
-        shadow.setShowTopShadow(true);
+        shadow.setShowTopShadow(false);
        shadow.setShadowColor(new Color(0, 0, 0));
        shadow.setCornerSize(10);//默认12
        shadow.setShadowOpacity((float) 0.85);//透明度为0-1的浮点数

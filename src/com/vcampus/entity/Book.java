@@ -41,9 +41,29 @@ public class Book implements java.io.Serializable{
         setsrTime(null);
     }
 
+    public Book(String serialVersionUID,String _name,String _introduction,int _number,String _author,String _authorCountry,String _publishingHouse,String _tabs,String _place,int chargable,String borrower,String _borrowTime,String pictureURL,String srTime)
+    {
+        super();
+        this.serialVersionUID=serialVersionUID;
+        this._name=_name;
+        this._introduction=_introduction;
+        this._number=_number;
+        this._author=_author;
+        this._authorCountry=_authorCountry;
+        this._publishingHouse=_publishingHouse;
+        this._tabs=_tabs;
+        this._place=_place;
+        this.chargable=chargable;
+        this.borrower=borrower;
+        this._borrowTime=_borrowTime;
+        this.pictureURL=pictureURL;
+        this.srTime=srTime;
+    }
+
     /* setters and getters */
     public String getSerialVersionUID(){return serialVersionUID;}
     public void setSerialVersionUID(String serialVersionUID){this.serialVersionUID=serialVersionUID;}
+
 
     public String getName() {
         return _name;

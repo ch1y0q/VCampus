@@ -1,14 +1,13 @@
 package com.vcampus.client.main;
 
+import com.vcampus.UI.myJLabel;
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.shop.AppShop;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.net.URI;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -22,7 +21,7 @@ public class AppStudent extends JFrame {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     static int index=0;
-    public JLabel selficon=new JLabel("");
+    public myJLabel selficon=new myJLabel();
     private class TimeListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -44,11 +43,18 @@ public class AppStudent extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        JLabel lblVcampus = new JLabel(res.getString("student_main"));
+        lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
+        lblVcampus.setFont(new Font("微软雅黑", Font.BOLD, 40));
+        lblVcampus.setForeground(new Color(0xF70F535F, true));
+        lblVcampus.setBounds(50, 22, 800, 43);
+        contentPane.add(lblVcampus);
+
         JLayeredPane self=new JLayeredPane();
-        self.setBounds(50,50,800,600);
+        self.setBounds(70,50,820,600);
 
         selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic0.jpg")));
-        selficon.setBounds(0,60,800,400);
+        selficon.setBounds(20,60,800,400);
         selficon.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -59,7 +65,7 @@ public class AppStudent extends JFrame {
                 }
             }
         });
-        JButton addphoto=new JButton("prior");
+        JButton addphoto=new JButton("←");
         addphoto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,8 +74,10 @@ public class AppStudent extends JFrame {
                 selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
             }
         });
-        addphoto.setBounds(0,250,100,30);
-        JButton decreasephoto=new JButton("next");
+        addphoto.setBounds(20,241,50,50);
+        addphoto.setFont(new Font("微软雅黑", Font.BOLD, 25));
+        addphoto.setForeground(new Color(0xDA2E2E95, true));
+        JButton decreasephoto=new JButton("→");
         decreasephoto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +86,9 @@ public class AppStudent extends JFrame {
                 selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
             }
         });
-        decreasephoto.setBounds(700,250,100,30);
+        decreasephoto.setBounds(745,240,50,50);
+        decreasephoto.setFont(new Font("微软雅黑", Font.BOLD, 25));
+        decreasephoto.setForeground(new Color(0xDA2E2E95, true));
 
         self.add(addphoto,1);
         self.add(decreasephoto,1);
@@ -88,11 +98,7 @@ public class AppStudent extends JFrame {
         Timer timer=new Timer(5000,new TimeListener());
         timer.start();
 
-        JLabel lblVcampus = new JLabel(res.getString("student_main"));
-        lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
-        lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 43));
-        lblVcampus.setBounds(50, 25, 800, 43);
-        contentPane.add(lblVcampus);
+
 
         JButton logout = new JButton(res.getString("logout"));
         logout.addActionListener(new ActionListener() {
@@ -109,6 +115,42 @@ public class AppStudent extends JFrame {
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         logout.setBounds(1200, 25, 60, 30);
         contentPane.add(logout);
+
+        myJLabel lblNews = new myJLabel();
+        lblNews.setText("每日新闻");
+        lblNews.setBounds(780,500,165,100);
+        lblNews.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        lblNews.setForeground(new Color(17, 70, 123));
+        lblNews.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblNews);
+
+        lblNews.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
 
         JButton btnLibrary = new JButton("李文正图书馆");
         btnLibrary.addActionListener(new ActionListener() {
