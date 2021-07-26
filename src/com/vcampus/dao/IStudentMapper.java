@@ -64,4 +64,6 @@ public interface IStudentMapper {
     public String getDormAddress(String cardNumber);
 
     public Boolean resetEmail(Map map);
+
+    public void setSelectedCourses(Map map);
 }
