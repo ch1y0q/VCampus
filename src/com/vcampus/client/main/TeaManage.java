@@ -1,5 +1,6 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.LoginUI;
 import com.vcampus.client.administrator.main.AppAdmin;
 
 import javax.swing.*;
@@ -67,7 +68,9 @@ public class TeaManage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==logout)
                 {
-
+                    LoginUI app=new LoginUI();
+                    app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });

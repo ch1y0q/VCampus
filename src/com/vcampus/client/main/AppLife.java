@@ -63,13 +63,21 @@ public class AppLife extends JFrame {
 
     public AppLife() {
 
-        System.out.println(1);
-
         String studentCardNumber;
         studentCardNumber = App.session.getStudent().getCardNumber();
 
         String studentBankAccount;
         studentBankAccount = App.session.getStudent().getBankAccount();
+
+
+        String studentDormAddress;
+        studentDormAddress = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getDormAddress",
+                        new Object[]{studentCardNumber}).send())
+                .getReturn(String.class);
+
+
+
 
 
 
@@ -304,11 +312,6 @@ public class AppLife extends JFrame {
         tblWaterBill.setBounds(600, 180, 600, 500);
         tblWaterBill.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblWaterBill.setRowHeight(50);
-        /*
-        tblWaterBill.getModel().setValueAt("时间", 0, 0);
-        tblWaterBill.getModel().setValueAt("金额", 0, 1);
-        tblWaterBill.getModel().setValueAt("属性", 0, 2);
-         */
         DefaultTableCellRenderer rWaterBill = new DefaultTableCellRenderer();
         rWaterBill.setHorizontalAlignment(JLabel.CENTER);
         tblWaterBill.setDefaultRenderer(Object.class, rWaterBill);
@@ -358,7 +361,7 @@ public class AppLife extends JFrame {
         lblDormNum.setBounds(25, 30, 100, 40);
         jp2.add(lblDormNum);
 
-        JLabel lblCurDormNum = new JLabel("M5C2412");
+        JLabel lblCurDormNum = new JLabel(studentDormAddress);
         lblCurDormNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurDormNum.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurDormNum.setBounds(115, 30, 100, 40);
@@ -376,16 +379,40 @@ public class AppLife extends JFrame {
         lblDormHygieneRate.setBounds(50, 160, 150, 40);
         jp2.add(lblDormHygieneRate);
 
+
+        JTextField txtDormHygieneRate = new JTextField();
+        txtDormHygieneRate.setBounds(360, 166, 70, 30);
+        jp2.add(txtDormHygieneRate);
+
         JComboBox cmbDormHygieneRateWeek = new JComboBox();
         for (int i = 1; i < 17; i++) {
             cmbDormHygieneRateWeek.addItem("第" + i + "周");
         }
         cmbDormHygieneRateWeek.setBounds(220, 166, 100, 30);
+        cmbDormHygieneRateWeek.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String weekText=cmbDormHygieneRateWeek.getSelectedItem().toString();
+                int weekNo=Integer.valueOf(weekText.substring(1,2));
+                System.out.println(weekNo);
+
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("dormAddress",studentDormAddress);
+                map.put("weekNo",weekNo);
+
+                int hygieneMark;
+                hygieneMark=ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getDormHygieneMark",
+                                new Object[]{map}).send())
+                        .getReturn(Integer.class);
+
+                txtDormHygieneRate.setText(String.valueOf(hygieneMark));
+            }
+        });
         jp2.add(cmbDormHygieneRateWeek);
 
-        JTextField txtDormHygieneRate = new JTextField();
-        txtDormHygieneRate.setBounds(360, 166, 70, 30);
-        jp2.add(txtDormHygieneRate);
+
 
         JLabel lblDormWaterRate = new JLabel("水费查询");
         lblDormWaterRate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -393,16 +420,38 @@ public class AppLife extends JFrame {
         lblDormWaterRate.setBounds(75, 210, 100, 40);
         jp2.add(lblDormWaterRate);
 
+        JTextField txtDormWaterRate = new JTextField();
+        txtDormWaterRate.setBounds(360, 216, 70, 30);
+        jp2.add(txtDormWaterRate);
+
         JComboBox cmbDormWaterRateMonth = new JComboBox();
         for (int i = 1; i < 13; i++) {
             cmbDormWaterRateMonth.addItem("第" + i + "月");
         }
         cmbDormWaterRateMonth.setBounds(220, 216, 100, 30);
+        cmbDormWaterRateMonth.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String weekText=cmbDormWaterRateMonth.getSelectedItem().toString();
+                int weekNo=Integer.valueOf(weekText.substring(1,2));
+                System.out.println(weekNo);
+
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("dormAddress",studentDormAddress);
+                map.put("weekNo",weekNo);
+
+                BigDecimal waterRate;
+                waterRate=ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getDormWaterRate",
+                                new Object[]{map}).send())
+                        .getReturn(BigDecimal.class);
+
+                txtDormWaterRate.setText(String.valueOf(waterRate));
+            }
+        });
         jp2.add(cmbDormWaterRateMonth);
 
-        JTextField txtDormWaterRate = new JTextField();
-        txtDormWaterRate.setBounds(360, 216, 70, 30);
-        jp2.add(txtDormWaterRate);
+
 
         JLabel lblDormElectricityRate = new JLabel("电费查询");
         lblDormElectricityRate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -410,16 +459,38 @@ public class AppLife extends JFrame {
         lblDormElectricityRate.setBounds(75, 260, 100, 40);
         jp2.add(lblDormElectricityRate);
 
+        JTextField txtDormElectricityRate = new JTextField();
+        txtDormElectricityRate.setBounds(360, 266, 70, 30);
+        jp2.add(txtDormElectricityRate);
+
         JComboBox cmbDormElectricityRateMonth = new JComboBox();
         for (int i = 1; i < 13; i++) {
             cmbDormElectricityRateMonth.addItem("第" + i + "月");
         }
         cmbDormElectricityRateMonth.setBounds(220, 266, 100, 30);
+        cmbDormElectricityRateMonth.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String weekText=cmbDormElectricityRateMonth.getSelectedItem().toString();
+                int weekNo=Integer.valueOf(weekText.substring(1,2));
+                System.out.println(weekNo);
+
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("dormAddress",studentDormAddress);
+                map.put("weekNo",weekNo);
+
+                BigDecimal electricityRate;
+                electricityRate=ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getDormElectricityRate",
+                                new Object[]{map}).send())
+                        .getReturn(BigDecimal.class);
+
+                txtDormElectricityRate.setText(String.valueOf(electricityRate));
+            }
+        });
         jp2.add(cmbDormElectricityRateMonth);
 
-        JTextField txtDormElectricityRate = new JTextField();
-        txtDormElectricityRate.setBounds(360, 266, 70, 30);
-        jp2.add(txtDormElectricityRate);
+
 
         JLabel lblDormRepairReport = new JLabel("宿舍报修");
         lblDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 18));

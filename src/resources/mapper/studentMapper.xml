@@ -124,6 +124,12 @@
         LIMIT 1
     </update>
 
+    <select id="getDormAddress" parameterType="String"
+            resultType="String">
+        SELECT `dormAddress` FROM `students` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
+
 
     <update id="resetPhoneNumber" parameterType="Map">
         UPDATE `students` SET

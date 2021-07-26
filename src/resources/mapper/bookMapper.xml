@@ -41,7 +41,7 @@
 
     <insert id="addBook" parameterType="Book">
         INSERT INTO tb_book
-        (serialVersionUID,_name,_author,_authorCountry,_number,chargable,_publishHouse,_tabs,_introduction,borrower,borrowTime,_place,pictureURL)
+        (serialVersionUID,_name,_author,_authorCountry,_number,chargable,_publishHouse,_tabs,_introduction,borrower,_borrowTime,_place,pictureURL)
         VALUES(#{serialVersionUID},#{_name},#{_author},#{_authorCountry},1,1,#{_publishHouse},#{_tabs},#{_introduction},#{borrower}, "2000-01-01",#{_place},#{pictureURL})
     </insert>
 
@@ -83,7 +83,6 @@
 
     <select id="fuzzySearchByAuthor" parameterType="String"
             resultType="Book">
-
         SELECT *FROM tb_book WHERE _author LIKE '%${_author}%'
     </select>
 

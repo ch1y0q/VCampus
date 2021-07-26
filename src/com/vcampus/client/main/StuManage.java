@@ -1,5 +1,6 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.LoginUI;
 import com.vcampus.client.administrator.main.AppAdmin;
 
 import javax.swing.*;
@@ -66,6 +67,12 @@ public class StuManage extends JFrame{
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==logout)
+                {
+                    LoginUI app=new LoginUI();
+                    app.setVisible(true);
+                    setVisible(false);
+                }
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));

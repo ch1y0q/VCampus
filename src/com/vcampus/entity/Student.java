@@ -29,6 +29,7 @@ public class Student {
     private String gender;
     public String bankAccount;
     private String lossStatus;
+    public String dormAddress;
 
     /* constructor */
     public Student(){}
@@ -153,6 +154,10 @@ public class Student {
     public void setCourseList(String courseList) {
         this.courseList = courseList;
     }
+
+    public String getDormAddress(){return dormAddress;}
+
+    public void setDormAddress(String dormAddress){this.dormAddress=dormAddress;}
 
     /* TODO getScore()  返回该学生某门课程的成绩
     *       dropCourse() 学生退课

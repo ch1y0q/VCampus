@@ -61,5 +61,7 @@ public interface IStudentMapper {
 
     public Boolean resetPhoneNumber(Map map);
 
+    public String getDormAddress(String cardNumber);
+
     public Boolean resetEmail(Map map);
 }

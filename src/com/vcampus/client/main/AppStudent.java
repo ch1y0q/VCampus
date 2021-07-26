@@ -169,7 +169,6 @@ public class AppStudent extends JFrame {
                 {
                     AppStuCourse app=new AppStuCourse();
                     setVisible(false);
-                    app.close();
                 }
             }
         });
