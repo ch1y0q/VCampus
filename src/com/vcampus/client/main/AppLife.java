@@ -1,13 +1,9 @@
 package com.vcampus.client.main;
 
-import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.RepairHistory;
 import com.vcampus.net.Request;
-import com.vcampus.net.Response;
 import com.vcampus.util.ResponseUtils;
-import org.apache.ibatis.jdbc.Null;
-import org.apache.ibatis.session.SqlSession;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -17,37 +13,18 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Objects;
-
-import com.vcampus.dao.IStudentMapper;
-import org.apache.ibatis.session.SqlSession;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JTable;
-import java.awt.event.ActionListener;
 import java.util.List;
-import java.awt.event.ActionEvent;
-import javax.swing.JEditorPane;
-import javax.swing.JTextArea;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 
 /**
@@ -59,8 +36,11 @@ public class AppLife extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
     private static JPanel jp1, jp2;
-    public List<DealHistory> list =null;
-    public DefaultTableModel model;
+    public List<DealHistory> listDealHistory =null;
+    public DefaultTableModel modelDealHistory;
+
+    public List<RepairHistory> listRepairHistory =null;
+    public DefaultTableModel modelRepairHistory;
 
     public AppLife() {
 
@@ -300,11 +280,11 @@ public class AppLife extends JFrame {
         lblWaterBillTable.setBounds(820, 130, 150, 40);
         jp1.add(lblWaterBillTable);
 
-        String[] head ={"时间","金额","类型"};
-        model=new DefaultTableModel(null,head);
+        String[] headModelDealHistory ={"时间","金额","类型"};
+        modelDealHistory =new DefaultTableModel(null,headModelDealHistory);
 
         JTable tblWaterBill = new JTable(10, 3);
-        tblWaterBill.setModel(model);
+        tblWaterBill.setModel(modelDealHistory);
         tblWaterBill.setBounds(600, 180, 600, 500);
         tblWaterBill.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblWaterBill.setRowHeight(50);
@@ -314,22 +294,22 @@ public class AppLife extends JFrame {
         jp1.add(tblWaterBill);
 
 
-        list= ResponseUtils.getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.AppLife.getDealHistory",
+        listDealHistory = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.AppLife.getDealHistory",
                 new Object[]{studentCardNumber}).send()).getListReturn(DealHistory.class);
 
-        model.setRowCount(0);
-        String[][] listData =null;
-        if(list==null){
-            listData =new String[1][3];
-            listData[0][0]="无交易记录..";
-            listData[0][1]=listData[0][2]="";
+        modelDealHistory.setRowCount(0);
+        String[][] listDataDealHistory =null;
+        if(listDealHistory ==null){
+            listDataDealHistory =new String[1][3];
+            listDataDealHistory[0][0]="无交易记录..";
+            listDataDealHistory[0][1]=listDataDealHistory[0][2]="";
         }
         else{
-            listData = new String[list.size()][3];
-            for(int i=0;i<list.size();i++){
-                listData[i][0]=list.get(i).dealTime;
-                listData[i][1]=String.valueOf(list.get(i).dealAmount);
-                String dealTypeEnglish=list.get(i).dealType;
+            listDataDealHistory = new String[listDealHistory.size()][3];
+            for(int i = 0; i< listDealHistory.size(); i++){
+                listDataDealHistory[i][0]= listDealHistory.get(i).dealTime;
+                listDataDealHistory[i][1]=String.valueOf(listDealHistory.get(i).dealAmount);
+                String dealTypeEnglish= listDealHistory.get(i).dealType;
                 String dealTypeChinese=null;
                 if(dealTypeEnglish.equals("INCOME"))
                     dealTypeChinese="收入";
@@ -337,14 +317,14 @@ public class AppLife extends JFrame {
                     dealTypeChinese="支出";
                 else
                     dealTypeChinese="ERROR";
-                listData[i][2]=dealTypeChinese;
+                listDataDealHistory[i][2]=dealTypeChinese;
             }
         }
-        model=new DefaultTableModel(listData,head){
+        modelDealHistory =new DefaultTableModel(listDataDealHistory,headModelDealHistory){
             @Override
             public boolean isCellEditable(int a,int b){return false;}
         };
-        tblWaterBill.setModel(model);
+        tblWaterBill.setModel(modelDealHistory);
 
 
         //一卡通部分结束
@@ -548,19 +528,53 @@ public class AppLife extends JFrame {
         lblDormRepairReportHistory.setBounds(800, 100, 100, 40);
         jp2.add(lblDormRepairReportHistory);
 
+        String[] headModelRepairHistory={"时间","内容","状态"};
+        modelRepairHistory=new DefaultTableModel(null,headModelRepairHistory);
+
         JTable tblDormRepairHistory = new JTable(9, 3);
+        tblDormRepairHistory.setModel(modelRepairHistory);
         tblDormRepairHistory.setBounds(600, 150, 500, 450);
         tblDormRepairHistory.setRowHeight(50);
         tblDormRepairHistory.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        tblDormRepairHistory.getModel().setValueAt("时间", 0, 0);
-        tblDormRepairHistory.getModel().setValueAt("内容", 0, 1);
-        tblDormRepairHistory.getModel().setValueAt("状态", 0, 2);
         DefaultTableCellRenderer rDormRepairHistory = new DefaultTableCellRenderer();
         rDormRepairHistory.setHorizontalAlignment(JLabel.CENTER);
         tblDormRepairHistory.setDefaultRenderer(Object.class, rDormRepairHistory);
         jp2.add(tblDormRepairHistory);
 
+        listRepairHistory = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getRepairHistory",
+                        new Object[]{studentDormAddress}).send())
+                .getListReturn(RepairHistory.class);
+
+        modelRepairHistory.setRowCount(0);
+        String[][] listDataRepairHistory = null;
+        if(listRepairHistory == null){
+            listDataRepairHistory=new String[1][3];
+            listDataRepairHistory[0][0]="无报修记录...";
+            listDataRepairHistory[0][1]=listDataRepairHistory[0][2]="";
+        }
+        else{
+            listDataRepairHistory=new String[listRepairHistory.size()][3];
+            for (int i=0;i<listRepairHistory.size();i++){
+                listDataRepairHistory[i][0]=listRepairHistory.get(i).reportTime;
+                listDataRepairHistory[i][1]=listRepairHistory.get(i).reportContent;
+                String repairStatusEnglish= listRepairHistory.get(i).repairStatus;
+                String repairStatusChinese="ERROR";
+                if(repairStatusEnglish.equals("TODO"))
+                    repairStatusChinese="待修理";
+                else if (repairStatusEnglish.equals("DONE"))
+                    repairStatusChinese="已修理";
+                listDataRepairHistory[i][2]=repairStatusChinese;
+            }
+        }
+        modelRepairHistory=new DefaultTableModel(listDataRepairHistory,headModelRepairHistory){
+            @Override
+            public boolean isCellEditable(int a,int b){return false;}
+        };
+        tblDormRepairHistory.setModel(modelRepairHistory);
+
         //宿舍部分结束
+
 
 
     }

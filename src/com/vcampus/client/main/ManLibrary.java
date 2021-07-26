@@ -1,7 +1,10 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.LoginUI;
 import com.vcampus.client.administrator.main.AppAdmin;
 import com.vcampus.entity.Book;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -22,7 +26,8 @@ import java.util.ResourceBundle;
 public class ManLibrary extends JFrame {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
-
+    private DefaultTableModel model;
+    private List<Book> list = null;
     public ManLibrary() {
         setResizable(true);
         setTitle("图书馆管理");
@@ -38,7 +43,6 @@ public class ManLibrary extends JFrame {
         JTree jt=new ManCategory().init();
         jt.setBounds(0,60,100,400);
         contentPane.add(jt);
-
 
         JButton back = new JButton("返回");
         back.addMouseListener(new MouseAdapter() {
@@ -56,23 +60,9 @@ public class ManLibrary extends JFrame {
         back.setBounds(0, 20, 100, 30);
         contentPane.add(back);
 
-        JButton bookadd = new JButton(res.getString("bookadd"));
-        bookadd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==bookadd)
-                {
-
-                }
-            }
-        });
-        bookadd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        bookadd.setBounds(800, 20, 200, 30);
-        contentPane.add(bookadd);
-
         JLabel tf = new JLabel();
         tf.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        tf.setText("欢迎你:" + "XXX");
+        tf.setText("欢迎你:" + "234");
         tf.setBounds(1000, 20, 180, 30);
         tf.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(tf);
@@ -83,7 +73,9 @@ public class ManLibrary extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==logout)
                 {
-
+                    LoginUI app=new LoginUI();
+                    app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
@@ -98,20 +90,11 @@ public class ManLibrary extends JFrame {
         contentPane.add(bookmanage);
 
         JTextField txtfield = new JTextField();    //创建文本框
-        txtfield.setText("输入书名或者ISBN号");
+        txtfield.setText("输入书名");
         txtfield.setBounds(470, 50, 300, 30);
         JButton search = new JButton("查询");
         search.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        search.setBounds(770, 50, 60, 18);
-        search.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==search)
-                {
-
-                }
-            }
-        });
+        search.setBounds(770, 50, 60, 30);
         contentPane.add(txtfield);
         contentPane.add(search);
 
@@ -120,24 +103,19 @@ public class ManLibrary extends JFrame {
         recall.setBounds(850, 50, 200, 30);
         recall.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(recall);
-        JComboBox jc=new JComboBox();
-        String[] recalltxt={"","中国文学","外国文学","小说诗歌"};
-        for(String s :recalltxt){
-            jc.addItem(s);
-        }
+        String[] recalltxt={"","1","2","小说诗歌"};
+        JComboBox jc=new JComboBox(recalltxt);
         jc.setBounds(1000,50,150,30);
         contentPane.add(jc);
 
         ManLibrarydetailPanel Bookdetail=new ManLibrarydetailPanel();
         Bookdetail.setBackground(new Color(255, 255, 255));
-        Bookdetail.setBounds(1000,210,800,300);
-        Bookdetail.setVisible(true);
-        Bookdetail.init();
+        Bookdetail.setBounds(800,120,600,350);
+        Bookdetail.setVisible(false);
         contentPane.add(Bookdetail);
 
         String[] header = {"序号","ISBN号", "书籍名称", "剩余数量", "作者","详细信息"};
-        String[][] data = {{"", "", "", "", "", ""}};
-        DefaultTableModel model = new DefaultTableModel(data, header);
+        model = new DefaultTableModel(null, header);
         JTable table = new JTable(model)
         {
             @Override
@@ -147,17 +125,52 @@ public class ManLibrary extends JFrame {
                 return false;
             }
         };
+        search.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==search)
+                {
+                    String str=jc.getSelectedItem().toString();
+                    System.out.println(str);
+                    list = ResponseUtils
+                            .getResponseByHash(new Request(App.connectionToServer, null,
+                                    "com.vcampus.server.library.BookServer.fuzzySearchByTitleAndTabs",
+                                    new Object[] { txtfield.getText(),str}).send())
+                            .getListReturn(Book.class);
+                    model.setRowCount(0);
+                    String[][] listData = new String[list.size()][6];
+                    if (list == null || list.size() == 0) {
+                        System.out.println("error");
+                    } else {
+                        model.setRowCount(0);
+                        int len = list.size();
+                        for (int i = 0; i < len; i++) {
+                            listData[i][0]=String.valueOf(i);
+                            listData[i][1]=list.get(i).getISBN();
+                            listData[i][2]=list.get(i).getName();
+                            listData[i][3]=String.valueOf(list.get(i).getNumber());
+                            listData[i][4]=list.get(i).getAuthor();
+                            listData[i][5]="<html><font color='rgb(110,110,110)'>查看</font></html>";
+                        }
+                        model = new DefaultTableModel(listData, header){
+                            public boolean isCellEditable(int a, int b) {
+                                return false;
+                            }
+                        };
+                        table.setModel(model);
+                    }
+                }
+            }
+        });
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int column = table.getSelectedColumn();
                 int row = table.getSelectedRow();
-                /**需增加
-                 * 判断逻辑
-                 * 点击逻辑
-                 */
-                if (column == 6) {
-                    table.setValueAt("<html><font color='rgb(110,110,110)'>查看</font></html>", row, column);
+                if (column == 5) {
+                    Bookdetail.initnow();
+                    Bookdetail.init();
+                    Bookdetail.setVisible(true);
                 }
             }
         });
@@ -167,42 +180,6 @@ public class ManLibrary extends JFrame {
         table.getTableHeader().setReorderingAllowed(false);
         jScrollPane.setBounds(260, 120, 500, 630);
         contentPane.add(jScrollPane);
-
-        JButton edit = new JButton("启动编辑");
-        edit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        edit.setBounds(800, 120, 150, 30);
-        edit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        contentPane.add(edit);
-
-        JButton save = new JButton("保存");
-        save.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        save.setBounds(960, 120, 150, 30);
-        save.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==search){
-                    String bookName = txtfield.getText();
-                    //Search
-                }
-            }
-        });
-        contentPane.add(save);
-
-        JLabel detail=new JLabel("详细信息");
-        detail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        detail.setBounds(800, 180, 100, 30);
-        detail.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(detail);
-
-        JLabel detailicon=new JLabel("");
-        detailicon.setIcon(new ImageIcon());
-        detailicon.setBounds(800,230,180,200);
-        contentPane.add(detailicon);
 
         JLabel Borrow=new JLabel("借书记录");
         Borrow.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -216,7 +193,7 @@ public class ManLibrary extends JFrame {
         jScrollPane2.setViewportView(table2);
         table2.setGridColor(Color.BLACK);
         table2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setBounds(800, 550, 500, 200);
+        jScrollPane2.setBounds(800, 530, 500, 200);
         contentPane.add(jScrollPane2);
 
     }

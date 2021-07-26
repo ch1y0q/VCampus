@@ -1,6 +1,9 @@
 package com.vcampus.client.main;
 
 import com.vcampus.client.LoginUI;
+import com.vcampus.entity.Book;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 /**
  * @author Xiao Kaijie
@@ -19,36 +23,34 @@ import java.awt.event.MouseEvent;
 public class TeaLibrary extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
-    private static JPanel jp1,jp2;
+    private static JPanel jp1,jp2,jp3;
+    private List<Book> list = null;
+    private DefaultTableModel model;
     public TeaLibrary() {
         setResizable(true);
         setTitle("东南大学图书馆");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();//获取屏幕大小
         setSize(d.width, d.height);
         this.setLayout(null);
         contentPane = new JPanel();
         jp1=new JPanel();
-        jp2=new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
-        jp2.setLayout(null);
-        jp2.setBackground(new Color(255, 255, 255));
 
-        JTree jt=new TeaCategory().init();
+        JTree jt= new TeaCategory().init();
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 
-
-        JButton back = new JButton("返回");
-        back.addActionListener(new ActionListener() {
+        JButton btnBack = new JButton("返回");
+        btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==back)
+                if(e.getSource()==btnBack)
                 {
                     AppTeacher app=new AppTeacher();
                     app.setVisible(true);
@@ -56,13 +58,18 @@ public class TeaLibrary extends JFrame {
                 }
             }
         });
-        back.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        back.setBounds(0, 25, 60, 30);
-        contentPane.add(back);
+        btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack.setBounds(0, 25, 60, 30);
+        contentPane.add(btnBack);
+
+        JButton btnSerchborrowed = new JButton("查询");
+
+        btnSerchborrowed.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnSerchborrowed.setBounds(500, 0, 60, 30);
+        jp1.add(btnSerchborrowed);
 
         String[] header = {"ISBN", "书名","作者","借阅时间","应当归还时间","备注","续借"};
-        String[][] data = {{"", "","","","","",""},{"", "","","","","",""}};
-        DefaultTableModel model = new DefaultTableModel(data,header);
+        model = new DefaultTableModel(null,header);
         JTable table = new JTable(model)
         {
             @Override
@@ -72,16 +79,59 @@ public class TeaLibrary extends JFrame {
                 return false;
             }
         };
+
+        btnSerchborrowed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnSerchborrowed)
+                {
+                    list = ResponseUtils.getResponseByHash(
+                            new Request(App.connectionToServer, null, "com.vcampus.server.library.AddoneBook.getBorrowedBookList",
+                                    new Object[] { App.session.getStudent().getCardNumber() }).send())
+                            .getListReturn(Book.class);
+                    String[][] listData = new String[list.size()][7];
+                    if (list == null || list.size() == 0) {
+                        System.out.println("error");
+                    } else {
+                        model.setRowCount(0);
+                        int len = list.size();
+                        for (int i = 0; i < len; i++) {
+                            listData[i][0]=list.get(i).getISBN();
+                            listData[i][1]=list.get(i).getName();
+                            listData[i][2]=list.get(i).getAuthor();
+                            listData[i][3]=list.get(i).get_borrowTime();
+                            listData[i][4]=list.get(i).getSrTime();
+                            listData[i][5]="";
+                            listData[i][6]="<html><font color='rgb(110,110,110)'>续借</font></html>";
+                        }
+                        model = new DefaultTableModel(listData, header){
+                            public boolean isCellEditable(int a, int b) {
+                                return false;
+                            }
+                        };
+                        table.setModel(model);
+                    }
+                }
+            }
+        });
+
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int column = table.getSelectedColumn();
                 int row = table.getSelectedRow();
-                /**需增加
-                 * 判断逻辑
-                 */
                 if (column == 6) {
-                    table.setValueAt("<html><font color='rgb(110,110,110)'>无法续借</font></html>", row, column);
+                    int result = ResponseUtils
+                            .getResponseByHash(new Request(App.connectionToServer, null,
+                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { "8888" }).send())
+                            .getReturn(Integer.class);
+                    if (result == 0)
+                        System.out.println("error");
+                    else
+                    {
+                        System.out.println("noerror");
+                        table.setValueAt("<html><font color='rgb(110,110,110)'>成功续借</font></html>", row, column);
+                    }
                 }
             }
         });
@@ -89,60 +139,16 @@ public class TeaLibrary extends JFrame {
         jScrollPane.setViewportView(table);
         table.setGridColor(Color.BLACK);
         table.getTableHeader().setReorderingAllowed(false);
-        jScrollPane.setBounds(0, 0, 980, 700);
+        jScrollPane.setBounds(0, 30, 980, 700);
         jp1.add(jScrollPane);
 
-        JTextField txtfield1=new JTextField();    //创建文本框
-        txtfield1.setText("输入书名或者ISBN号");
-        txtfield1.setBounds(0,10,400,30);
-        JButton search=new JButton("查询");
-        search.setBounds(420,10,60,30);
-        search.addActionListener(new ActionListener() {
+        jp2=new AppStuLibborrow();
+
+        JButton btnLogout = new JButton("登出");
+        btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        String[] header2 = {"ISBN", "书名","作者","作者国籍","剩余数量","出版社","介绍","分类","借阅"};
-        String[][] data2 = {{"", "","","","","", "","","","",""}};
-        DefaultTableModel model2 = new DefaultTableModel(data2,header2);
-        JTable table2 = new JTable(model2)
-        {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                this.setRowSelectionAllowed(false);
-                this.setColumnSelectionAllowed(false);
-                return false;
-            }
-        };
-        table2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int column = table2.getSelectedColumn();
-                int row = table2.getSelectedRow();
-                /**需增加
-                 * 判断逻辑
-                 */
-                if (column == 6) {
-                    table2.setValueAt("<html><font color='rgb(110,110,110)'>已借</font></html>", row, column);
-                }
-            }
-        });
-        JScrollPane jScrollPane2 = new JScrollPane();
-        jScrollPane2.setViewportView(table2);
-        table2.setGridColor(Color.BLACK);
-        table2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setBounds(0, 50, 980, 700);
-        jp2.add(search);
-        jp2.add(txtfield1);
-        jp2.add(jScrollPane2);
-
-
-        JButton logout = new JButton("登出");
-        logout.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==logout)
+                if(e.getSource()==btnLogout)
                 {
                     LoginUI app=new LoginUI();
                     app.setVisible(true);
@@ -150,14 +156,17 @@ public class TeaLibrary extends JFrame {
                 }
             }
         });
-        logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        logout.setBounds(1200, 25, 60, 30);
-        contentPane.add(logout);
+        btnLogout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnLogout.setBounds(1200, 25, 60, 30);
+        contentPane.add(btnLogout);
 
+        // 创建选项卡面板
         tabbedPane = new JTabbedPane();
         tabbedPane.add("已借图书",jp1);
         tabbedPane.add("图书查询借阅",jp2);
         tabbedPane.setBounds(200,50,1000,700);
         contentPane.add(tabbedPane);
+
+
     }
 }

@@ -1,5 +1,7 @@
 package com.vcampus.client.main;
 
+import com.vcampus.util.StringUtils;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -145,7 +147,7 @@ public class AppStuInfo  extends JFrame {
         JTextField txt_10=new JTextField();
         txt_10.setBounds(1130,640,170,40);
         txt_10.setEditable(false);
-        txt_10.setText(studentPassword);
+        txt_10.setText("输入重置密码");
         txt_10.setForeground(Color.GRAY);
         contentPane.add(txt_10);
 
@@ -294,6 +296,7 @@ public class AppStuInfo  extends JFrame {
                 txt_9.setForeground(Color.BLACK);
                 txt_9.setEditable(true);//邮箱
                 txt_10.setForeground(Color.BLACK);
+                txt_10.setText("");
                 txt_10.setEditable(true);//密码
 
 
@@ -305,12 +308,7 @@ public class AppStuInfo  extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                txt_8.setForeground(Color.GRAY);
-                txt_8.setEditable(false);//电话
-                txt_9.setForeground(Color.GRAY);
-                txt_9.setEditable(false);//邮箱
-                txt_10.setForeground(Color.GRAY);
-                txt_10.setEditable(false);//密码
+
 
                 String txtStudentPhoneNumber = txt_8.getText().trim();//获取修改后的电话
                 String txtStudentEmail = txt_9.getText().trim();//获取修改后的邮箱
@@ -325,6 +323,20 @@ public class AppStuInfo  extends JFrame {
                 mapCardNum_StudentEmail.put("email",txtStudentEmail );
                 AppStudentInfoHelper.resetEmail(mapCardNum_StudentEmail);
 
+                HashMap<String,String>mapCardNum_StudentPassword = new HashMap<String, String>();
+                mapCardNum_StudentPassword.put("cardNumber", studentCardNumber);
+                System.out.println(StringUtils.MD5EncodeSalted(txtStudentPassword, ""));
+                String tempStudentPassword=StringUtils.MD5EncodeSalted(txtStudentPassword, "");
+                mapCardNum_StudentPassword.put("password", tempStudentPassword);
+                //AppStudentInfoHelper.resetPassword(mapCardNum_StudentPassword);//会超时，待解决
+
+                txt_8.setForeground(Color.GRAY);
+                txt_8.setEditable(false);//电话
+                txt_9.setForeground(Color.GRAY);
+                txt_9.setEditable(false);//邮箱
+                txt_10.setForeground(Color.GRAY);
+                txt_10.setEditable(false);//密码
+                txt_10.setText("输入重置密码");
                 JOptionPane.showMessageDialog(null, "保存成功");
 
             }

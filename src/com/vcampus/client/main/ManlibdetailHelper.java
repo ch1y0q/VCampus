@@ -1,41 +1,30 @@
 package com.vcampus.client.main;
 
-import com.alee.api.annotations.NotNull;
+import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 
-/**
- * 将哈希表和学生信息连接起来
- * @author Dong Ruojing
- * @date 2021/7/26
- */
-public class AppStudentInfoHelper {
-    @NotNull
-    //修改电话
-    public static Boolean resetPhoneNumber(HashMap map) {
+public class ManlibdetailHelper {
+    public static Boolean resetTabsByISBN(HashMap map) {
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer,
-                        null, "com.vcampus.server.AppStuInfo.resetPhoneNumber",
+                        null, "com.vcampus.server.library.BookServer.resetTabsByISBN",
                         new Object[]{map}).send())
                 .getReturn(Boolean.class);
     }
-
-    //修改邮箱
-    public static Boolean resetEmail(HashMap map) {
+    public static Boolean resetNumByISBN(HashMap map) {
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer,
-                        null, "com.vcampus.server.AppStuInfo.resetEmail",
+                        null, "com.vcampus.server.library.BookServer.resetNumByISBN",
                         new Object[]{map}).send())
                 .getReturn(Boolean.class);
     }
-    //修改密码
-    public static Boolean resetPassword(HashMap map){
+    public static Boolean resetPlaceByISBN(HashMap map) {
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer,
-                        null, "com.vcampus.server.AppStuInfo.resetPassword",
+                        null, "com.vcampus.server.library.BookServer.resetPlaceByISBN",
                         new Object[]{map}).send())
                 .getReturn(Boolean.class);
     }

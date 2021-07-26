@@ -15,6 +15,7 @@ public class AddoneBook {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
             result = bookMapper.getBorrowedBook(cardNumber);
+            System.out.println(result);
             sqlSession.commit();
             sqlSession.close();
         } catch (Exception e) {

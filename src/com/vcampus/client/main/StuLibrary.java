@@ -32,15 +32,12 @@ public class StuLibrary extends JFrame {
         this.setLayout(null);
         contentPane = new JPanel();
         jp1=new JPanel();
-        jp3=new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
-        jp3.setLayout(null);
-        jp3.setBackground(new Color(255, 255, 255));
 
         JTree jt= new StuCategory().init();
         jt.setBounds(0,50,200,600);
@@ -96,7 +93,7 @@ public class StuLibrary extends JFrame {
                         model.setRowCount(0);
                         int len = list.size();
                         for (int i = 0; i < len; i++) {
-                            listData[i][0]=list.get(i).getSerialVersionUID();
+                            listData[i][0]=list.get(i).getISBN();
                             listData[i][1]=list.get(i).getName();
                             listData[i][2]=list.get(i).getAuthor();
                             listData[i][3]=list.get(i).get_borrowTime();
@@ -127,9 +124,7 @@ public class StuLibrary extends JFrame {
                             .getReturn(Integer.class);
                     if (result == 0)
                         System.out.println("error");
-                    if (result == 1)
-                        System.out.println("error1");
-                    if (result == 2)
+                    else
                     {
                         System.out.println("noerror");
                         table.setValueAt("<html><font color='rgb(110,110,110)'>成功续借</font></html>", row, column);

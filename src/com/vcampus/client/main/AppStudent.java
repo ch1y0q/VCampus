@@ -158,7 +158,7 @@ public class AppStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnLibrary)
                 {
-                    StuLibrary app=new StuLibrary();
+                    ManLibrary app=new ManLibrary();
                     setVisible(false);
                     app.setVisible(true);
                 }
@@ -210,6 +210,7 @@ public class AppStudent extends JFrame {
                 if(e.getSource()==btnLibrary)
                 {
                     AppStuCourse app=new AppStuCourse();
+                    app.open();
                     setVisible(false);
                 }
             }

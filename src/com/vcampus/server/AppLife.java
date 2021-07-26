@@ -178,4 +178,21 @@ public class AppLife {
         return true;
     }
 
+    public static List<RepairHistory> getRepairHistory(String dormAddress){
+        List<RepairHistory> list =new ArrayList<>();
+        SqlSession sqlSession=null;
+        try{
+            sqlSession = App.sqlSessionFactory.openSession();
+            IRepairHistoryMapper repairHistoryMapper=sqlSession.getMapper(IRepairHistoryMapper.class);
+
+            list=repairHistoryMapper.getRepairHistory(dormAddress);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }
