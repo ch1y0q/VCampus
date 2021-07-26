@@ -154,6 +154,11 @@
             resultType="Book">
         SELECT * FROM `librarybook` WHERE `borrower` = #{cardNumber}
     </select>
+    <select id="getBorrowedBookListFromtitle" parameterType="String"
+            resultType="Book">
+        SELECT * FROM `librarybook` WHERE _name =#{_name} AND borrower is not null
+    </select>
+
     <select id="checkBorrowTime" parameterType="String"
             resultType="Integer">
         SELECT DATEDIFF((SELECT CURDATE()),(SELECT borrowtime FROM

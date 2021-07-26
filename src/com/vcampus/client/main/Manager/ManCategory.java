@@ -1,6 +1,9 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.Manager;
 
 import com.vcampus.client.administrator.main.AppAdminInfo;
+import com.vcampus.client.main.AppAdminCourse;
+import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.ManagerLibrary.ManLibrary;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -37,29 +40,29 @@ public class ManCategory extends JTree {
                         if(this.getClass().getName()!="com.vcampus.client.administrator.AppAdminInfo")
                         {
                             AppAdminInfo app=new AppAdminInfo();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodTeaInfor){
-                        if(this.getClass().getName()!="com.vcampus.client.main.TeaManage") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.Manager.TeaManage") {
                             TeaManage app = new TeaManage();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodStuInfor){
-                        if(this.getClass().getName()!="com.vcampus.client.main.StuManage") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.Manager.StuManage") {
                             StuManage app = new StuManage();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodLibrary){
-                        if(this.getClass().getName()!="com.vcampus.client.main.ManLibrary") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.ManagerLibrary.ManLibrary") {
                             ManLibrary app = new ManLibrary();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodClassManage){
@@ -71,8 +74,8 @@ public class ManCategory extends JTree {
                     else if(node==nodDorm){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppDormAdmin") {
                             AppLife app = new AppLife();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                 }

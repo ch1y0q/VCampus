@@ -1,5 +1,8 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.Teacher;
 
+import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.AppTeaCourse;
+import com.vcampus.client.main.StudentLibrary.StuLibrary;
 import com.vcampus.client.main.TeacherInfo.AppTeaInfo;
 import com.vcampus.client.main.shop.AppShop;
 
@@ -44,15 +47,15 @@ public class TeaCategory extends JTree {
                         if(!this.getClass().getName().equals("com.vcampus.client.main.TeacherInfo.AppTeaInfo"))
                         {
                             AppTeaInfo app=new AppTeaInfo();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodLibrary){
-                        if(!this.getClass().getName().equals("com.vcampus.client.main.StuLibrary")) {
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.StudentLibrary.StuLibrary")) {
                             StuLibrary app = new StuLibrary();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodGrades||node==nodChooseCourses){
@@ -64,15 +67,15 @@ public class TeaCategory extends JTree {
                     else if(node==nodCard){
                         if(!this.getClass().getName().equals("com.vcampus.client.main.AppLife")) {
                             AppLife app = new AppLife();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
                         if(!this.getClass().getName().equals("com.vcampus.client.main.AppShopTeacher")) {
                             AppShop app = new AppShop();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                 }

@@ -1,25 +1,13 @@
 package com.vcampus.client.administrator.main;
 
-import com.mysql.cj.protocol.Message;
 //import com.mysql.cj.xdevapi.Client;
-import com.vcampus.client.main.AppDormAdmin;
-import com.vcampus.client.main.ManCategory;
-import org.apache.ibatis.javassist.bytecode.ByteArray;
+import com.vcampus.client.main.Manager.ManCategory;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+        import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
+        import java.awt.*;
+        import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * 管理员个人信息界面

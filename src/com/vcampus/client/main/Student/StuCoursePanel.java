@@ -1,4 +1,4 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.Student;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

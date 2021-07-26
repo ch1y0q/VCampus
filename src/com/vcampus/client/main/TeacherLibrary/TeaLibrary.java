@@ -1,6 +1,10 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.TeacherLibrary;
 
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.App;
+import com.vcampus.client.main.Teacher.AppTeacher;
+import com.vcampus.client.main.StudentLibrary.AppStuLibborrow;
+import com.vcampus.client.main.Teacher.TeaCategory;
 import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -9,21 +13,24 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 /**
  * @author Xiao Kaijie
- * @date 2021-07-14
+ * @date 2021-07-16
  */
 
-public class StuLibrary extends JFrame {
+public class TeaLibrary extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
-    private static JPanel jp1,jp2;
+    private static JPanel jp1,jp2,jp3;
     private List<Book> list = null;
     private DefaultTableModel model;
-    public StuLibrary() {
+    public TeaLibrary() {
         setResizable(true);
         setTitle("东南大学图书馆");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,8 +46,8 @@ public class StuLibrary extends JFrame {
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
 
-        JTree jt= new StuCategory().init();
-        jt.setBounds(0,60,200,600);
+        JTree jt= new TeaCategory().init();
+        jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 
         JButton btnBack = new JButton("返回");
@@ -49,7 +56,7 @@ public class StuLibrary extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    AppStudent app=new AppStudent();
+                    AppTeacher app=new AppTeacher();
                     app.setVisible(true);
                     setVisible(false);
                 }
@@ -98,7 +105,7 @@ public class StuLibrary extends JFrame {
                             listData[i][2]=list.get(i).getAuthor();
                             listData[i][3]=list.get(i).getBorrowtime();
                             listData[i][4]=list.get(i).getSrTime();
-                            listData[i][5]="无";
+                            listData[i][5]="";
                             listData[i][6]="<html><font color='rgb(110,110,110)'>续借</font></html>";
                         }
                         model = new DefaultTableModel(listData, header){
@@ -120,12 +127,10 @@ public class StuLibrary extends JFrame {
                 if (column == 6) {
                     int result = ResponseUtils
                             .getResponseByHash(new Request(App.connectionToServer, null,
-                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { table.getValueAt(row,0) }).send())
+                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { "8888" }).send())
                             .getReturn(Integer.class);
                     if (result == 0)
-                    {   System.out.println("error");
-                        JOptionPane.showMessageDialog(null,"超时还书 无法续借 请至图书馆及时还书");
-                    }
+                        System.out.println("error");
                     else
                     {
                         System.out.println("noerror");
@@ -165,5 +170,7 @@ public class StuLibrary extends JFrame {
         tabbedPane.add("图书查询借阅",jp2);
         tabbedPane.setBounds(200,50,1000,700);
         contentPane.add(tabbedPane);
+
+
     }
 }

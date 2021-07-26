@@ -1,6 +1,9 @@
 package com.vcampus.client.administrator.main;
 
 import com.vcampus.client.main.*;
+import com.vcampus.client.main.Manager.StuManage;
+import com.vcampus.client.main.Manager.TeaManage;
+import com.vcampus.client.main.ManagerLibrary.ManLibrary;
 import com.vcampus.client.main.shop.AppShop;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.Manager;
 
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.administrator.main.AppAdmin;
@@ -16,15 +16,16 @@ import java.util.ResourceBundle;
 
 /**
  * @author Xiao Kaijie
- * @date 2021-07-22
+ * @date 2021-07-13
  */
-public class TeaManage extends JFrame {
+
+public class StuManage extends JFrame{
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
-    public TeaManage(){
+    public StuManage(){
         setResizable(true);
-        setTitle("教师信息管理");
+        setTitle("学生信息管理");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -78,101 +79,91 @@ public class TeaManage extends JFrame {
         logout.setBounds(1330, 20, 60, 30);
         contentPane.add(logout);
 
-
         JTextField txtfield1=new JTextField();    //创建文本框
-        txtfield1.setText("输入教师一卡通号或姓名");
+        txtfield1.setText("输入学生一卡通号或姓名");
         txtfield1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         txtfield1.setBounds(210,50,300,30);
         contentPane.add(txtfield1);
 
-        JButton addTea=new JButton("教师信息录入");
-        addTea.setBounds(210,130,150,30);
-        addTea.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        addTea.addActionListener(new ActionListener() {
+        JButton addStu=new JButton("学生信息录入");
+        addStu.setBounds(210,130,150,30);
+        addStu.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        addStu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==addTea)
-                {
-
-                }
             }
         });
-        contentPane.add(addTea);
+        contentPane.add(addStu);
 
-        JPanel Teainforselect=new JPanel();
-        Teainforselect.setBounds(600,50,500,200);
-        Teainforselect.setLayout(null);
-        contentPane.add(Teainforselect);
-        JLabel Tease=new JLabel("教师信息筛选");
-        Tease.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Tease.setBounds(0,0,300,30);
-        Teainforselect.add(Tease);
+        JPanel Stuinforselect=new JPanel();
+        Stuinforselect.setBounds(600,50,500,200);
+        Stuinforselect.setLayout(null);
+        contentPane.add(Stuinforselect);
+        JLabel Stuse=new JLabel("学生信息筛选");
+        Stuse.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        Stuse.setBounds(0,0,300,30);
+        Stuinforselect.add(Stuse);
 
-        JButton Teaserch=new JButton("教师信息查询");
-        Teaserch.setBounds(1100,80,150,30);
-        Teaserch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teaserch.addActionListener(new ActionListener() {
+        JButton Stuserch=new JButton("学生信息查询");
+        Stuserch.setBounds(1100,80,150,30);
+        Stuserch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        Stuserch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==Teaserch)
-                {
-
-                }
             }
         });
-        contentPane.add(Teaserch);
+        contentPane.add(Stuserch);
 
         JLabel academylabel=new JLabel("学院");
         academylabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         academylabel.setBounds(250, 40, 50, 30);
         academylabel.setBorder(new EmptyBorder(0,0,0,0));
-        Teainforselect.add(academylabel);
+        Stuinforselect.add(academylabel);
         JComboBox academy=new JComboBox();
         String[] recalltxt1={"","计算机科学与工程学院","网络安全学院","软件学院"};
         for(String s :recalltxt1){
             academy.addItem(s);
         }
         academy.setBounds(300,40,150,30);
-        Teainforselect.add(academy);
+        Stuinforselect.add(academy);
 
-        JLabel levellabel=new JLabel("职称");
-        levellabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        levellabel.setBounds(250, 90, 50, 30);
-        levellabel.setBorder(new EmptyBorder(0,0,0,0));
-        Teainforselect.add(levellabel);
-        JComboBox level=new JComboBox();
-        String[] recalltxt2={"","讲师","副教授","教授"};
+        JLabel classlabel=new JLabel("班级");
+        classlabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        classlabel.setBounds(250, 90, 50, 30);
+        classlabel.setBorder(new EmptyBorder(0,0,0,0));
+        Stuinforselect.add(classlabel);
+        JComboBox Stuclass=new JComboBox();
+        String[] recalltxt2={"","0901921","090192","090193"};
         for(String s :recalltxt2){
-            level.addItem(s);
+            Stuclass.addItem(s);
         }
-        level.setBounds(300,90,150,30);
-        Teainforselect.add(level);
+        Stuclass.setBounds(300,90,150,30);
+        Stuinforselect.add(Stuclass);
 
         JLabel sexlabel=new JLabel("性别");
         sexlabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         sexlabel.setBounds(250, 140, 50, 30);
         sexlabel.setBorder(new EmptyBorder(0,0,0,0));
-        Teainforselect.add(sexlabel);
+        Stuinforselect.add(sexlabel);
         JComboBox sex=new JComboBox();
         String[] recalltxt3={"","男","女"};
         for(String s :recalltxt3){
             sex.addItem(s);
         }
         sex.setBounds(300,140,150,30);
-        Teainforselect.add(sex);
+        Stuinforselect.add(sex);
 
-        TeaMandetailPanel Teadetail=new TeaMandetailPanel();
-        Teadetail.setBackground(new Color(255, 255, 255));
-        Teadetail.setBounds(210,610,800,180);
-        Teadetail.setVisible(false);
-        contentPane.add(Teadetail);
+        StudetailInfo Studetail=new StudetailInfo();
+        Studetail.setBounds(210,610,800,180);
+        Studetail.setVisible(false);
+        contentPane.add(Studetail);
 
-        JLabel Teainfor=new JLabel("教师信息：");
-        Teainfor.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teainfor.setBounds(210,260,100,30);
-        contentPane.add(Teainfor);
+        JLabel Stuinfor=new JLabel("学生信息：");
+        Stuinfor.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        Stuinfor.setBounds(210,260,100,30);
+        contentPane.add(Stuinfor);
 
-        String[] header = {"一卡通号", "姓名","性别","学院","职称","选择"};
+        String[] header = {"一卡通号", "姓名","性别","学院","班级","选择"};
         String[][] data = {{"", "","","","",""}};
         DefaultTableModel model = new DefaultTableModel(data,header);
         JTable table = new JTable(model)
@@ -194,7 +185,7 @@ public class TeaManage extends JFrame {
                  */
                 if (column == 5) {
                     table.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>", row, column);
-                    Teadetail.setVisible(true);
+                    Studetail.setVisible(true);
                 }
             }
         });
@@ -204,5 +195,6 @@ public class TeaManage extends JFrame {
         table.getTableHeader().setReorderingAllowed(false);
         jScrollPane.setBounds(210, 300, 980, 300);
         contentPane.add(jScrollPane);
+
     }
 }

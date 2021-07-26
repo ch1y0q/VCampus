@@ -1,4 +1,4 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.Manager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

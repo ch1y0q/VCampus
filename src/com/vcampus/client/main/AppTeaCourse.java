@@ -1,5 +1,7 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.main.Teacher.TeaCategory;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;

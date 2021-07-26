@@ -1,6 +1,9 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.StudentLibrary;
 
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.App;
+import com.vcampus.client.main.Student.AppStudent;
+import com.vcampus.client.main.Student.StuCategory;
 import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -9,24 +12,21 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.List;
 
 /**
  * @author Xiao Kaijie
- * @date 2021-07-16
+ * @date 2021-07-14
  */
 
-public class TeaLibrary extends JFrame {
+public class StuLibrary extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
-    private static JPanel jp1,jp2,jp3;
+    private static JPanel jp1,jp2;
     private List<Book> list = null;
     private DefaultTableModel model;
-    public TeaLibrary() {
+    public StuLibrary() {
         setResizable(true);
         setTitle("东南大学图书馆");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,8 +42,8 @@ public class TeaLibrary extends JFrame {
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
 
-        JTree jt= new TeaCategory().init();
-        jt.setBounds(0,50,200,600);
+        JTree jt= new StuCategory().init();
+        jt.setBounds(0,60,200,600);
         contentPane.add(jt);
 
         JButton btnBack = new JButton("返回");
@@ -52,7 +52,7 @@ public class TeaLibrary extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    AppTeacher app=new AppTeacher();
+                    AppStudent app=new AppStudent();
                     app.setVisible(true);
                     setVisible(false);
                 }
@@ -101,7 +101,7 @@ public class TeaLibrary extends JFrame {
                             listData[i][2]=list.get(i).getAuthor();
                             listData[i][3]=list.get(i).getBorrowtime();
                             listData[i][4]=list.get(i).getSrTime();
-                            listData[i][5]="";
+                            listData[i][5]="无";
                             listData[i][6]="<html><font color='rgb(110,110,110)'>续借</font></html>";
                         }
                         model = new DefaultTableModel(listData, header){
@@ -123,10 +123,12 @@ public class TeaLibrary extends JFrame {
                 if (column == 6) {
                     int result = ResponseUtils
                             .getResponseByHash(new Request(App.connectionToServer, null,
-                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { "8888" }).send())
+                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { table.getValueAt(row,0) }).send())
                             .getReturn(Integer.class);
                     if (result == 0)
-                        System.out.println("error");
+                    {   System.out.println("error");
+                        JOptionPane.showMessageDialog(null,"超时还书 无法续借 请至图书馆及时还书");
+                    }
                     else
                     {
                         System.out.println("noerror");
@@ -166,7 +168,5 @@ public class TeaLibrary extends JFrame {
         tabbedPane.add("图书查询借阅",jp2);
         tabbedPane.setBounds(200,50,1000,700);
         contentPane.add(tabbedPane);
-
-
     }
 }

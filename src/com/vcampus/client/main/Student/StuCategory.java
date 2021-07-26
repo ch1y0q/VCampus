@@ -1,6 +1,9 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.Student;
 
+import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.AppStuCourse;
 import com.vcampus.client.main.StudentInfo.AppStuInfo;
+import com.vcampus.client.main.StudentLibrary.StuLibrary;
 import com.vcampus.client.main.shop.AppShop;
 
 import javax.swing.*;
@@ -67,35 +70,36 @@ public class StuCategory extends JTree{
                         if(this.getClass().getName()!="com.vcampus.client.main.StudentInfo.AppStuInfo")
                         {
                             AppStuInfo app=new AppStuInfo();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodLibrary||node==nodBorrowLookup||node==nodBookLookup||node==nodBorrowHistory){
-                        if(this.getClass().getName()!="com.vcampus.client.main.StuLibrary") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.StudentLibrary.StuLibrary") {
                             StuLibrary app = new StuLibrary();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodCourses||node==nodTimetable||node==nodGrades||node==nodChooseCourses){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppStuCourse") {
                             AppStuCourse app = new AppStuCourse();
+                            app.open();
                             setVisible(false);
                         }
                     }
                     else if(node==nodLivingServices||node==nodCard||node==nodDormManage){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppLife") {
                             AppLife app = new AppLife();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                     else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
                         if(this.getClass().getName()!="com.vcampus.client.main.shop.AppShop") {
                             AppShop app = new AppShop();
-                            setVisible(false);
                             app.setVisible(true);
+                            setVisible(false);
                         }
                     }
                 }

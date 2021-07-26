@@ -7,16 +7,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
+import com.vcampus.client.main.Student.StuCategory;
 import com.vcampus.net.Request;
 import com.vcampus.util.*;
-import com.vcampus.server.teaching.*;
 
 import com.vcampus.entity.*;
-import com.vcampus.server.StudentManage;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class AppStuCourse {
     private JFrame jf = new JFrame("课程管理");

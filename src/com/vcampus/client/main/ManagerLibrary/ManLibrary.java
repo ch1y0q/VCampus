@@ -1,7 +1,9 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.ManagerLibrary;
 
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.administrator.main.AppAdmin;
+import com.vcampus.client.main.App;
+import com.vcampus.client.main.Manager.ManCategory;
 import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -27,7 +29,9 @@ public class ManLibrary extends JFrame {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     private DefaultTableModel model;
+    private DefaultTableModel model2;
     private List<Book> list = null;
+    private List<Book> list1 = null;
     public ManLibrary() {
         setResizable(true);
         setTitle("图书馆管理");
@@ -103,7 +107,7 @@ public class ManLibrary extends JFrame {
         recall.setBounds(850, 50, 200, 30);
         recall.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(recall);
-        String[] recalltxt={"","1","2","小说诗歌"};
+        String[] recalltxt={"","china","usa","japan"};
         JComboBox jc=new JComboBox(recalltxt);
         jc.setBounds(1000,50,150,30);
         contentPane.add(jc);
@@ -125,13 +129,21 @@ public class ManLibrary extends JFrame {
                 return false;
             }
         };
+        JTable table2 = new JTable(model2);
+        JLabel Borrow=new JLabel("借书记录");
+        Borrow.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        Borrow.setBounds(800, 500, 150, 30);
+        Borrow.setBorder(new EmptyBorder(0,0,0,0));
+        contentPane.add(Borrow);
+        String[] header2 = {"一卡通号","书名","借书时间", "应还时间"};
+        model2 = new DefaultTableModel(null, header2);
+        table2.setModel(model2);
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==search)
                 {
                     String str=jc.getSelectedItem().toString();
-                    System.out.println(str);
                     list = ResponseUtils
                             .getResponseByHash(new Request(App.connectionToServer, null,
                                     "com.vcampus.server.library.BookServer.fuzzySearchByTitleAndTabs",
@@ -159,6 +171,31 @@ public class ManLibrary extends JFrame {
                         };
                         table.setModel(model);
                     }
+                    model2 = new DefaultTableModel(null, header2);
+                    table2.setModel(model2);
+                    list1 = ResponseUtils.getResponseByHash(
+                            new Request(App.connectionToServer, null, "com.vcampus.server.library.AddoneBook.getBorrowedBookFromtitle",
+                                    new Object[] { txtfield.getText() }).send())
+                            .getListReturn(Book.class);
+                    String[][] listData1 = new String[list1.size()][4];
+                    if (list1 == null || list1.size() == 0) {
+                        System.out.println("error");
+                    } else {
+                        model2.setRowCount(0);
+                        int len = list1.size();
+                        for (int i = 0; i < len; i++) {
+                            listData1[i][0]=list1.get(i).getborrower();
+                            listData1[i][1]=list1.get(i).getName();
+                            listData1[i][2]=list1.get(i).getBorrowtime();
+                            listData1[i][3]=list1.get(i).getSrTime();
+                        }
+                        model2 = new DefaultTableModel(listData1, header2){
+                            public boolean isCellEditable(int a, int b) {
+                                return false;
+                            }
+                        };
+                        table2.setModel(model2);
+                    }
                 }
             }
         });
@@ -169,7 +206,7 @@ public class ManLibrary extends JFrame {
                 int row = table.getSelectedRow();
                 if (column == 5) {
                     Bookdetail.initnow();
-                    Bookdetail.init(table.getValueAt(row,0).toString());
+                    Bookdetail.init(table.getValueAt(row,1).toString());
                     Bookdetail.setVisible(true);
                 }
             }
@@ -181,19 +218,11 @@ public class ManLibrary extends JFrame {
         jScrollPane.setBounds(260, 120, 500, 630);
         contentPane.add(jScrollPane);
 
-        JLabel Borrow=new JLabel("借书记录");
-        Borrow.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Borrow.setBounds(800, 500, 150, 30);
-        Borrow.setBorder(new EmptyBorder(0,0,0,0));
-        String[] header2 = {"一卡通号","借书时间", "是否归还", "应还时间"};
-        String[][] data2 = {{"", "", "", ""}};
-        DefaultTableModel model2 = new DefaultTableModel(data2, header2);
-        JTable table2 = new JTable(model2);
         JScrollPane jScrollPane2 = new JScrollPane();
         jScrollPane2.setViewportView(table2);
         table2.setGridColor(Color.BLACK);
         table2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setBounds(800, 530, 500, 200);
+        jScrollPane2.setBounds(800, 530, 500, 220);
         contentPane.add(jScrollPane2);
 
     }

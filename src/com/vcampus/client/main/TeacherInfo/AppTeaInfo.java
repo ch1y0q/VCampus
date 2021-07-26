@@ -1,8 +1,9 @@
 package com.vcampus.client.main.TeacherInfo;
 
+import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.AppTeacher;
-import com.vcampus.client.main.TeaCategory;
+import com.vcampus.client.main.Teacher.AppTeacher;
+import com.vcampus.client.main.Teacher.TeaCategory;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -48,8 +49,8 @@ public class AppTeaInfo  extends JFrame {
                 if(e.getSource()==returnButton)
                 {
                     AppTeacher app=new AppTeacher();
-                    //setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
@@ -58,6 +59,17 @@ public class AppTeaInfo  extends JFrame {
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
         LogoutButton.setBounds(1450,5,50,30);
         LogoutButton.setForeground(new Color(33, 117, 206,100));
+        LogoutButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==returnButton)
+                {
+                    LoginUI app=new LoginUI();
+                    app.setVisible(true);
+                    setVisible(false);
+                }
+            }
+        });
         contentPane.add(LogoutButton);
 
         JButton EditButton = new JButton("启动编辑");//编辑按钮

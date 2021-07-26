@@ -1,5 +1,7 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.ManagerLibrary;
 
+import com.vcampus.client.main.App;
+import com.vcampus.client.main.ManagerLibrary.ManlibdetailHelper;
 import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -42,6 +44,7 @@ public class ManLibrarydetailPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                addbook();
+               closeedit();
             }
         });
         btnSure.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -66,7 +69,8 @@ public class ManLibrarydetailPanel extends JPanel {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==save) savechange();
+                savechange();
+                closeedit();
             }
         });
         add(save);
@@ -243,5 +247,16 @@ public class ManLibrarydetailPanel extends JPanel {
         txtPlace.setText("");
         txtIntro.setText("");
     }
-
+    public void closeedit()
+    {
+        txtISBN.setEditable(false);
+        txtBook.setEditable(false);
+        txtWriter.setEditable(false);
+        txtCountry.setEditable(false);
+        txtPrint.setEditable(false);
+        txtClassify.setEditable(false);
+        txtRemain.setEditable(false);
+        txtPlace.setEditable(false);
+        txtIntro.setEditable(false);
+    }
 }

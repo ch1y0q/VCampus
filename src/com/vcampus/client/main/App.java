@@ -1,6 +1,8 @@
 package com.vcampus.client.main;
 
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.Student.AppStudent;
+import com.vcampus.client.main.Teacher.AppTeacher;
 import com.vcampus.client.messageQueue.ResponseQueue;
 import com.vcampus.net.ConnectionToServer;
 import com.vcampus.net.ResponseListener;

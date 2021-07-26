@@ -1,14 +1,12 @@
 package com.vcampus.client.main;
 
-import org.apache.ibatis.jdbc.Null;
+import com.vcampus.client.main.Manager.ManCategory;
 
 import javax.swing.JPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.Objects;
 
 /**
  * @author Y

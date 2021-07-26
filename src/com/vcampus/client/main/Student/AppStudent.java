@@ -1,8 +1,12 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.Student;
 
 import com.vcampus.UI.myJLabel;
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.AppStuCourse;
+import com.vcampus.client.main.ManagerLibrary.ManLibrary;
 import com.vcampus.client.main.StudentInfo.AppStuInfo;
+import com.vcampus.client.main.StudentLibrary.StuLibrary;
 import com.vcampus.client.main.shop.AppShop;
 
 import javax.swing.*;
@@ -99,8 +103,6 @@ public class AppStudent extends JFrame {
         Timer timer=new Timer(5000,new TimeListener());
         timer.start();
 
-
-
         JButton logout = new JButton(res.getString("logout"));
         logout.addActionListener(new ActionListener() {
             @Override
@@ -159,7 +161,7 @@ public class AppStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnLibrary)
                 {
-                    StuLibrary app=new StuLibrary();
+                    ManLibrary app=new ManLibrary();
                     setVisible(false);
                     app.setVisible(true);
                 }

@@ -59,6 +59,8 @@ public interface IBookMapper {
 
     public List<Book> getBorrowedBook(String cardNumber);
 
+    public List<Book> getBorrowedBookListFromtitle(String _name);
+
     public int checkBorrowTime(String ISBN);
     public int checkRenewOrNot(String ISBN);
     public Boolean renewBook(String ISBN);

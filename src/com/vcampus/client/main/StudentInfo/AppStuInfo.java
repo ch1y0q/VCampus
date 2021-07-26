@@ -1,9 +1,8 @@
 package com.vcampus.client.main.StudentInfo;
 
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.AppStudent;
-import com.vcampus.client.main.StuCategory;
-import com.vcampus.client.main.StudentInfo.AppStudentInfoHelper;
+import com.vcampus.client.main.Student.AppStudent;
+import com.vcampus.client.main.Student.StuCategory;
 import com.vcampus.util.StringUtils;
 
 import javax.swing.*;

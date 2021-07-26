@@ -1,7 +1,7 @@
 package com.vcampus.client.main.shop;
 
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.StuCategory;
+import com.vcampus.client.main.Student.StuCategory;
 
 import static com.vcampus.client.main.shop.AppShopHelper.*;
 

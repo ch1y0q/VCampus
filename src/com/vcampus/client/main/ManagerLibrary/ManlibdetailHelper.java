@@ -1,5 +1,6 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.ManagerLibrary;
 
+import com.vcampus.client.main.App;
 import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;

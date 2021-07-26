@@ -15,7 +15,20 @@ public class AddoneBook {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
             result = bookMapper.getBorrowedBook(cardNumber);
-            System.out.println(result);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static List<Book> getBorrowedBookFromtitle(String _name) {
+        List<Book> result = null;
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
+            result = bookMapper.getBorrowedBookListFromtitle(_name);
             sqlSession.commit();
             sqlSession.close();
         } catch (Exception e) {

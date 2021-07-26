@@ -1,4 +1,6 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.Student;
+
+import com.vcampus.client.main.App;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -39,9 +41,6 @@ public class StuInfoPanel extends JPanel {
         label_4.setBounds(18, 147, 104, 18);
         add(label_4);
 
-        JLabel label_5 = new JLabel("图书馆借书：");
-        label_5.setBounds(18, 178, 104, 18);
-        add(label_5);
 
         lblName = new JLabel("...");
         lblName.setBounds(104, 23, 149, 18);

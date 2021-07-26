@@ -1,7 +1,10 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.Teacher;
 
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.AppTeaCourse;
 import com.vcampus.client.main.TeacherInfo.AppTeaInfo;
+import com.vcampus.client.main.TeacherLibrary.TeaLibrary;
 import com.vcampus.client.main.shop.AppShop;
 
 import javax.swing.*;
