@@ -15,6 +15,7 @@ import java.util.List;
 
 public class AppStuLibborrow extends JPanel {
     private List<Book> list = null;
+    private DefaultTableModel model2;
     public AppStuLibborrow()
     {
         setLayout(null);
@@ -26,51 +27,68 @@ public class AppStuLibborrow extends JPanel {
         btnQuery.setBounds(420,10,60,30);
 
         String[] header2 = {"ISBN", "书名","作者","作者国籍","剩余数量","出版社","介绍","分类","借阅"};
-        String[][] data2 = {{"", "","","","","", "","","","",""}};
-        DefaultTableModel model2 = new DefaultTableModel(data2,header2);
+        model2 = new DefaultTableModel(null,header2);
         JTable table2 = new JTable(model2)
         {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                this.setRowSelectionAllowed(false);
-                this.setColumnSelectionAllowed(false);
-                return false;
+            public boolean isCellEditable(int a, int b) {
+            this.setRowSelectionAllowed(false);
+            this.setColumnSelectionAllowed(false);
+            return false;
             }
         };
-        table2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int column = table2.getSelectedColumn();
-                int row = table2.getSelectedRow();
-                if (column == 6) {
-                    table2.setValueAt("<html><font color='rgb(110,110,110)'>已借</font></html>", row, column);
-                }
-            }
-        });
         btnQuery.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str="xkk";
+                String str="";
                 list = ResponseUtils
                         .getResponseByHash(new Request(App.connectionToServer, null,
                                 "com.vcampus.server.library.BookServer.fuzzySearchByTitleAndAuthor",
                                 new Object[] { txtBookOrIsbn.getText(),str}).send())
                         .getListReturn(Book.class);
+                String[][] listData = new String[list.size()][9];
                 model2.setRowCount(0);
                 if (list == null) {
                     System.out.println("error");
                 } else {
                     for (int i = 0; i < list.size(); i++)
                     {
-                        System.out.println(list.get(i).getSerialVersionUID());
-                        Object[] toAdd = { list.get(i).getSerialVersionUID(), list.get(i).getName(), list.get(i).getAuthor(),
-                                list.get(i).getAuthorCountry(),list.get(i).getNumber(),list.get(i).getPublishingHouse(),
-                                list.get(i).getIntroduction(),list.get(i).getTabs()};
-                        model2.addRow(toAdd);
-                        System.out.println("666");
+                        listData[i][0]=list.get(i).getSerialVersionUID();
+                        listData[i][1]=list.get(i).getName();
+                        listData[i][2]=list.get(i).getAuthor();
+                        listData[i][3]=list.get(i).getAuthorCountry();
+                        listData[i][4]=String.valueOf(list.get(i).getNumber());
+                        listData[i][5]=list.get(i).getPublishingHouse();
+                        listData[i][6]= list.get(i).getIntroduction();
+                        listData[i][7]=list.get(i).getTabs();
+                        listData[i][8]="<html><font color='rgb(110,110,110)'>借阅</font></html>";
                     }
+                    model2 = new DefaultTableModel(listData, header2){
+                        public boolean isCellEditable(int a, int b) {
+                            return false;
+                        }
+                    };
                     table2.setModel(model2);
-                    System.out.println("123");
+                }
+            }
+        });
+        table2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int column = table2.getSelectedColumn();
+                int row = table2.getSelectedRow();
+                if (column == 8) {
+                    table2.setValueAt("<html><font color='rgb(110,110,110)'>已借</font></html>", row, column);
+                    int result = ResponseUtils
+                            .getResponseByHash(
+                                    new Request(App.connectionToServer, null, "com.vcampus.server.library.BookServer.borrowBook",
+                                            new Object[] { App.session.getStudent().getCardNumber(), "8888"}).send())
+                            .getReturn(Integer.class);
+                    if (result == 2) {
+                        System.out.println("success");
+                    }
+                    if (result == 0) {
+                        System.out.println("error");
+                    }
                 }
             }
         });

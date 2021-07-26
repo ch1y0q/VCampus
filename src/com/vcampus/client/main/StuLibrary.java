@@ -22,6 +22,7 @@ public class StuLibrary extends JFrame {
     private static JTabbedPane tabbedPane;
     private static JPanel jp1,jp2,jp3;
     private List<Book> list = null;
+    private DefaultTableModel model;
     public StuLibrary() {
         setResizable(true);
         setTitle("东南大学图书馆");
@@ -52,8 +53,8 @@ public class StuLibrary extends JFrame {
                 if(e.getSource()==btnBack)
                 {
                     AppStudent app=new AppStudent();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
@@ -61,9 +62,14 @@ public class StuLibrary extends JFrame {
         btnBack.setBounds(0, 25, 60, 30);
         contentPane.add(btnBack);
 
+        JButton btnSerchborrowed = new JButton("查询");
+
+        btnSerchborrowed.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnSerchborrowed.setBounds(500, 0, 60, 30);
+        jp1.add(btnSerchborrowed);
+
         String[] header = {"ISBN", "书名","作者","借阅时间","应当归还时间","备注","续借"};
-        String[][] data = {{"", "","","","","",""},{"", "","","","","",""}};
-        DefaultTableModel model = new DefaultTableModel(data,header);
+        model = new DefaultTableModel(null,header);
         JTable table = new JTable(model)
         {
             @Override
@@ -73,13 +79,61 @@ public class StuLibrary extends JFrame {
                 return false;
             }
         };
+
+        btnSerchborrowed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnSerchborrowed)
+                {
+                    list = ResponseUtils.getResponseByHash(
+                            new Request(App.connectionToServer, null, "com.vcampus.server.library.AddoneBook.getBorrowedBookList",
+                                    new Object[] { App.session.getStudent().getCardNumber() }).send())
+                            .getListReturn(Book.class);
+                    String[][] listData = new String[list.size()][7];
+                    if (list == null || list.size() == 0) {
+                        System.out.println("error");
+                    } else {
+                        model.setRowCount(0);
+                        int len = list.size();
+                        for (int i = 0; i < len; i++) {
+                            listData[i][0]=list.get(i).getSerialVersionUID();
+                            listData[i][1]=list.get(i).getName();
+                            listData[i][2]=list.get(i).getAuthor();
+                            listData[i][3]=list.get(i).get_borrowTime();
+                            listData[i][4]=list.get(i).getSrTime();
+                            listData[i][5]="";
+                            listData[i][6]="<html><font color='rgb(110,110,110)'>续借</font></html>";
+                        }
+                        model = new DefaultTableModel(listData, header){
+                            public boolean isCellEditable(int a, int b) {
+                                return false;
+                            }
+                        };
+                        table.setModel(model);
+                    }
+                }
+            }
+        });
+
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int column = table.getSelectedColumn();
                 int row = table.getSelectedRow();
                 if (column == 6) {
-                    table.setValueAt("<html><font color='rgb(110,110,110)'>成功续借</font></html>", row, column);
+                    int result = ResponseUtils
+                            .getResponseByHash(new Request(App.connectionToServer, null,
+                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { "8888" }).send())
+                            .getReturn(Integer.class);
+                    if (result == 0)
+                        System.out.println("error");
+                    if (result == 1)
+                        System.out.println("error1");
+                    if (result == 2)
+                    {
+                        System.out.println("noerror");
+                        table.setValueAt("<html><font color='rgb(110,110,110)'>成功续借</font></html>", row, column);
+                    }
                 }
             }
         });
@@ -87,7 +141,7 @@ public class StuLibrary extends JFrame {
         jScrollPane.setViewportView(table);
         table.setGridColor(Color.BLACK);
         table.getTableHeader().setReorderingAllowed(false);
-        jScrollPane.setBounds(0, 0, 980, 700);
+        jScrollPane.setBounds(0, 30, 980, 700);
         jp1.add(jScrollPane);
 
         jp2=new AppStuLibborrow();
@@ -115,22 +169,6 @@ public class StuLibrary extends JFrame {
         tabbedPane.setBounds(200,50,1000,700);
         contentPane.add(tabbedPane);
 
-        list = ResponseUtils.getResponseByHash(
-                new Request(App.connectionToServer, null, "com.vcampus.server.library.AddoneBook.getBorrowedBookList",
-                        new Object[] { App.session.getStudent().getCardNumber() }).send())
-                .getListReturn(Book.class);
-
-        if (list == null || list.size() == 0) {
-            System.out.println("error");
-        } else {
-            model.setRowCount(0);
-            int len = list.size();
-            for (int i = 0; i < len; i++) {
-                Object[] toAdd = { list.get(i).getSerialVersionUID(), list.get(i).getName(), list.get(i).getAuthor(),
-                        list.get(i).get_borrowTime(),"2020-01-01","无" };
-                model.addRow(toAdd);
-            }
-        }
 
     }
 }

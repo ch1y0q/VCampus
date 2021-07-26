@@ -21,7 +21,7 @@
 
     <select id="searchChargableByISBN" parameterType="String"
             resultType="Integer">
-        SELECT chargable FROM tb_book WHERE serialVersionUID=#{serialVersionUID}
+        SELECT _number FROM tb_book WHERE serialVersionUID=#{serialVersionUID} AND _number>0
     </select>
 
     <update id="changeNumberByTitle" parameterType="String">
@@ -109,14 +109,19 @@
     </select>
     <select id="checkBorrowTime" parameterType="String"
             resultType="Integer">
-        SELECT DATEDIFF((SELECT CURDATE()),(SELECT borrowTime FROM
+        SELECT DATEDIFF((SELECT CURDATE()),(SELECT _borrowTime FROM
             tb_book WHERE serialVersionUID=#{serialVersionUID}))
+    </select>
+
+    <select id="checkRenewOrNot" parameterType="String"
+            resultType="Integer">
+        SELECT _number FROM `tb_book` WHERE serialVersionUID=#{serialVersionUID}
     </select>
 
     <update id="renewBook" parameterType="String">
         UPDATE tb_book
-        SET
-            borrowTime=(SELECT CURDATE()) WHERE serialVersionUID=#{serialVersionUID}
+        SET _borrowTime=(SELECT CURDATE()) WHERE serialVersionUID=#{serialVersionUID};
+        SET srTime=DATE_ADD(SELECT CURDATE(),1 MONTH) WHERE serialVersionUID=#{serialVersionUID};
     </update>
 
 </mapper>

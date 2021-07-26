@@ -12,7 +12,7 @@ public class Book implements java.io.Serializable{
     private String serialVersionUID ;   //ISBN号
     private String _name;                //书名
     private String _introduction;       //书介绍
-    private String _number;             //剩余数量
+    private int _number;             //剩余数量
     private String _author;              //作者
     private String _authorCountry;      //作者国籍
     private String _publishingHouse;    //出版社
@@ -22,12 +22,13 @@ public class Book implements java.io.Serializable{
     private String borrower;
     private String _borrowTime;
     private String pictureURL;
+    private String srTime;
 
     public Book() {
         setSerialVersionUID(null);
         setName(null);                    //设置书名
         setIntroduction(null);              //设置介绍
-        setNumber(null);                   //设置剩余数量
+        setNumber(0);                   //设置剩余数量
         setAuthor(null);                    //设置作者
         setAuthorCountry(null);             //设置作者国籍
         setPublishingHouse(null);           //设置出版社
@@ -37,11 +38,12 @@ public class Book implements java.io.Serializable{
         setBorrower(null);
         set_borrowTime(null);
         setPictureURL(null);
+        setsrTime(null);
     }
 
     /* setters and getters */
     public String getSerialVersionUID(){return serialVersionUID;}
-    public void setSerialVersionUID(String serialVersionUID1){this.serialVersionUID=serialVersionUID1;}
+    public void setSerialVersionUID(String serialVersionUID){this.serialVersionUID=serialVersionUID;}
 
     public String getName() {
         return _name;
@@ -57,10 +59,10 @@ public class Book implements java.io.Serializable{
         this._introduction = _introduction;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return _number;
     }
-    public void setNumber(String _number) {
+    public void setNumber(int _number) {
         this._number = _number;
     }
 
@@ -100,6 +102,8 @@ public class Book implements java.io.Serializable{
     public String getborrower(){return borrower;}
     public String get_borrowTime(){return _borrowTime ;}
     public String getpictureURL(){ return pictureURL;}
+    public String getSrTime(){return srTime;}
+    public void setsrTime(String srTime){this.srTime=srTime;}
 
     public int getChargable() {
         return chargable;
@@ -108,4 +112,5 @@ public class Book implements java.io.Serializable{
     public void setBorrower(String borrower){this.borrower=borrower;}
     public void set_borrowTime(String _borrowTime){this._borrowTime=_borrowTime;}
     public void setPictureURL(String pictureURL){this.pictureURL=pictureURL;}
+
 }

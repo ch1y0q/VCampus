@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 public class BookServer {
-    public static String searchAuthorByTitle(String title) {
+    public static String searchAuthorByTitle(String _name) {
         String result = null;
         SqlSession sqlSession = null;
         try {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
-            result = bookMapper.searchAuthorByTitle(title);
+            result = bookMapper.searchAuthorByTitle(_name);
             sqlSession.commit();
             sqlSession.close();
         } catch (Exception e) {
@@ -27,24 +27,25 @@ public class BookServer {
         return result;
     }
 
-    public static int borrowBook(String borrower, String ISBN) {
+    public static int borrowBook(String borrower, String serialVersionUID) {
         int result = 0;
         SqlSession sqlSession = null;
         try {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
-            String TITLE = bookMapper.searchTitleByISBN(ISBN);
-            if (TITLE != null) {
-                int chargable = bookMapper.searchChargableByISBN(ISBN);
+            String TITLE = bookMapper.searchTitleByISBN(serialVersionUID);
+            if (TITLE != null)
+            {
+                int chargable = bookMapper.searchChargableByISBN(serialVersionUID);
                 result = 1;
                 if (chargable == 1) {
-                    String nowborrower = bookMapper.getBorrowerByISBN(ISBN);
-                    bookMapper.changeChargableByISBN(ISBN);
-                    String title = bookMapper.searchTitleByISBN(ISBN);
-                    bookMapper.changeNumberByTitle(title);
+                    String nowborrower = bookMapper.getBorrowerByISBN(serialVersionUID);
+                    bookMapper.changeChargableByISBN(serialVersionUID);
+                    String _name = bookMapper.searchTitleByISBN(serialVersionUID);
+                    bookMapper.changeNumberByTitle(_name);
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("borrower", borrower);
-                    map.put("ISBN", ISBN);
+                    map.put("serialVersionUID", serialVersionUID);
                     bookMapper.changeBorrowerByISBN(map);
                     result = 2;
                 }
@@ -106,27 +107,25 @@ public class BookServer {
         return list;
     }
 
-    public static int returnBook(String borrower, String ISBN) {
+    public static int returnBook(String borrower, String serialVersionUID) {
         int result = 0;
         SqlSession sqlSession = null;
         try {
             sqlSession = App.sqlSessionFactory.openSession();
 
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
-            String TITLE = bookMapper.searchTitleByISBN(ISBN);
+            String TITLE = bookMapper.searchTitleByISBN(serialVersionUID);
 
             if (TITLE != null) {
-                int chargable = bookMapper.searchChargableByISBN(ISBN);
-
+                int chargable = bookMapper.searchChargableByISBN(serialVersionUID);
                 if (chargable == 1)
                     result = 1;
                 else {
-                    String nowborrower = bookMapper.getBorrowerByISBN(ISBN);
-
+                    String nowborrower = bookMapper.getBorrowerByISBN(serialVersionUID);
                     if (nowborrower == null || !nowborrower.equals(borrower)) {
                         result = 1;
                     } else {
-                        bookMapper.returnBookByISBN(ISBN);
+                        bookMapper.returnBookByISBN(serialVersionUID);
                         result = 2;
                     }
                 }
@@ -142,19 +141,19 @@ public class BookServer {
 
     }
 
-    public static Boolean addBook(String ISBN, String title, String author, String category, String details,
+    public static Boolean addBook(String serialVersionUID, String title, String author, String category, String details,
                                   String pictureURL) {
         SqlSession sqlSession = null;
         try {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
-            int number = bookMapper.searchHowManyByISBN(ISBN);
+            int number = bookMapper.searchHowManyByISBN(serialVersionUID);
             if (number == 1) {
                 sqlSession.close();
                 return false;
             } else {
                 Book book2 = new Book();
-                book2.setSerialVersionUID(ISBN);
+                book2.setSerialVersionUID(serialVersionUID);
                 book2.setName(title);
                 book2.setAuthor(author);
                 book2.setTabs(category);
@@ -172,15 +171,15 @@ public class BookServer {
         return false;
     }
 
-    public static int searchHowManyByISBN(String ISBN) {
+    public static int searchHowManyByISBN(String serialVersionUID) {
         int result = 0;
         SqlSession sqlSession = null;
         try {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
             Book book = new Book();
-            book.setSerialVersionUID(ISBN);
-            result = bookMapper.searchHowManyByISBN(ISBN);
+            book.setSerialVersionUID(serialVersionUID);
+            result = bookMapper.searchHowManyByISBN(serialVersionUID);
             sqlSession.commit();
         } catch (Exception e) {
             sqlSession.rollback();
@@ -189,15 +188,15 @@ public class BookServer {
         return result;
     }
 
-    public static List<Book> searchSimilarBook(String title, String category) {
+    public static List<Book> searchSimilarBook(String _name, String _tabs) {
         List<Book> list = new ArrayList<>();
         SqlSession sqlSession = null;
         try {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
             Book book = new Book();
-            book.setName(title);
-            book.setTabs(category);
+            book.setName(_name);
+            book.setTabs(_tabs);
             list = bookMapper.searchSimilarBook(book);
             sqlSession.commit();
             sqlSession.close();
@@ -207,13 +206,13 @@ public class BookServer {
         return list;
     }
 
-    public static String searchPicture(String ISBN) {
+    public static String searchPicture(String serialVersionUID) {
         String result = null;
         SqlSession sqlSession = null;
         try {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
-            result = bookMapper.searchPicture(ISBN);
+            result = bookMapper.searchPicture(serialVersionUID);
             sqlSession.commit();
             sqlSession.close();
         } catch (Exception e) {
@@ -240,14 +239,14 @@ public class BookServer {
 
     }
 
-    public static Boolean deleteBook(String ISBN) {
+    public static Boolean deleteBook(String serialVersionUID) {
         Boolean result = null;
         SqlSession sqlSession = null;
         try {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
             Book book = new Book();
-            book.setSerialVersionUID(ISBN);
+            book.setSerialVersionUID(serialVersionUID);
             result = bookMapper.deleteBook(book);
             sqlSession.commit();
             sqlSession.close();
@@ -258,21 +257,21 @@ public class BookServer {
         return result;
     }
 
-    public static int renewBook(String ISBN) {
+    public static int renewBook(String serialVersionUID) {
         int result = 0;
         SqlSession sqlSession = null;
         try {
             sqlSession = App.sqlSessionFactory.openSession();
             IBookMapper bookMapper = sqlSession.getMapper(IBookMapper.class);
-            result = bookMapper.checkBorrowTime(ISBN);
+            result = bookMapper.checkBorrowTime(serialVersionUID);
             if (result >= 30)
                 result = 0;
             else {
-                int renewornot = bookMapper.checkRenewOrNot(ISBN);
+                int renewornot = bookMapper.checkRenewOrNot(serialVersionUID);
                 if (renewornot == 1)
                     result = 1;
                 else {
-                    bookMapper.renewBook(ISBN);
+                    bookMapper.renewBook(serialVersionUID);
                     result = 2;
                 }
             }
