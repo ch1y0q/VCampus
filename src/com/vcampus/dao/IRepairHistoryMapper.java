@@ -9,4 +9,7 @@ import com.vcampus.entity.RepairHistory;
 public interface IRepairHistoryMapper {
 
     public void insertRepairHistory(RepairHistory repairHistory);
+
+    public List<RepairHistory> getRepairHistory(String dormAddress);
+    //
 }
