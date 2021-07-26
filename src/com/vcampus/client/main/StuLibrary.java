@@ -99,7 +99,7 @@ public class StuLibrary extends JFrame {
                             listData[i][0]=list.get(i).getSerialVersionUID();
                             listData[i][1]=list.get(i).getName();
                             listData[i][2]=list.get(i).getAuthor();
-                            listData[i][3]=list.get(i).get_borrowTime();
+                            listData[i][3]=list.get(i).getBorrowTime();
                             listData[i][4]=list.get(i).getSrTime();
                             listData[i][5]="";
                             listData[i][6]="<html><font color='rgb(110,110,110)'>续借</font></html>";

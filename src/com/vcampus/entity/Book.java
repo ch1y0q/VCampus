@@ -1,7 +1,5 @@
 package com.vcampus.entity;
 
-import java.util.ArrayList;
-
 /**
  * Book 类
  * @author Dong Ruojing
@@ -10,17 +8,17 @@ import java.util.ArrayList;
 public class Book implements java.io.Serializable{
 
     private String serialVersionUID ;   //ISBN号
-    private String _name;                //书名
-    private String _introduction;       //书介绍
-    private int _number;             //剩余数量
-    private String _author;              //作者
-    private String _authorCountry;      //作者国籍
-    private String _publishingHouse;    //出版社
-    private String _tabs;    //分类
-    private String _place;              //摆放位置
+    private String name;                //书名
+    private String introduction;       //书介绍
+    private int number;             //剩余数量
+    private String author;              //作者
+    private String authorCountry;      //作者国籍
+    private String publishingHouse;    //出版社
+    private String tabs;    //分类
+    private String place;              //摆放位置
     private int chargable=1;
     private String borrower;
-    private String _borrowTime;
+    private String borrowTime;
     private String pictureURL;
     private String srTime;
 
@@ -36,7 +34,7 @@ public class Book implements java.io.Serializable{
         setPlace(null);                        //设置摆放位置
         setChargable(1);
         setBorrower(null);
-        set_borrowTime(null);
+        setBorrowTime(null);
         setPictureURL(null);
         setsrTime(null);
     }
@@ -46,61 +44,61 @@ public class Book implements java.io.Serializable{
     public void setSerialVersionUID(String serialVersionUID){this.serialVersionUID=serialVersionUID;}
 
     public String getName() {
-        return _name;
+        return name;
     }
     public void setName(String _name) {
-        this._name = _name;
+        this.name = _name;
     }
 
     public String getIntroduction() {
-        return _introduction;
+        return introduction;
     }
     public void setIntroduction(String _introduction) {
-        this._introduction = _introduction;
+        this.introduction = _introduction;
     }
 
     public int getNumber() {
-        return _number;
+        return number;
     }
     public void setNumber(int _number) {
-        this._number = _number;
+        this.number = _number;
     }
 
     public String getAuthor() {
-        return _author;
+        return author;
     }
     public void setAuthor(String _author) {
-        this._author = _author;
+        this.author = _author;
     }
 
     public String getAuthorCountry() {
-        return _authorCountry;
+        return authorCountry;
     }
     public void setAuthorCountry(String _authorCountry) {
-        this._authorCountry = _authorCountry;
+        this.authorCountry = _authorCountry;
     }
 
     public String getPublishingHouse() {
-        return _publishingHouse;
+        return publishingHouse;
     }
     public void setPublishingHouse(String _publishingHouse) {
-        this._publishingHouse = _publishingHouse;
+        this.publishingHouse = _publishingHouse;
     }
 
     public String getTabs() {
-        return _tabs;
+        return tabs;
     }
-    public void setTabs(String _tabs) {this._tabs = _tabs;}
+    public void setTabs(String _tabs) {this.tabs = _tabs;}
 
     public String getPlace() {
-        return _place;
+        return place;
     }
     public void setPlace(String _place) {
-        this._place = _place;
+        this.place = _place;
     }
 
     public String getborrower(){return borrower;}
-    public String get_borrowTime(){return _borrowTime ;}
+    public String getBorrowTime(){return borrowTime;}
     public String getpictureURL(){ return pictureURL;}
     public String getSrTime(){return srTime;}
     public void setsrTime(String srTime){this.srTime=srTime;}
@@ -110,7 +108,7 @@ public class Book implements java.io.Serializable{
     }
     public void setChargable(int chargable){this.chargable=chargable;}
     public void setBorrower(String borrower){this.borrower=borrower;}
-    public void set_borrowTime(String _borrowTime){this._borrowTime=_borrowTime;}
+    public void setBorrowTime(String borrowTime){this.borrowTime = borrowTime;}
     public void setPictureURL(String pictureURL){this.pictureURL=pictureURL;}
 
 }
