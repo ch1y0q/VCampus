@@ -3,6 +3,21 @@
         "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="com.vcampus.dao.IBookMapper">
+    <resultMap id="book" type="com.vcampus.entity.Book">
+        <result property="serialVersionUID" column="serialVersionUID"/>
+        <result property="_name" column="_name"/>
+        <result property="_introduction" column="_introduction"/>
+        <result property="_number" column="_number"/>
+        <result property="_author" column="_author"/>
+        <result property="_authorCountry" column="_authorCountry"/>
+        <result property="_publishingHouse" column="_publishingHouse"/>
+        <result property="_tabs" column="_tabs"/>
+        <result property="_place" column="_place"/>
+        <result property="chargable" column="chargable"/>
+        <result property="borrower" column="borrower"/>
+        <result property="_borrowTime" column="_borrowTime"/>
+        <result property="pictureURL" column="pictureURL"/>
+    </resultMap>
 
     <select id="searchAuthorByTitle" parameterType="String"
             resultType="String">
@@ -56,7 +71,7 @@
     </select>
 
     <select id="searchSimilarBook" parameterType="Book"
-            resultType="Book">
+            resultMap="book">
         SELECT DISTINCT `serialVersionUID`,`_name`,`_author`,`_number` AS
             "numofborrowed" FROM
             tb_book WHERE
@@ -69,7 +84,7 @@
         SELECT pictureURL from tb_book WHERE serialVersionUID=#{serialVersionUID}
     </select>
 
-    <select id="searchHotBook" resultType="Book">
+    <select id="searchHotBook" resultMap="book">
         SELECT DISTINCT
             `_name`,`_author`,`_number`AS "numofborrowed",`pictureURL` FROM
             tb_book
@@ -77,17 +92,17 @@
     </select>
 
     <select id="fuzzySearchByTitle" parameterType="String"
-            resultType="Book">
+            resultMap="book">
         SELECT *FROM tb_book WHERE _name LIKE '%${_name}%'
     </select>
 
     <select id="fuzzySearchByAuthor" parameterType="String"
-            resultType="Book">
+            resultMap="book">
         SELECT *FROM tb_book WHERE _author LIKE '%${_author}%'
     </select>
 
     <select id="fuzzySearchByTitleAndAuthor" parameterType="Book"
-            resultType="Book">
+            resultMap="book">
         SELECT *FROM tb_book WHERE _name LIKE '%${_name}%' AND
                 _author LIKE '%${_author}%'
     </select>
@@ -104,7 +119,7 @@
     </select>
 
     <select id="getBorrowedBook" parameterType="String"
-            resultType="Book">
+            resultMap="book">
         SELECT * FROM `tb_book` WHERE `borrower` = #{cardNumber}
     </select>
     <select id="checkBorrowTime" parameterType="String"
