@@ -31,4 +31,12 @@ public class AppStudentInfoHelper {
                         new Object[]{map}).send())
                 .getReturn(Boolean.class);
     }
+    //修改密码
+    public static Boolean resetPassword(HashMap map){
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer,
+                        null, "com.vcampus.server.AppStuInfo.resetPassword",
+                        new Object[]{map}).send())
+                .getReturn(Boolean.class);
+    }
 }
