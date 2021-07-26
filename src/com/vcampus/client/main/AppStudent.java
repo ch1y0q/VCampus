@@ -2,6 +2,7 @@ package com.vcampus.client.main;
 
 import com.vcampus.UI.myJLabel;
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.StudentInfo.AppStuInfo;
 import com.vcampus.client.main.shop.AppShop;
 
 import javax.swing.*;

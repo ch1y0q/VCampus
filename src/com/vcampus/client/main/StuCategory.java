@@ -1,5 +1,6 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.main.StudentInfo.AppStuInfo;
 import com.vcampus.client.main.shop.AppShop;
 
 import javax.swing.*;
@@ -63,7 +64,7 @@ public class StuCategory extends JTree{
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
                     if(node==nodPersonalInfo||node==nodInfoLookup||node==nodInfoManage){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppStuInfo")
+                        if(this.getClass().getName()!="com.vcampus.client.main.StudentInfo.AppStuInfo")
                         {
                             AppStuInfo app=new AppStuInfo();
                             setVisible(false);
