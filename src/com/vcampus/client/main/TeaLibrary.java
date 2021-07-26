@@ -1,5 +1,7 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.LoginUI;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +19,7 @@ import java.awt.event.MouseEvent;
 public class TeaLibrary extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
-    private static JPanel jp1,jp2,jp3;
+    private static JPanel jp1,jp2;
     public TeaLibrary() {
         setResizable(true);
         setTitle("东南大学图书馆");
@@ -28,18 +30,14 @@ public class TeaLibrary extends JFrame {
         contentPane = new JPanel();
         jp1=new JPanel();
         jp2=new JPanel();
-        jp3=new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
-        contentPane.add(jp1);
         jp2.setLayout(null);
         jp2.setBackground(new Color(255, 255, 255));
-        jp3.setLayout(null);
-        jp3.setBackground(new Color(255, 255, 255));
 
         JTree jt=new TeaCategory().init();
         jt.setBounds(0,50,200,600);
@@ -53,8 +51,8 @@ public class TeaLibrary extends JFrame {
                 if(e.getSource()==back)
                 {
                     AppTeacher app=new AppTeacher();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
@@ -139,26 +137,17 @@ public class TeaLibrary extends JFrame {
         jp2.add(txtfield1);
         jp2.add(jScrollPane2);
 
-        String[] header3 = {"ISBN", "书名","作者","借阅时间","归还时间"};
-        String[][] data3 = {{"","","","",""}};
-        DefaultTableModel model3 = new DefaultTableModel(data3,header3);
-        JTable table3 = new JTable(model3);
-        JScrollPane jScrollPane3 = new JScrollPane();
-        jScrollPane3.setViewportView(table3);
-        table3.setGridColor(Color.BLACK);
-        table3.setEnabled(false);
-        jScrollPane3.setBounds(0, 0, 980, 700);
-        jp3.add(jScrollPane3);
 
         JButton logout = new JButton("登出");
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                    }
-                });
+                if(e.getSource()==logout)
+                {
+                    LoginUI app=new LoginUI();
+                    app.setVisible(true);
+                    setVisible(false);
+                }
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -168,7 +157,6 @@ public class TeaLibrary extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.add("已借图书",jp1);
         tabbedPane.add("图书查询借阅",jp2);
-        tabbedPane.add("已还图书",jp3);
         tabbedPane.setBounds(200,50,1000,700);
         contentPane.add(tabbedPane);
     }

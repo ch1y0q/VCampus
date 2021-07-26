@@ -24,12 +24,7 @@ public class AppStuLibborrow extends JPanel {
         txtBookOrIsbn.setBounds(0,10,400,30);
         JButton btnQuery=new JButton("查询");
         btnQuery.setBounds(420,10,60,30);
-        btnQuery.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO
-            }
-        });
+
         String[] header2 = {"ISBN", "书名","作者","作者国籍","剩余数量","出版社","介绍","分类","借阅"};
         String[][] data2 = {{"", "","","","","", "","","","",""}};
         DefaultTableModel model2 = new DefaultTableModel(data2,header2);
@@ -52,27 +47,33 @@ public class AppStuLibborrow extends JPanel {
                 }
             }
         });
-        String str="xkk";
-        list = ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null,
-                        "com.vcampus.server.library.BookServer.searchAuthorByTitle",
-                        new Object[] { txtBookOrIsbn.getText().trim()}).send())
-                .getListReturn(Book.class);
-        model2.setRowCount(0);
-        if (list == null) {
-            System.out.println("error");
-        } else {
-            for (int i = 0; i < list.size(); i++)
-            {
-                Object[] toAdd = { list.get(i).getSerialVersionUID(), list.get(i).getName(), list.get(i).getAuthor(),
-                        list.get(i).getAuthorCountry(),list.get(i).getNumber(),list.get(i).getPublishingHouse(),
-                        list.get(i).getIntroduction(),list.get(i).getTabs()};
-                model2.addRow(toAdd);
-                System.out.println("666");
+        btnQuery.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String str="xkk";
+                list = ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null,
+                                "com.vcampus.server.library.BookServer.fuzzySearchByTitleAndAuthor",
+                                new Object[] { txtBookOrIsbn.getText(),str}).send())
+                        .getListReturn(Book.class);
+                model2.setRowCount(0);
+                if (list == null) {
+                    System.out.println("error");
+                } else {
+                    for (int i = 0; i < list.size(); i++)
+                    {
+                        System.out.println(list.get(i).getSerialVersionUID());
+                        Object[] toAdd = { list.get(i).getSerialVersionUID(), list.get(i).getName(), list.get(i).getAuthor(),
+                                list.get(i).getAuthorCountry(),list.get(i).getNumber(),list.get(i).getPublishingHouse(),
+                                list.get(i).getIntroduction(),list.get(i).getTabs()};
+                        model2.addRow(toAdd);
+                        System.out.println("666");
+                    }
+                    table2.setModel(model2);
+                    System.out.println("123");
+                }
             }
-            table2.setModel(model2);
-            System.out.println("123");
-        }
+        });
         JScrollPane jScrollPane2 = new JScrollPane();
         jScrollPane2.setViewportView(table2);
         table2.setGridColor(Color.BLACK);

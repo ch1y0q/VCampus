@@ -92,17 +92,6 @@ public class StuLibrary extends JFrame {
 
         jp2=new AppStuLibborrow();
 
-        String[] header3 = {"ISBN", "书名","作者","借阅时间","归还时间"};
-        String[][] data3 = {{"","","","",""}};
-        DefaultTableModel model3 = new DefaultTableModel(data3,header3);
-        JTable table3 = new JTable(model3);
-        JScrollPane jScrollPane3 = new JScrollPane();
-        jScrollPane3.setViewportView(table3);
-        table3.setGridColor(Color.BLACK);
-        table3.setEnabled(false);
-        jScrollPane3.setBounds(0, 0, 980, 700);
-        jp3.add(jScrollPane3);
-
         JButton btnLogout = new JButton("登出");
         btnLogout.addActionListener(new ActionListener() {
             @Override
@@ -123,7 +112,6 @@ public class StuLibrary extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.add("已借图书",jp1);
         tabbedPane.add("图书查询借阅",jp2);
-        tabbedPane.add("已还图书",jp3);
         tabbedPane.setBounds(200,50,1000,700);
         contentPane.add(tabbedPane);
 
@@ -139,7 +127,7 @@ public class StuLibrary extends JFrame {
             int len = list.size();
             for (int i = 0; i < len; i++) {
                 Object[] toAdd = { list.get(i).getSerialVersionUID(), list.get(i).getName(), list.get(i).getAuthor(),
-                        list.get(i).get_borrowTime(),"2020-01-01","000" };
+                        list.get(i).get_borrowTime(),"2020-01-01","无" };
                 model.addRow(toAdd);
             }
         }
