@@ -79,9 +79,13 @@ public class Auth {
             IAdminMapper adminMapper = sqlSession.getMapper(IAdminMapper.class);
             //boolean verifyResult = adminMapper.verifyAdmin(admin);
             String cardNumber = admin.getCardNumber();
+
             boolean verifyResult =
                     StringUtils.MD5EncodeSalted(admin.getPassword(), adminMapper.getSaltByCardNumber(cardNumber))
                             .equalsIgnoreCase(adminMapper.getPasswordByCardNumber(cardNumber));
+            System.out.println(admin.getPassword());
+            System.out.println(adminMapper.getSaltByCardNumber(cardNumber));
+            System.out.println(adminMapper.getPasswordByCardNumber(cardNumber));
 
             if (!verifyResult) {
                 System.out.println("No result");

@@ -12,7 +12,7 @@ public class Admin {
 
     /* required */
     private String name;
-    private String password;
+    public String password;
     private String cardNumber;
     private BigDecimal balance;
 
