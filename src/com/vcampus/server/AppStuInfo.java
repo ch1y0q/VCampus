@@ -4,6 +4,7 @@ import com.vcampus.dao.IStudentMapper;
 import org.apache.ibatis.session.SqlSession;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -33,6 +34,20 @@ public class AppStuInfo {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
             studentMapper.resetEmail(map);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    //重设密码
+    public static Boolean resetPassword(Map map) {
+
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+            studentMapper.resetPassword(map);
             sqlSession.commit();
             sqlSession.close();
         } catch (Exception e) {
