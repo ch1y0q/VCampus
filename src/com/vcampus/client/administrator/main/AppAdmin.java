@@ -1,6 +1,7 @@
 package com.vcampus.client.administrator.main;
 
 import com.vcampus.client.main.*;
+import com.vcampus.client.main.shop.AppShop;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

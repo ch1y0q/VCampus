@@ -1,4 +1,6 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.shop;
+
+import com.vcampus.client.main.ManCategory;
 
 import javax.swing.JPanel;
 import javax.swing.*;
