@@ -31,7 +31,7 @@ public class AppAdmin extends JFrame{
     public AppAdmin(){
 
         setResizable(true);
-        setTitle("管理员登录");
+        setTitle("管理员主页");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //setBounds(400, 200, 800, 550);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -61,7 +61,7 @@ public class AppAdmin extends JFrame{
         returnButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
         returnButton.setBounds(10,5,80,30);
         returnButton.setForeground(new Color(33, 117, 206,100));
-        contentPane.add(returnButton);
+        //contentPane.add(returnButton);
 
         JButton LogoutButton = new JButton("登出");
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));

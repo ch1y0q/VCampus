@@ -1,8 +1,11 @@
 package com.vcampus.client.main.teacher;
 
+import com.alee.managers.style.StyleId;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.AppTeaCourse;
+import com.vcampus.client.main.dailyReport.AppDailyReport;
+import com.vcampus.client.main.dailyReport.AppDailyReportManage;
 import com.vcampus.client.main.teacher.TeacherInfo.AppTeaInfo;
 import com.vcampus.client.main.library.TeaLibrary;
 import com.vcampus.client.main.shop.AppShop;
@@ -34,23 +37,27 @@ public class AppTeacher extends JFrame {
         setSize(d.width, d.height);
         System.out.println(d.width+" "+d.height);
         JPanel contentPane = new JPanel();
-        contentPane.setBackground(new Color(255, 255, 255));
+        contentPane.setBackground(new Color(240, 255, 240));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel tf = new JLabel();
-        tf.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        tf.setText("欢迎你:" + "XXX");
-        tf.setBounds(1000, 20, 200, 30);
-        tf.setBorder(new EmptyBorder(0,0,0,0));
-        contentPane.add(tf);
+        JLabel label =new JLabel();
+        label.setText(" 欢迎您,"+"xxx" );//App.session.getTeacher().getName()
+        label.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        label.setOpaque(true);
+        label.setForeground(new Color(33, 117, 206));
+        label.setBackground(new Color(33,177,206,80));
+        label.setBounds(1270, 5, 100, 30);
+        contentPane.add(label);
 
-        JButton logout = new JButton(res.getString("logout"));
-        logout.addActionListener(new ActionListener() {
+        JButton LogoutButton = new JButton(res.getString("logout"));
+        LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        LogoutButton.setBounds(1380,5,50,30);
+        LogoutButton.setForeground(new Color(33, 117, 206,100));
+        LogoutButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                if(e.getSource()==logout)
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==LogoutButton)
                 {
                     LoginUI app=new LoginUI();
                     app.setVisible(true);
@@ -58,24 +65,24 @@ public class AppTeacher extends JFrame {
                 }
             }
         });
-        logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        logout.setBounds(1330, 20, 60, 30);
-        contentPane.add(logout);
+        contentPane.add(LogoutButton);
 
         JLayeredPane self=new JLayeredPane();
         self.setBounds(50,50,1500,1000);
         JLabel selficon=new JLabel("");
         selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teainformation.jpg")));
-        selficon.setBounds(0,0,300,420);
+        selficon.setBounds(70, 15, 290,420);
         JLabel selfin=new JLabel("");
         JLabel selftext=new JLabel("个人信息");
-        selftext.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        selftext.setForeground(new Color(0, 0, 0, 255));
+        selftext.setFont(new Font("微软雅黑", Font.BOLD, 20));
+        selftext.setForeground(new Color(0, 0, 0,150));
+        selftext.setHorizontalAlignment(SwingConstants.CENTER);
         selfin.setOpaque(true);
-        selfin.setBackground(new Color(255, 255, 255, 100));
-        selfin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
-        selfin.setBounds(0,210,170,210);
-        selftext.setBounds(30,300,120,30);
+        selfin.setBackground(new Color(255, 255, 255, 90));
+        selfin.setBorder( BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
+        selfin.setBounds(65,230,170,210);
+        selftext.setBounds(65,230,170,210);
         selfin.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==selfin)
@@ -88,10 +95,10 @@ public class AppTeacher extends JFrame {
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {
-                selftext.setForeground(Color.red);
+                selftext.setForeground(Color.BLACK);
             }
             public void mouseExited(MouseEvent e) {
-                selftext.setForeground(new Color(0, 0, 0, 255));
+                selftext.setForeground(new Color(0, 0, 0,150));
             }});
         self.add(selftext,0);
         self.add(selfin,1);
@@ -99,16 +106,18 @@ public class AppTeacher extends JFrame {
 
         JLabel classicon=new JLabel("");
         classicon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teaclass.jpg")));
-        classicon.setBounds(320,0,490,360);
+        classicon.setBounds(400,15,410,300);
         JLabel classin=new JLabel("");
         JLabel classtext=new JLabel("课程管理");
-        classtext.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        classtext.setForeground(new Color(0, 0, 0, 255));
+        classtext.setFont(new Font("微软雅黑", Font.BOLD, 20));
+        classtext.setForeground(new Color(0, 0, 0,150));
+        classtext.setHorizontalAlignment(SwingConstants.CENTER);
         classin.setOpaque(true);
-        classin.setBackground(new Color(255, 255, 255, 100));
-        classin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
-        classin.setBounds(660,0,150,180);
-        classtext.setBounds(685,80,100,30);
+        classin.setBackground(new Color(255, 255, 255, 90));
+        classin.setBorder( BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
+        classin.setBounds(635,10,180,180);
+        classtext.setBounds(635,10,180,180);
         classin.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==classin)
@@ -121,9 +130,9 @@ public class AppTeacher extends JFrame {
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {
-                classtext.setForeground(Color.red);
+                classtext.setForeground(Color.BLACK);
             }
-            public void mouseExited(MouseEvent e) { classtext.setForeground(new Color(0, 0, 0, 255));; }
+            public void mouseExited(MouseEvent e) { classtext.setForeground(new Color(0, 0, 0,150));; }
         });
         self.add(classtext,0);
         self.add(classin,1);
@@ -131,16 +140,18 @@ public class AppTeacher extends JFrame {
 
         JLabel cardicon=new JLabel("");
         cardicon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teacard.jpg")));
-        cardicon.setBounds(830,0,490,360);
+        cardicon.setBounds(850,15,480,300);
         JLabel cardin=new JLabel("");
         JLabel cardtext=new JLabel("一卡通");
-        cardtext.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        cardtext.setForeground(new Color(0, 0, 0, 255));
+        cardtext.setFont(new Font("微软雅黑",Font.BOLD, 20));
+        cardtext.setForeground(new Color(0, 0, 0,150));
+        cardtext.setHorizontalAlignment(SwingConstants.CENTER);
         cardin.setOpaque(true);
-        cardin.setBackground(new Color(255, 255, 255, 100));
-        cardin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
-        cardin.setBounds(830,180,200,180);
-        cardtext.setBounds(885,260,100,30);
+        cardin.setBackground(new Color(255, 255, 255, 90));
+        cardin.setBorder( BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
+        cardin.setBounds(845,185,235,135);
+        cardtext.setBounds(845,185,235,135);
         cardin.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==cardin)
@@ -153,10 +164,10 @@ public class AppTeacher extends JFrame {
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {
-                cardtext.setForeground(Color.red);
+                cardtext.setForeground(Color.BLACK);
             }
             public void mouseExited(MouseEvent e) {
-                cardtext.setForeground(new Color(0,0,0,255));
+                cardtext.setForeground(new Color(0, 0, 0,150));
             }});
         self.add(cardtext,0);
         self.add(cardin,1);
@@ -164,16 +175,18 @@ public class AppTeacher extends JFrame {
 
         JLabel shopicon=new JLabel("");
         shopicon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teashop.jpg")));
-        shopicon.setBounds(0,440,350,350);
+        shopicon.setBounds(70,470,460,250);
         JLabel shopin=new JLabel("");
         JLabel shoptext=new JLabel("网上商店");
-        shoptext.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        shoptext.setForeground(new Color(0, 0, 0, 255));
+        shoptext.setFont(new Font("微软雅黑", Font.BOLD, 20));
+        shoptext.setForeground(new Color(0, 0, 0,150));
+        shoptext.setHorizontalAlignment(SwingConstants.CENTER);
         shopin.setOpaque(true);
-        shopin.setBackground(new Color(255, 255, 255, 100));
-        shopin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
-        shopin.setBounds(170,440,180,350);
-        shoptext.setBounds(210,615,100,30);
+        shopin.setBackground(new Color(255, 255, 255, 90));
+        shopin.setBorder( BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
+        shopin.setBounds(230,465,170,270);
+        shoptext.setBounds(230,465,170,270);
         shopin.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==shopin)
@@ -185,10 +198,10 @@ public class AppTeacher extends JFrame {
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {
-                shoptext.setForeground(Color.red);
+                shoptext.setForeground(Color.BLACK);
             }
             public void mouseExited(MouseEvent e) {
-                shoptext.setForeground(new Color(0,0,0,255));
+                shoptext.setForeground(new Color(0, 0, 0,150));
             }});
         self.add(shoptext,0);
         self.add(shopin,1);
@@ -196,16 +209,18 @@ public class AppTeacher extends JFrame {
 
         JLabel Libicon=new JLabel("");
         Libicon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/teaLib.jpg")));
-        Libicon.setBounds(380,380,940,410);
+        Libicon.setBounds(570,350,760,370);
         JLabel Libin=new JLabel("");
         JLabel Libtext=new JLabel("图书馆");
-        Libtext.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        Libtext.setForeground(new Color(0, 0, 0, 255));
+        Libtext.setFont(new Font("微软雅黑", Font.BOLD, 20));
+        Libtext.setHorizontalAlignment(SwingConstants.CENTER);
+        Libtext.setForeground(new Color(0, 0, 0,150));
         Libin.setOpaque(true);
-        Libin.setBackground(new Color(255, 255, 255, 100));
-        Libin.setBorder( BorderFactory.createLineBorder(new Color(255,255,255)));
-        Libin.setBounds(1030,380,290,410);
-        Libtext.setBounds(1130,580,100,30);
+        Libin.setBackground(new Color(255, 255, 255, 90));
+        Libin.setBorder( BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
+        Libin.setBounds(1075,345,270,410);
+        Libtext.setBounds(1075,345,270,410);
         Libin.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==Libin) {
@@ -217,14 +232,38 @@ public class AppTeacher extends JFrame {
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
             public void mouseEntered(MouseEvent e) {
-                Libtext.setForeground(Color.red);
+                Libtext.setForeground(Color.BLACK);
             }
             public void mouseExited(MouseEvent e) {
-                Libtext.setForeground(new Color(0,0,0,255));
+                Libtext.setForeground(new Color(0, 0, 0,150));
             }});
         self.add(Libtext,0);
         self.add(Libin,1);
         self.add(Libicon,2);
         contentPane.add(self);
+
+        //每日上报
+        final JButton btnReport = new JButton ();
+        btnReport.putClientProperty ( StyleId.STYLE_PROPERTY, StyleId.buttonHover );
+        btnReport.setText("每日上报");btnReport.setBounds(445, 395, 140, 95);
+        btnReport.setOpaque(true);
+        btnReport.setFont( new Font("微软雅黑", Font.BOLD, 16));
+        btnReport.setForeground(new Color(0, 0, 0,150));
+        btnReport.setBackground(new Color(0x7ACBB5));
+        btnReport.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
+        btnReport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnReport)
+                {
+                    //AppDailyReport app=new AppDailyReport();
+                    //setVisible(false);
+                    //app.setVisible(true);
+                }
+            }
+        });
+        contentPane.add(btnReport);
+
     }
 }
