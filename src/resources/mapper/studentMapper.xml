@@ -155,4 +155,93 @@
                                                       = #{cardNumber}
         LIMIT 1
     </update>
+
+    <select id="fuzzySearchByName" parameterType="String"
+            resultType="Student">
+        SELECT *FROM students WHERE name LIKE '%${name}%'
+    </select>
+
+    <select id="fuzzySearchByCard" parameterType="String"
+            resultType="Student">
+        SELECT *FROM students WHERE cardNumber LIKE '%${cardNumber}%'
+    </select>
+
+
+    <select id="fuzzySearchBySchool" parameterType="String"
+            resultType="Student">
+        SELECT *FROM students WHERE school LIKE '%${school}%'
+    </select>
+
+    <select id="fuzzySearchByGender" parameterType="String"
+            resultType="Student">
+        SELECT *FROM students WHERE gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndCard" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE name LIKE '%${name}%' AND
+            cardNumber LIKE '%${cardNumber}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndSchool" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE name LIKE '%${name}%' AND
+                                        school LIKE '%${school}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndGender" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE name LIKE '%${name}%' AND
+            gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByCardAndSchool" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE cardNumber LIKE '%${cardNumber}%' AND
+            school LIKE '%${school}%'
+    </select>
+
+    <select id="fuzzySearchByCardAndGender" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE cardNumber LIKE '%${cardNumber}%' AND
+            gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchBySchoolAndGender" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE school LIKE '%${school}%' AND
+            gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndCardAndSchool" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE name LIKE '%${name}%' AND
+            cardNumber LIKE '%${cardNumber}%' AND school LIKE '%${school}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndCardAndGender" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE name LIKE '%${name}%' AND
+            cardNumber LIKE '%${cardNumber}%' AND gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByCardAndSchoolAndGender" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE cardNumber LIKE '%${cardNumber}%' AND school LIKE '%${school}%'
+                                AND gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndSchoolAndGender" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE name LIKE '%${name}%' AND school LIKE '%${school}%'
+                                AND gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndCardAndSchoolAndGender" parameterType="Student"
+            resultType="Student">
+        SELECT *FROM students WHERE name LIKE '%${name}%' AND cardNumber LIKE '%${cardNumber}%'
+                                AND school LIKE '%${school}%' AND gender LIKE '%${gender}%'
+    </select>
+
+
 </mapper>

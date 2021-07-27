@@ -15,12 +15,5 @@
       <jdbc-url>jdbc:mysql://sh-cynosdbmysql-grp-bfh7pm72.sql.tencentcdb.com:27186</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="vcampus" uuid="79272915-f22e-4e63-8136-8eecd6cb3a2a">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://sh-cynosdbmysql-grp-bfh7pm72.sql.tencentcdb.com:27186/vcampus</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
   </component>
 </project>

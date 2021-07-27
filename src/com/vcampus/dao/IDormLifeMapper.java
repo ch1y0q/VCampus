@@ -14,4 +14,6 @@ public interface IDormLifeMapper {
 
     public float getElectricityRate(Map map);
 
+    public Boolean setDormHygieneMark(Map map);
+
 }

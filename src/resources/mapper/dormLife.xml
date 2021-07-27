@@ -22,5 +22,12 @@
             `dormAddress`=#{dormAddress} AND `monthOrWeek`= #{weekNo}
     </select>
 
+    <update id="setDormHygieneMark" parameterType="Map">
+        UPDATE `dormLife` SET
+            `hygieneMark` = #{hygieneMark} WHERE
+            `dormAddress`= #{dormAddress} AND `monthOrWeek` = #{weekNo}
+        LIMIT 1
+    </update>
+
 
 </mapper>

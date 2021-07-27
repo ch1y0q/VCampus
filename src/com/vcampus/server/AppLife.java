@@ -195,4 +195,19 @@ public class AppLife {
         return list;
     }
 
+    public static Boolean setDormHygieneMark(HashMap map) {
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IDormLifeMapper dormLifeMapper=sqlSession.getMapper(IDormLifeMapper.class);
+
+            dormLifeMapper.setDormHygieneMark(map);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

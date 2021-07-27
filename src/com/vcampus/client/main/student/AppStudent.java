@@ -7,6 +7,8 @@ import com.vcampus.client.main.App;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.AppStuCourse;
 import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
+import com.vcampus.client.main.library.StuLibrary;
+import com.vcampus.client.main.manager.StuManage;
 import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
 import com.vcampus.client.main.shop.AppShop;
 
@@ -181,7 +183,7 @@ public class AppStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnLibrary)
                 {
-                    ManLibrary app=new ManLibrary();
+                    StuLibrary app=new StuLibrary();
                     setVisible(false);
                     app.setVisible(true);
                 }

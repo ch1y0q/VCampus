@@ -2,6 +2,7 @@ package com.vcampus.server;
 
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.vcampus.dao.IStudentMapper;
@@ -137,5 +138,148 @@ public class StudentManage {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static List<Student> ByNameAndCardAndSchoolAndGender(String name, String cardNumber, String school, String gender) {
+        List<Student> list = new ArrayList<>();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+            if (cardNumber == null&&school == null&&gender == null) {
+                list = studentMapper.fuzzySearchByName(name);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (name == null && school == null && gender == null) {
+                list = studentMapper.fuzzySearchByCard(cardNumber);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (name == null && cardNumber == null && gender == null) {
+                list = studentMapper.fuzzySearchBySchool(school);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (name == null && cardNumber == null && school == null) {
+                list = studentMapper.fuzzySearchByGender(gender);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (school == null && gender == null) {
+                Student student = new Student();
+                student.setName(name);
+                student.setCardNumber(cardNumber);
+                list = studentMapper.fuzzySearchByNameAndCard(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (cardNumber == null && gender == null) {
+                Student student = new Student();
+                student.setName(name);
+                student.setSchoolBy(school);
+                list = studentMapper.fuzzySearchByNameAndSchool(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (cardNumber == null && school == null) {
+                Student student = new Student();
+                student.setName(name);
+                student.setGender(gender);
+                list = studentMapper.fuzzySearchByNameAndGender(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (name == null && gender == null) {
+                Student student = new Student();
+                student.setCardNumber(cardNumber);
+                student.setSchoolBy(school);
+                list = studentMapper.fuzzySearchByCardAndSchool(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (name == null && school == null) {
+                Student student = new Student();
+                student.setCardNumber(cardNumber);
+                student.setGender(gender);
+                list = studentMapper.fuzzySearchByCardAndGender(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (name == null && cardNumber == null) {
+                Student student = new Student();
+                student.setSchoolBy(school);
+                student.setGender(gender);
+                list = studentMapper.fuzzySearchBySchoolAndGender(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (gender==null) {
+                Student student = new Student();
+                student.setName(name);
+                student.setCardNumber(cardNumber);
+                student.setSchoolBy(school);
+                list = studentMapper.fuzzySearchByNameAndCardAndSchool(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (school==null) {
+                Student student = new Student();
+                student.setName(name);
+                student.setCardNumber(cardNumber);
+                student.setGender(gender);
+                list = studentMapper.fuzzySearchByNameAndCardAndGender(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if (name==null) {
+                Student student = new Student();
+                student.setCardNumber(cardNumber);
+                student.setSchoolBy(school);
+                student.setGender(gender);
+                list = studentMapper.fuzzySearchByCardAndSchoolAndGender(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else if(cardNumber==null)
+            {
+                Student student = new Student();
+                student.setName(name);
+                student.setSchoolBy(school);
+                student.setGender(gender);
+                list = studentMapper.fuzzySearchByNameAndSchoolAndGender(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+            else {
+                Student student = new Student();
+                student.setName(name);
+                student.setCardNumber(cardNumber);
+                student.setSchoolBy(school);
+                student.setGender(gender);
+                list = studentMapper.fuzzySearchByNameAndCardAndSchoolAndGender(student);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+            }
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return list;
     }
 }
