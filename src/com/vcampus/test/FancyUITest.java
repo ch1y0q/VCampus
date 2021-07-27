@@ -2,7 +2,7 @@ package com.vcampus.test;
 
 
 /*
- * This file is part of WebLookAndFeel library.
+ * This file is *adopted from* part of WebLookAndFeel library.
  *
  * WebLookAndFeel library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,6 +53,7 @@ import com.alee.extended.tab.DocumentAdapter;
 import com.alee.extended.tab.DocumentData;
 import com.alee.extended.tab.PaneData;
 import com.alee.extended.tab.WebDocumentPane;
+import com.alee.extended.tree.ExTreeDataProvider;
 import com.alee.extended.tree.WebExTree;
 import com.alee.extended.tree.WebTreeFilterField;
 import com.alee.laf.WebLookAndFeel;
@@ -67,6 +68,7 @@ import com.alee.laf.toolbar.WebToolBar;
 import com.alee.laf.tree.TreeNodeEventRunnable;
 import com.alee.laf.tree.TreeSelectionStyle;
 import com.alee.laf.tree.TreeState;
+import com.alee.laf.tree.WebTree;
 import com.alee.laf.window.WebFrame;
 import com.alee.managers.hotkey.Hotkey;
 import com.alee.managers.language.LM;
@@ -87,6 +89,7 @@ import com.alee.utils.swing.Customizer;
 import com.alee.utils.swing.extensions.KeyEventRunnable;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -116,7 +119,7 @@ public final class FancyUITest extends WebFrame
     /**
      * Demo application base UI elements.
      */
-    private WebDockablePane dockablePane;
+    WebDockablePane dockablePane;
     WebDocumentPane<DocumentData> mainPane;
     WebDockableFrame categoryFrame;
 
@@ -149,7 +152,7 @@ public final class FancyUITest extends WebFrame
         initializeDocks();
         initializeStatus();
         initializeToolBar();
-        initializeCategoryFrame();
+       // initializeCategoryFrame();
 
         setDefaultCloseOperation ( WindowConstants.EXIT_ON_CLOSE );
         registerSettings ( new Configuration<WindowState> ( "application", new SerializableSupplier<WindowState> ()
@@ -160,6 +163,8 @@ public final class FancyUITest extends WebFrame
                 return new WindowState ( new Dimension ( 1200, 820 ) );
             }
         } ) );
+
+
     }
 
     /**
@@ -170,7 +175,7 @@ public final class FancyUITest extends WebFrame
         final StringBuilder title = new StringBuilder ();
 
         // Library version
-        title.append ( "vCampus " ).append ( version.toString () );
+        title.append ( "vCampus " );
 
         // Opened example
         final DocumentData doc = mainPane != null ? mainPane.getSelectedDocument () : null;
@@ -185,22 +190,24 @@ public final class FancyUITest extends WebFrame
 
     /**
      * Initializes categoryFrame.
+     * Called during initializeDocks().
      *
      * @author Huang Qiyue
      * @date 2021-07-20
      */
     private void initializeCategoryFrame()
     {
+        categoryFrame = new WebDockableFrame(StyleId.dockableframeCompact,"FancyUITest","vCampus");
         categoryFrame.setPosition(CompassDirection.west);
-        categoryFrame.setPreferredSize(300,200);
 
-        final WebExTree appTree = new WebExTree();
+        final WebTree appTree = new WebTree(getTreeNodes());
+
         appTree.setEditable(false);
         appTree.setRootVisible(false);
         appTree.setShowsRootHandles(true);
         appTree.setMultipleSelectionAllowed(false);
         appTree.setSelectionStyle(TreeSelectionStyle.line);
-        //TODO appTree.expandAll();
+        appTree.expandAll();
         appTree.onKeyPress ( Hotkey.ENTER, new KeyEventRunnable()
         {
             @Override
@@ -219,19 +226,18 @@ public final class FancyUITest extends WebFrame
                 //open ( node );
             }
         } );
-        appTree.registerSettings ( new Configuration<TreeState> ( "ExamplesTree" ) );
+        //appTree.registerSettings ( new Configuration<TreeState> ( "ExamplesTree" ) );
         final WebScrollPane appTreeScroll = new WebScrollPane ( StyleId.scrollpaneTransparentHoveringExtending, appTree );
         appTreeScroll.registerSettings ( new Configuration<ScrollPaneState> ( "ExamplesScroll" ) );
 
         // Filtering field
-        // TODO
-        // final WebTreeFilterField filter = new WebTreeFilterField ( appTree );
+        // unimplemented - requires WebExTree
+        //final WebTreeFilterField filter = new WebTreeFilterField ( appTree );
 
         // Frame UI composition
         final WebSeparator separator = new WebSeparator ( StyleId.separatorHorizontal );
-        //categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, filter, separator, appTreeScroll ) );
-        categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, separator, appTreeScroll ) );
-
+       //categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, filter, separator, appTreeScroll ) );
+       categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, separator, appTreeScroll ) );
     }
 
     /**
@@ -240,7 +246,6 @@ public final class FancyUITest extends WebFrame
     private void initializeStatus ()
     {
         final WebStatusBar statusBar = new WebStatusBar ();
-
 
         statusBar.addSpacingToEnd ( 10 );
 
@@ -294,7 +299,6 @@ public final class FancyUITest extends WebFrame
         /**
          * Content.
          */
-
         mainPane = new WebDocumentPane<>();
         mainPane.setClosable ( true );
         mainPane.setDragEnabled ( true );
@@ -317,6 +321,7 @@ public final class FancyUITest extends WebFrame
         information.setHorizontalTextAlignment ( WebStyledLabel.CENTER );
         information.setWrap ( TextWrap.none );
         information.changeFontSize ( 3 );
+        information.setFontName("微软雅黑");
         information.setText("请从左侧选择要进行的操作");
         /*
         information.setLanguage (
@@ -325,7 +330,22 @@ public final class FancyUITest extends WebFrame
                 SystemUtils.getJavaName (),
                 SystemUtils.getJavaVersion ().versionString (), SystemUtils.getOsArch ()
         );*/
+
         overlayContainer.add ( information );
+        JDesktopPane desktopPane = new JDesktopPane();
+        int  x = 30, y = 30;
+        for(int  i = 0; i < 10 ; ++i )
+        {
+            JInternalFrame jframe = new JInternalFrame("Internal Frame " + i ,  true, true, true, true);
+
+            jframe.setBounds(x, y, 250, 85);
+            Container c1 = jframe.getContentPane( ) ;
+            c1.add(new JLabel("I love my country"));
+            desktopPane.add( jframe );
+            jframe.setVisible(true);
+            y += 85;
+        }
+        overlayContainer.add ( desktopPane );
 
         overlay.addOverlay ( new FillOverlay ( overlayContainer ) );
 
@@ -360,7 +380,7 @@ public final class FancyUITest extends WebFrame
          * Frames.
          */
 
-        categoryFrame = new WebDockableFrame(StyleId.dockableframeCompact,"FancyUITest","vCampus");
+        initializeCategoryFrame();
         dockablePane.addFrame (categoryFrame);
 
         /**
@@ -369,6 +389,58 @@ public final class FancyUITest extends WebFrame
          */
 
         add ( dockablePane, BorderLayout.CENTER );
+    }
+
+    /**
+     * Initialize a tree with all functionalities.
+     *
+     * @author Huang Qiyue
+     * @date 2021-07-22
+     */
+    private DefaultMutableTreeNode getTreeNodes(){
+        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("学生登陆");
+        DefaultMutableTreeNode nodPersonalInfo = new DefaultMutableTreeNode("个人信息");
+        DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
+        DefaultMutableTreeNode nodCourses = new DefaultMutableTreeNode("课程管理");
+        DefaultMutableTreeNode nodLivingServices = new DefaultMutableTreeNode(   "生活服务");
+        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        nodLogin.add(nodPersonalInfo);
+        nodLogin.add(nodCourses);
+        nodLogin.add(nodLibrary);
+        nodLogin.add(nodLivingServices);
+        nodLogin.add(nodShop);
+
+        DefaultMutableTreeNode nodInfoLookup = new DefaultMutableTreeNode("个人信息查询");
+        DefaultMutableTreeNode nodInfoManage = new DefaultMutableTreeNode("个人信息维护");
+        nodPersonalInfo.add(nodInfoLookup);
+        nodPersonalInfo.add(nodInfoManage);
+        DefaultMutableTreeNode nodBorrowLookup = new DefaultMutableTreeNode("借阅查询");
+        DefaultMutableTreeNode nodBookLookup = new DefaultMutableTreeNode("书籍查询");
+        DefaultMutableTreeNode nodBorrowHistory = new DefaultMutableTreeNode("借阅历史");
+        nodLibrary.add(nodBorrowLookup);
+        nodLibrary.add(nodBookLookup);
+        nodLibrary.add(nodBorrowHistory);
+        DefaultMutableTreeNode nodTimetable = new DefaultMutableTreeNode("课表");
+        DefaultMutableTreeNode nodGrades = new DefaultMutableTreeNode("成绩查询");
+        DefaultMutableTreeNode nodChooseCourses = new DefaultMutableTreeNode("选课");
+        nodCourses.add(nodTimetable);
+        nodCourses.add(nodGrades);
+        nodCourses.add(nodChooseCourses);
+        DefaultMutableTreeNode nodCard = new DefaultMutableTreeNode("一卡通");
+        DefaultMutableTreeNode nodDormManage = new DefaultMutableTreeNode("宿舍管理");
+        nodLivingServices.add(nodCard);
+        nodLivingServices.add(nodDormManage);
+        DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
+        DefaultMutableTreeNode nodCart = new DefaultMutableTreeNode("购物车");
+        DefaultMutableTreeNode nodShoppingHistory = new DefaultMutableTreeNode("购买历史");
+        nodShop.add(nodGoods);
+        nodShop.add(nodCart);
+        nodShop.add(nodShoppingHistory);
+
+       // JTree jt = new JTree(nodLogin);
+       // jt.setBounds(0,50,200,600);
+       // categoryFrame.add(jt);
+        return nodLogin;
     }
 
     /**
@@ -416,11 +488,10 @@ public final class FancyUITest extends WebFrame
             @Override
             public void run ()
             {
-
                 // Configuring settings location
-                SettingsManager.setDefaultSettingsDirName ( ".weblaf-demo" );
-                SettingsManager.setDefaultSettingsGroup ( "WebLookAndFeelDemo" );
-                SettingsManager.setSaveOnChange ( true );
+               //SettingsManager.setDefaultSettingsDirName ( ".weblaf-demo" );
+               //SettingsManager.setDefaultSettingsGroup ( "WebLookAndFeelDemo" );
+               //SettingsManager.setSaveOnChange ( true );
 
 
                 // Adding demo data aliases before styles using it are read
@@ -462,8 +533,6 @@ public final class FancyUITest extends WebFrame
 
                 // Starting demo application
                 FancyUITest.getInstance ().display ();
-
-
             }
         } );
     }
