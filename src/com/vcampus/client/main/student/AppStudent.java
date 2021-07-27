@@ -3,6 +3,7 @@ package com.vcampus.client.main.student;
 import com.alee.managers.style.StyleId;
 import com.vcampus.UI.myJLabel;
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.App;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.AppStuCourse;
 import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
@@ -47,6 +48,7 @@ public class AppStudent extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
 
         JLabel lblVcampus = new JLabel(res.getString("student_main"));
         lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,6 +105,16 @@ public class AppStudent extends JFrame {
         Timer timer=new Timer(5000,new TimeListener());
         timer.start();
 
+        JLabel label =new JLabel();
+        label.setText(" 欢迎您,"+ App.session.getStudent().getName());
+        label.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        label.setOpaque(true);
+        label.setForeground(new Color(33, 117, 206));
+        label.setBackground(new Color(33,177,206,80));
+        label.setBounds(1270, 5, 100, 30);
+        contentPane.add(label);
+
+
         JButton logout = new JButton(res.getString("logout"));
         logout.addActionListener(new ActionListener() {
             @Override
@@ -116,7 +128,7 @@ public class AppStudent extends JFrame {
             }
         });
         logout.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        logout.setBounds(1450,5,50,30);
+        logout.setBounds(1380,5,50,30);
         logout.setForeground(new Color(33, 117, 206,100));
         contentPane.add(logout);
 
