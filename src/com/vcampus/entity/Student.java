@@ -24,6 +24,7 @@ public class Student {
     private String courseList;
 
     /* optional */
+    private String school;
     private String email;
     private String phoneNumber;
     private String gender;
@@ -32,7 +33,24 @@ public class Student {
     public String dormAddress;
 
     /* constructor */
-    public Student(){}
+    public Student(){
+        name = "";
+        password = "";
+        cardNumber = "";
+        studentNumber = "";
+        balance = new BigDecimal(0);
+        courses = null;
+        school=null;
+        courseList=null;
+        school=null;
+        email=null;
+        phoneNumber=null;
+        gender=null;
+        bankAccount=null;
+        lossStatus=null;
+        dormAddress=null;
+
+    }
     public Student(String _cardNumber, String _password) {
         name = "";
         password = _password;
@@ -40,6 +58,15 @@ public class Student {
         studentNumber = "";
         balance = new BigDecimal(0);
         courses = null;
+    }
+    public Student(String _cardNumber, String _password,String _school) {
+        name = "";
+        password = _password;
+        cardNumber = _cardNumber;
+        studentNumber = "";
+        balance = new BigDecimal(0);
+        courses = null;
+        school=_school;
     }
 
     public Student(String _name, String _password, String _cardNumber, String _studentNumber, BigDecimal _balance, List<String> _courses) {
@@ -61,7 +88,13 @@ public class Student {
         }
         return school;
     }
-
+    public String getSchoolBy() {
+        return school;
+    }
+    public void setSchoolBy(String school)
+    {
+        this.school=school;
+    }
     /* getters and setters */
     public String getName() {
         return name;

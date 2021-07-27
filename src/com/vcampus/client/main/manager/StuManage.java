@@ -2,6 +2,11 @@ package com.vcampus.client.main.manager;
 
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.administrator.main.AppAdmin;
+import com.vcampus.client.main.App;
+import com.vcampus.entity.Book;
+import com.vcampus.entity.Student;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -22,7 +28,8 @@ import java.util.ResourceBundle;
 public class StuManage extends JFrame{
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
-
+    private List<Student> list = null;
+    private DefaultTableModel model;
     public StuManage(){
         setResizable(true);
         setTitle("学生信息管理");
@@ -80,7 +87,7 @@ public class StuManage extends JFrame{
         contentPane.add(logout);
 
         JTextField txtfield1=new JTextField();    //创建文本框
-        txtfield1.setText("输入学生一卡通号或姓名");
+        txtfield1.setText("输入学生姓名");
         txtfield1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         txtfield1.setBounds(210,50,300,30);
         contentPane.add(txtfield1);
@@ -107,36 +114,26 @@ public class StuManage extends JFrame{
         JButton Stuserch=new JButton("学生信息查询");
         Stuserch.setBounds(1100,80,150,30);
         Stuserch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Stuserch.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
         contentPane.add(Stuserch);
 
-        JLabel academylabel=new JLabel("学院");
+        JLabel academylabel=new JLabel("Card");
         academylabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         academylabel.setBounds(250, 40, 50, 30);
         academylabel.setBorder(new EmptyBorder(0,0,0,0));
         Stuinforselect.add(academylabel);
-        JComboBox academy=new JComboBox();
-        String[] recalltxt1={"","计算机科学与工程学院","网络安全学院","软件学院"};
-        for(String s :recalltxt1){
-            academy.addItem(s);
-        }
-        academy.setBounds(300,40,150,30);
-        Stuinforselect.add(academy);
+        JTextField txtfield2=new JTextField();    //创建文本框
+        txtfield2.setText("");
+        txtfield2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        txtfield2.setBounds(300,40,150,30);
+        Stuinforselect.add(txtfield2);
 
-        JLabel classlabel=new JLabel("班级");
+        JLabel classlabel=new JLabel("学院");
         classlabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         classlabel.setBounds(250, 90, 50, 30);
         classlabel.setBorder(new EmptyBorder(0,0,0,0));
         Stuinforselect.add(classlabel);
-        JComboBox Stuclass=new JComboBox();
-        String[] recalltxt2={"","0901921","090192","090193"};
-        for(String s :recalltxt2){
-            Stuclass.addItem(s);
-        }
+        String[] recalltxt2={"","computer","ruanjian","science"};
+        JComboBox Stuclass=new JComboBox(recalltxt2);
         Stuclass.setBounds(300,90,150,30);
         Stuinforselect.add(Stuclass);
 
@@ -146,12 +143,13 @@ public class StuManage extends JFrame{
         sexlabel.setBorder(new EmptyBorder(0,0,0,0));
         Stuinforselect.add(sexlabel);
         JComboBox sex=new JComboBox();
-        String[] recalltxt3={"","男","女"};
+        String[] recalltxt3={"","man","woman"};
         for(String s :recalltxt3){
             sex.addItem(s);
         }
         sex.setBounds(300,140,150,30);
         Stuinforselect.add(sex);
+
 
         StudetailInfo Studetail=new StudetailInfo();
         Studetail.setBounds(210,610,800,180);
@@ -164,8 +162,7 @@ public class StuManage extends JFrame{
         contentPane.add(Stuinfor);
 
         String[] header = {"一卡通号", "姓名","性别","学院","班级","选择"};
-        String[][] data = {{"", "","","","",""}};
-        DefaultTableModel model = new DefaultTableModel(data,header);
+        model = new DefaultTableModel(null,header);
         JTable table = new JTable(model)
         {
             @Override
@@ -175,6 +172,43 @@ public class StuManage extends JFrame{
                 return false;
             }
         };
+        Stuserch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String txt1=txtfield1.getText();
+                String txt2=txtfield2.getText();
+                String txt3=Stuclass.getSelectedItem().toString();
+                String txt4=sex.getSelectedItem().toString();
+                list = ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null,
+                                "com.vcampus.server.StudentManage.ByNameAndCardAndSchoolAndGender",
+                                new Object[] {txt1,txt2,txt3,txt4}).send())
+                        .getListReturn(Student.class);
+                String[][] listData = new String[list.size()][6];
+                if (list == null || list.size() == 0) {
+                    System.out.println("error");
+                    model.setRowCount(0);
+                    table.setModel(model);
+                } else {
+                    model.setRowCount(0);
+                    int len = list.size();
+                    for (int i = 0; i < len; i++) {
+                        listData[i][0]=list.get(i).getCardNumber();
+                        listData[i][1]=list.get(i).getName();
+                        listData[i][2]=list.get(i).getGender();
+                        listData[i][3]=list.get(i).getSchoolBy();
+                        listData[i][4]=list.get(i).getStudentNumber();
+                        listData[i][5]="<html><font color='rgb(110,110,110)'>查看</font></html>";
+                    }
+                    model = new DefaultTableModel(listData, header){
+                        public boolean isCellEditable(int a, int b) {
+                            return false;
+                        }
+                    };
+                    table.setModel(model);
+                }
+            }
+        });
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

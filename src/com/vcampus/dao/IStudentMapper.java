@@ -66,4 +66,24 @@ public interface IStudentMapper {
     public Boolean resetEmail(Map map);
 
     public void setSelectedCourses(Map map);
+
+    public List<Student> fuzzySearchByName(String name);
+    public List<Student> fuzzySearchByCard(String cardNumber);
+    public List<Student> fuzzySearchBySchool(String school);
+    public List<Student> fuzzySearchByGender(String gender);
+
+    public List<Student> fuzzySearchByNameAndCard(Student student);
+    public List<Student> fuzzySearchByNameAndSchool(Student student);
+    public List<Student> fuzzySearchByNameAndGender(Student student);
+    public List<Student> fuzzySearchByCardAndSchool(Student student);
+    public List<Student> fuzzySearchByCardAndGender(Student student);
+    public List<Student> fuzzySearchBySchoolAndGender(Student student);
+
+    public List<Student> fuzzySearchByNameAndCardAndSchool(Student student);
+    public List<Student> fuzzySearchByNameAndCardAndGender(Student student);
+    public List<Student> fuzzySearchByCardAndSchoolAndGender(Student student);
+    public List<Student> fuzzySearchByNameAndSchoolAndGender(Student student);
+
+    public List<Student> fuzzySearchByNameAndCardAndSchoolAndGender(Student student);
+
 }
