@@ -2,6 +2,10 @@ package com.vcampus.client.main.shop;
 
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.student.StuCategory;
+import com.vcampus.entity.Goods;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
+import com.vcampus.util.SwingUtils;
 
 import static com.vcampus.client.main.shop.AppShopHelper.*;
 
@@ -11,10 +15,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
- * @author Y
+ * @author Y, Huang Qiyue
  * @date 2021/7/21
  */
 
@@ -22,10 +29,51 @@ public class AppShop extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
     private static JPanel jp1, jp2;
-    private static JComboBox cmbGoodsKind;
+    private static JComboBox cmbGoodsCategory;
     private static JTable tblGoodsList;
     private static JTextField txtGoodsNum;
     private static JLabel lblBalanceVal;
+    private static JLabel goodsPic;
+
+    public void addGoodsListHeader(){
+        /* BE CAREFUL CHANGING columnIndex! */
+        tblGoodsList.getModel().setValueAt("商品名称", 0, 0);
+        tblGoodsList.getModel().setValueAt("类别", 0, 1);
+        tblGoodsList.getModel().setValueAt("剩余数量", 0, 2);
+        tblGoodsList.getModel().setValueAt("状态", 0, 3);
+        tblGoodsList.getModel().setValueAt("价格", 0, 4);
+    }
+
+    public void handleCategorySelection(String category) {
+        tblGoodsList.removeAll();
+        List<Goods> list = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null,
+                        "com.vcampus.server.shop.ShopServer.listGoodsByType", new Object[] { category }).send())
+                .getListReturn(Goods.class);
+        if (list == null) {
+            SwingUtils.showMessage(null, "抱歉，没有搜到符合条件的商品，管理员正在努力备货中...", "提示");
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                tblGoodsList.getModel().setValueAt(list.get(i).getName(), i+1, 0);
+                tblGoodsList.getModel().setValueAt(list.get(i).getCategory(), i+1, 1);
+                tblGoodsList.getModel().setValueAt(list.get(i).getRemaining(), i+1, 2);
+                tblGoodsList.getModel().setValueAt(list.get(i).getStatus(), i+1, 3);
+                tblGoodsList.getModel().setValueAt(list.get(i).getPrice(), i+1, 4);
+            }
+
+        }
+        // 滚动到顶端
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                /* TODO
+                jsp_List.getVerticalScrollBar().setValue(0);
+                lblDefaultHint.setVisible(false);
+                jsp_List.setVisible(true);
+                */
+            }
+        });
+    }
 
     private void loadGoods(){
         //TODO
@@ -109,13 +157,28 @@ public class AppShop extends JFrame {
         lblGoodsKind.setBounds(620, 60, 100, 40);
         contentPane.add(lblGoodsKind);
 
-        cmbGoodsKind = new JComboBox();
-        cmbGoodsKind.addItem("所有商品");
-        //cmbGoodsKind.addItem("食品");
-        //cmbGoodsKind.addItem("日用");
-        //cmbGoodsKind.addItem("文具");
-        cmbGoodsKind.setBounds(770, 67, 100, 30);
-        contentPane.add(cmbGoodsKind);
+        cmbGoodsCategory = new JComboBox();
+        cmbGoodsCategory.addItem("所有商品");
+        cmbGoodsCategory.addItem("食品");
+        cmbGoodsCategory.addItem("日用");
+        cmbGoodsCategory.addItem("文具");
+        cmbGoodsCategory.setBounds(770, 67, 100, 30);
+        contentPane.add(cmbGoodsCategory);
+        cmbGoodsCategory.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(ItemEvent.SELECTED == e.getStateChange()){
+                    String selectedItem = e.getItem().toString();
+                    handleCategorySelection(selectedItem);
+                    //System.out.printf("new selected item : %s%n",selectedItem);
+                }
+                if(ItemEvent.DESELECTED == e.getStateChange()){
+                    //String selectedItem = e.getItem().toString();
+                    //System.out.printf("deselected item : %s%n",selectedItem);
+                }
+            }
+
+        });
 
         JLabel lblBalance = new JLabel("账户余额");
         lblBalance.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -130,14 +193,9 @@ public class AppShop extends JFrame {
 
         tblGoodsList = new JTable(12, 5);
         tblGoodsList.setBounds(330, 150, 500, 600);
-        tblGoodsList.setRowHeight(50);
+        tblGoodsList.setRowHeight(40);
         tblGoodsList.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        /* BE CAREFUL CHANGING columnIndex! */
-        tblGoodsList.getModel().setValueAt("商品名称", 0, 0);
-        tblGoodsList.getModel().setValueAt("类别", 0, 1);
-        tblGoodsList.getModel().setValueAt("剩余数量", 0, 2);
-        tblGoodsList.getModel().setValueAt("状态", 0, 3);
-        tblGoodsList.getModel().setValueAt("价格", 0, 4);
+        addGoodsListHeader();
         tblGoodsList.setPreferredScrollableViewportSize(new Dimension(200, 100));
         DefaultTableCellRenderer rGoodsList = new DefaultTableCellRenderer();
         rGoodsList.setHorizontalAlignment(JLabel.CENTER);
@@ -151,9 +209,9 @@ public class AppShop extends JFrame {
         lblGoodsPic.setBounds(1050, 150, 100, 40);
         contentPane.add(lblGoodsPic);
 
-        JLabel goodsPic = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
+        goodsPic = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
         contentPane.add(goodsPic);
-        goodsPic.setBounds(1000, 200, 100, 100);
+        goodsPic.setBounds(1000, 200, 200, 200);
 
         JLabel lblGoodsInfo = new JLabel("商品信息");
         lblGoodsInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
