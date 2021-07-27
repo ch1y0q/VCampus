@@ -1,6 +1,8 @@
 package com.vcampus.client.main;
 
 import com.vcampus.client.main.manager.ManCategory;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
 
 import javax.swing.JPanel;
 import javax.swing.*;
@@ -9,6 +11,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 /**
  * @author Y
@@ -97,8 +100,31 @@ public class AppDormAdmin extends JFrame {
 
         JButton btnDormHygieneRateLookUp = new JButton("查询");
         btnDormHygieneRateLookUp.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
-        jp1.add(btnDormHygieneRateLookUp);
         btnDormHygieneRateLookUp.setBounds(220, 337, 100, 30);
+        btnDormHygieneRateLookUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String dormAddress = txtDormHygieneRateEnteringDormAddress.getText();
+                String weekText=cmbDormHygieneMarkWeek.getSelectedItem().toString();
+                int weekNo=Integer.valueOf(weekText.substring(1,2));
+
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("dormAddress",dormAddress);
+                map.put("weekNo",weekNo);
+
+                int hygieneMark;
+                hygieneMark= ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getDormHygieneMark",
+                                new Object[]{map}).send())
+                        .getReturn(Integer.class);
+
+                tblDormHygieneMark.getModel().setValueAt(dormAddress,1,0);
+                tblDormHygieneMark.getModel().setValueAt(hygieneMark,1,1);
+                tblDormHygieneMark.getModel().setValueAt(weekNo,1,2);
+            }
+        });
+        jp1.add(btnDormHygieneRateLookUp);
+
         
         JLabel lblDormHygieneMarkEnteringMark = new JLabel("分数");
         lblDormHygieneMarkEnteringMark.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -112,9 +138,31 @@ public class AppDormAdmin extends JFrame {
 
         JButton btnDormHygieneRateEntering = new JButton("录入");
         btnDormHygieneRateEntering.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
-        jp1.add(btnDormHygieneRateEntering);
         btnDormHygieneRateEntering.setBounds(330, 586, 100, 30);
+        btnDormHygieneRateEntering.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String dormAddress = txtDormHygieneRateEnteringDormAddress.getText();
+                String weekText=cmbDormHygieneMarkWeek.getSelectedItem().toString();
+                int weekNo=Integer.valueOf(weekText.substring(1,2));
+                String dormHygieneMark = txtDormHygieneRateEnteringMark.getText();
+
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("dormAddress",dormAddress);
+                map.put("weekNo",weekNo);
+                map.put("hygieneMark",dormHygieneMark);
+
+                ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.setDormHygieneMark",
+                                new Object[]{map}).send())
+                        .getReturn(Boolean.class);
+            }
+        });
+        jp1.add(btnDormHygieneRateEntering);
+
         
+
+
 
 
 
