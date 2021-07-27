@@ -85,7 +85,7 @@ public class AppStuInfo  extends JFrame {
         String studentName = App.session.getStudent().getName();//获取姓名
         String studentCardNumber = App.session.getStudent().getCardNumber();//获取一卡通号
         String studentGender = App.session.getStudent().getGender();//获取性别
-        String studentSchool = App.session.getStudent().getSchool();//获取学院
+        String studentSchool = App.session.getStudent().getSchoolByNumber();//获取学院
         String studentEmail = App.session.getStudent().getEmail();//获取邮箱
         String studentPassword = App.session.getStudent().getPassword();//获取登录密码
         String studentPhoneNumber = App.session.getStudent().getPhoneNumber();//获取电话号码

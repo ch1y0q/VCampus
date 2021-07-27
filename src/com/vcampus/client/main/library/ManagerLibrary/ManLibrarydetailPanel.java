@@ -26,53 +26,81 @@ public class ManLibrarydetailPanel extends JPanel {
     public ManLibrarydetailPanel(){
         setLayout(null);
 
-        JButton bookadd = new JButton("添加书籍");
-        bookadd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                initnow();
-                startedit();
-            }
-        });
-        bookadd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        bookadd.setBounds(0, 0, 150, 30);
-        add(bookadd);
 
         JButton btnSure = new JButton("确认");
-        btnSure.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               addbook();
-               closeedit();
-            }
-        });
         btnSure.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         btnSure.setBounds(480, 0, 150, 30);
         add(btnSure);
+        btnSure.setEnabled(false);
+
+        JButton save = new JButton("保存");
+        save.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        save.setBounds(320, 0, 150, 30);
+        add(save);
+        save.setEnabled(false);
+
+        JButton bookadd = new JButton("添加书籍");
+        bookadd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        bookadd.setBounds(0, 0, 150, 30);
+        add(bookadd);
 
 
         JButton edit = new JButton("启动编辑");
         edit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         edit.setBounds(160, 0, 150, 30);
-        edit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startedit();
-            }
-        });
         add(edit);
 
-        JButton save = new JButton("保存");
-        save.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        save.setBounds(320, 0, 150, 30);
+        //确认
+        btnSure.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addbook();
+                closeedit();
+                bookadd.setEnabled(true);
+                edit.setEnabled(true);
+                btnSure.setEnabled(false);
+                save.setEnabled(false);
+            }
+        });
+
+        //保存
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 savechange();
                 closeedit();
+                bookadd.setEnabled(true);
+                edit.setEnabled(true);
+                btnSure.setEnabled(false);
+                save.setEnabled(false);
             }
         });
-        add(save);
+
+        //添加书籍
+        bookadd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                initnow();
+                startedit();
+                bookadd.setEnabled(false);
+                edit.setEnabled(false);
+                btnSure.setEnabled(true);
+                save.setEnabled(false);
+            }
+        });
+
+        //启动编辑
+        edit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startedit();
+                bookadd.setEnabled(false);
+                edit.setEnabled(false);
+                btnSure.setEnabled(false);
+                save.setEnabled(true);
+            }
+        });
+
         JLabel detail=new JLabel("详细信息");
         detail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         detail.setBounds(0, 30, 100, 30);

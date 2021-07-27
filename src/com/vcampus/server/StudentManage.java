@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.Student;
-import com.vcampus.server.App;
 
 /**
  * 学生管理类
@@ -182,7 +181,7 @@ public class StudentManage {
             else if (cardNumber == null && gender == null) {
                 Student student = new Student();
                 student.setName(name);
-                student.setSchoolBy(school);
+                student.setSchool(school);
                 list = studentMapper.fuzzySearchByNameAndSchool(student);
                 sqlSession.commit();
                 sqlSession.close();
@@ -200,7 +199,7 @@ public class StudentManage {
             else if (name == null && gender == null) {
                 Student student = new Student();
                 student.setCardNumber(cardNumber);
-                student.setSchoolBy(school);
+                student.setSchool(school);
                 list = studentMapper.fuzzySearchByCardAndSchool(student);
                 sqlSession.commit();
                 sqlSession.close();
@@ -217,7 +216,7 @@ public class StudentManage {
             }
             else if (name == null && cardNumber == null) {
                 Student student = new Student();
-                student.setSchoolBy(school);
+                student.setSchool(school);
                 student.setGender(gender);
                 list = studentMapper.fuzzySearchBySchoolAndGender(student);
                 sqlSession.commit();
@@ -228,7 +227,7 @@ public class StudentManage {
                 Student student = new Student();
                 student.setName(name);
                 student.setCardNumber(cardNumber);
-                student.setSchoolBy(school);
+                student.setSchool(school);
                 list = studentMapper.fuzzySearchByNameAndCardAndSchool(student);
                 sqlSession.commit();
                 sqlSession.close();
@@ -247,7 +246,7 @@ public class StudentManage {
             else if (name==null) {
                 Student student = new Student();
                 student.setCardNumber(cardNumber);
-                student.setSchoolBy(school);
+                student.setSchool(school);
                 student.setGender(gender);
                 list = studentMapper.fuzzySearchByCardAndSchoolAndGender(student);
                 sqlSession.commit();
@@ -258,7 +257,7 @@ public class StudentManage {
             {
                 Student student = new Student();
                 student.setName(name);
-                student.setSchoolBy(school);
+                student.setSchool(school);
                 student.setGender(gender);
                 list = studentMapper.fuzzySearchByNameAndSchoolAndGender(student);
                 sqlSession.commit();
@@ -269,7 +268,7 @@ public class StudentManage {
                 Student student = new Student();
                 student.setName(name);
                 student.setCardNumber(cardNumber);
-                student.setSchoolBy(school);
+                student.setSchool(school);
                 student.setGender(gender);
                 list = studentMapper.fuzzySearchByNameAndCardAndSchoolAndGender(student);
                 sqlSession.commit();

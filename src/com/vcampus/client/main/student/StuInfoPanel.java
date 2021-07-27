@@ -87,7 +87,7 @@ public class StuInfoPanel extends JPanel {
         lblName.setText(App.session.getStudent().getName());
         lblCardNumber.setText(App.session.getStudent().getCardNumber());
         lblStudentNumber.setText(App.session.getStudent().getStudentNumber());
-        lblAcademy.setText(App.session.getStudent().getSchool());
+        lblAcademy.setText(App.session.getStudent().getSchoolByNumber());
         lblBalance.setText(String.valueOf(App.session.getStudent().getBalance()));
         lblBookLend.setText("2");
     }

@@ -10,14 +10,14 @@
             resultType="boolean">
         SELECT COUNT(*)
         FROM `admins`
-        WHERE `cardnumber` = #{cardNumber}
+        WHERE `cardNumber` = #{cardNumber}
           AND `password` = #{password}
     </select>
     <select id="getAdminDetailByCardNumber" parameterType="String"
             resultType="Admin">
         SELECT *
         FROM `admins`
-        WHERE `cardnumber` = #{cardNumber}
+        WHERE `cardNumber` = #{cardNumber}
     </select>
 
     <select id="getNameByCardNumber" parameterType="String"
