@@ -5,12 +5,12 @@
 <mapper namespace="com.vcampus.dao.ICourseMapper">
     <update id="takeCourse" parameterType="Student">
         UPDATE students SET
-            selectedCourse=#{courseList} WHERE
+            selectedcourse=#{courseList} WHERE
             cardNumber=#{cardNumber}
     </update>
     <select id="getCourseSelection" parameterType="Student"
             resultType="String">
-        SELECT selectedCourse FROM students WHERE
+        SELECT selectedcourse FROM students WHERE
             cardNumber=#{cardNumber}
     </select>
     <select id="getOneCourse" parameterType="String"
