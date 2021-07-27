@@ -9,9 +9,10 @@ import java.math.BigDecimal;
  */
 public class Goods {
     //private static final long serialVersionUID = -1628627823619818674L;
-    private int id;//商品编号
+    //private int id;//商品编号
     private int remaining;//商品剩余数量
     private String name;//商品名称
+    private String category;//商品分类
     private BigDecimal price;//商品价格
     private String pic;//图片文件名
     private String description;//商品简介
@@ -35,12 +36,13 @@ public class Goods {
     public void setDescription(String description) {
         this.description = description;
     }
-    public int getId() {
+    /* public int getId() {
         return id;
     }
     public void setId(int id) {
         this.id = id;
     }
+    */
     public int getRemaining() {
         return remaining;
     }
@@ -58,5 +60,13 @@ public class Goods {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category){
+        this.category = category;
     }
 }

@@ -116,6 +116,11 @@ Exception in thread "AWT-EventQueue-0" java.lang.reflect.InaccessibleObjectExcep
 参考： https://stackoverflow.com/questions/41265266/how-to-solve-inaccessibleobjectexception-unable-to-make-member-accessible-m
 
 ## Database
+### 无法保存中文字符到数据库中
+可以读取数据库中含有中文字符的数据，却无法保存，保存的中文字符全成了“?”。
+解决方法：首先确保数据库使用的编码支持中文（我们采用的是UTF8）。在此基础上，最关键的一步是，连接数据库的URL后面添加参数`useUnicode=true&characterEncoding=UTF-8`。
+参考资料：https://blog.csdn.net/randompeople/article/details/79439859
+
 ### MyBatis 未正确映射Java对象和数据库字段
 这是一个示例语句。
 ```sql

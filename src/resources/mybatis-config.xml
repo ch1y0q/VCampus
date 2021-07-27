@@ -23,6 +23,7 @@
         <typeAlias type="com.vcampus.entity.Course" alias="Course" />
         <typeAlias type="com.vcampus.entity.DormLife" alias="DormLife" />
         <typeAlias type="com.vcampus.entity.RepairHistory" alias="RepairHistory" />
+        <typeAlias type="com.vcampus.entity.Goods" alias="Goods" />
     </typeAliases>
 
     <!-- 环境配置 -->
@@ -52,6 +53,7 @@
         <mapper resource="resources/mapper/dormLife.xml"/>
         <mapper resource="resources/mapper/repairHistory.xml"/>
         <mapper resource="resources/mapper/courseMapper.xml"/>
+        <mapper resource="resources/mapper/goodsMapper.xml"/>
         <!-- <mapper resource="resources/mapper/classMapper.xml" /> -->
     </mappers>
 
