@@ -3,14 +3,21 @@ package com.vcampus.client.main.shop;
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.entity.Goods;
+import com.vcampus.entity.Teacher;
+import com.vcampus.entity.UserType;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 import com.vcampus.util.SwingUtils;
 
 import static com.vcampus.client.main.shop.AppShopHelper.*;
+import static com.vcampus.entity.UserType.STUDENT;
+import static com.vcampus.server.bank.BankServer.getStudentBalance;
+import static com.vcampus.server.bank.BankServer.getTeacherBalance;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -34,19 +41,26 @@ public class AppShop extends JFrame {
     private static JTextField txtGoodsNum;
     private static JLabel lblBalanceVal;
     private static JLabel goodsPic;
+    private static JLabel lblGoodsInfo;
+    private static List<Goods> list;
+    private static JTextArea goodsDetail;
+
+    private static final String EMPTY_GOODS_PIC = "/resources/assets/bg/bg3.jpg";
+    private static final String EMPTY_GOODS_DESCRIPTION = "这里应该是商品详细信息";
 
     public void addGoodsListHeader(){
         /* BE CAREFUL CHANGING columnIndex! */
-        tblGoodsList.getModel().setValueAt("商品名称", 0, 0);
-        tblGoodsList.getModel().setValueAt("类别", 0, 1);
-        tblGoodsList.getModel().setValueAt("剩余数量", 0, 2);
-        tblGoodsList.getModel().setValueAt("状态", 0, 3);
-        tblGoodsList.getModel().setValueAt("价格", 0, 4);
+        tblGoodsList.getModel().setValueAt("商品编号", 0, 0);
+        tblGoodsList.getModel().setValueAt("商品名称", 0, 1);
+        tblGoodsList.getModel().setValueAt("类别", 0, 2);
+        tblGoodsList.getModel().setValueAt("剩余数量", 0, 3);
+        tblGoodsList.getModel().setValueAt("状态", 0, 4);
+        tblGoodsList.getModel().setValueAt("价格", 0, 5);
     }
 
     public void handleCategorySelection(String category) {
         tblGoodsList.removeAll();
-        List<Goods> list = ResponseUtils
+        list = ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null,
                         "com.vcampus.server.shop.ShopServer.listGoodsByType", new Object[] { category }).send())
                 .getListReturn(Goods.class);
@@ -54,11 +68,12 @@ public class AppShop extends JFrame {
             SwingUtils.showMessage(null, "抱歉，没有搜到符合条件的商品，管理员正在努力备货中...", "提示");
         } else {
             for (int i = 0; i < list.size(); i++) {
-                tblGoodsList.getModel().setValueAt(list.get(i).getName(), i+1, 0);
-                tblGoodsList.getModel().setValueAt(list.get(i).getCategory(), i+1, 1);
-                tblGoodsList.getModel().setValueAt(list.get(i).getRemaining(), i+1, 2);
-                tblGoodsList.getModel().setValueAt(list.get(i).getStatus(), i+1, 3);
-                tblGoodsList.getModel().setValueAt(list.get(i).getPrice(), i+1, 4);
+                tblGoodsList.getModel().setValueAt(list.get(i).getId(), i+1, 0);
+                tblGoodsList.getModel().setValueAt(list.get(i).getName(), i+1, 1);
+                tblGoodsList.getModel().setValueAt(list.get(i).getCategory(), i+1, 2);
+                tblGoodsList.getModel().setValueAt(list.get(i).getRemaining(), i+1, 3);
+                tblGoodsList.getModel().setValueAt(list.get(i).getStatus(), i+1, 4);
+                tblGoodsList.getModel().setValueAt(list.get(i).getPrice(), i+1, 5);
             }
 
         }
@@ -187,16 +202,57 @@ public class AppShop extends JFrame {
         contentPane.add(lblBalance);
 
         lblBalanceVal = new JLabel();
+        switch(App.session.getUserType()){
+            case STUDENT:
+                lblBalanceVal.setText(getBalance(App.session.getStudent().getCardNumber(), UserType.STUDENT).toString());
+                break;
+            case TEACHER:
+                lblBalanceVal.setText(getBalance(App.session.getTeacher().getCardNumber(), UserType.TEACHER).toString());
+                break;
+        }
+
         lblBalanceVal.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         lblBalanceVal.setBounds(1050, 67, 160, 30);
         contentPane.add(lblBalanceVal);
 
-        tblGoodsList = new JTable(12, 5);
+
+        tblGoodsList = new JTable(12, 6){
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;
+            }
+        };
+
+        //tblGoodsList.setColumnSelectionAllowed(false);
+        //tblGoodsList.setRowSelectionAllowed(true);
         tblGoodsList.setBounds(330, 150, 500, 600);
         tblGoodsList.setRowHeight(40);
         tblGoodsList.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+
+        tblGoodsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        //tblGoodsList.setCellSelectionEnabled(false);
         addGoodsListHeader();
         tblGoodsList.setPreferredScrollableViewportSize(new Dimension(200, 100));
+        tblGoodsList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int row = tblGoodsList.getSelectedRow();
+                if(row != -1)
+                {
+                    System.out.println(getClass().getResource("/resources/assets/goods"
+                            + list.get(row-1).getPic()));//TODO remove this line
+                    goodsPic.setIcon(new ImageIcon(getClass().getResource("/resources/assets/goods"
+                            + list.get(row-1).getPic())));
+                    goodsDetail.setText(list.get(row-1).getDescription());
+                }
+                else{
+                    goodsPic.setIcon(new ImageIcon(getClass().getResource(EMPTY_GOODS_PIC)));
+                    goodsDetail.setText(EMPTY_GOODS_DESCRIPTION);
+                }
+            }
+        });
         DefaultTableCellRenderer rGoodsList = new DefaultTableCellRenderer();
         rGoodsList.setHorizontalAlignment(JLabel.CENTER);
         tblGoodsList.setDefaultRenderer(Object.class, rGoodsList);
@@ -209,23 +265,23 @@ public class AppShop extends JFrame {
         lblGoodsPic.setBounds(1050, 150, 100, 40);
         contentPane.add(lblGoodsPic);
 
-        goodsPic = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/bg/bg3.jpg")));
+        goodsPic = new JLabel(new ImageIcon(getClass().getResource(EMPTY_GOODS_PIC)));
         contentPane.add(goodsPic);
         goodsPic.setBounds(1000, 200, 200, 200);
 
-        JLabel lblGoodsInfo = new JLabel("商品信息");
+        lblGoodsInfo = new JLabel("商品信息");
         lblGoodsInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblGoodsInfo.setHorizontalAlignment(SwingConstants.CENTER);
         lblGoodsInfo.setBounds(1050, 345, 100, 40);
         contentPane.add(lblGoodsInfo);
 
-        JLabel lblGoodsSpInfo = new JLabel("商品详细信息");
-        lblGoodsSpInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        lblGoodsSpInfo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblGoodsSpInfo.setBounds(850, 410, 200, 40);
-        contentPane.add(lblGoodsSpInfo);
+        JLabel lblGoodsDescription = new JLabel("商品详细信息");
+        lblGoodsDescription.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblGoodsDescription.setHorizontalAlignment(SwingConstants.CENTER);
+        lblGoodsDescription.setBounds(850, 410, 200, 40);
+        contentPane.add(lblGoodsDescription);
 
-        JTextArea goodsDetail = new JTextArea("这里应该是商品详细信息", 8, 30);
+        goodsDetail = new JTextArea(EMPTY_GOODS_DESCRIPTION, 8, 30);
         goodsDetail.setLineWrap(true);
         goodsDetail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         goodsDetail.setBounds(1050, 420, 300, 150);
