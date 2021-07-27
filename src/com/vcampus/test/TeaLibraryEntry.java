@@ -1,6 +1,6 @@
 package com.vcampus.test;
 
-import com.vcampus.client.main.TeacherLibrary.TeaLibrary;
+import com.vcampus.client.main.library.TeaLibrary;
 
 import java.awt.*;
 

@@ -1,7 +1,7 @@
 package com.vcampus.test;
 
 import com.alee.laf.WebLookAndFeel;
-import com.vcampus.client.main.Teacher.AppTeacher;
+import com.vcampus.client.main.teacher.AppTeacher;
 
 import java.awt.*;
 

@@ -1,6 +1,6 @@
 package com.vcampus.client.main;
 
-import com.vcampus.client.main.Teacher.TeaCategory;
+import com.vcampus.client.main.teacher.TeaCategory;
 
 import javax.swing.JPanel;
 import javax.swing.*;

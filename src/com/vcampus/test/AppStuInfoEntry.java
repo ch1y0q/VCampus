@@ -1,7 +1,7 @@
 package com.vcampus.test;
 
 import com.alee.laf.WebLookAndFeel;
-import com.vcampus.client.main.StudentInfo.AppStuInfo;
+import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
 
 /**
  * 学生信息界面测试

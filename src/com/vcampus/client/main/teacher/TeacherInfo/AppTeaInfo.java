@@ -1,27 +1,29 @@
-package com.vcampus.client.administrator.main;
+package com.vcampus.client.main.teacher.TeacherInfo;
 
-//import com.mysql.cj.xdevapi.Client;
-import com.vcampus.client.main.manager.ManCategory;
+import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.App;
+import com.vcampus.client.main.teacher.AppTeacher;
+import com.vcampus.client.main.teacher.TeaCategory;
 
-        import javax.swing.*;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-        import java.awt.*;
-        import java.awt.event.MouseAdapter;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 
 /**
- * 管理员个人信息界面
+ * 教师信息界面
  * @author Dong Ruojing
- * @date 2021/7/18
+ * @date 2021/7/23
  */
-public class AppAdminInfo  extends JFrame {
+public class AppTeaInfo  extends JFrame {
     private JPanel contentPane;
 
-    public AppAdminInfo() {
-        setResizable(true);//允许窗口大小更改，建议不更改
+    public AppTeaInfo() {
+        setResizable(true);//允许窗口大小更改
         setTitle("个人信息管理");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setBounds(400, 200, 800, 550);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(d.width, d.height);
         contentPane = new JPanel();
@@ -31,11 +33,12 @@ public class AppAdminInfo  extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt=new ManCategory().init();
-        jt.setBounds(0,60,100,400);
+        JTree jt=new TeaCategory().init();
+        jt.setBackground(new Color(240, 255, 240));
+        jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 
-        JButton returnButton = new JButton("← 返回");
+        JButton returnButton = new JButton("← 返回");//返回按钮
         returnButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
         returnButton.setBounds(220,5,80,30);
         returnButton.setForeground(new Color(33, 117, 206,100));
@@ -45,86 +48,58 @@ public class AppAdminInfo  extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==returnButton)
                 {
-                    AppAdmin app=new AppAdmin();
-                    //setVisible(false);
+                    AppTeacher app=new AppTeacher();
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
 
-        JButton LogoutButton = new JButton("登出");
+        JButton LogoutButton = new JButton("登出");//登出按钮
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
         LogoutButton.setBounds(1450,5,50,30);
         LogoutButton.setForeground(new Color(33, 117, 206,100));
+        LogoutButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==returnButton)
+                {
+                    LoginUI app=new LoginUI();
+                    app.setVisible(true);
+                    setVisible(false);
+                }
+            }
+        });
         contentPane.add(LogoutButton);
 
-        JButton EditButton = new JButton("启动编辑");
+        JButton EditButton = new JButton("启动编辑");//编辑按钮
         EditButton.setFont(new Font("微软雅黑", Font.BOLD, 17));
-        EditButton.setBounds(1150,670,90,40);
+        EditButton.setBounds(1150,695,90,40);
         EditButton.setForeground(new Color(58, 51, 168,100));
         contentPane.add(EditButton);
 
-        JButton btnLoadPortrait = new JButton("上传头像");
+        JButton btnLoadPortrait = new JButton("上传头像");//上传头像按钮
         btnLoadPortrait.setFont(new Font("微软雅黑", Font.BOLD, 14));
         btnLoadPortrait.setBounds(690,375,80,30);
         btnLoadPortrait.setForeground(new Color(58, 51, 168,100));
         contentPane.add(btnLoadPortrait);
 
-//        btnLoadPortrait.addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                //读取图片  修改类型
-//                JFileChooser chooser = new JFileChooser();
-//                chooser.setLocation(71, 36);
-//                chooser.setSize(510, 327);
-//
-//                chooser.setFileFilter(new FileNameExtensionFilter("JPG","jpg"));
-//                String imgPath = null;
-//                int returnVal = chooser.showOpenDialog(contentPane);
-//                if (returnVal == OnlyFileChooser.APPROVE_OPTION) {
-//                    imgPath = chooser.getSelectedFile().getAbsolutePath();
-//                }
-//                ByteArray byteArray = new ByteArray();
-//                byte[] imageData = null;
-//                try {
-//                    BufferedImage image = ImageIO.read(new FileInputStream(imgPath));
-//                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                    ImageIO.write(image, "jpg", baos);
-//                    imageData = baos.toByteArray();
-//                    byteArray.setImageData(imageData);
-//                } catch (FileNotFoundException e1) {
-//                    e1.printStackTrace();
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();
-//                }
-//                //发送图片信息
-//                Message senderMessage = new Message(Card);
-//                senderMessage.setByteArray(byteArray);
-//                senderMessage.setType(1303);//上传照片
-//                try {
-//                    Message messageBack =  new Client().start(senderMessage);
-//                    if (messageBack.getType() == 1101) {
-//                        //更新界面的图片
-//                        _image.setIcon(new ImageIcon(imgPath));
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Error：上传失败！〒_〒");
-//                    }
-//                } catch (ClassNotFoundException e1) {
-//                    e1.printStackTrace();
-//                } catch (Exception e1) {
-//                    e1.printStackTrace();
-//                }
-//            }
-//        });
 
-
-        JButton SaveButton = new JButton("保存");
+        JButton SaveButton = new JButton("保存");//保存按钮
         SaveButton.setFont(new Font("微软雅黑", Font.BOLD, 17));
-        SaveButton.setBounds(1270,670,60,40);
+        SaveButton.setBounds(1270,695,60,40);
         SaveButton.setForeground(new Color(58, 51, 168,100));
         contentPane.add(SaveButton);
+
+        String teacherName = App.session.getTeacher().getName();//获取姓名
+        String teacherCardNumber = App.session.getTeacher().getCardNumber();//获取一卡通号
+        String teacherGender = App.session.getTeacher().getGender();//获取性别
+        String teacherSchool = App.session.getTeacher().getSchool();//获取学院
+        String teacherEmail = App.session.getTeacher().getEmail();//获取邮箱
+        String teacherPassword = App.session.getTeacher().getPassword();//获取登录密码
+        String teacherPhoneNumber = App.session.getTeacher().getPhoneNumber();//获取电话号码
+        String teacherBankAccount = App.session.getTeacher().getTeacherNumber();
+        BigDecimal studentBalance = App.session.getTeacher().getBalance();//获取存款
 
         //输入框
         JTextField txt_1=new JTextField();
@@ -148,6 +123,13 @@ public class AppAdminInfo  extends JFrame {
         JTextField txt_7=new JTextField();
         txt_7.setBounds(1130,460,170,40);
         contentPane.add(txt_7);
+        JTextField txt_8=new JTextField();
+        txt_8.setBounds(1130,520,170,40);
+        contentPane.add(txt_8);
+        JTextField txt_9=new JTextField();
+        txt_9.setBounds(1130,580,170,40);
+        contentPane.add(txt_9);
+
 
         JLabel label = new JLabel("姓名：");
         label.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -173,7 +155,7 @@ public class AppAdminInfo  extends JFrame {
         label_2.setBounds(945, 220, 100, 40);
         contentPane.add(label_2);
 
-        JLabel label_3 = new JLabel("电子邮箱：");
+        JLabel label_3 = new JLabel("学院：");
         label_3.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_3.setOpaque(true);
         label_3.setForeground(new Color(19, 188, 210));
@@ -181,7 +163,7 @@ public class AppAdminInfo  extends JFrame {
         label_3.setBounds(945, 280, 100, 40);
         contentPane.add(label_3);
 
-        JLabel label_4 = new JLabel("电话：");
+        JLabel label_4 = new JLabel("银行账户：");
         label_4.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_4.setOpaque(true);
         label_4.setForeground(new Color(19, 188, 210));
@@ -189,7 +171,7 @@ public class AppAdminInfo  extends JFrame {
         label_4.setBounds(945, 340, 100, 40);
         contentPane.add(label_4);
 
-        JLabel label_5 = new JLabel("身份证号：");
+        JLabel label_5 = new JLabel("账户存款：");
         label_5.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_5.setOpaque(true);
         label_5.setForeground(new Color(19, 188, 210));
@@ -197,7 +179,7 @@ public class AppAdminInfo  extends JFrame {
         label_5.setBounds(945, 400, 100, 40);
         contentPane.add(label_5);
 
-        JLabel label_6 = new JLabel("地址：");
+        JLabel label_6 = new JLabel("电话：");
         label_6.setFont(new Font("微软雅黑", Font.BOLD, 18));
         label_6.setOpaque(true);
         label_6.setForeground(new Color(19, 188, 210));
@@ -205,7 +187,24 @@ public class AppAdminInfo  extends JFrame {
         label_6.setBounds(945, 460, 100, 40);
         contentPane.add(label_6);
 
-        JLabel HeadPortrait= new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/adminInfo1.jpg")));
+        JLabel label_7 = new JLabel("邮箱：");
+        label_7.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        label_7.setOpaque(true);
+        label_7.setForeground(new Color(19, 188, 210));
+        label_7.setBackground(new Color(255,255,255,80));
+        label_7.setBounds(945, 520, 100, 40);
+        contentPane.add(label_7);
+
+        JLabel label_8 = new JLabel("登录密码：");
+        label_8.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        label_8.setOpaque(true);
+        label_8.setForeground(new Color(19, 188, 210));
+        label_8.setBackground(new Color(255,255,255,80));
+        label_8.setBounds(945, 580, 100, 40);
+        contentPane.add(label_8);
+
+
+        JLabel HeadPortrait= new JLabel(new ImageIcon(getClass().getResource("/resources/assets/Teacher/TeaInfo.jpg")));
         HeadPortrait.setOpaque(true);
         HeadPortrait.setBorder(BorderFactory.createMatteBorder(8,8,8,8,
                 new Color(255, 255, 255, 255)));
@@ -215,7 +214,7 @@ public class AppAdminInfo  extends JFrame {
         JLabel TransLabel = new JLabel("");//半透明效果
         TransLabel.setHorizontalAlignment(SwingConstants.CENTER);
         TransLabel.setOpaque(true);
-        TransLabel.setBackground(new Color(255,255,255,100));
+        TransLabel.setBackground(new Color(255,255,255,120));
         TransLabel.setBounds(220, 50, 602, 700);
         contentPane.add(TransLabel);//先添加的label在最上层
 
@@ -223,19 +222,17 @@ public class AppAdminInfo  extends JFrame {
         TransLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         TransLabel2.setOpaque(true);
         TransLabel2.setBackground(new Color(255,255,255,70));
-        TransLabel2.setBounds(1100, 98, 230, 405);
+        TransLabel2.setBounds(1100, 98, 230, 525);
         contentPane.add(TransLabel2);//先添加的label在最上层
 
-        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/adminInfo1.jpg")));
+        JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/Teacher/TeaInfo.jpg")));
         bg.setOpaque(true);
-        //bg.setForeground(new Color(255, 255, 255,100));
         bg.setBounds(220, 50, 600, 700);
         contentPane.add(bg);//背景
 
         JLabel underLabel= new JLabel();
         underLabel.setOpaque(true);
         underLabel.setForeground(new Color(33, 117, 206));
-        //underLabel.setBackground(new Color(227, 145, 145,50));//这个颜色也很好看
         underLabel.setBackground(new Color(34, 189, 176,50));
         underLabel.setBounds(880, 50, 500, 700);
         contentPane.add(underLabel);//总在最底层，代码段写在最后
@@ -244,3 +241,4 @@ public class AppAdminInfo  extends JFrame {
     }
 
 }
+

@@ -1,6 +1,6 @@
 package com.vcampus.client.main;
 
-import com.vcampus.client.main.Student.StuCategory;
+import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.RepairHistory;
 import com.vcampus.net.Request;

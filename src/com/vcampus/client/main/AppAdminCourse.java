@@ -1,6 +1,6 @@
 package com.vcampus.client.main;
 
-import com.vcampus.client.main.Manager.ManCategory;
+import com.vcampus.client.main.manager.ManCategory;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

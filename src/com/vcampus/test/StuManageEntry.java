@@ -1,6 +1,6 @@
 package com.vcampus.test;
 
-import com.vcampus.client.main.Manager.StuManage;
+import com.vcampus.client.main.manager.StuManage;
 
 import java.awt.*;
 

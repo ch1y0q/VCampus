@@ -1,6 +1,6 @@
 package com.vcampus.test;
 
-import com.vcampus.client.main.ManagerLibrary.ManLibrary;
+import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
 
 import java.awt.*;
 

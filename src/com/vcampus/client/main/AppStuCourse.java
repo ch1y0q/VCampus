@@ -7,13 +7,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
-import com.vcampus.client.main.Student.StuCategory;
+import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.net.Request;
 import com.vcampus.util.*;
 
 import com.vcampus.entity.*;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 

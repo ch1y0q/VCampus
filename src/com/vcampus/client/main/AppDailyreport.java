@@ -1,6 +1,6 @@
 package com.vcampus.client.main;
 
-import com.vcampus.client.main.Student.AppStudent;
+import com.vcampus.client.main.student.AppStudent;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
