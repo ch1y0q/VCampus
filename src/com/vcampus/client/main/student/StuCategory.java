@@ -11,6 +11,8 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
+import java.awt.*;
+
 /**
  * @author Xiao Kaijie
  * @date 2021-07-20
@@ -31,22 +33,24 @@ public class StuCategory extends JTree{
         nodLogin.add(nodLivingServices);
         nodLogin.add(nodShop);
 
-        DefaultMutableTreeNode nodInfoLookup = new DefaultMutableTreeNode("个人信息查询");
+        //DefaultMutableTreeNode nodInfoLookup = new DefaultMutableTreeNode("个人信息查询");
         DefaultMutableTreeNode nodInfoManage = new DefaultMutableTreeNode("个人信息维护");
-        nodPersonalInfo.add(nodInfoLookup);
+       // nodPersonalInfo.add(nodInfoLookup);
         nodPersonalInfo.add(nodInfoManage);
-        DefaultMutableTreeNode nodBorrowLookup = new DefaultMutableTreeNode("借阅查询");
-        DefaultMutableTreeNode nodBookLookup = new DefaultMutableTreeNode("书籍查询");
-        DefaultMutableTreeNode nodBorrowHistory = new DefaultMutableTreeNode("借阅历史");
+        DefaultMutableTreeNode nodBorrowLookup = new DefaultMutableTreeNode("图书查询借阅");
+        //DefaultMutableTreeNode nodBookLookup = new DefaultMutableTreeNode("书籍查询");
+        DefaultMutableTreeNode nodBorrowHistory = new DefaultMutableTreeNode("已借图书");
         nodLibrary.add(nodBorrowLookup);
-        nodLibrary.add(nodBookLookup);
+       // nodLibrary.add(nodBookLookup);
         nodLibrary.add(nodBorrowHistory);
-        DefaultMutableTreeNode nodTimetable = new DefaultMutableTreeNode("课表");
+        DefaultMutableTreeNode nodTimetable = new DefaultMutableTreeNode("课程表");
         DefaultMutableTreeNode nodGrades = new DefaultMutableTreeNode("成绩查询");
-        DefaultMutableTreeNode nodChooseCourses = new DefaultMutableTreeNode("选课");
+        DefaultMutableTreeNode nodChooseCourses = new DefaultMutableTreeNode("选课系统");
+        DefaultMutableTreeNode nodChosenCourses = new DefaultMutableTreeNode("已选课程");
         nodCourses.add(nodTimetable);
-        nodCourses.add(nodGrades);
         nodCourses.add(nodChooseCourses);
+        nodCourses.add(nodGrades);
+        nodCourses.add(nodChosenCourses);
         DefaultMutableTreeNode nodCard = new DefaultMutableTreeNode("一卡通");
         DefaultMutableTreeNode nodDormManage = new DefaultMutableTreeNode("宿舍管理");
         nodLivingServices.add(nodCard);
@@ -66,7 +70,7 @@ public class StuCategory extends JTree{
             public void valueChanged(TreeSelectionEvent e) {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
-                    if(node==nodPersonalInfo||node==nodInfoLookup||node==nodInfoManage){
+                    if(node==nodPersonalInfo||node==nodInfoManage){//||node==nodInfoLookup
                         if(this.getClass().getName()!="com.vcampus.client.main.student.StudentInfo.AppStuInfo")
                         {
                             AppStuInfo app=new AppStuInfo();
@@ -74,14 +78,15 @@ public class StuCategory extends JTree{
                             setVisible(false);
                         }
                     }
-                    else if(node==nodLibrary||node==nodBorrowLookup||node==nodBookLookup||node==nodBorrowHistory){
+                    else if(node==nodLibrary||node==nodBorrowLookup||node==nodBorrowHistory){//||node==nodBookLookup
                         if(this.getClass().getName()!="com.vcampus.client.main.StudentLibrary.StuLibrary") {
                             StuLibrary app = new StuLibrary();
                             app.setVisible(true);
                             setVisible(false);
                         }
                     }
-                    else if(node==nodCourses||node==nodTimetable||node==nodGrades||node==nodChooseCourses){
+                    else if(node==nodCourses||node==nodTimetable||node==nodGrades||node==nodChooseCourses
+                            ||node==nodChosenCourses){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppStuCourse") {
                             AppStuCourse app = new AppStuCourse();
                             app.open();

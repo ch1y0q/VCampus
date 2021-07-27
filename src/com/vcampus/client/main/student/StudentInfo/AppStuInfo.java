@@ -7,6 +7,7 @@ import com.vcampus.client.main.imageIO.MessageForImage;
 import com.vcampus.client.main.dailyReport.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.util.StringUtils;
+import com.vcampus.client.main.expandTree;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -24,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
+
 
 /**
  * 学生信息界面
@@ -46,7 +48,10 @@ public class AppStuInfo  extends JFrame {
         contentPane.setLayout(null);
 
         JTree jt= new StuCategory().init();
-        jt.setBounds(0,50,200,600);
+        jt.setBounds(0,0,200,d.height);
+        jt.setOpaque(false);
+        jt.setBackground(new Color(240, 255, 240));
+        expandTree.expandTree(jt,true);
         contentPane.add(jt);
 
         JButton returnButton = new JButton("← 返回");//返回按钮
