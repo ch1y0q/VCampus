@@ -1,14 +1,16 @@
-package com.vcampus.client.main.student;
+package com.vcampus.client.main.dailyReport;
 
 import com.alee.laf.WebLookAndFeel;
 import com.alee.managers.style.StyleId;
 import com.vcampus.UI.myJLabel;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.AppDailyReport;
+import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.AppStuCourse;
 import com.vcampus.client.main.library.StuLibrary;
+import com.vcampus.client.main.student.StuCoursePanel;
+import com.vcampus.client.main.student.StuInfoPanel;
 import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
 import com.vcampus.client.main.shop.AppShop;
 

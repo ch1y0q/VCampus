@@ -1,7 +1,6 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.dailyReport;
 
-import com.vcampus.UI.myJLabel;
-import com.vcampus.client.main.student.AppStudent;
+import com.vcampus.client.main.App;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.util.Hashtable;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -58,7 +56,7 @@ public class AppDailyReport extends JFrame {
         jplDetail.add(jlBasicInfo);
         JLabel jlCardnumber = new JLabel();
         jlCardnumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        jlCardnumber.setText("一卡通号"+" "+App.session.getStudent().getCardNumber());
+        jlCardnumber.setText("一卡通号"+" "+ App.session.getStudent().getCardNumber());
         jlCardnumber.setBounds(0, 30, 180, 30);
         jlCardnumber.setBorder(new EmptyBorder(0,0,0,0));
         jplDetail.add(jlCardnumber);

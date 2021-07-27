@@ -2,7 +2,7 @@ package com.vcampus.client.main.library;
 
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.student.AppStudent;
+import com.vcampus.client.main.dailyReport.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
