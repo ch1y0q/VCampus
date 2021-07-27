@@ -2,12 +2,11 @@ package com.vcampus.server.teaching;
 
 import com.vcampus.dao.IBookMapper;
 import com.vcampus.dao.IStudentMapper;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.vcampus.entity.*;
 import com.vcampus.dao.ICourseMapper;
@@ -21,21 +20,25 @@ import com.vcampus.server.App;
 public class CourseSelection {
     public static Boolean takeCourse(Student student, String newClassId) {
         SqlSession sqlSession = App.sqlSessionFactory.openSession();
-        Boolean one = null, two = null;
+        Boolean one = null;
         try {
             ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
-            one = courseMapper.takeCourse(student);
             String temp = courseMapper.getStudentOfOneCourse(newClassId);
+            if(temp=="null"){
+                temp="";
+            }
             temp += student.getCardNumber();
-            temp += "xxx,";
+            temp += ",";
             Map<String, String> map = new HashMap<String, String>();
             map.put("classId", newClassId);
             map.put("content", temp);
-            two = courseMapper.updateScoreOfOneCourse(map);
+            one = courseMapper.updateScoreOfOneCourse(map);
             String cardNumber = student.getCardNumber();
             temp = courseMapper.getCourseSelection(student);
-            System.out.println(temp);
+            if(temp=="null"){
+                temp="";
+            }
             temp+=newClassId;
             temp+=",";
             Map<String, String> map2 = new HashMap<String, String>();
@@ -55,7 +58,7 @@ public class CourseSelection {
             sqlSession.rollback();
             e.printStackTrace();
         }
-        return Boolean.logicalAnd(one, two);
+        return one;
     }
 
     public static String getCourseSelection(Student student) {
@@ -110,11 +113,52 @@ public class CourseSelection {
             sqlSession.commit();
             sqlSession.close();
             return list;
-
         } catch (Exception e) {
             sqlSession.rollback();
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static String dropCourse(Student student ,String courseId){
+        SqlSession sqlSession = App.sqlSessionFactory.openSession();
+        ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+        IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+        String selectedCourses = courseMapper.getCourseSelection(student);
+        System.out.println("sC= "+selectedCourses);
+        String[] splitSelectedCourses = selectedCourses.split(",");
+        String temp="";
+        for(String s:splitSelectedCourses){
+            if(!s.equals(courseId)){
+                System.out.println("s= "+s+", cardNumber="+courseId);
+                temp+=s;
+                temp+=",";
+            }
+        }
+        System.out.println(temp);
+        String cardNumber = student.getCardNumber();
+        Map<String, String> map2 = new HashMap<String, String>();
+        map2.put("cardNumber",cardNumber);
+        map2.put("content",temp);
+        studentMapper.setSelectedCourses(map2);
+        String selectedStudents = courseMapper.getStudentOfOneCourse(courseId);
+        System.out.println("sS= "+selectedStudents);
+        String[] splitSelectedStudents = selectedStudents.split(",");
+        temp="";
+        for(String s:splitSelectedStudents){
+            if(!s.equals(cardNumber)){
+                System.out.println("s= "+s+", cardNumber="+cardNumber);
+                temp+=s;
+                temp+=",";
+            }
+        }
+        System.out.println(temp);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("classId",courseId);
+        map.put("content",temp);
+        courseMapper.updateScoreOfOneCourse(map);
+        sqlSession.commit();
+        sqlSession.close();
+        return "ok";
     }
 }
