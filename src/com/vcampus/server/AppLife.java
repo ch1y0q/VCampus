@@ -258,4 +258,19 @@ public class AppLife {
         return true;
     }
 
+    public static Boolean setRepairHistoryStatus(HashMap map) {
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IRepairHistoryMapper repairHistoryMapper=sqlSession.getMapper(IRepairHistoryMapper.class);
+
+            repairHistoryMapper.setRepairHistoryStatus(map);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

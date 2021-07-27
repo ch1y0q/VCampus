@@ -15,4 +15,10 @@
             resultType="RepairHistory">
         SELECT * FROM repairHistory WHERE dormAddress= #{dormAddress} ORDER BY reportTime DESC
     </select>
+
+    <update id="setRepairHistoryStatus" parameterType="Map">
+        UPDATE `repairHistory` SET
+            `repairStatus` = #{repairStatus} WHERE
+            `reportTime`= #{reportTime}
+    </update>
 </mapper>

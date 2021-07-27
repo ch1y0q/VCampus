@@ -1,6 +1,7 @@
 package com.vcampus.client.main;
 
 import com.vcampus.client.main.manager.ManCategory;
+import com.vcampus.entity.RepairHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 
@@ -8,11 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Y
@@ -23,6 +26,9 @@ public class AppDormAdmin extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
     private static JPanel jp1,jp2;
+    public List<RepairHistory> list=null;
+    public DefaultTableModel defaultTableModel;
+    public String[][] listData=null;
     public AppDormAdmin(){
         setResizable(false);
         setTitle("宿舍管理 - Vcampus");
@@ -313,39 +319,143 @@ public class AppDormAdmin extends JFrame {
 
         //jp1结束
 
-        JTable tblDormRepairState=new JTable(6,5);
-        tblDormRepairState.setBounds(50,150,1000,300);
+        JLabel lblDormRepairStateUpdateDormAddress = new JLabel("宿舍号");
+        lblDormRepairStateUpdateDormAddress.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblDormRepairStateUpdateDormAddress.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDormRepairStateUpdateDormAddress.setBounds(150, 100, 450, 40);
+        jp2.add(lblDormRepairStateUpdateDormAddress);
+
+        JTextField txtDormRepairStateUpdateDormAddress = new JTextField();
+        txtDormRepairStateUpdateDormAddress.setBounds(455, 106, 90, 30);
+        jp2.add(txtDormRepairStateUpdateDormAddress);
+
+        String[] head={"宿舍号","报修时间","报修内容","报修状态"};
+        defaultTableModel = new DefaultTableModel(null,head);
+
+        JTable tblDormRepairState=new JTable(6,4);
+        tblDormRepairState.setModel(defaultTableModel);
+        tblDormRepairState.setBounds(150,200,800,300);
         tblDormRepairState.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblDormRepairState.setRowHeight(50);
-        tblDormRepairState.getModel().setValueAt("宿舍号",0,0);
-        tblDormRepairState.getModel().setValueAt("报修时间",0,1);
-        tblDormRepairState.getModel().setValueAt("报修内容",0,2);
-        tblDormRepairState.getModel().setValueAt("报修详细信息",0,3);
-        tblDormRepairState.getModel().setValueAt("报修状态",0,4);
         DefaultTableCellRenderer rDormRepairState =new DefaultTableCellRenderer();
         rDormRepairState.setHorizontalAlignment(JLabel.CENTER);
         tblDormRepairState.setDefaultRenderer(Object.class,rDormRepairState);
         jp2.add(tblDormRepairState);
 
+
+        JButton btnDormRepairStatusLookUp = new JButton("查询");
+        btnDormRepairStatusLookUp.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
+        btnDormRepairStatusLookUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                list = ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getRepairHistory",
+                                new Object[]{txtDormRepairStateUpdateDormAddress.getText()}).send())
+                        .getListReturn(RepairHistory.class);
+
+                defaultTableModel.setRowCount(0);
+                if(list==null){
+                    listData=new String[1][4];
+                    listData[0][0]="无报修记录...";
+                    listData[0][1]=listData[0][2]=listData[0][3]="";
+                }
+                else{
+                    listData=new String[list.size()][4];
+                    for(int i=0;i<list.size();i++)
+                    {
+                        listData[i][0]=txtDormRepairStateUpdateDormAddress.getText();
+                        listData[i][1]=list.get(i).reportTime;
+                        listData[i][2]=list.get(i).reportContent;
+                        String repairStatusEnglish=list.get(i).repairStatus;
+                        String repairStatusChinese="ERROR";
+                        if(repairStatusEnglish.equals("TODO"))
+                            repairStatusChinese="待修理";
+                        else if (repairStatusEnglish.equals("DONE"))
+                            repairStatusChinese="已修理";
+                        listData[i][3]=repairStatusChinese;
+                    }
+                }
+                defaultTableModel=new DefaultTableModel(listData,head){
+                    @Override
+                    public boolean isCellEditable(int a,int b){return false;}
+                };
+                tblDormRepairState.setModel(defaultTableModel);
+
+            }
+        });
+        jp2.add(btnDormRepairStatusLookUp);
+        btnDormRepairStatusLookUp.setBounds(680, 106, 100, 30);
+
         JLabel lblDormRepairStateUpdate = new JLabel("修改表中第                          条的报修状态为");
         lblDormRepairStateUpdate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairStateUpdate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairStateUpdate.setBounds(160, 520, 450, 40);
+        lblDormRepairStateUpdate.setBounds(160, 570, 450, 40);
         jp2.add(lblDormRepairStateUpdate);
 
         JTextField txtDormRepairStateUpdateNoSelect = new JTextField();
-        txtDormRepairStateUpdateNoSelect.setBounds(325, 526, 90, 30);
+        txtDormRepairStateUpdateNoSelect.setBounds(325, 576, 90, 30);
         jp2.add(txtDormRepairStateUpdateNoSelect);
 
         JComboBox cmbDormRepairStatus=new JComboBox();
         cmbDormRepairStatus.addItem("已修理");
         cmbDormRepairStatus.addItem("未修理");
-        cmbDormRepairStatus.setBounds(600,526,100,30);
+        cmbDormRepairStatus.setBounds(600,576,100,30);
         jp2.add(cmbDormRepairStatus);
 
         JButton btnDormRepairStatusUpdate = new JButton("确认");
         btnDormRepairStatusUpdate.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
+        btnDormRepairStatusUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                list = ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getRepairHistory",
+                                new Object[]{txtDormRepairStateUpdateDormAddress.getText()}).send())
+                        .getListReturn(RepairHistory.class);
+
+                defaultTableModel.setRowCount(0);
+                if(list==null){
+                    listData=new String[1][4];
+                    listData[0][0]="无报修记录...";
+                    listData[0][1]=listData[0][2]=listData[0][3]="";
+                }
+                else{
+                    listData=new String[list.size()][4];
+                    for(int i=0;i<list.size();i++)
+                    {
+                        listData[i][0]=txtDormRepairStateUpdateDormAddress.getText();
+                        listData[i][1]=list.get(i).reportTime;
+                        listData[i][2]=list.get(i).reportContent;
+                        String repairStatusEnglish=list.get(i).repairStatus;
+                        String repairStatusChinese="ERROR";
+                        if(repairStatusEnglish.equals("TODO"))
+                            repairStatusChinese="待修理";
+                        else if (repairStatusEnglish.equals("DONE"))
+                            repairStatusChinese="已修理";
+                        listData[i][3]=repairStatusChinese;
+                    }
+                }
+                int lineNo=Integer.valueOf(txtDormRepairStateUpdateNoSelect.getText());
+                String reportTime=listData[lineNo-1][1];
+
+                String statusToUpdate=cmbDormRepairStatus.getSelectedItem().toString();
+                String statusToUpdateEng="ERROR";
+                if(statusToUpdate.equals("待修理"))
+                    statusToUpdateEng="TODO";
+                else if(statusToUpdate.equals("已修理"))
+                    statusToUpdateEng="DONE";
+
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("repairStatus",statusToUpdateEng);
+                map.put("reportTime",reportTime);
+
+                ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.setRepairHistoryStatus",
+                                new Object[]{map}).send())
+                        .getListReturn(Boolean.class);
+
+            }
+        });
         jp2.add(btnDormRepairStatusUpdate);
-        btnDormRepairStatusUpdate.setBounds(780, 526, 100, 30);
+        btnDormRepairStatusUpdate.setBounds(780, 576, 100, 30);
     }
 }
