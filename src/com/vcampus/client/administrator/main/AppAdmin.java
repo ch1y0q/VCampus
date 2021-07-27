@@ -1,6 +1,11 @@
 package com.vcampus.client.administrator.main;
 
+import com.alee.managers.style.StyleId;
+import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.*;
+import com.vcampus.client.main.dailyReport.AppDailyReport;
+import com.vcampus.client.main.dailyReport.AppDailyReportManage;
+import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.manager.StuManage;
 import com.vcampus.client.main.manager.TeaManage;
 import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
@@ -43,12 +48,12 @@ public class AppAdmin extends JFrame{
 
 
         JLabel label =new JLabel();
-        label.setText(" 欢迎您,xxx");
+        label.setText(" 欢迎您,"+"xxx" );//App.session.getAdmin().getName()
         label.setFont(new Font("微软雅黑", Font.BOLD, 14));
         label.setOpaque(true);
         label.setForeground(new Color(33, 117, 206));
         label.setBackground(new Color(33,177,206,80));
-        label.setBounds(1350, 5, 100, 30);
+        label.setBounds(1270, 5, 100, 30);
         contentPane.add(label);
 
 
@@ -60,8 +65,19 @@ public class AppAdmin extends JFrame{
 
         JButton LogoutButton = new JButton("登出");
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        LogoutButton.setBounds(1450,5,50,30);
+        LogoutButton.setBounds(1380,5,50,30);
         LogoutButton.setForeground(new Color(33, 117, 206,100));
+        LogoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==LogoutButton)
+                {
+                    LoginUI app=new LoginUI();
+                    app.setVisible(true);
+                    setVisible(false);
+                }
+            }
+        });
         contentPane.add(LogoutButton);
 
         JLabel TeacherInfoLabel1 = new JLabel("教师信息管理");//文字框
@@ -435,6 +451,28 @@ public class AppAdmin extends JFrame{
         bg6.setBounds(1140, 63, 110, 110);
         bg6.setForeground(new Color(255,255,255,255));
 
+        //管理员接收每日上报
+        final JButton btnReport = new JButton ();
+        btnReport.putClientProperty ( StyleId.STYLE_PROPERTY, StyleId.buttonHover );
+        btnReport.setText("每日上报");btnReport.setBounds(1260, 85, 90, 90);
+        btnReport.setOpaque(true);
+        btnReport.setFont( new Font("微软雅黑", Font.BOLD, 14));
+        btnReport.setForeground(new Color(0, 0, 0,150));
+        btnReport.setBackground(new Color(0x7ACBB5));
+        btnReport.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
+                new Color(255,255,255,255)));
+        btnReport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnReport)
+                {
+                    AppDailyReportManage app=new AppDailyReportManage();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
+            }
+        });
+        contentPane.add(btnReport);
 
 
     }
