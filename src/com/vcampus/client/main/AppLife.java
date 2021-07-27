@@ -372,7 +372,6 @@ public class AppLife extends JFrame {
 
                 String weekText=cmbDormHygieneRateWeek.getSelectedItem().toString();
                 int weekNo=Integer.valueOf(weekText.substring(1,2));
-                System.out.println(weekNo);
 
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("dormAddress",studentDormAddress);
