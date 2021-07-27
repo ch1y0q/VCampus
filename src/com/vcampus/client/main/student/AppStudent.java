@@ -5,12 +5,10 @@ import com.alee.managers.style.StyleId;
 import com.vcampus.UI.myJLabel;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.AppDailyreport;
+import com.vcampus.client.main.AppDailyReport;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.AppStuCourse;
-import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
 import com.vcampus.client.main.library.StuLibrary;
-import com.vcampus.client.main.manager.StuManage;
 import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
 import com.vcampus.client.main.shop.AppShop;
 
@@ -271,7 +269,7 @@ public class AppStudent extends JFrame {
                 if(e.getSource()==btnReport)
                 {
                     WebLookAndFeel.install();
-                    AppDailyreport app=new AppDailyreport();
+                    AppDailyReport app=new AppDailyReport();
                     setVisible(false);
                     app.setVisible(true);
                 }
