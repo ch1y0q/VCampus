@@ -1,5 +1,6 @@
 package com.vcampus.client.main;
 
+import com.vcampus.UI.myJLabel;
 import com.vcampus.client.main.student.AppStudent;
 
 import javax.swing.*;
@@ -9,8 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Hashtable;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 
 public class AppDailyreport extends JFrame {
     private static Locale locale = Locale.getDefault();
@@ -85,6 +91,7 @@ public class AppDailyreport extends JFrame {
         jplDaily.add(jlTemper);
         JTextField jtxtTemper=new JTextField();
         jtxtTemper.setBounds(160,30,150,30);
+        jtxtTemper.setEditable(false);
         jplDaily.add(jtxtTemper);
         JLabel jllocal=new JLabel("目前所在位置");
         jllocal.setBounds(0,60,150,30);
@@ -93,6 +100,79 @@ public class AppDailyreport extends JFrame {
         JComboBox jcomlocal=new JComboBox(localtxt);
         jcomlocal.setBounds(160,60,150,30);
         jplDaily.add(jcomlocal);
+
+        JLabel lblHealth= new JLabel();//设置健康标签
+        lblHealth.setText("今日体温：37℃");
+        lblHealth.setBounds(780,470,300,60);
+        lblHealth.setFont(new Font("微软雅黑", Font.BOLD, 25));
+        lblHealth.setOpaque(true);
+        lblHealth.setBackground(new Color(0xC9B6F3F1, true));
+        lblHealth.setForeground(new Color(0xF22D8B4C, true));
+        lblHealth.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblHealth);
+
+        JLabel lblAdvice= new JLabel();//设置建议标签
+        lblAdvice.setText("体温正常~~开启快乐学习生活");
+        lblAdvice.setBounds(780,670,500,60);
+        lblAdvice.setFont(new Font("微软雅黑", Font.BOLD, 20));
+        lblAdvice.setOpaque(true);
+        lblAdvice.setBackground(new Color(0xC9248E8B, true));
+        lblAdvice.setForeground(new Color(0xF2FFFFFF, true));
+        lblAdvice.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblAdvice);
+
+        //slider
+        //设置小数，需要计算
+        Hashtable labelTable = new Hashtable();
+        for (int i=0;i<=40;i+=5){
+            labelTable.put(i,new JLabel(String.valueOf(36+(double)i/10+" ")));
+
+        }
+        final JSlider slider = new JSlider(0, 40, 10);//40个格子，开始的时候在37度位置，也就是10
+        // 设置主刻度间隔
+        slider.setLabelTable(labelTable);
+        slider.setMajorTickSpacing(5);
+        // 设置次刻度间隔
+        slider.setMinorTickSpacing(1);
+        // 绘制 刻度 和 标签
+        slider.setPaintTicks(true);
+        slider.setPaintLabels(true);
+        // 不对齐到刻度
+        slider.setSnapToTicks(false);
+        // 添加刻度改变监听器
+
+
+        slider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                double temperature=36+(double)(slider.getValue())/10;
+                System.out.println("当前值: " + slider.getValue());
+                jtxtTemper.setText(String.valueOf(temperature));
+                lblHealth.setText("今日体温："+String.valueOf(temperature)+"℃");
+                if(temperature<37.3)
+                {
+                  jtxtTemper.setForeground(new Color(0xF22D8B4C, true));
+                  lblHealth.setForeground(new Color(0xF22D8B4C, true));
+                  lblAdvice.setText("体温正常~~开启快乐学习生活");
+                } else if(temperature<37.9){
+                    jtxtTemper.setForeground(new Color(0xD4733F));
+                    lblHealth.setForeground(new Color(0xD4733F));
+                    lblAdvice.setText("体温较高，需要注意身体");
+                } else{
+                    jtxtTemper.setForeground(new Color(0xEA0909));
+                    lblHealth.setForeground(new Color(0xEA0909));
+                    lblAdvice.setText("发烧啦！请快去医院");
+                }
+                jtxtTemper.repaint();
+                lblHealth.repaint();
+                lblAdvice.repaint();
+                }
+
+        });
+        slider.setBounds(160,580,800,60);
+        contentPane.add(slider);
+
+
 
         JLabel jlSchool=new JLabel("目前所在校区");
         jlSchool.setBounds(0,90,150,30);

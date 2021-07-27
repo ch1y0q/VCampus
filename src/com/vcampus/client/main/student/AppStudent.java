@@ -1,9 +1,11 @@
 package com.vcampus.client.main.student;
 
+import com.alee.laf.WebLookAndFeel;
 import com.alee.managers.style.StyleId;
 import com.vcampus.UI.myJLabel;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
+import com.vcampus.client.main.AppDailyreport;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.AppStuCourse;
 import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
@@ -266,7 +268,13 @@ public class AppStudent extends JFrame {
         btnReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO
+                if(e.getSource()==btnReport)
+                {
+                    WebLookAndFeel.install();
+                    AppDailyreport app=new AppDailyreport();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
             }
         });
         contentPane.add(btnReport);
