@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 /**
@@ -160,7 +161,7 @@ public class AppDormAdmin extends JFrame {
         });
         jp1.add(btnDormHygieneRateEntering);
 
-        
+
 
 
 
@@ -204,23 +205,111 @@ public class AppDormAdmin extends JFrame {
 
         JButton btnDormWaterElectricityRateLookUp = new JButton("查询");
         btnDormWaterElectricityRateLookUp.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
+        btnDormWaterElectricityRateLookUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String dormAddress = txtDormWaterElectricityRateEnteringDormAddress.getText();
+                String weekText=cmbDormBill.getSelectedItem().toString();
+                int weekNo=Integer.valueOf(weekText.substring(1,2));
+
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("dormAddress",dormAddress);
+                map.put("weekNo",weekNo);
+
+                BigDecimal waterRate;
+                waterRate=ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getDormWaterRate",
+                                new Object[]{map}).send())
+                        .getReturn(BigDecimal.class);
+
+                BigDecimal electricityRate;
+                electricityRate=ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getDormElectricityRate",
+                                new Object[]{map}).send())
+                        .getReturn(BigDecimal.class);
+
+                tblDormBill.getModel().setValueAt(dormAddress,1,0);
+                tblDormBill.getModel().setValueAt(waterRate,1,1);
+                tblDormBill.getModel().setValueAt(electricityRate,1,2);
+                tblDormBill.getModel().setValueAt(weekNo,1,3);
+            }
+        });
         jp1.add(btnDormWaterElectricityRateLookUp);
         btnDormWaterElectricityRateLookUp.setBounds(770, 337, 100, 30);
 
-        JLabel lblDormWaterElectricityRateEntering = new JLabel("分数");
-        lblDormWaterElectricityRateEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        lblDormWaterElectricityRateEntering.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormWaterElectricityRateEntering.setBounds(580, 580, 250, 40);
-        jp1.add(lblDormWaterElectricityRateEntering);
 
-        JTextField txtDormWaterElectricityRateEntering = new JTextField();
-        txtDormWaterElectricityRateEntering.setBounds(755, 586, 90, 30);
-        jp1.add(txtDormWaterElectricityRateEntering);
+        JLabel lblDormWaterRateEntering = new JLabel("水费");
+        lblDormWaterRateEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblDormWaterRateEntering.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDormWaterRateEntering.setBounds(580, 580, 250, 40);
+        jp1.add(lblDormWaterRateEntering);
 
-        JButton btnDormWaterElectricityRateEntering = new JButton("录入");
-        btnDormWaterElectricityRateEntering.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
-        jp1.add(btnDormWaterElectricityRateEntering);
-        btnDormWaterElectricityRateEntering.setBounds(880, 586, 100, 30);
+        JTextField txtDormWaterRateEntering = new JTextField();
+        txtDormWaterRateEntering.setBounds(755, 586, 90, 30);
+        jp1.add(txtDormWaterRateEntering);
+
+        JButton btnDormWaterRateEntering = new JButton("录入");
+        btnDormWaterRateEntering.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
+        btnDormWaterRateEntering.setBounds(880, 586, 100, 30);
+        btnDormWaterRateEntering.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String dormAddress = txtDormWaterElectricityRateEnteringDormAddress.getText();
+                String weekText=cmbDormBill.getSelectedItem().toString();
+                int weekNo=Integer.valueOf(weekText.substring(1,2));
+                String waterRate=txtDormWaterRateEntering.getText();
+
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("dormAddress",dormAddress);
+                map.put("weekNo",weekNo);
+                map.put("waterCost",waterRate);
+
+                ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.setDormWaterRate",
+                                new Object[]{map}).send())
+                        .getReturn(Boolean.class);
+
+            }
+        });
+        jp1.add(btnDormWaterRateEntering);
+
+        JLabel lblDormElectricityRateEntering = new JLabel("电费");
+        lblDormElectricityRateEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblDormElectricityRateEntering.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDormElectricityRateEntering.setBounds(580, 640, 250, 40);
+        jp1.add(lblDormElectricityRateEntering);
+
+        JTextField txtDormElectricityRateEntering = new JTextField();
+        txtDormElectricityRateEntering.setBounds(755, 646, 90, 30);
+        jp1.add(txtDormElectricityRateEntering);
+
+        JButton btnDormElectricityRateEntering = new JButton("录入");
+        btnDormElectricityRateEntering.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
+        btnDormElectricityRateEntering.setBounds(880, 646, 100, 30);
+        btnDormElectricityRateEntering.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String dormAddress = txtDormWaterElectricityRateEnteringDormAddress.getText();
+                String weekText=cmbDormBill.getSelectedItem().toString();
+                int weekNo=Integer.valueOf(weekText.substring(1,2));
+                String electricityRate=txtDormElectricityRateEntering.getText();
+
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("dormAddress",dormAddress);
+                map.put("weekNo",weekNo);
+                map.put("electricityCost",electricityRate);
+
+                ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.setDormElectricityRate",
+                                new Object[]{map}).send())
+                        .getReturn(Boolean.class);
+
+            }
+        });
+        jp1.add(btnDormElectricityRateEntering);
+
 
         //jp1结束
 
