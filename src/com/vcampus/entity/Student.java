@@ -79,7 +79,7 @@ public class Student {
     }
 
     /* util */
-    public String getSchool() {
+    public String getSchoolByNumber() {
         String school = "";
         try {
             school = getSchoolByCode(studentNumber.substring(0, 2));
@@ -88,10 +88,10 @@ public class Student {
         }
         return school;
     }
-    public String getSchoolBy() {
+    public String getSchool() {
         return school;
     }
-    public void setSchoolBy(String school)
+    public void setSchool(String school)
     {
         this.school=school;
     }

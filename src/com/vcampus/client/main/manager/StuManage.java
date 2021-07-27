@@ -3,7 +3,6 @@ package com.vcampus.client.main.manager;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.administrator.main.AppAdmin;
 import com.vcampus.client.main.App;
-import com.vcampus.entity.Book;
 import com.vcampus.entity.Student;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -196,7 +195,7 @@ public class StuManage extends JFrame{
                         listData[i][0]=list.get(i).getCardNumber();
                         listData[i][1]=list.get(i).getName();
                         listData[i][2]=list.get(i).getGender();
-                        listData[i][3]=list.get(i).getSchoolBy();
+                        listData[i][3]=list.get(i).getSchool();
                         listData[i][4]=list.get(i).getStudentNumber();
                         listData[i][5]="<html><font color='rgb(110,110,110)'>查看</font></html>";
                     }
