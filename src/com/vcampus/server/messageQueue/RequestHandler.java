@@ -63,7 +63,8 @@ public class RequestHandler extends Thread{
                                 processedParams[i] = JSON.parseObject(temp.toJSONString(), paramTypes[i]);
                             }
                         }
-                        ret = method.invoke(null, processedParams);
+                        if(processedParams == null) ret = method.invoke(null);  // no params passed
+                        else ret = method.invoke(null, processedParams);
                     }
                     App.appendLog("调用了接口：" + methodName);
                     // 组织并发送响应

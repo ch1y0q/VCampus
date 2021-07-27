@@ -49,9 +49,9 @@ public interface IStudentMapper {
 
     public String getBankAccountByCardNumber(String cardNumber);
 
-    public Boolean setBalance(int balanceAdded);
+    public Boolean setBalance(Map map); // <money, cardNumber>
 
-    public void chargeCard(Map map);
+    public void chargeCard(Map map); // <money, cardNumber> add money
 
     public String getLossStatusByCardNumber(String cardNumber);
 

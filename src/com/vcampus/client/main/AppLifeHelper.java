@@ -17,6 +17,12 @@ public class AppLifeHelper {
                 .getReturn(BigDecimal.class);
     }
 
+    public static BigDecimal setBalance(HashMap map) {
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.setBalance",
+                        new Object[]{map}).send())
+                .getReturn(BigDecimal.class);
+    }
     public static String lossJudge(String string){
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.lossJudge",

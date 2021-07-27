@@ -11,6 +11,8 @@ import java.util.Map;
  */
 public interface IGoodsMapper {
 
+    public List<Goods> listAllGoods();
+
     public List<Goods> listGoodsByCategory(String category);
 
     public List<Goods> searchGoods(String Goods);
@@ -25,7 +27,10 @@ public interface IGoodsMapper {
 
     public Boolean addBuyer(Goods Goods);
 
-    public String getGoodsStorage(String name);
+    public int getGoodsStorageByName(String name);
 
-    public int buySomething(Map<String, String> map);
+    public int getGoodsStorageById(int id);
+
+    public int buySomething(Map<String, Integer> map);  //<cardNumber, id>
+
 }

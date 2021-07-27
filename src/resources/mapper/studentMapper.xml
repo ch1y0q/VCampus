@@ -77,9 +77,10 @@
                                                  #{cardNumber} LIMIT 1
     </select>
 
+    <!-- 充钱 -->
     <update id="chargeCard" parameterType="Map">
         UPDATE `students` SET
-            `balance` =  #{money} WHERE `cardNumber`
+            `balance` =  `balance`+#{money} WHERE `cardNumber`
                                                        = #{cardNumber}
         LIMIT 1
     </update>
@@ -97,9 +98,9 @@
             `cardNumber`=#{cardNumber}
     </select>
 
-    <update id="setBalance" parameterType="BigDecimal">
+    <update id="setBalance" parameterType="Map">
         UPDATE `students` SET
-            `balance` = `balance` + #{money} WHERE `cardNumber`
+            `balance` = #{money} WHERE `cardNumber`
                                                        = #{cardNumber}
         LIMIT 1
     </update>

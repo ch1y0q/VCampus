@@ -78,7 +78,7 @@
         SELECT `balance` FROM `teachers` WHERE `cardNumber` =
                                                #{cardNumber} LIMIT 1
     </select>
-
+<!-- TODO setBalance -->
     <update id="chargeCard" parameterType="Map">
         UPDATE `teachers` SET
             `balance` = `balance` + #{money} WHERE `cardNumber`

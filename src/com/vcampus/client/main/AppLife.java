@@ -197,6 +197,7 @@ public class AppLife extends JFrame {
         btnCardRecharge.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //TODO check here, 尤其检查api用得对不对
                 String balanceAddedText = txtAmount.getText().trim();
                 BigDecimal balanceAdded = new BigDecimal(balanceAddedText);
                 if (balanceAdded.compareTo(new BigDecimal(0)) == 1 // larger than 0
@@ -206,7 +207,7 @@ public class AppLife extends JFrame {
                     mapCardNum_BalanceAdded.put("cardNumber", studentCardNumber);
                     BigDecimal _balance = App.session.getStudent().getBalance();
                     mapCardNum_BalanceAdded.put("money", _balance.add(balanceAdded));
-                    BigDecimal result = AppLifeHelper.chargeCard(mapCardNum_BalanceAdded);
+                    BigDecimal result = AppLifeHelper.setBalance(mapCardNum_BalanceAdded);
                     if (result.compareTo(_balance.add(balanceAdded)) == 0) { // equals
                         JOptionPane.showMessageDialog(null, "充值成功");
                     }

@@ -19,6 +19,23 @@ import java.util.Map;
  * @date 2021-07-26
  */
 public class ShopServer {
+    public static List<Goods> listAllGoods() {
+        List<Goods> result = new ArrayList<>();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            IGoodsMapper GoodsMapper = sqlSession.getMapper(IGoodsMapper.class);
+            result = GoodsMapper.listAllGoods();
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            // sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static List<Goods> searchGoods(String Goods) {
         List<Goods> result = null;
 
@@ -85,12 +102,13 @@ public class ShopServer {
         }
         Integer result = 0;
         // tokenize and parse
+        /* id1@qty1@pr1$id2@qty2@pr2$id3@qty3@pr3 */
         BigDecimal totalMoney = new BigDecimal(0);
-        Map<String, Integer> remainChecker = new HashMap<>();
+        Map<Integer, Integer> remainChecker = new HashMap<>();
         String[] L1 = se.split("\\$");
         for (String ele : L1) {
             String[] L2 = ele.split("@");
-            remainChecker.put(L2[0], Integer.parseInt(L2[1]));
+            remainChecker.put(Integer.parseInt(L2[0]), Integer.parseInt(L2[1]));
             totalMoney = totalMoney.add (new BigDecimal(L2[1]).multiply(new BigDecimal(L2[2])) );
         }
         SqlSession sqlSession = null;
@@ -104,22 +122,22 @@ public class ShopServer {
             }
             // storage check
             IGoodsMapper goodsMapper = sqlSession.getMapper(IGoodsMapper.class);
-            for (String key : remainChecker.keySet()) {
-                Integer currentRemain = Integer.parseInt(goodsMapper.getGoodsStorage(key));
+            for (int key : remainChecker.keySet()) {
+                int currentRemain = goodsMapper.getGoodsStorageById(key);
                 if (currentRemain < remainChecker.get(key)) {
                     return 2; // storage not sufficient
                 }
             }
             // buy, update `goods`
-            for (String key : remainChecker.keySet()) {
-                Map<String, String> map = new HashMap<>();
-                map.put("howmany", String.valueOf(remainChecker.get(key)));
-                map.put("name", key);
+            for (Integer key : remainChecker.keySet()) {
+                Map<String, Integer> map = new HashMap<>();
+                map.put("howmany", remainChecker.get(key));
+                map.put("id", key);
                 goodsMapper.buySomething(map);
             }
             // buy, update student balance
-            Map<String, String> map = new HashMap<>();
-            map.put("money", String.valueOf(totalMoney.multiply(new BigDecimal(-1))));
+            Map<String, Object> map = new HashMap<>();
+            map.put("money", String.valueOf(totalMoney.multiply(new BigDecimal(-1))));//乘上-1
             map.put("cardNumber", cardNumber);
             studentMapper.chargeCard(map);
             sqlSession.commit();

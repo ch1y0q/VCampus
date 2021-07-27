@@ -20,8 +20,8 @@ public class myJLabel extends JLabel {
        shadow.setShadowColor(new Color(0, 0, 0));
        shadow.setCornerSize(10);//默认12
        shadow.setShadowOpacity((float) 0.85);//透明度为0-1的浮点数
-        System.out.println(shadow.getShadowOpacity());
-        System.out.println(shadow.getCornerSize());
+        //System.out.println(shadow.getShadowOpacity());
+        //System.out.println(shadow.getCornerSize());
         this.setBorder(shadow);
     }
 }

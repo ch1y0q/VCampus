@@ -3,6 +3,9 @@
         "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="com.vcampus.dao.IGoodsMapper">
+    <select id="listAllGoods" resultType="Goods">
+        SELECT * FROM goods
+    </select>
 
     <select id="searchGoods" parameterType="String"
             resultType="Goods">
@@ -33,13 +36,18 @@
                                                                         #{price} AND remaining = #{remaining}
     </delete>
 
-    <select id="getGoodsStorage" parameterType="String"
-            resultType="String">
+    <select id="getGoodsStorageById" parameterType="int"
+            resultType="int">
+        SELECT `remaining` FROM `goods` WHERE `id` = #{id} LIMIT 1
+    </select>
+
+    <select id="getGoodsStorageByName" parameterType="String"
+            resultType="int">
         SELECT `remaining` FROM `goods` WHERE `name` = #{name} LIMIT 1
     </select>
 
     <update id="buySomething" parameterType="Map">
-        UPDATE `goods` SET `remaining` = `remaining` - #{howmany} WHERE `name` = #{name} LIMIT 1
+        UPDATE `goods` SET `remaining` = `remaining` - #{howmany} WHERE `id` = #{id} LIMIT 1
     </update>
 
 </mapper>

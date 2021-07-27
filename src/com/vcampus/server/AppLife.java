@@ -33,6 +33,24 @@ public class AppLife {
         return result;
     }
 
+    public static BigDecimal setBalance(HashMap map) {
+        BigDecimal result = new BigDecimal(0);
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+
+            studentMapper.setBalance(map);
+
+            result = studentMapper.getBalance((String) map.get("cardNumber"));
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static String lossJudge(String cardNumber){
         String curLossStatus="挂失";
         try {

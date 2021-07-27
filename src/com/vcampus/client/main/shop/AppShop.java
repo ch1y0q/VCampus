@@ -1,5 +1,6 @@
 package com.vcampus.client.main.shop;
 
+import com.alee.managers.style.StyleId;
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.entity.Goods;
@@ -14,18 +15,26 @@ import static com.vcampus.entity.UserType.STUDENT;
 import static com.vcampus.server.bank.BankServer.getStudentBalance;
 import static com.vcampus.server.bank.BankServer.getTeacherBalance;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * @author Y, Huang Qiyue
@@ -44,36 +53,40 @@ public class AppShop extends JFrame {
     private static JLabel lblGoodsInfo;
     private static List<Goods> list;
     private static JTextArea goodsDetail;
+    private static DefaultTableModel tableModel;
 
     private static final String EMPTY_GOODS_PIC = "/resources/assets/bg/bg3.jpg";
     private static final String EMPTY_GOODS_DESCRIPTION = "这里应该是商品详细信息";
-
-    public void addGoodsListHeader(){
-        /* BE CAREFUL CHANGING columnIndex! */
-        tblGoodsList.getModel().setValueAt("商品编号", 0, 0);
-        tblGoodsList.getModel().setValueAt("商品名称", 0, 1);
-        tblGoodsList.getModel().setValueAt("类别", 0, 2);
-        tblGoodsList.getModel().setValueAt("剩余数量", 0, 3);
-        tblGoodsList.getModel().setValueAt("状态", 0, 4);
-        tblGoodsList.getModel().setValueAt("价格", 0, 5);
-    }
-
+    private static final String CATEGORY_UNFILTERED = "所有商品";
+    private static final int PIC_WIDTH = 200,
+                             PIC_HEIGHT = 200;
     public void handleCategorySelection(String category) {
-        tblGoodsList.removeAll();
-        list = ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null,
-                        "com.vcampus.server.shop.ShopServer.listGoodsByType", new Object[] { category }).send())
-                .getListReturn(Goods.class);
+        tableModel.setRowCount(0);   // remove all rows
+        if(category.equals(CATEGORY_UNFILTERED)){
+            list = ResponseUtils
+                    .getResponseByHash(new Request(App.connectionToServer, null,
+                            "com.vcampus.server.shop.ShopServer.listAllGoods", new Object[]{}).send())
+                    .getListReturn(Goods.class);
+        }
+        else {
+            list = ResponseUtils
+                    .getResponseByHash(new Request(App.connectionToServer, null,
+                            "com.vcampus.server.shop.ShopServer.listGoodsByType", new Object[]{category}).send())
+                    .getListReturn(Goods.class);
+        }
         if (list == null) {
             SwingUtils.showMessage(null, "抱歉，没有搜到符合条件的商品，管理员正在努力备货中...", "提示");
         } else {
             for (int i = 0; i < list.size(); i++) {
-                tblGoodsList.getModel().setValueAt(list.get(i).getId(), i+1, 0);
-                tblGoodsList.getModel().setValueAt(list.get(i).getName(), i+1, 1);
-                tblGoodsList.getModel().setValueAt(list.get(i).getCategory(), i+1, 2);
-                tblGoodsList.getModel().setValueAt(list.get(i).getRemaining(), i+1, 3);
-                tblGoodsList.getModel().setValueAt(list.get(i).getStatus(), i+1, 4);
-                tblGoodsList.getModel().setValueAt(list.get(i).getPrice(), i+1, 5);
+                tableModel.addRow(new Object[]{
+                        list.get(i).getId(),
+                        list.get(i).getName(),
+                        list.get(i).getCategory(),
+                        list.get(i).getRemaining(),
+                        list.get(i).getStatus(),
+                        list.get(i).getPrice()
+                });
+
             }
 
         }
@@ -90,31 +103,26 @@ public class AppShop extends JFrame {
         });
     }
 
-    private void loadGoods(){
-        //TODO
-    }
-
     /**
      * 购买已选中的商品，并进行一系列初步检测。
      */
     private void purchase() {
         int row = tblGoodsList.getSelectedRow();
-        int amount = Integer.parseInt(txtGoodsNum.getText());
+        int quantity = Integer.parseInt(txtGoodsNum.getText());
+
         // has selection
         if (row == -1) {
             JOptionPane.showMessageDialog(null, "未选中商品", "错误", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int remaining = (int) tblGoodsList.getValueAt(row, 2);
+        int remaining = (int) tblGoodsList.getValueAt(row, 3);
+
         // has remaining
-        if (amount > remaining) {
+        if (quantity > remaining) {
             JOptionPane.showMessageDialog(null, "商品剩余数量不足", "错误", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        // has money
-        BigDecimal totalPrice = new BigDecimal(0);
-        totalPrice = (BigDecimal) tblGoodsList.getValueAt(row, 4);
-        totalPrice = totalPrice.multiply(new BigDecimal(amount));
+
         String cardNumber;
         switch (App.session.getUserType()) {
             case STUDENT:
@@ -127,14 +135,19 @@ public class AppShop extends JFrame {
                 System.err.println("Neither student nor teacher...");
                 return;
         }
+        /* has money, done serverside
+        BigDecimal totalPrice = new BigDecimal(0);
+        totalPrice = (BigDecimal) tblGoodsList.getValueAt(row, 5);  // price
+        totalPrice = totalPrice.multiply(new BigDecimal(quantity));           // multiplies quantity
         BigDecimal balance = getBalance(cardNumber, App.session.getUserType());
         if (balance.compareTo(totalPrice) == -1) { // < , no enough money
             JOptionPane.showMessageDialog(null, "余额不足", "错误", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        // TODO check parameter
+        */
+        // TODO 一次购买多种商品
         submitPurchase(cardNumber, App.session.getUserType(),
-                tblGoodsList.getValueAt(row, 4) + "@" + amount);
+                tblGoodsList.getValueAt(row, 0) + "@" + quantity+"@" + tblGoodsList.getValueAt(row, 5));
     }
 
     public AppShop() {
@@ -173,7 +186,7 @@ public class AppShop extends JFrame {
         contentPane.add(lblGoodsKind);
 
         cmbGoodsCategory = new JComboBox();
-        cmbGoodsCategory.addItem("所有商品");
+        cmbGoodsCategory.addItem(CATEGORY_UNFILTERED);
         cmbGoodsCategory.addItem("食品");
         cmbGoodsCategory.addItem("日用");
         cmbGoodsCategory.addItem("文具");
@@ -215,25 +228,33 @@ public class AppShop extends JFrame {
         lblBalanceVal.setBounds(1050, 67, 160, 30);
         contentPane.add(lblBalanceVal);
 
-
-        tblGoodsList = new JTable(12, 6){
+        /* BE CAREFUL CHANGING columnIndex! */
+        // Check purchase()
+        tableModel = new DefaultTableModel();
+        String[] columnNames={
+                "商品编号",
+                "商品名称",
+                "类别",
+                "剩余数量",
+                "状态",
+                "价格"};
+        String[][] tableValues = {};
+        tableModel=new DefaultTableModel(tableValues, columnNames);
+        tblGoodsList = new JTable(tableModel){
             @Override
             public boolean isCellEditable(int row, int column)
             {
                 return false;
             }
         };
-
-        //tblGoodsList.setColumnSelectionAllowed(false);
-        //tblGoodsList.setRowSelectionAllowed(true);
-        tblGoodsList.setBounds(330, 150, 500, 600);
+        tblGoodsList.putClientProperty ( StyleId.STYLE_PROPERTY, "table" );
+        tblGoodsList.setAutoResizeMode ( JTable.AUTO_RESIZE_ALL_COLUMNS );
+        tblGoodsList.setRowSelectionAllowed(true);
+        tblGoodsList.setCellSelectionEnabled(false);
+       // tblGoodsList.setBounds(330, 150, 500, 600);
         tblGoodsList.setRowHeight(40);
         tblGoodsList.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-
         tblGoodsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        //tblGoodsList.setCellSelectionEnabled(false);
-        addGoodsListHeader();
         tblGoodsList.setPreferredScrollableViewportSize(new Dimension(200, 100));
         tblGoodsList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -241,11 +262,18 @@ public class AppShop extends JFrame {
                 int row = tblGoodsList.getSelectedRow();
                 if(row != -1)
                 {
-                    System.out.println(getClass().getResource("/resources/assets/goods"
-                            + list.get(row-1).getPic()));//TODO remove this line
-                    goodsPic.setIcon(new ImageIcon(getClass().getResource("/resources/assets/goods"
-                            + list.get(row-1).getPic())));
-                    goodsDetail.setText(list.get(row-1).getDescription());
+                    BufferedImage img = null;
+                    try {
+                        img = ImageIO.read(getClass().getResource("/resources/assets/goods/"
+                                + list.get(row).getPic()));
+                    } catch (IOException ee) {
+                        ee.printStackTrace();
+                    }
+                    Image dimg = img.getScaledInstance(PIC_WIDTH, PIC_HEIGHT,
+                            Image.SCALE_SMOOTH);
+                    goodsPic.setIcon(new ImageIcon(dimg));
+
+                    goodsDetail.setText(list.get(row).getDescription());
                 }
                 else{
                     goodsPic.setIcon(new ImageIcon(getClass().getResource(EMPTY_GOODS_PIC)));
@@ -256,8 +284,9 @@ public class AppShop extends JFrame {
         DefaultTableCellRenderer rGoodsList = new DefaultTableCellRenderer();
         rGoodsList.setHorizontalAlignment(JLabel.CENTER);
         tblGoodsList.setDefaultRenderer(Object.class, rGoodsList);
-        //JScrollPane scrollPane=new JScrollPane(tblGoodsList);
-        contentPane.add(tblGoodsList);
+        JScrollPane scrollPane=new JScrollPane(tblGoodsList);
+        scrollPane.setBounds(330, 150, 500, 600);
+        contentPane.add(scrollPane);
 
         JLabel lblGoodsPic = new JLabel("商品图片");
         lblGoodsPic.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -265,9 +294,21 @@ public class AppShop extends JFrame {
         lblGoodsPic.setBounds(1050, 150, 100, 40);
         contentPane.add(lblGoodsPic);
 
-        goodsPic = new JLabel(new ImageIcon(getClass().getResource(EMPTY_GOODS_PIC)));
+
+        goodsPic = new JLabel();
+        goodsPic.setBounds(1000, 200, 300, 300);
         contentPane.add(goodsPic);
-        goodsPic.setBounds(1000, 200, 200, 200);
+
+        /* load initial goods img */
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(getClass().getResource(EMPTY_GOODS_PIC));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image dimg = img.getScaledInstance(PIC_WIDTH, PIC_HEIGHT,
+                Image.SCALE_SMOOTH);
+        goodsPic.setIcon(new ImageIcon(dimg));
 
         lblGoodsInfo = new JLabel("商品信息");
         lblGoodsInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -309,5 +350,8 @@ public class AppShop extends JFrame {
         btnAddToCart.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         contentPane.add(btnAddToCart);
         btnAddToCart.setBounds(1050, 700, 110, 35);
+
+        /* show all goods upon show-up */
+        handleCategorySelection(CATEGORY_UNFILTERED);
     }
 }

@@ -36,12 +36,12 @@ public class AppShopHelper {
                 return ResponseUtils
                         .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.shop.ShopServer.studentCheckout",
                                 new Object[]{cardNumber, se}).send())
-                        .getReturn(int.class);
+                        .getReturn(Integer.class);
             case TEACHER:
                 return ResponseUtils
                         .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.shop.ShopServer.teacherCheckout",
                                 new Object[]{cardNumber, se}).send())
-                        .getReturn(int.class);
+                        .getReturn(Integer.class);
             default:
                 return -1;
         }
