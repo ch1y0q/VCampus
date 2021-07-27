@@ -12,6 +12,7 @@ import com.vcampus.util.SwingUtils;
 
 import static com.vcampus.client.main.shop.AppShopHelper.*;
 import static com.vcampus.entity.UserType.STUDENT;
+import static com.vcampus.entity.UserType.TEACHER;
 import static com.vcampus.server.bank.BankServer.getStudentBalance;
 import static com.vcampus.server.bank.BankServer.getTeacherBalance;
 
@@ -146,8 +147,38 @@ public class AppShop extends JFrame {
         }
         */
         // TODO 一次购买多种商品
-        submitPurchase(cardNumber, App.session.getUserType(),
+        int result = submitPurchase(cardNumber, App.session.getUserType(),
                 tblGoodsList.getValueAt(row, 0) + "@" + quantity+"@" + tblGoodsList.getValueAt(row, 5));
+        switch(result){
+            case 0:
+                JOptionPane.showMessageDialog(null, "成功支付。", "成功", JOptionPane.INFORMATION_MESSAGE);
+                // update balance label
+                lblBalanceVal.setText(getBalance(cardNumber,App.session.getUserType()).toString());
+                // update object of App.session
+                switch (App.session.getUserType()) {
+                    case STUDENT:
+                        App.session.getStudent().setBalance(getBalance(cardNumber,STUDENT));
+                        break;
+                    case TEACHER:
+                        App.session.getTeacher().setBalance(getBalance(cardNumber,TEACHER));
+                        break;
+                    default:
+                        System.err.println("Neither student nor teacher...");
+                        return;
+                }
+                // update table
+                handleCategorySelection(cmbGoodsCategory.getSelectedItem().toString());
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, "余额不足", "错误", JOptionPane.ERROR_MESSAGE);
+                break;
+            case 2:
+                JOptionPane.showMessageDialog(null, "存货不足", "错误", JOptionPane.ERROR_MESSAGE);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "发生错误", "错误", JOptionPane.ERROR_MESSAGE);
+                break;
+        }
     }
 
     public AppShop() {
@@ -220,7 +251,7 @@ public class AppShop extends JFrame {
                 lblBalanceVal.setText(getBalance(App.session.getStudent().getCardNumber(), UserType.STUDENT).toString());
                 break;
             case TEACHER:
-                lblBalanceVal.setText(getBalance(App.session.getTeacher().getCardNumber(), UserType.TEACHER).toString());
+                lblBalanceVal.setText(getBalance(App.session.getTeacher().getCardNumber(), TEACHER).toString());
                 break;
         }
 

@@ -3,18 +3,23 @@ package com.vcampus.client.main;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
 import com.vcampus.client.main.student.StuCategory;
+import com.vcampus.dao.ICourseMapper;
 import com.vcampus.net.Request;
 import com.vcampus.util.*;
 
 import com.vcampus.entity.*;
+import org.apache.ibatis.session.SqlSession;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 public class AppStuCourse {
     private JFrame jf = new JFrame("课程管理");
@@ -79,12 +84,14 @@ public class AppStuCourse {
         for (int i = 0; i < 13; i++) {
             model0.setValueAt(Integer.toString(i + 1), i, 0);
         }
+
         JTable courseTable = new JTable(model0) {
             public boolean isCellEditable(int row, int column) {
                 this.setRowSelectionAllowed(false);
                 this.setColumnSelectionAllowed(false);
                 return false;
             }
+
         };
         JLabel semesterLabel0 = new JLabel("学期", JLabel.CENTER);
         semesterLabel0.setBounds(width / 50, height / 40, 40, 30);
@@ -96,11 +103,12 @@ public class AppStuCourse {
         }
         chooseSemester0.setBounds(width / 50 + 60, height / 40, 120, 30);
         jp0.add(chooseSemester0);
-        courseTable.setRowHeight(30);
+        courseTable.setRowHeight(60);
         sp0.setViewportView(courseTable);
-        DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-        r.setHorizontalAlignment(JLabel.CENTER);
-        courseTable.setDefaultRenderer(Object.class, r);
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(JLabel.CENTER);
+        courseTable.setDefaultRenderer(Object.class, tcr);
+        refreshCourseTable();
 
 
         //选课
@@ -156,7 +164,7 @@ public class AppStuCourse {
         jp2.add(numOfCreditText);
         sp2.setBounds(width / 50, 30+height / 20, width * 3 / 5, height * 3 / 5);
         for(int i = 0;i<selectedCourseTable.getRowCount();i++){
-            Object n = model2.getValueAt(i,2);
+            Object n = model2.getValueAt(i,3);
             if(n!=null){
                 Double d = Double.parseDouble((String)n);
                 credit+=d;
@@ -271,7 +279,6 @@ public class AppStuCourse {
                     model1.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>",row,column);
                     //String courseId = "12345";
                     Object courseIdO = model1.getValueAt(row,0);
-                    System.out.println(courseIdO);
                     String courseId = (String)courseIdO;
                     Boolean IsTakeCourse = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
                             null,"com.vcampus.server.teaching.CourseSelection.takeCourse",
@@ -283,8 +290,9 @@ public class AppStuCourse {
                             ,course.getTeacher(),course.getTime(),course.getClassroom(),course.getMajor(),course.getCapacity()
                             ,course.getSelectedNumber(),"退课"};
                     model2.addRow(courseInfo);
+                    refreshCourseTable();
                     for(int i = 0;i<selectedCourseTable.getRowCount();i++){
-                        Object n = model2.getValueAt(i,2);
+                        Object n = model2.getValueAt(i,3);
                         if(n!=null){
                             double d = Double.parseDouble((String)n);
                             credit+=d;
@@ -304,10 +312,16 @@ public class AppStuCourse {
                 int column = selectedCourseTable.getSelectedColumn();
                 int row = selectedCourseTable.getSelectedRow();
                 if(column == 10){
+                    Object courseIdO = model2.getValueAt(row,0);
+                    String courseId = (String)courseIdO;
+                    String res=ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                            null,"com.vcampus.server.teaching.CourseSelection.dropCourse",
+                            new Object[] {App.session.getStudent(),courseId}).send()).getReturn(String.class);
+                    System.out.println("result= "+res);
                     model2.removeRow(row);
-
+                    credit=0;
                     for(int i = 0;i<selectedCourseTable.getRowCount();i++){
-                        Object n = model2.getValueAt(i,2);
+                        Object n = model2.getValueAt(i,3);
                         if(n!=null){
                             double d = Double.parseDouble((String)n);
                             credit+=d;
@@ -324,10 +338,32 @@ public class AppStuCourse {
 
     }
     private void refreshCourseTable(){
+        String selectedCourses = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null,
+                        "com.vcampus.server.teaching.CourseSelection.getCourseSelection",
+                        new Object[] {App.session.getStudent()}).send())
+                .getReturn(String.class);
 
-
-        Object semester = chooseSemester0.getSelectedItem();
-
+        if(selectedCourses!=""){
+            String[] splitSelectedCourses = selectedCourses.split(",");
+            for(String s:splitSelectedCourses){
+                Course course = ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null,
+                                "com.vcampus.server.teaching.CourseSelection.getOneCourse",
+                                new Object[] {s}).send())
+                        .getReturn(Course.class);
+                String time = course.getTime();
+                String[] splitTime = time.split("-");
+                int start = Integer.parseInt(splitTime[1]);
+                int end = Integer.parseInt(splitTime[2]);
+                int day = Integer.parseInt(splitTime[0]);
+                for(int i = start-1;i<=end-1;i++){
+                    String name = course.getClassName();
+                    String classroom = course.getClassroom();
+                    model0.setValueAt("<html><center>"+name+"<br>"+classroom+"</center></html>",i,day);
+                }
+            }
+        }
 
     }
     private void refreshSelectCourseTable(){
@@ -351,3 +387,4 @@ public class AppStuCourse {
     }
     public void open(){jf.setVisible(true);}
 }
+

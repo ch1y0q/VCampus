@@ -80,7 +80,7 @@
     <!-- 充钱 -->
     <update id="chargeCard" parameterType="Map">
         UPDATE `students` SET
-            `balance` =  `balance`+#{money} WHERE `cardNumber`
+            `balance` =  `balance` + #{money} WHERE `cardNumber`
                                                        = #{cardNumber}
         LIMIT 1
     </update>
@@ -133,13 +133,13 @@
 
     <select id="getSelectedCourses" parameterType="String"
             resultType="String">
-        SELECT `selectedCourse` FROM `students` WHERE
+        SELECT `selectedcourse` FROM `students` WHERE
             `cardNumber`=#{cardNumber} LIMIT 1
     </select>
 
     <update id="setSelectedCourses" parameterType="Map">
         UPDATE students
-        SET `selectedCourse` = #{content} WHERE `cardNumber` = #{cardNumber} LIMIT 1
+        SET `selectedcourse` = #{content} WHERE `cardNumber` = #{cardNumber} LIMIT 1
     </update>
 
 

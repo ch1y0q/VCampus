@@ -3,6 +3,7 @@ package com.vcampus.dao;
 import com.vcampus.entity.Teacher;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,4 +44,6 @@ public interface ITeacherMapper {
     public BigDecimal getBalance(String cardNumber);
 
     public Boolean resetPassword(Map map);
+
+    public BigDecimal setBalance(Map map);
 }
