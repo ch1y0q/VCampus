@@ -78,11 +78,18 @@
         SELECT `balance` FROM `teachers` WHERE `cardNumber` =
                                                #{cardNumber} LIMIT 1
     </select>
-<!-- TODO setBalance -->
+<!-- 充钱 -->
     <update id="chargeCard" parameterType="Map">
         UPDATE `teachers` SET
             `balance` = `balance` + #{money} WHERE `cardNumber`
                                                        = #{cardNumber}
+        LIMIT 1
+    </update>
+
+    <update id="setBalance" parameterType="Map">
+        UPDATE `teachers` SET
+            `balance` = #{money} WHERE `cardNumber`
+                                           = #{cardNumber}
         LIMIT 1
     </update>
 

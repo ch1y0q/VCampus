@@ -3,6 +3,10 @@
 Some problems we encountered.
 
 ## GUI
+### JTable不显示表头
+解决方法：把JTable 放进JScrollPane中，JScrollPane设置bounds，JTable不设置。
+
+### WebLaf 安装
 在安装 [Weblaf](https://github.com/mgarin/weblaf) 时报错。
 
 同样是JDK 9的模块平台的原因。

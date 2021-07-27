@@ -140,6 +140,8 @@ public class ShopServer {
             map.put("money", String.valueOf(totalMoney.multiply(new BigDecimal(-1))));//乘上-1
             map.put("cardNumber", cardNumber);
             studentMapper.chargeCard(map);
+            //buy, update dealHistory
+            //TODO
             sqlSession.commit();
             sqlSession.close();
             return 0;

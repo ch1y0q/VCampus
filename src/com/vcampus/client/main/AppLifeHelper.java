@@ -12,14 +12,14 @@ public class AppLifeHelper {
     @NotNull
     public static BigDecimal chargeCard(HashMap map) {
         return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.chargeCard",
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.bank.BankServer.chargeStudentCard",
                         new Object[]{map}).send())
                 .getReturn(BigDecimal.class);
     }
 
     public static BigDecimal setBalance(HashMap map) {
         return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.setBalance",
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.bank.BankServer.setStudentBalance",
                         new Object[]{map}).send())
                 .getReturn(BigDecimal.class);
     }

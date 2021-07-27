@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AppLife {
+    @Deprecated
+    // moved to BankServer
     public static BigDecimal chargeCard(HashMap map) {
         BigDecimal result = new BigDecimal(0);
         try {
@@ -33,6 +35,8 @@ public class AppLife {
         return result;
     }
 
+    @Deprecated
+    // moved to BankServer
     public static BigDecimal setBalance(HashMap map) {
         BigDecimal result = new BigDecimal(0);
         try {
