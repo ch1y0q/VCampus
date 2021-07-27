@@ -6,7 +6,6 @@ import com.vcampus.server.App;
 import org.apache.ibatis.session.SqlSession;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 
 /**
  * 用于银行相关的服务器类。
@@ -23,8 +22,9 @@ public class BankServer {
      */
     public static BigDecimal getStudentBalance(String cardNumber) {
         BigDecimal result = new BigDecimal(0);
+        SqlSession sqlSession = null;
         try {
-            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
 
             result = studentMapper.getBalance(cardNumber);;
@@ -45,11 +45,12 @@ public class BankServer {
      */
     public static BigDecimal getTeacherBalance(String cardNumber) {
         BigDecimal result = new BigDecimal(0);
+        SqlSession sqlSession = null;
         try {
-            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            sqlSession = App.sqlSessionFactory.openSession();
             ITeacherMapper teacherMapper = sqlSession.getMapper(ITeacherMapper.class);
 
-            result = teacherMapper.getBalance(cardNumber);;
+            result = teacherMapper.getBalance(cardNumber);
 
             sqlSession.commit();
             sqlSession.close();

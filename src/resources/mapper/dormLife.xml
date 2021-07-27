@@ -22,5 +22,26 @@
             `dormAddress`=#{dormAddress} AND `monthOrWeek`= #{weekNo}
     </select>
 
+    <update id="setDormHygieneMark" parameterType="Map">
+        UPDATE `dormLife` SET
+            `hygieneMark` = #{hygieneMark} WHERE
+            `dormAddress`= #{dormAddress} AND `monthOrWeek` = #{weekNo}
+        LIMIT 1
+    </update>
+
+    <update id="setDormWaterRate" parameterType="Map">
+        UPDATE `dormLife` SET
+            `waterCost` = #{waterCost} WHERE
+            `dormAddress`= #{dormAddress} AND `monthOrWeek` = #{weekNo}
+        LIMIT 1
+    </update>
+
+    <update id="setDormElectricityRate" parameterType="Map">
+        UPDATE `dormLife` SET
+            `electricityCost` = #{electricityCost} WHERE
+            `dormAddress`= #{dormAddress} AND `monthOrWeek` = #{weekNo}
+        LIMIT 1
+    </update>
+
 
 </mapper>

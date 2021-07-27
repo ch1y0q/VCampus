@@ -195,4 +195,49 @@ public class AppLife {
         return list;
     }
 
+    public static Boolean setDormHygieneMark(HashMap map) {
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IDormLifeMapper dormLifeMapper=sqlSession.getMapper(IDormLifeMapper.class);
+
+            dormLifeMapper.setDormHygieneMark(map);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static Boolean setDormWaterRate(HashMap map) {
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IDormLifeMapper dormLifeMapper=sqlSession.getMapper(IDormLifeMapper.class);
+
+            dormLifeMapper.setDormWaterRate(map);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static Boolean setDormElectricityRate(HashMap map) {
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IDormLifeMapper dormLifeMapper=sqlSession.getMapper(IDormLifeMapper.class);
+
+            dormLifeMapper.setDormElectricityRate(map);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }
