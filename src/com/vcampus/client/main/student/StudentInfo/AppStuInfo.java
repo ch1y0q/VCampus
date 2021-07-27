@@ -349,6 +349,9 @@ public class AppStuInfo  extends JFrame {
                 txt_10.setEditable(false);//密码
                 txt_10.setText("输入重置密码");
 
+                txt_8.repaint();
+                txt_9.repaint();
+                txt_10.repaint();
 
                 JOptionPane.showMessageDialog(null, "保存成功");
 

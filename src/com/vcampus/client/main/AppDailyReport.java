@@ -18,10 +18,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
-public class AppDailyreport extends JFrame {
+public class AppDailyReport extends JFrame {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
-    public AppDailyreport() {
+    public AppDailyReport() {
         setResizable(true);
         setTitle(res.getString("student_main"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,8 +116,8 @@ public class AppDailyreport extends JFrame {
         lblAdvice.setBounds(780,670,500,60);
         lblAdvice.setFont(new Font("微软雅黑", Font.BOLD, 20));
         lblAdvice.setOpaque(true);
-        lblAdvice.setBackground(new Color(0xC9248E8B, true));
-        lblAdvice.setForeground(new Color(0xF2FFFFFF, true));
+        lblAdvice.setBackground(new Color(0xC9248E8B));
+        lblAdvice.setForeground(new Color(0xF2FFFFFF));
         lblAdvice.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAdvice);
 
