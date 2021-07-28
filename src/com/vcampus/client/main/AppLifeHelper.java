@@ -39,7 +39,7 @@ public class AppLifeHelper {
 
     public static Boolean insertDealHistory(String cardNumber,BigDecimal dealAmount,String dealType) {
         return ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.insertDealHistory",
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.bank.BankServer.insertDealHistory",
                         new Object[]{new DealHistory(cardNumber,dealAmount,dealType)}).send())
                 .getReturn(Boolean.class);
 

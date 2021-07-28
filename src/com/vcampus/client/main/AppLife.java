@@ -296,7 +296,7 @@ public class AppLife extends JFrame {
         jp1.add(tblWaterBill);
 
 
-        listDealHistory = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.AppLife.getDealHistory",
+        listDealHistory = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.bank.BankServer.getDealHistory",
                 new Object[]{studentCardNumber}).send()).getListReturn(DealHistory.class);
 
         modelDealHistory.setRowCount(0);

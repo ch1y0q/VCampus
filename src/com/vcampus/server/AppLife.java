@@ -87,40 +87,6 @@ public class AppLife {
         return curFoundStatus;
     }
 
-    public static Boolean insertDealHistory(DealHistory dealHistory) {
-
-        try {
-            SqlSession sqlSession = App.sqlSessionFactory.openSession();
-            IDealHistoryMapper dealHistoryMapper =sqlSession.getMapper(IDealHistoryMapper.class);
-
-            dealHistoryMapper.insertDealHistory(dealHistory);
-
-            sqlSession.commit();
-            sqlSession.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-    public static List<DealHistory> getDealHistory(String cardNumber){
-        List<DealHistory> list =new ArrayList<>();
-        SqlSession sqlSession=null;
-        try{
-            sqlSession = App.sqlSessionFactory.openSession();
-            IDealHistoryMapper dealHistoryMapper =sqlSession.getMapper(IDealHistoryMapper.class);
-
-
-            list=dealHistoryMapper.getDealHistory(cardNumber);
-
-            sqlSession.commit();
-            sqlSession.close();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return list;
-    }
-
     public static String getDormAddress(String cardNumber) {
         String dormAddress="ERROR";
         try {

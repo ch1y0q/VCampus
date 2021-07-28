@@ -1,12 +1,16 @@
 package com.vcampus.server.bank;
 
+import com.vcampus.dao.IDealHistoryMapper;
 import com.vcampus.dao.IStudentMapper;
 import com.vcampus.dao.ITeacherMapper;
+import com.vcampus.entity.DealHistory;
 import com.vcampus.server.App;
 import org.apache.ibatis.session.SqlSession;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -153,5 +157,39 @@ public class BankServer {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static Boolean insertDealHistory(DealHistory dealHistory) {
+
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IDealHistoryMapper dealHistoryMapper =sqlSession.getMapper(IDealHistoryMapper.class);
+
+            dealHistoryMapper.insertDealHistory(dealHistory);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static List<DealHistory> getDealHistory(String cardNumber){
+        List<DealHistory> list =new ArrayList<>();
+        SqlSession sqlSession=null;
+        try{
+            sqlSession = App.sqlSessionFactory.openSession();
+            IDealHistoryMapper dealHistoryMapper =sqlSession.getMapper(IDealHistoryMapper.class);
+
+
+            list=dealHistoryMapper.getDealHistory(cardNumber);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
     }
 }

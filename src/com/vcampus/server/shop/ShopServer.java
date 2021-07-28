@@ -2,8 +2,11 @@ package com.vcampus.server.shop;
 
 import com.vcampus.dao.IGoodsMapper;
 import com.vcampus.dao.IStudentMapper;
+import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.Goods;
+import com.vcampus.net.Request;
 import com.vcampus.server.App;
+import com.vcampus.util.ResponseUtils;
 import org.apache.ibatis.session.SqlSession;
 
 import java.math.BigDecimal;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.vcampus.server.bank.BankServer.insertDealHistory;
 
 /**
  * 购买者（师生）角色的商店后端。
@@ -141,7 +146,8 @@ public class ShopServer {
             map.put("cardNumber", cardNumber);
             studentMapper.chargeCard(map);
             //buy, update dealHistory
-            //TODO
+            insertDealHistory(new DealHistory(cardNumber,totalMoney,"OUTCOME"));
+
             sqlSession.commit();
             sqlSession.close();
             return 0;
