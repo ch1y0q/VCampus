@@ -111,17 +111,6 @@ public class AppLife extends JFrame {
 
         //一卡通部分开始 - jp1
 
-        JButton btnBack = new JButton("返回");
-        btnBack.setFont((new Font("微软雅黑", Font.PLAIN, 18)));
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-
-            }
-        });
-        jp1.add(btnBack);
-        btnBack.setBounds(1100, 32, 120, 45);
 
         JLabel lblCardNum = new JLabel("一卡通号");
         lblCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
