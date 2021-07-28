@@ -1,5 +1,6 @@
 package com.vcampus.client.main;
 
+//import com.vcampus.client.main.student.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.RepairHistory;
@@ -97,13 +98,19 @@ public class AppLife extends JFrame {
         jt.setBounds(0, 50, 200, 600);
         contentPane.add(jt);
 
-        /*
-        JLabel commodityPic = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/icon/bgcolor2.png")));
-        jp1.add(commodityPic);
-        commodityPic.setBounds(200, 200, 50, 50);
-         */
-
         //一卡通部分开始 - jp1
+
+        JButton btnBack = new JButton("返回");
+        btnBack.setFont((new Font("微软雅黑", Font.PLAIN, 18)));
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+
+            }
+        });
+        jp1.add(btnBack);
+        btnBack.setBounds(1100, 32, 120, 45);
 
         JLabel lblCardNum = new JLabel("一卡通号");
         lblCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -475,14 +482,14 @@ public class AppLife extends JFrame {
         JLabel lblDormRepairReportThing = new JLabel("报修内容");
         lblDormRepairReportThing.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReportThing.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReportThing.setBounds(75, 420, 100, 40);
+        lblDormRepairReportThing.setBounds(75, 470, 100, 40);
         jp2.add(lblDormRepairReportThing);
 
         JTextField txtDormRepairReport = new JTextField();
-        txtDormRepairReport.setBounds(195, 426, 150, 30);
+        txtDormRepairReport.setBounds(195, 476, 150, 30);
         jp2.add(txtDormRepairReport);
 
-        JLabel lblDormRepairReportDate = new JLabel("报修日期");
+        /*JLabel lblDormRepairReportDate = new JLabel("报修日期");
         lblDormRepairReportDate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReportDate.setHorizontalAlignment(SwingConstants.CENTER);
         lblDormRepairReportDate.setBounds(75, 470, 100, 40);
@@ -502,22 +509,9 @@ public class AppLife extends JFrame {
         txtDormRepairReportDetail.setBounds(195, 526, 150, 30);
         jp2.add(txtDormRepairReportDetail);
 
-        JButton btnDormRepairReport = new JButton("确认报修");
-        btnDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        btnDormRepairReport.setBounds(380, 479, 110, 35);
-        btnDormRepairReport.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String reportContent;
-                reportContent=txtDormRepairReport.getText().trim();
-                String repairStatus="TODO";
-                ResponseUtils
-                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.insertRepairHistory",
-                                new Object[]{new RepairHistory(studentDormAddress,reportContent,repairStatus)}).send())
-                        .getReturn(Boolean.class);
-            }
-        });
-        jp2.add(btnDormRepairReport);
+         */
+
+
 
 
         JLabel lblDormRepairReportHistory = new JLabel("报修历史");
@@ -570,6 +564,55 @@ public class AppLife extends JFrame {
             public boolean isCellEditable(int a,int b){return false;}
         };
         tblDormRepairHistory.setModel(modelRepairHistory);
+
+        JButton btnDormRepairReport = new JButton("确认报修");
+        btnDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        btnDormRepairReport.setBounds(380, 479, 110, 35);
+        btnDormRepairReport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String reportContent;
+                reportContent=txtDormRepairReport.getText().trim();
+                String repairStatus="TODO";
+                ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.insertRepairHistory",
+                                new Object[]{new RepairHistory(studentDormAddress,reportContent,repairStatus)}).send())
+                        .getReturn(Boolean.class);
+
+                listRepairHistory = ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getRepairHistory",
+                                new Object[]{studentDormAddress}).send())
+                        .getListReturn(RepairHistory.class);
+
+                modelRepairHistory.setRowCount(0);
+                String[][] listDataRepairHistory = null;
+                if(listRepairHistory == null){
+                    listDataRepairHistory=new String[1][3];
+                    listDataRepairHistory[0][0]="无报修记录...";
+                    listDataRepairHistory[0][1]=listDataRepairHistory[0][2]="";
+                }
+                else{
+                    listDataRepairHistory=new String[listRepairHistory.size()][3];
+                    for (int i=0;i<listRepairHistory.size();i++){
+                        listDataRepairHistory[i][0]=listRepairHistory.get(i).reportTime;
+                        listDataRepairHistory[i][1]=listRepairHistory.get(i).reportContent;
+                        String repairStatusEnglish= listRepairHistory.get(i).repairStatus;
+                        String repairStatusChinese="ERROR";
+                        if(repairStatusEnglish.equals("TODO"))
+                            repairStatusChinese="待修理";
+                        else if (repairStatusEnglish.equals("DONE"))
+                            repairStatusChinese="已修理";
+                        listDataRepairHistory[i][2]=repairStatusChinese;
+                    }
+                }
+                modelRepairHistory=new DefaultTableModel(listDataRepairHistory,headModelRepairHistory){
+                    @Override
+                    public boolean isCellEditable(int a,int b){return false;}
+                };
+                tblDormRepairHistory.setModel(modelRepairHistory);
+            }
+        });
+        jp2.add(btnDormRepairReport);
 
         //宿舍部分结束
 

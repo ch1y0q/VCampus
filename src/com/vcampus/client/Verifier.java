@@ -28,7 +28,6 @@ public class Verifier {
     }
 
     public static Admin checkAdmin(String cardNumber, String password) {
-        System.out.println(password+" TEST2");
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.Auth.adminLoginChecker",
                         new Object[] { new Student(cardNumber,password) }).send())

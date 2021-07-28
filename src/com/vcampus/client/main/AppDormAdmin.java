@@ -398,7 +398,7 @@ public class AppDormAdmin extends JFrame {
 
         JComboBox cmbDormRepairStatus=new JComboBox();
         cmbDormRepairStatus.addItem("已修理");
-        cmbDormRepairStatus.addItem("未修理");
+        cmbDormRepairStatus.addItem("待修理");
         cmbDormRepairStatus.setBounds(600,576,100,30);
         jp2.add(cmbDormRepairStatus);
 
@@ -434,6 +434,13 @@ public class AppDormAdmin extends JFrame {
                         listData[i][3]=repairStatusChinese;
                     }
                 }
+
+                defaultTableModel=new DefaultTableModel(listData,head){
+                    @Override
+                    public boolean isCellEditable(int a,int b){return false;}
+                };
+                tblDormRepairState.setModel(defaultTableModel);
+
                 int lineNo=Integer.valueOf(txtDormRepairStateUpdateNoSelect.getText());
                 String reportTime=listData[lineNo-1][1];
 

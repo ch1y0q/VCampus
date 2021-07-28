@@ -161,4 +161,77 @@ public class CourseSelection {
         sqlSession.close();
         return "ok";
     }
+
+    public static List<Course> fuzzySearchById(String id) {
+        List<Course> list = new ArrayList<>();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+                list = courseMapper.fuzzySearchById(id);
+                sqlSession.commit();
+                sqlSession.close();
+                return list;
+
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<Course> fuzzySearchByName(String name) {
+        List<Course> list = new ArrayList<>();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            list = courseMapper.fuzzySearchByName(name);
+            sqlSession.commit();
+            sqlSession.close();
+            return list;
+
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<Course> fuzzySearchByMajor(String major) {
+        List<Course> list = new ArrayList<>();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            list = courseMapper.fuzzySearchByMajor(major);
+            sqlSession.commit();
+            sqlSession.close();
+            return list;
+
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<Course> fuzzySearchByTeacher(String teacher) {
+        List<Course> list = new ArrayList<>();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            list = courseMapper.fuzzySearchByTeacher(teacher);
+            sqlSession.commit();
+            sqlSession.close();
+            return list;
+
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
+
