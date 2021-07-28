@@ -233,5 +233,20 @@ public class CourseSelection {
         }
         return list;
     }
+
+    public static void setCourse(Course course){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            courseMapper.setCourse(course);
+            sqlSession.commit();
+            sqlSession.close();
+
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+    }
 }
 

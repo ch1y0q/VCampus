@@ -1,6 +1,6 @@
 package com.vcampus.test;
 
-import com.vcampus.client.main.AppStuCourse;
+import com.vcampus.client.main.courseManage.AppStuCourse;
 
 import java.awt.*;
 

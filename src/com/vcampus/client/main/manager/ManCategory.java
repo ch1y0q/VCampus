@@ -1,7 +1,7 @@
 package com.vcampus.client.main.manager;
 
 import com.vcampus.client.administrator.main.AppAdminInfo;
-import com.vcampus.client.main.AppAdminCourse;
+import com.vcampus.client.main.courseManage.AppAdminCourse;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.dailyReport.AppDailyReportManage;
 import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
@@ -70,7 +70,7 @@ public class ManCategory extends JTree {
                         }
                     }
                     else if(node==nodClassManage){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppAdminCourse") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.courseManage.AppAdminCourse") {
                             setVisible(false);
                             AppAdminCourse app = new AppAdminCourse();
                         }
