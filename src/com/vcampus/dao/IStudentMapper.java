@@ -67,6 +67,13 @@ public interface IStudentMapper {
 
     public void setSelectedCourses(Map map);
 
+
+    public int resetStudentNumberByCard(Map<String, String> map);
+
+    public int resetSchoolByCard(Map<String, String> map);
+
+    public int resetDormByCard(Map<String, String> map);
+
     public List<Student> fuzzySearchByName(String name);
     public List<Student> fuzzySearchByCard(String cardNumber);
     public List<Student> fuzzySearchBySchool(String school);

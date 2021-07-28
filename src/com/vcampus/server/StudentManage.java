@@ -1,10 +1,13 @@
 package com.vcampus.server;
 
+import com.vcampus.dao.IBookMapper;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.Student;
 
@@ -24,6 +27,21 @@ public class StudentManage {
             sqlSession = App.sqlSessionFactory.openSession();
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
             result = studentMapper.getNameByCardNumber(cardNumber);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static Student getStudentDetailByCardNumber(String cardNumber) {
+        Student result = null;
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+            result = studentMapper.getStudentDetailByCardNumber(cardNumber);
             sqlSession.commit();
             sqlSession.close();
         } catch (Exception e) {
@@ -138,6 +156,46 @@ public class StudentManage {
         }
         return result;
     }
+
+    public static Boolean resetStudentNumberByCard(Map map){
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+            studentMapper.resetStudentNumberByCard(map);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static Boolean resetSchoolByCard(Map map){
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+            studentMapper.resetSchoolByCard(map);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    public static Boolean resetDormByCard(Map map){
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+            studentMapper.resetDormByCard(map);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+
 
     public static List<Student> ByNameAndCardAndSchoolAndGender(String name, String cardNumber, String school, String gender) {
         List<Student> list = new ArrayList<>();

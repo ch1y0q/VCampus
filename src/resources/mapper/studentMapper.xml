@@ -36,8 +36,9 @@
 
     <insert id="insertStudent" parameterType="Student">
         INSERT INTO
-            `students` VALUES (#{cardNumber}, #{studentNumber}, #{password},
-                                 #{school}, #{name}, 0, "")
+            `students` VALUES ( #{name},"","",#{cardNumber}, #{studentNumber},
+                               "","","",0,"", "",  #{dormAddress}, #{gender},  #{email}, #{phoneNumber},
+                                "")
     </insert>
 
     <delete id="deleteStudent" parameterType="String">
@@ -244,5 +245,19 @@
                                 AND school LIKE '%${school}%' AND gender LIKE '%${gender}%'
     </select>
 
+    <update id="resetStudentNumberByCard" parameterType="Map">
+        UPDATE students
+        SET `studentNumber` = #{studentNumber} WHERE cardNumber=#{cardNumber}
+    </update>
+
+    <update id="resetSchoolByCard" parameterType="Map">
+        UPDATE students
+        SET `school` = #{school} WHERE cardNumber=#{cardNumber}
+    </update>
+
+    <update id="resetDormByCard" parameterType="Map">
+        UPDATE students
+        SET `dormAddress` = #{dormAddress} WHERE cardNumber=#{cardNumber}
+    </update>
 
 </mapper>

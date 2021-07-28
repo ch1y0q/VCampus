@@ -32,7 +32,7 @@ public class AppAdminInfo  extends JFrame {
         contentPane.setLayout(null);
 
         JTree jt=new ManCategory().init();
-        jt.setBounds(0,60,100,400);
+        jt.setBounds(0,60,200,400);
         contentPane.add(jt);
 
         JButton returnButton = new JButton("← 返回");
