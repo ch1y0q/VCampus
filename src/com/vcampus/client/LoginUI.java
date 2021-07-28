@@ -20,6 +20,8 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static com.vcampus.util.CommonUtils.getUserTypeByCardNumber;
+
 /**
  * 登陆界面的GUI
  *
@@ -30,6 +32,7 @@ import java.util.ResourceBundle;
 public class LoginUI extends JFrame {
     private JPanel loginPanel;
     private JButton btnLogin;
+    private JRadioButton rdbAuto;
     private JRadioButton rdbStudent;
     private JRadioButton rdbTeacher;
     private JRadioButton rdbAdmin;
@@ -39,6 +42,59 @@ public class LoginUI extends JFrame {
     private Locale locale;
     private ResourceBundle res;
 
+    private UserType type;
+
+    private void studentLogin(){
+        type = UserType.STUDENT;
+        Student student = Verifier.checkStudent(txtCardNumber.getText(), new String(txtPassword.getPassword()));
+        if (student != null) {
+            SwingUtils.showMessage(null, res.getString("student_login_success"), res.getString("info"));
+            // 填充App.session
+            App.hasLogon = true;
+            App.session = new Session(student);
+            setVisible(false);
+            // 要求界面路由
+            App.requireRouting();
+        } else {
+            SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
+            txtPassword.setText("");
+        }
+    }
+
+    private void teacherLogin() {
+        type = UserType.TEACHER;
+        Teacher teacher = Verifier.checkTeacher(txtCardNumber.getText(), new String(txtPassword.getPassword()));
+        if (teacher != null) {
+            SwingUtils.showMessage(null, res.getString("teacher_login_success"), res.getString("info"));
+            // 填充App.session
+            App.hasLogon = true;
+            App.session = new Session(teacher);
+            setVisible(false);
+            // 要求界面路由
+            App.requireRouting();
+        } else {
+            SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
+            txtPassword.setText("");
+        }
+    }
+
+    private void adminLogin(){
+        type = UserType.ADMIN;
+        System.out.println(txtPassword.getPassword()+"TEST1");// TODO remove this
+        Admin admin = Verifier.checkAdmin(txtCardNumber.getText(), new String(txtPassword.getPassword()));
+        if (admin != null) {
+            SwingUtils.showMessage(null, res.getString("admin_login_success"), res.getString("info"));
+            // 填充App.session
+            App.hasLogon = true;
+            App.session = new Session(admin);
+            setVisible(false);
+            // 要求界面路由
+            App.requireRouting();
+        } else {
+            SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
+            txtPassword.setText("");
+        }
+    }
 
     public void login() {
         /* check if all fields are filled */
@@ -47,63 +103,44 @@ public class LoginUI extends JFrame {
             return;
         }
 
-        UserType type = null;
+        type = null;
         if (rdbStudent.isSelected()) {
-            type = UserType.STUDENT;
-            Student student = Verifier.checkStudent(txtCardNumber.getText(), new String(txtPassword.getPassword()));
-            if (student != null) {
-                SwingUtils.showMessage(null, res.getString("student_login_success"), res.getString("info"));
-                // 填充App.session
-                App.hasLogon = true;
-                App.session = new Session(student);
-                setVisible(false);
-                // 要求界面路由
-                App.requireRouting();
-            } else {
-                SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
-                txtPassword.setText("");
-            }
+            studentLogin();
         } else if (rdbTeacher.isSelected()) {
-            type = UserType.TEACHER;
-            Teacher teacher = Verifier.checkTeacher(txtCardNumber.getText(), new String(txtPassword.getPassword()));
-            if (teacher != null) {
-                SwingUtils.showMessage(null, res.getString("teacher_login_success"), res.getString("info"));
-                // 填充App.session
-                App.hasLogon = true;
-                App.session = new Session(teacher);
-                setVisible(false);
-                // 要求界面路由
-                App.requireRouting();
-            } else {
-                SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
-                txtPassword.setText("");
-            }
+            teacherLogin();
         } else if (rdbAdmin.isSelected()) {
-            type = UserType.ADMIN;
-            System.out.println(txtPassword.getPassword()+"TEST1");
-            Admin admin = Verifier.checkAdmin(txtCardNumber.getText(), new String(txtPassword.getPassword()));
-            if (admin != null) {
-                SwingUtils.showMessage(null, res.getString("admin_login_success"), res.getString("info"));
-                // 填充App.session
-                App.hasLogon = true;
-                App.session = new Session(admin);
-                setVisible(false);
-                // 要求界面路由
-                App.requireRouting();
-            } else {
-                SwingUtils.showError(null, res.getString("wrong_password"), res.getString("error"));
-                txtPassword.setText("");
+            adminLogin();
+        } else if (rdbAuto.isSelected()){
+            UserType _userType = getUserTypeByCardNumber(txtCardNumber.getText());
+            if(_userType == null){
+                JOptionPane.showMessageDialog(null, res.getString("invalid_card_number"), res.getString("error"), JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            switch(_userType){
+                case STUDENT:
+                    studentLogin();
+                    break;
+                case TEACHER:
+                    teacherLogin();
+                    break;
+                case ADMIN:
+                    adminLogin();
+                    break;
             }
         }
+
     }
+
 
     public LoginUI() {
         locale = Locale.getDefault();
         res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(400, 200, 800, 520);
+        int x = Toolkit.getDefaultToolkit().getScreenSize().width/2 - 400;
+        int y = Toolkit.getDefaultToolkit().getScreenSize().height/2 - 250;
+        setBounds(x, y, 800, 520);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/assets/icon/fav2.png")));
         setTitle(res.getString("window_title"));
 
@@ -117,7 +154,8 @@ public class LoginUI extends JFrame {
         pBody.setLayout(null);
 
         JLabel lblUsername = new JLabel(res.getString("card_number"));
-        lblUsername.setBounds(500, 215, 60, 18);
+        lblUsername.setFont(new Font("微软雅黑",Font.PLAIN, 14));
+        lblUsername.setBounds(495, 215, 75, 18);
         pBody.add(lblUsername);
 
         txtCardNumber = new JTextField();
@@ -127,6 +165,7 @@ public class LoginUI extends JFrame {
         txtCardNumber.setColumns(8);
 
         JLabel lblPassword = new JLabel(res.getString("password"));
+        lblPassword.setFont(new Font("微软雅黑",Font.PLAIN, 14));
         lblPassword.setBounds(506, 268, 40, 18);
         pBody.add(lblPassword);
 
@@ -135,6 +174,7 @@ public class LoginUI extends JFrame {
         txtPassword.setBounds(555, 265, 180, 26);
         pBody.add(txtPassword);
 
+        rdbAuto = new JRadioButton(res.getString("auto"));
         rdbStudent = new JRadioButton(res.getString("student"));
         rdbTeacher = new JRadioButton(res.getString("teacher"));
         rdbAdmin = new JRadioButton(res.getString("admin"));
@@ -145,6 +185,7 @@ public class LoginUI extends JFrame {
                 if (rdbStudent.isSelected()) {
                     rdbTeacher.setSelected(false);
                     rdbAdmin.setSelected(false);
+                    rdbAuto.setSelected(false);
                 } else {
                     rdbStudent.setSelected(true);
                 }
@@ -157,6 +198,7 @@ public class LoginUI extends JFrame {
                 if (rdbTeacher.isSelected()) {
                     rdbStudent.setSelected(false);
                     rdbAdmin.setSelected(false);
+                    rdbAuto.setSelected(false);
                 } else {
                     rdbTeacher.setSelected(true);
                 }
@@ -169,19 +211,39 @@ public class LoginUI extends JFrame {
                 if (rdbAdmin.isSelected()) {
                     rdbStudent.setSelected(false);
                     rdbTeacher.setSelected(false);
+                    rdbAuto.setSelected(false);
                 } else {
                     rdbAdmin.setSelected(true);
                 }
             }
         });
 
-        rdbStudent.setBounds(560, 320, 59, 27);
+        rdbAuto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (rdbAuto.isSelected()) {
+                    rdbStudent.setSelected(false);
+                    rdbTeacher.setSelected(false);
+                    rdbAdmin.setSelected(false);
+                } else {
+                    rdbAuto.setSelected(true);
+                }
+            }
+        });
+
+        rdbAdmin.setFont(new Font("微软雅黑", Font.PLAIN,18));
+        rdbAuto.setFont(new Font("微软雅黑", Font.PLAIN,18));
+        rdbStudent.setFont(new Font("微软雅黑", Font.PLAIN,18));
+        rdbTeacher.setFont(new Font("微软雅黑", Font.PLAIN,18));
+        rdbAuto.setBounds(560,320,69,27);
+        pBody.add(rdbAuto);
+        rdbStudent.setBounds(630, 320, 69, 27);
         pBody.add(rdbStudent);
-        rdbTeacher.setBounds(620, 320, 59, 27);
+        rdbTeacher.setBounds(560, 350, 69, 27);
         pBody.add(rdbTeacher);
-        rdbAdmin.setBounds(680, 320, 73, 27);
+        rdbAdmin.setBounds(630, 350, 83, 27);
         pBody.add(rdbAdmin);
-        rdbStudent.setSelected(true);
+        rdbAuto.setSelected(true);
 
         /* 按下回车登录 */
         KeyAdapter loginKeyAdapter = new KeyAdapter() {
@@ -211,7 +273,7 @@ public class LoginUI extends JFrame {
         pBody.add(icon);
 
         btnLogin = new JButton(res.getString("login"));
-        btnLogin.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+        btnLogin.setFont(new Font("微软雅黑", Font.BOLD, 30));
         //btnLogin.setIcon(new ImageIcon(getClass().getResource("/resources/assets/icon/right-circle.png")));
         btnLogin.addActionListener(new ActionListener() {
             @Override
@@ -219,10 +281,11 @@ public class LoginUI extends JFrame {
                 login();
             }
         });
-        btnLogin.setBounds(555, 372, 140, 75);
+        btnLogin.setBounds(555, 392, 140, 75);
         pBody.add(btnLogin);
 
         JLabel lblUserType = new JLabel(res.getString("usertype"));
+        lblUserType.setFont(new Font("微软雅黑",Font.PLAIN, 14));
         lblUserType.setBounds(495, 323, 75, 18);
         pBody.add(lblUserType);
 

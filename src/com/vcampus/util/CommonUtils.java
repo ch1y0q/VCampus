@@ -1,5 +1,7 @@
 package com.vcampus.util;
 
+import com.vcampus.entity.UserType;
+
 import java.util.*;
 
 /**
@@ -11,6 +13,23 @@ import java.util.*;
 
 
 public class  CommonUtils {
+    /**
+     * @param cardNumber 一卡通号，用String表示
+     * @return 用户类型
+     */
+    public static UserType getUserTypeByCardNumber(String cardNumber) {
+        String first = cardNumber.substring(0, 1);
+        switch (first) {
+            case "0":
+                return UserType.ADMIN;
+            case "1":
+                return UserType.TEACHER;
+            case "2":
+                return UserType.STUDENT;
+            default:
+                return null;
+        }
+    }
 
     /**
      * @param code 学院的代码，用String表示
