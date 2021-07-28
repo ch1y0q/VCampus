@@ -166,6 +166,7 @@ public class CourseSelection {
         List<Course> list = new ArrayList<>();
         SqlSession sqlSession = null;
         try {
+            System.out.println("ID= "+id);
             sqlSession = App.sqlSessionFactory.openSession();
             ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
                 list = courseMapper.fuzzySearchById(id);
