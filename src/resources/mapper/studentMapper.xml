@@ -168,6 +168,18 @@
         SELECT *FROM students WHERE cardNumber LIKE '%${cardNumber}%'
     </select>
 
+    <select id="getBankAccountPassword" parameterType="String"
+            resultType="String">
+        SELECT `bankAccountPassword` FROM `students` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
+
+
+    <select id="getBankAccountPasswordSalt" parameterType="String"
+            resultType="String">
+        SELECT `bankAccountPasswordSalt` FROM `students` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
 
     <select id="fuzzySearchBySchool" parameterType="String"
             resultType="Student">

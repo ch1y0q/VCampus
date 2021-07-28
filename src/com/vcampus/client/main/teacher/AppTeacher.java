@@ -3,7 +3,7 @@ package com.vcampus.client.main.teacher;
 import com.alee.managers.style.StyleId;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.AppLife;
-import com.vcampus.client.main.AppTeaCourse;
+import com.vcampus.client.main.courseManage.AppTeaCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.dailyReport.AppDailyReportManage;
 import com.vcampus.client.main.teacher.TeacherInfo.AppTeaInfo;

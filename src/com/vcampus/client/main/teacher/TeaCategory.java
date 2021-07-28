@@ -1,7 +1,7 @@
 package com.vcampus.client.main.teacher;
 
 import com.vcampus.client.main.AppLife;
-import com.vcampus.client.main.AppTeaCourse;
+import com.vcampus.client.main.courseManage.AppTeaCourse;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.teacher.TeacherInfo.AppTeaInfo;
 import com.vcampus.client.main.shop.AppShop;
@@ -59,7 +59,7 @@ public class TeaCategory extends JTree {
                         }
                     }
                     else if(node==nodGrades||node==nodChooseCourses){
-                        if(!this.getClass().getName().equals("com.vcampus.client.main.AppStuCourse")) {
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.courseManage.AppStuCourse")) {
                             AppTeaCourse app = new AppTeaCourse();
                             setVisible(false);
                         }

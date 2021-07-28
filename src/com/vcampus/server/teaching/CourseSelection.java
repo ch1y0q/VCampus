@@ -166,6 +166,7 @@ public class CourseSelection {
         List<Course> list = new ArrayList<>();
         SqlSession sqlSession = null;
         try {
+            System.out.println("ID= "+id);
             sqlSession = App.sqlSessionFactory.openSession();
             ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
                 list = courseMapper.fuzzySearchById(id);
@@ -232,6 +233,21 @@ public class CourseSelection {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static void setCourse(Course course){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            courseMapper.setCourse(course);
+            sqlSession.commit();
+            sqlSession.close();
+
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
     }
 }
 

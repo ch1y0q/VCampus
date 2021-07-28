@@ -1,4 +1,4 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.courseManage;
 
 import com.vcampus.client.main.teacher.TeaCategory;
 

@@ -58,21 +58,33 @@
 
     <select id="fuzzySearchById" parameterType="String"
             resultType="Course">
-        SELECT *FROM courses WHERE id LIKE '%${id}%'
+        SELECT *FROM courses WHERE id LIKE '%${_parameter}%'
     </select>
 
     <select id="fuzzySearchByName" parameterType="String"
             resultType="Course">
-        SELECT *FROM courses WHERE courseName LIKE '%${name}%'
+        SELECT *FROM courses WHERE courseName LIKE '%${_parameter}%'
     </select>
 
     <select id="fuzzySearchByMajor" parameterType="String"
             resultType="Course">
-        SELECT *FROM courses WHERE major LIKE '%${major}%'
+        SELECT *FROM courses WHERE major LIKE '%${_parameter}%'
     </select>
 
     <select id="fuzzySearchByTeacher" parameterType="String"
             resultType="Course">
-        SELECT *FROM courses WHERE teacher LIKE '%${teacher}%'
+        SELECT *FROM courses WHERE teacher LIKE '%${_parameter}%'
     </select>
+    <update id="setCourse" parameterType="Course">
+        UPDATE courses SET
+            semester=#{semester},
+            courseName=#{courseName},
+            major=#{major},
+            teacher=#{teacher},
+            time=#{time},
+            classroom=#{classroom},
+            capacity=#{capacity},
+            selectedNumber=#{selectedNumber},
+            credit=#{credit} WHERE id=#{id}
+    </update>
 </mapper>

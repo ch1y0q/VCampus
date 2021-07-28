@@ -27,7 +27,23 @@ public class ShopAdminServer {
             e.printStackTrace();
         }
         return result;
+    }
 
+    public static Boolean insertNewGoodsWithoutId(Goods goods) {
+        Boolean result = null;
+
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            IGoodsMapper goodsMapper = sqlSession.getMapper(IGoodsMapper.class);
+            result = goodsMapper.insertNewGoodsWithoutId(goods);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public static Boolean deleteGoods(Goods goods) {

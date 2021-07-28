@@ -120,6 +120,78 @@ Exception in thread "AWT-EventQueue-0" java.lang.reflect.InaccessibleObjectExcep
 参考： https://stackoverflow.com/questions/41265266/how-to-solve-inaccessibleobjectexception-unable-to-make-member-accessible-m
 
 ## Database
+### MyBatis未能确定变量类型
+商店无法列出商品。但管理员仍可以添加。说明`listGoodsByCategory`接口出错。
+抛出异常：`org.apache.ibatis.exceptions.PersistenceException`
+报错：
+```java
+org.apache.ibatis.exceptions.PersistenceException:
+        ### Error querying database.  Cause: org.apache.ibatis.executor.result.ResultMapException: Error attempting to get column 'category' from result set.  Cause: java.sql.SQLDataException: Cannot determine value type from string '日用'
+        ### The error may exist in resources/mapper/goodsMapper.xml
+        ### The error may involve com.vcampus.dao.IGoodsMapper.listGoodsByCategory
+        ### The error occurred while handling results
+        ### SQL: SELECT * FROM goods WHERE `category` = ?
+        ### Cause: org.apache.ibatis.executor.result.ResultMapException: Error attempting to get column 'category' from result set.  Cause: java.sql.SQLDataException: Cannot determine value type from string '日用'
+        at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+        at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+        at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+        at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:144)
+        at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:77)
+        at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:58)
+        at jdk.proxy1/jdk.proxy1.$Proxy5.listGoodsByCategory(Unknown Source)
+        at com.vcampus.server.shop.ShopServer.listGoodsByType(ShopServer.java:68)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+        at com.vcampus.server.messageQueue.RequestHandler.run(RequestHandler.java:67)
+        Caused by: org.apache.ibatis.executor.result.ResultMapException: Error attempting to get column 'category' from result set.  Cause: java.sql.SQLDataException: Cannot determine value type from string '日用'
+        at org.apache.ibatis.type.BaseTypeHandler.getResult(BaseTypeHandler.java:83)
+        at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.createUsingConstructor(DefaultResultSetHandler.java:672)
+        at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.createByConstructorSignature(DefaultResultSetHandler.java:655)
+        at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.createResultObject(DefaultResultSetHandler.java:618)
+        at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.createResultObject(DefaultResultSetHandler.java:591)
+        at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.getRowValue(DefaultResultSetHandler.java:397)
+        at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:354)
+        at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValues(DefaultResultSetHandler.java:328)
+        at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleResultSet(DefaultResultSetHandler.java:301)
+        at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleResultSets(DefaultResultSetHandler.java:194)
+        at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:65)
+        at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79)
+        at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63)
+        at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324)
+        at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+        at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+        at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83)
+        at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+        ... 11 more
+        Caused by: java.sql.SQLDataException: Cannot determine value type from string '日用'
+        at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:114)
+        at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+        at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+        at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+        at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:73)
+        at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:96)
+        at com.mysql.cj.jdbc.result.ResultSetImpl.getObject(ResultSetImpl.java:1422)
+        at com.mysql.cj.jdbc.result.ResultSetImpl.getInt(ResultSetImpl.java:822)
+        at com.mysql.cj.jdbc.result.ResultSetImpl.getInt(ResultSetImpl.java:843)
+        at com.mchange.v2.c3p0.impl.NewProxyResultSet.getInt(NewProxyResultSet.java:451)
+        at org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+        at org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:26)
+        at org.apache.ibatis.type.BaseTypeHandler.getResult(BaseTypeHandler.java:81)
+        ... 28 more
+        Caused by: com.mysql.cj.exceptions.DataConversionException: Cannot determine value type from string '日用'
+        at com.mysql.cj.result.AbstractNumericValueFactory.createFromBytes(AbstractNumericValueFactory.java:66)
+        at com.mysql.cj.protocol.a.MysqlTextValueDecoder.decodeByteArray(MysqlTextValueDecoder.java:143)
+        at com.mysql.cj.protocol.result.AbstractResultsetRow.decodeAndCreateReturnValue(AbstractResultsetRow.java:135)
+        at com.mysql.cj.protocol.result.AbstractResultsetRow.getValueFromBytes(AbstractResultsetRow.java:243)
+        at com.mysql.cj.protocol.a.result.ByteArrayRow.getValue(ByteArrayRow.java:91)
+        at com.mysql.cj.jdbc.result.ResultSetImpl.getObject(ResultSetImpl.java:1316)
+        ... 34 more
+```
+
+检查git commits记录，发现是在给`Goods`类编写构造函数后发生的，构造函数和数据库存储顺序不一致。修改构造函数参数顺序即可。
+
 ### 无法保存中文字符到数据库中
 可以读取数据库中含有中文字符的数据，却无法保存，保存的中文字符全成了“?”。
 解决方法：首先确保数据库使用的编码支持中文（我们采用的是UTF8）。在此基础上，最关键的一步是，连接数据库的URL后面添加参数`useUnicode=true&characterEncoding=UTF-8`。

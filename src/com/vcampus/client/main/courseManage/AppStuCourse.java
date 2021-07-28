@@ -1,25 +1,21 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.courseManage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
+import com.vcampus.client.main.App;
 import com.vcampus.client.main.student.StuCategory;
-import com.vcampus.dao.ICourseMapper;
 import com.vcampus.net.Request;
 import com.vcampus.util.*;
 
 import com.vcampus.entity.*;
-import org.apache.ibatis.session.SqlSession;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Map;
 
 public class AppStuCourse {
     private JFrame jf = new JFrame("课程管理");
@@ -286,7 +282,7 @@ public class AppStuCourse {
                     Course course = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
                             null,"com.vcampus.server.teaching.CourseSelection.getOneCourse",
                             new Object[] {courseId}).send()).getReturn(Course.class);
-                    String[] courseInfo = {course.getID(),course.getClassName(),course.getSemester(),course.getCredit()
+                    String[] courseInfo = {course.getId(),course.getClassName(),course.getSemester(),course.getCredit()
                             ,course.getTeacher(),course.getTime(),course.getClassroom(),course.getMajor(),course.getCapacity()
                             ,course.getSelectedNumber(),"退课"};
                     model2.addRow(courseInfo);
@@ -375,7 +371,7 @@ public class AppStuCourse {
         ListIterator<Course> iter = list.listIterator();
         while(iter.hasNext()){
             Course course = iter.next();
-            String[] courseInfo = {course.getID(),course.getClassName(),course.getSemester(),course.getCredit()
+            String[] courseInfo = {course.getId(),course.getClassName(),course.getSemester(),course.getCredit()
                     ,course.getTeacher(),course.getTime(),course.getClassroom(),course.getMajor(),course.getCapacity()
                     ,course.getSelectedNumber(),"选择"};
             model1.addRow(courseInfo);

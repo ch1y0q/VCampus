@@ -7,7 +7,7 @@ import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.AppLife;
-import com.vcampus.client.main.AppStuCourse;
+import com.vcampus.client.main.courseManage.AppStuCourse;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.student.StuCoursePanel;
 import com.vcampus.client.main.student.StuInfoPanel;
