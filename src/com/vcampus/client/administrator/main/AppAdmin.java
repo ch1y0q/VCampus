@@ -139,8 +139,8 @@ public class AppAdmin extends JFrame{
                 if(e.getSource()==StudentInfoLabel1)
                 {
                     StuManage app=new StuManage();
-                    //setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
 
@@ -186,8 +186,8 @@ public class AppAdmin extends JFrame{
                 if(e.getSource()==PersonInfoLabel1)
                 {
                     AppAdminInfo app=new AppAdminInfo();
-                    //setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
 
@@ -241,8 +241,8 @@ public class AppAdmin extends JFrame{
                 if(e.getSource()== ShopInfoLabel1)
                 {
                     AppShop app=new AppShop();
-                    //setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
 
@@ -292,8 +292,8 @@ public class AppAdmin extends JFrame{
                 if(e.getSource()==LifeInfoLabel1)
                 {
                     AppDormAdmin app=new AppDormAdmin();
-                    //setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
 
@@ -343,9 +343,7 @@ public class AppAdmin extends JFrame{
                 if(e.getSource()==CourseInfoLabel1)
                 {
                     AppAdminCourse app=new AppAdminCourse();
-                    //setVisible(false);
-                    /*need setVisiable
-                     */
+                    setVisible(false);
                 }
             }
 
@@ -395,8 +393,8 @@ public class AppAdmin extends JFrame{
                 if(e.getSource()==LibraryInfoLabel1)
                 {
                     ManLibrary app=new ManLibrary();
-                    //setVisible(false);
                     app.setVisible(true);
+                    //setVisible(false);
                 }
             }
 
@@ -467,8 +465,8 @@ public class AppAdmin extends JFrame{
                 if(e.getSource()==btnReport)
                 {
                     AppDailyReportManage app=new AppDailyReportManage();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
