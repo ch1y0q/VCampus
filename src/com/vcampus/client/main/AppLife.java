@@ -677,8 +677,6 @@ public class AppLife extends JFrame {
         jp2.add(btnDormRepairReport);
 
         //宿舍部分结束
-
-
-
+    //
     }
 }
