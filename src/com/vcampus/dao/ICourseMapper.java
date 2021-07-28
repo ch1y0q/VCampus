@@ -1,6 +1,7 @@
 package com.vcampus.dao;
 
 import com.vcampus.entity.Course;
+import com.vcampus.entity.CourseScore;
 import com.vcampus.entity.Student;
 
 import java.util.List;
@@ -43,4 +44,6 @@ public interface ICourseMapper {
     public List<Course> fuzzySearchByTeacher(String teacher);
 
     public void setCourse(Course course);
+
+    public void addLineInCourseScore(CourseScore courseScore);
 }
