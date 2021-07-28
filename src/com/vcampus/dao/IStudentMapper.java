@@ -94,5 +94,6 @@ public interface IStudentMapper {
     public List<Student> fuzzySearchByNameAndCardAndSchoolAndGender(Student student);
 
     public String getBankAccountPassword(String cardNumber);
+    public String getBankAccountPasswordSalt(String cardNumber);
 
 }

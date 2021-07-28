@@ -6,6 +6,7 @@ import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.RepairHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
+import com.vcampus.util.StringUtils;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -61,14 +62,24 @@ public class AppLife extends JFrame {
 
         String lossJudge;
         lossJudge=App.session.getStudent().getLossStatus();
-
         String lossJudgeChinese="ERROR";
         if(lossJudge.equals("LOST"))
             lossJudgeChinese="挂失";
         else if(lossJudge.equals("NORMAL"))
             lossJudgeChinese="正常";
 
-        int dealHistoryLineNum=0;
+        String studentBankAccountPassword=
+                ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getBankAccountPassword",
+                                new Object[]{studentCardNumber}).send())
+                        .getReturn(String.class);
+
+        String studentBankAccountPasswordSalt=
+                ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getBankAccountPasswordSalt",
+                                new Object[]{studentCardNumber}).send())
+                        .getReturn(String.class);
+
 
         setResizable(true);
         setTitle("生活服务 - Vcampus");
@@ -309,69 +320,78 @@ public class AppLife extends JFrame {
         btnCardRecharge.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO check here, 尤其检查api用得对不对
-                String balanceAddedText = txtAmount.getText().trim();
-                BigDecimal balanceAdded = new BigDecimal(balanceAddedText);
-                if (balanceAdded.compareTo(new BigDecimal(0)) == 1 // larger than 0
-                        && balanceAdded.compareTo(new BigDecimal(1000)) == -1) // upper bound
-                {
-                    HashMap<String, Object> mapCardNum_BalanceAdded = new HashMap<String, Object>();
-                    mapCardNum_BalanceAdded.put("cardNumber", studentCardNumber);
-                    BigDecimal _balance = App.session.getStudent().getBalance();
-                    mapCardNum_BalanceAdded.put("money", _balance.add(balanceAdded));
-                    BigDecimal result = AppLifeHelper.setBalance(mapCardNum_BalanceAdded);
-                    if (result.compareTo(_balance.add(balanceAdded)) == 0) { // equals
-                        JOptionPane.showMessageDialog(null, "充值成功");
+
+
+                Boolean verifyResult =
+                        StringUtils.MD5EncodeSalted(String.valueOf(txtPassword.getPassword()),studentBankAccountPasswordSalt)
+                        .equalsIgnoreCase(studentBankAccountPassword);
+
+                if (!verifyResult) {
+                    System.out.println("No result");
+                    JOptionPane.showMessageDialog(null, "密码错误，请重试！");
+                }
+                else {
+
+                    //TODO check here, 尤其检查api用得对不对
+                    String balanceAddedText = txtAmount.getText().trim();
+                    BigDecimal balanceAdded = new BigDecimal(balanceAddedText);
+                    if (balanceAdded.compareTo(new BigDecimal(0)) == 1 // larger than 0
+                            && balanceAdded.compareTo(new BigDecimal(1000)) == -1) // upper bound
+                    {
+                        HashMap<String, Object> mapCardNum_BalanceAdded = new HashMap<String, Object>();
+                        mapCardNum_BalanceAdded.put("cardNumber", studentCardNumber);
+                        BigDecimal _balance = App.session.getStudent().getBalance();
+                        mapCardNum_BalanceAdded.put("money", _balance.add(balanceAdded));
+                        BigDecimal result = AppLifeHelper.setBalance(mapCardNum_BalanceAdded);
+                        if (result.compareTo(_balance.add(balanceAdded)) == 0) { // equals
+                            JOptionPane.showMessageDialog(null, "充值成功");
+                        }
+                        lblCurCardBalance.setText(String.valueOf(result));
+                        App.session.getStudent().setBalance(result);
                     }
-                    lblCurCardBalance.setText(String.valueOf(result));
-                    App.session.getStudent().setBalance(result);
-                }
 
-                Boolean flag= AppLifeHelper.insertDealHistory(studentCardNumber,balanceAdded,"INCOME");
+                    Boolean flag = AppLifeHelper.insertDealHistory(studentCardNumber, balanceAdded, "INCOME");
 
-                listDealHistory = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.bank.BankServer.getDealHistory",
-                        new Object[]{studentCardNumber}).send()).getListReturn(DealHistory.class);
 
-                modelDealHistory.setRowCount(0);
-                String[][] listDataDealHistory =null;
-                if(listDealHistory ==null){
-                    listDataDealHistory =new String[1][3];
-                    listDataDealHistory[0][0]="无交易记录..";
-                    listDataDealHistory[0][1]=listDataDealHistory[0][2]="";
-                }
-                else{
-                    listDataDealHistory = new String[listDealHistory.size()][3];
-                    for(int i = 0; i< listDealHistory.size(); i++){
-                        listDataDealHistory[i][0]= listDealHistory.get(i).dealTime;
-                        listDataDealHistory[i][1]=String.valueOf(listDealHistory.get(i).dealAmount);
-                        String dealTypeEnglish= listDealHistory.get(i).dealType;
-                        String dealTypeChinese=null;
-                        if(dealTypeEnglish.equals("INCOME"))
-                            dealTypeChinese="收入";
-                        else if(dealTypeEnglish.equals("OUTCOME"))
-                            dealTypeChinese="支出";
-                        else
-                            dealTypeChinese="ERROR";
-                        listDataDealHistory[i][2]=dealTypeChinese;
+                    listDealHistory = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.bank.BankServer.getDealHistory",
+                            new Object[]{studentCardNumber}).send()).getListReturn(DealHistory.class);
+
+                    modelDealHistory.setRowCount(0);
+                    String[][] listDataDealHistory = null;
+                    if (listDealHistory == null) {
+                        listDataDealHistory = new String[1][3];
+                        listDataDealHistory[0][0] = "无交易记录..";
+                        listDataDealHistory[0][1] = listDataDealHistory[0][2] = "";
+                    } else {
+                        listDataDealHistory = new String[listDealHistory.size()][3];
+                        for (int i = 0; i < listDealHistory.size(); i++) {
+                            listDataDealHistory[i][0] = listDealHistory.get(i).dealTime;
+                            listDataDealHistory[i][1] = String.valueOf(listDealHistory.get(i).dealAmount);
+                            String dealTypeEnglish = listDealHistory.get(i).dealType;
+                            String dealTypeChinese = null;
+                            if (dealTypeEnglish.equals("INCOME"))
+                                dealTypeChinese = "收入";
+                            else if (dealTypeEnglish.equals("OUTCOME"))
+                                dealTypeChinese = "支出";
+                            else
+                                dealTypeChinese = "ERROR";
+                            listDataDealHistory[i][2] = dealTypeChinese;
+                        }
                     }
+                    modelDealHistory = new DefaultTableModel(listDataDealHistory, headModelDealHistory) {
+                        @Override
+                        public boolean isCellEditable(int a, int b) {
+                            return false;
+                        }
+                    };
+                    tblWaterBill.setModel(modelDealHistory);
+
+
                 }
-                modelDealHistory =new DefaultTableModel(listDataDealHistory,headModelDealHistory){
-                    @Override
-                    public boolean isCellEditable(int a,int b){return false;}
-                };
-                tblWaterBill.setModel(modelDealHistory);
-
-                /*String studentBankAccountPassword=
-                ResponseUtils
-                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.Applife.getBankAccountPassword",
-                                new Object[]{studentCardNumber}).send())
-                        .getReturn(String.class);
-                System.out.println(studentBankAccountPassword);
-
-                 */
-
             }
         });
+
+
         jp1.add(btnCardRecharge);
         btnCardRecharge.setBounds(260, 380, 110, 35);
 

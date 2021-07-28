@@ -259,5 +259,21 @@ public class AppLife {
         return bankAccountPassword;
     }
 
+    public static String getBankAccountPasswordSalt(String cardNumber) {
+        String bankAccountPasswordSalt="!ERROR!";
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+
+            bankAccountPasswordSalt=studentMapper.getBankAccountPasswordSalt(cardNumber);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bankAccountPasswordSalt;
+    }
+
 
 }
