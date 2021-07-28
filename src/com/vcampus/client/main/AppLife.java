@@ -1,5 +1,6 @@
 package com.vcampus.client.main;
 
+//import com.vcampus.client.main.student.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.RepairHistory;
@@ -97,13 +98,19 @@ public class AppLife extends JFrame {
         jt.setBounds(0, 50, 200, 600);
         contentPane.add(jt);
 
-        /*
-        JLabel commodityPic = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/icon/bgcolor2.png")));
-        jp1.add(commodityPic);
-        commodityPic.setBounds(200, 200, 50, 50);
-         */
-
         //一卡通部分开始 - jp1
+
+        JButton btnBack = new JButton("返回");
+        btnBack.setFont((new Font("微软雅黑", Font.PLAIN, 18)));
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+
+            }
+        });
+        jp1.add(btnBack);
+        btnBack.setBounds(1100, 32, 120, 45);
 
         JLabel lblCardNum = new JLabel("一卡通号");
         lblCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
