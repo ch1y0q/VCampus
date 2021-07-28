@@ -1,8 +1,10 @@
 package com.vcampus.client.main.dailyReport;
 
+import com.alee.managers.style.StyleId;
 import com.vcampus.UI.myJLabel;
 import com.vcampus.UI.myJLabel2;
 import com.vcampus.client.main.App;
+import com.vcampus.client.main.AppLife;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -106,7 +108,7 @@ public class DailyReportPanel extends JPanel {
         jllocal.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         jllocal.setBounds(10,90,150,30);
         jplDaily.add(jllocal);
-        String[]localtxt={"","在校内","在校外"};
+        String[]localtxt={"在校内","在校外"};
         JComboBox jcomlocal=new JComboBox(localtxt);
         jcomlocal.setBounds(170,90,150,30);
         jplDaily.add(jcomlocal);
@@ -228,11 +230,15 @@ public class DailyReportPanel extends JPanel {
                     if (jcomlocal.getSelectedItem().toString() == "在校外") {
                         jplDaily.add(jlExactlocation);
                         jplDaily.add(jtxtExact);
+                        jplDaily.remove(jcomSchool);
+                        jplDaily.remove(jlSchool);
                         jplDaily.repaint();
                     }
                     else if(jcomlocal.getSelectedItem().toString() == "在校内"){
-                        jplDaily.add(jlSchool);
                         jplDaily.add(jcomSchool);
+                        jplDaily.add(jlSchool);
+                        jplDaily.remove(jlExactlocation);
+                        jplDaily.remove(jtxtExact);
                         jplDaily.repaint();
                     }
                 }
@@ -261,7 +267,7 @@ public class DailyReportPanel extends JPanel {
         jlifquezhen.setBounds(10,290,150,30);
         jplDaily.add(jlifquezhen);
         JComboBox jcomifquezhen=new JComboBox(strYN);
-        jcomifyisi.setBounds(170,290,150,30);
+        jcomifquezhen.setBounds(170,290,150,30);
         jplDaily.add(jcomifquezhen);
 
         JLabel jliflvju=new JLabel("存在风险区旅居史");
@@ -271,6 +277,27 @@ public class DailyReportPanel extends JPanel {
         JComboBox jcomiflvju=new JComboBox(strYN);
         jcomiflvju.setBounds(170,330,150,30);
         jplDaily.add(jcomiflvju);
+
+        //上传
+        final JButton btnUpload = new JButton("上传");
+        btnUpload.putClientProperty( StyleId.STYLE_PROPERTY, StyleId.buttonHover);
+        btnUpload.setBounds(250, 430, 80, 30);
+        btnUpload.setOpaque(true);
+        btnUpload.setFont( new Font("微软雅黑", Font.BOLD, 18));
+        btnUpload.setForeground(new Color(0xD5B8B8));
+        btnUpload.setBackground(new Color(0xDA61A4B8, true));
+        btnUpload.setBorder(BorderFactory.createMatteBorder(2,2,2,2,
+                new Color(255,255,255,255)));
+        btnUpload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnUpload)
+                {
+                    JOptionPane.showMessageDialog(null, "上传成功");
+                }
+            }
+        });
+        jplDaily.add(btnUpload);
 
 
     }
