@@ -69,14 +69,14 @@ public class DailyReportPanel extends JPanel {
 
         JLabel jlName = new JLabel();
         jlName.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jlName.setText("姓名:       "+" "+App.session.getStudent().getName());
+        jlName.setText("姓名:        "+" "+App.session.getStudent().getName());
         jlName.setBounds(10, 100, 180, 30);
         jlName.setBorder(new EmptyBorder(0,0,0,0));
         jplDetail.add(jlName);
 
         JLabel jlAcademy = new JLabel();
         jlAcademy.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jlAcademy.setText("学院:       "+" "+App.session.getStudent().getSchool());
+        jlAcademy.setText("学院:        "+" "+App.session.getStudent().getSchool());
         jlAcademy.setBounds(10, 150, 250, 30);
         jlAcademy.setBorder(new EmptyBorder(0,0,0,0));
         jplDetail.add(jlAcademy);
@@ -293,6 +293,9 @@ public class DailyReportPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnUpload)
                 {
+
+
+
                     JOptionPane.showMessageDialog(null, "上传成功");
                 }
             }
