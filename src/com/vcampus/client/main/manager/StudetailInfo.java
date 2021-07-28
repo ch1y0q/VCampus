@@ -1,10 +1,19 @@
 package com.vcampus.client.main.manager;
 
+import com.vcampus.client.main.App;
+import com.vcampus.client.main.library.ManagerLibrary.ManlibdetailHelper;
+import com.vcampus.entity.Student;
+import com.vcampus.net.Request;
+import com.vcampus.net.Response;
+import com.vcampus.util.ResponseUtils;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+
 /**
  * @author Xiao Kaijie
  * @date 2021-07-13
@@ -18,11 +27,9 @@ public class StudetailInfo extends JPanel {
     public JTextField txtSex;
     public JTextField txtacademy;
     public JTextField Stunum;
-    public JTextField StuClass1;
+    public JTextField Studorm;
     public JTextField txtbodynumber;
-    public JTextField txtBirth;
     public JTextField txtemail;
-    public JTextField txtEntry;
     public JTextField txtphone;
     public StudetailInfo()
     {
@@ -84,58 +91,40 @@ public class StudetailInfo extends JPanel {
         Stunum.setBounds(190, 130, 100, 30);
         Stunum.setEditable(false);
         add(Stunum);
-        JLabel StuClass=new JLabel("班级");
-        StuClass.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        StuClass.setBounds(100, 160, 90, 30);
-        StuClass.setBorder(new EmptyBorder(0,0,0,0));
-        add(StuClass);
-        StuClass1 = new JTextField();    //创建文本框
-        StuClass1.setBounds(190, 160, 100, 30);
-        StuClass1.setEditable(false);
-        add(StuClass1);
-        JLabel bodynumber=new JLabel("身份证号");
+        JLabel Studormad=new JLabel("宿舍");
+        Studormad.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        Studormad.setBounds(100, 160, 90, 30);
+        Studormad.setBorder(new EmptyBorder(0,0,0,0));
+        add(Studormad);
+        Studorm = new JTextField();    //创建文本框
+        Studorm.setBounds(190, 160, 100, 30);
+        Studorm.setEditable(false);
+        add(Studorm);
+        JLabel bodynumber=new JLabel("银行卡号");
         bodynumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        bodynumber.setBounds(300, 10, 150, 30);
+        bodynumber.setBounds(300, 10, 80, 30);
         bodynumber.setBorder(new EmptyBorder(0,0,0,0));
         add(bodynumber);
         txtbodynumber = new JTextField();    //创建文本框
-        txtbodynumber.setBounds(460, 10, 100, 30);
+        txtbodynumber.setBounds(390, 10, 200, 30);
         txtbodynumber.setEditable(false);
         add(txtbodynumber);
-        JLabel TeaBirth=new JLabel("出生日期");
-        TeaBirth.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        TeaBirth.setBounds(300, 40, 150, 30);
-        TeaBirth.setBorder(new EmptyBorder(0,0,0,0));
-        add(TeaBirth);
-        txtBirth = new JTextField();    //创建文本框
-        txtBirth.setBounds(460, 40, 100, 30);
-        txtBirth.setEditable(false);
-        add(txtBirth);
         JLabel Teaemail=new JLabel("邮箱");
         Teaemail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teaemail.setBounds(300, 70, 150, 30);
+        Teaemail.setBounds(300, 70, 80, 30);
         Teaemail.setBorder(new EmptyBorder(0,0,0,0));
         add(Teaemail);
         txtemail = new JTextField();    //创建文本框
-        txtemail.setBounds(460, 70, 100, 30);
+        txtemail.setBounds(390, 70, 200, 30);
         txtemail.setEditable(false);
         add(txtemail);
-        JLabel zhuanye=new JLabel("专业");
-        zhuanye.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        zhuanye.setBounds(300, 100, 150, 30);
-        zhuanye.setBorder(new EmptyBorder(0,0,0,0));
-        add(zhuanye);
-        txtEntry = new JTextField();    //创建文本框
-        txtEntry.setBounds(460, 100, 100, 30);
-        txtEntry.setEditable(false);
-        add(txtEntry);
         JLabel phone=new JLabel("电话");
         phone.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        phone.setBounds(300, 130, 150, 30);
+        phone.setBounds(300, 130, 80, 30);
         phone.setBorder(new EmptyBorder(0,0,0,0));
         add(phone);
         txtphone = new JTextField();    //创建文本框
-        txtphone.setBounds(460, 130, 100, 30);
+        txtphone.setBounds(390, 130, 200, 30);
         txtphone.setEditable(false);
         add(txtphone);
 
@@ -148,27 +137,14 @@ public class StudetailInfo extends JPanel {
                 if(e.getSource()==edit)
                 {
                     txtname.setEditable(true);
-                    strText[0]=txtname.getText();
                     txtcard.setEditable(true);
-                    strText[1]=txtcard.getText();
                     txtSex.setEditable(true);
-                    strText[2]=txtSex.getText();
                     Stunum.setEditable(true);
-                    strText[3]=Stunum.getText();
                     txtacademy.setEditable(true);
-                    strText[4]=txtacademy.getText();
-                    StuClass1.setEditable(true);
-                    strText[5]=StuClass1.getText();
+                    Studorm.setEditable(true);
                     txtbodynumber.setEditable(true);
-                    strText[6]=txtbodynumber.getText();
-                    txtBirth.setEditable(true);
-                    strText[7]=txtBirth.getText();
                     txtemail.setEditable(true);
-                    strText[8]=txtemail.getText();
-                    txtEntry.setEditable(true);
-                    strText[9]=txtEntry.getText();
                     txtphone.setEditable(true);
-                    strText[10]=txtphone.getText();
                 }
             }
         });
@@ -183,7 +159,7 @@ public class StudetailInfo extends JPanel {
             {
                 if(e.getSource()==save)
                 {
-
+                    saveChange();
                 }
             }
         });
@@ -197,23 +173,119 @@ public class StudetailInfo extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==Studelete)
                 {
-
+                    deleteStu(txtcard.getText());
                 }
             }
         });
         add(Studelete);
+
+        JButton StuSureAdd = new JButton("确认添加学生");
+        StuSureAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        StuSureAdd.setBounds(600, 130, 200, 30);
+        StuSureAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==StuSureAdd)
+                {
+                    Student student=new Student();
+                    student.setName(txtname.getText());
+                    student.setCardNumber(txtcard.getText());
+                    student.setGender(txtSex.getText());
+                    student.setStudentNumber(Stunum.getText());
+                    student.setSchool(txtacademy.getText());
+                    student.setDormAddress(Studorm.getText());
+                    student.setBankAccount(txtbodynumber.getText());
+                    student.setEmail(txtemail.getText());
+                    student.setPhoneNumber(txtphone.getText());
+                    AddStu(student);
+                    closeedit();
+                }
+            }
+        });
+        add(StuSureAdd);
+
     }
-    public void init(){
-        txtname.setText("xkk");
+    public void initnow(){
+        txtname.setText("");
         txtcard.setText("");
         txtSex.setText("");
         txtacademy.setText("");
         Stunum.setText("");
-        StuClass1.setText("");
+        Studorm.setText("");
         txtbodynumber.setText("");
-        txtBirth.setText("");
         txtemail.setText("");
-        txtEntry.setText("");
         txtphone.setText("");
+    }
+    public void init(String cardNumber)
+    {
+        Student student=new Student();
+        student= ResponseUtils.getResponseByHash(
+                new Request(App.connectionToServer, null, "com.vcampus.server.StudentManage.getStudentDetailByCardNumber",
+                        new Object[] { cardNumber }).send())
+                .getReturn(Student.class);
+
+        txtname.setText(student.getName());
+        txtcard.setText(student.getCardNumber());
+        txtSex.setText(student.getGender());
+        txtacademy.setText(student.getSchool());
+        Stunum.setText(student.getStudentNumber());
+        Studorm.setText(student.getDormAddress());
+        txtbodynumber.setText(student.getBankAccount());
+        txtemail.setText(student.getEmail());
+        txtphone.setText(student.getPhoneNumber());
+    }
+    public void deleteStu(String cardNumber)
+    {
+        Response resp = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
+                "com.vcampus.server.StudentManage.deleteStudent", new Object[] { cardNumber }).send());
+        if (resp.getReturn(Boolean.class)) {
+            System.out.println("success");
+        } else {
+            System.out.println("error");
+        }
+    }
+    public void AddStu(Student student)
+    {
+        Response resp = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
+                "com.vcampus.server.StudentManage.insertStudent", new Object[] { student }).send());
+        if (resp.getReturn(Boolean.class)) {
+            System.out.println("success");
+        } else {
+            System.out.println("error");
+        }
+    }
+    public void closeedit()
+    {
+        txtname.setEditable(false);
+        txtcard.setEditable(false);
+        txtSex.setEditable(false);
+        Stunum.setEditable(false);
+        txtacademy.setEditable(false);
+        Studorm.setEditable(false);
+        txtbodynumber.setEditable(false);
+        txtemail.setEditable(false);
+        txtphone.setEditable(false);
+    }
+    public void saveChange(){
+        closeedit();
+        String cardNumber=txtcard.getText();
+        String studentNumber=Stunum.getText();
+        String school=txtacademy.getText();
+        String dormAddress=Studorm.getText();
+
+        HashMap<String,String> mapResetTabs = new HashMap<String, String>();
+        mapResetTabs.put("cardNumber", cardNumber );
+        mapResetTabs.put("studentNumber",studentNumber);
+        StuManageHelper.resetStudentNumberByCard(mapResetTabs);
+
+        HashMap<String,String> mapResetNum = new HashMap<String, String>();
+        mapResetNum.put("cardNumber", cardNumber);
+        mapResetNum.put("school",school);
+        StuManageHelper.resetSchoolByCard(mapResetNum);
+
+        HashMap<String,String> mapResetPlace = new HashMap<String, String>();
+        mapResetPlace.put("cardNumber", cardNumber);
+        mapResetPlace.put("dormAddress",dormAddress);
+        StuManageHelper.resetDormByCard(mapResetPlace);
     }
 }
