@@ -121,7 +121,7 @@ public class AppLife extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    AppAdmin app=new AppAdmin();
+                    AppStudent app=new AppStudent();
                     setVisible(false);
                     app.setVisible(true);
                 }

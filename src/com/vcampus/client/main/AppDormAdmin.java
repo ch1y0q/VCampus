@@ -1,5 +1,6 @@
 package com.vcampus.client.main;
 
+import com.vcampus.client.administrator.main.AppAdmin;
 import com.vcampus.client.main.manager.ManCategory;
 import com.vcampus.entity.RepairHistory;
 import com.vcampus.net.Request;
@@ -13,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +62,22 @@ public class AppDormAdmin extends JFrame {
         tabbedPane.add("宿舍报修处理",jp2);
         tabbedPane.setBounds(200,0,2000,1100);
         this.add(tabbedPane);
+
+        JButton btnBack = new JButton("返回");
+        btnBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==btnBack)
+                {
+                    AppAdmin app=new AppAdmin();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
+            }
+        });
+        btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack.setBounds(1050, 30, 100, 40);
+        jp1.add(btnBack);
 
         JLabel lblDormHygieneMarkEntering = new JLabel("宿舍卫生分数录入");
         lblDormHygieneMarkEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
