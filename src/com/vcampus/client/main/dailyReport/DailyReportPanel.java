@@ -1,5 +1,7 @@
 package com.vcampus.client.main.dailyReport;
 
+import com.vcampus.UI.myJLabel;
+import com.vcampus.UI.myJLabel2;
 import com.vcampus.client.main.App;
 
 import javax.swing.*;
@@ -100,25 +102,35 @@ public class DailyReportPanel extends JPanel {
         jcomlocal.setBounds(160,60,150,30);
         jplDaily.add(jcomlocal);
 
-        JLabel lblHealth= new JLabel();//设置健康标签
+        myJLabel2 lblHealth= new myJLabel2();//设置健康标签
         lblHealth.setText("今日体温：37℃");
-        lblHealth.setBounds(780,470,300,60);
-        lblHealth.setFont(new Font("微软雅黑", Font.BOLD, 25));
+        lblHealth.setBounds(800,90,280,60);
+        lblHealth.setFont(new Font("微软雅黑", Font.BOLD, 23));
         lblHealth.setOpaque(true);
         lblHealth.setBackground(new Color(0xC9B6F3F1, true));
         lblHealth.setForeground(new Color(0xF22D8B4C, true));
         lblHealth.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblHealth);
 
-        JLabel lblAdvice= new JLabel();//设置建议标签
-        lblAdvice.setText("体温正常~~开启快乐学习生活");
-        lblAdvice.setBounds(780,670,500,60);
+        myJLabel2 lblAdvice= new myJLabel2();//设置建议标签
+        lblAdvice.setText("体温正常");
+        lblAdvice.setBounds(800,170,280,60);
         lblAdvice.setFont(new Font("微软雅黑", Font.BOLD, 20));
         lblAdvice.setOpaque(true);
-        lblAdvice.setBackground(new Color(0xC9248E8B));
+        lblAdvice.setBackground(new Color(0x53ADA2));
         lblAdvice.setForeground(new Color(0xF2FFFFFF));
         lblAdvice.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblAdvice);
+
+        myJLabel2 lblAdvice2= new myJLabel2();//设置建议标签
+        lblAdvice2.setText("开启快乐学习生活(≧∇≦)ﾉ");
+        lblAdvice2.setBounds(800,250,280,60);
+        lblAdvice2.setFont(new Font("微软雅黑", Font.BOLD, 20));
+        lblAdvice2.setOpaque(true);
+        lblAdvice2.setBackground(new Color(0x357171));
+        lblAdvice2.setForeground(new Color(0xF2FFFFFF));
+        lblAdvice2.setHorizontalAlignment(SwingConstants.CENTER);
+        add(lblAdvice2);
 
         //slider
         //设置小数，需要计算
@@ -138,8 +150,9 @@ public class DailyReportPanel extends JPanel {
         slider.setPaintLabels(true);
         // 不对齐到刻度
         slider.setSnapToTicks(false);
+        //设置垂直
+        slider.setOrientation(SwingConstants.VERTICAL);
         // 添加刻度改变监听器
-
 
         slider.addChangeListener(new ChangeListener() {
             @Override
@@ -152,23 +165,36 @@ public class DailyReportPanel extends JPanel {
                 {
                     jtxtTemper.setForeground(new Color(0xF22D8B4C, true));
                     lblHealth.setForeground(new Color(0xF22D8B4C, true));
-                    lblAdvice.setText("体温正常~~开启快乐学习生活");
+                    lblAdvice.setText("体温正常");
+                    lblAdvice2.setText("开启快乐学习生活(≧∇≦)ﾉ");
+                    lblHealth.setBackground(new Color(0xC9B6F3F1, true));
+                    lblAdvice.setBackground(new Color(0x53ADA2));
+                    lblAdvice2.setBackground(new Color(0x357171));
                 } else if(temperature<37.9){
                     jtxtTemper.setForeground(new Color(0xD4733F));
                     lblHealth.setForeground(new Color(0xD4733F));
-                    lblAdvice.setText("体温较高，需要注意身体");
+                    lblAdvice.setText("体温较高");
+                    lblAdvice2.setText("需要注意身体QAQ");
+                    lblHealth.setBackground(new Color(0xFDECE581, true));
+                    lblAdvice.setBackground(new Color(0xE3A75F));
+                    lblAdvice2.setBackground(new Color(0xE78C5B));
                 } else{
                     jtxtTemper.setForeground(new Color(0xEA0909));
                     lblHealth.setForeground(new Color(0xEA0909));
-                    lblAdvice.setText("发烧啦！请快去医院");
+                    lblAdvice.setText("发烧啦！");
+                    lblAdvice2.setText("请快去医院o(╥﹏╥)o");
+                    lblHealth.setBackground(new Color(0xC9E78D8A, true));
+                    lblAdvice.setBackground(new Color(0xDC6757));
+                    lblAdvice2.setBackground(new Color(0xEA3423));
                 }
                 jtxtTemper.repaint();
                 lblHealth.repaint();
                 lblAdvice.repaint();
+                lblAdvice2.repaint();
             }
 
         });
-        slider.setBounds(160,580,800,60);
+        slider.setBounds(720,70,60,600);
         add(slider);
 
 
