@@ -83,7 +83,13 @@ public class StringUtils {
         return resultString;
     }
     public static void main(String[] args) {
-        System.out.println(MD5EncodeSalted("111", ""));
+        System.out.println(MD5EncodeSalted("111", ""));//698d51a19d8a121ce581499d7b701668
+        System.out.println(MD5EncodeSalted("123", ""));//202cb962ac59075b964b07152d234b70
+        System.out.println(MD5EncodeSalted("222", ""));//bcbe3365e6ac95ea2c0343a2395834dd
+        System.out.println(MD5EncodeSalted("333", ""));//310dcbbf4cce62f762a2aaa148d556bd
+        System.out.println(MD5EncodeSalted("444", ""));//550a141f12de6341fba65b0ad0433500
+        System.out.println(MD5EncodeSalted("555", ""));//15de21c670ae7c3f6f3f1f37029303c9
+        System.out.println(MD5EncodeSalted("666", ""));//fae0b27c451c728867a567e8c1bb4e53
     }
 
 }

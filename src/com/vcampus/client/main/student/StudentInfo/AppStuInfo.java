@@ -346,8 +346,10 @@ public class AppStuInfo  extends JFrame {
                 mapCardNum_StudentPassword.put("password", tempStudentPassword);
                 //AppStudentInfoHelper.resetPassword(mapCardNum_StudentPassword);//会超时，待解决
 
+               // txt_8.setText(App.session.getStudent().getPhoneNumber());
                 txt_8.setForeground(Color.GRAY);
                 txt_8.setEditable(false);//电话
+              //  txt_9.setText(App.session.getStudent().getEmail());
                 txt_9.setForeground(Color.GRAY);
                 txt_9.setEditable(false);//邮箱
                 txt_10.setForeground(Color.GRAY);
