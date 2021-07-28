@@ -1,17 +1,25 @@
 package com.vcampus.client.main.courseManage;
 
+import com.vcampus.client.main.App;
 import com.vcampus.client.main.teacher.TeaCategory;
+import com.vcampus.entity.Course;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+import java.util.ListIterator;
 
 public class AppTeaCourse {
     private JFrame jf = new JFrame("课程管理");
     private int width = 1151;
     private int height = 800;
+    private DefaultTableModel model2;
+    private JComboBox chooseSemester;
     public AppTeaCourse() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         width = screenSize.width;
@@ -75,7 +83,7 @@ public class AppTeaCourse {
         semesterLabel0.setBounds(width / 50, height / 40, 40, 30);
         jp0.add(semesterLabel0);
         JComboBox chooseSemester0 = new JComboBox();
-        String[] semesters = {"2020-2021-1", "2020-2021-2", "2020-2021-3", "2020-2021-4"};
+        String[] semesters = {"全部","2020-2021-1", "2020-2021-2", "2020-2021-3", "2020-2021-4"};
         for (String s : semesters) {
             chooseSemester0.addItem(s);
         }
@@ -155,9 +163,9 @@ public class AppTeaCourse {
         sp2.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         sp2.setBackground(Color.white);
         jp2.add(sp2);
-        String[] columnName2 = {"课程编号", "课程名称", "学分", "上课时间", "上课地点", "所属专业",
+        String[] columnName2 = {"课程编号","学期", "课程名称", "学分", "上课时间", "上课地点", "所属专业",
                 "状态", "课容量", "已选学生数量"};
-        DefaultTableModel model2 = new DefaultTableModel(emptyTable, columnName2);
+        model2 = new DefaultTableModel(emptyTable, columnName2);
         JTable checkScoreTable = new JTable(model2) {
             public boolean isCellEditable(int row, int column) {
                 this.setRowSelectionAllowed(false);
@@ -166,13 +174,10 @@ public class AppTeaCourse {
             }
         };
         sp2.getViewport().add(checkScoreTable);
-        for (int i = 0; i < 5; i++) {
-            model2.addRow(emptyData);
-        }
         JLabel semesterLabel = new JLabel("学期", JLabel.CENTER);
         semesterLabel.setBounds(width / 50, height / 40, 40, 30);
         jp2.add(semesterLabel);
-        JComboBox chooseSemester = new JComboBox();
+        chooseSemester = new JComboBox();
         for (String s : semesters) {
             chooseSemester.addItem(s);
         }
@@ -184,6 +189,7 @@ public class AppTeaCourse {
         JButton searchButton = new JButton("查询");
         searchButton.setBounds(width / 25 + 375, height / 40, 60, 30);
         jp2.add(searchButton);
+        refreshAllCourseTable();
 
 
         //事件
@@ -242,6 +248,25 @@ public class AppTeaCourse {
     }
     private void refreshCourseTable(){
 
+    }
+
+    private void refreshAllCourseTable(){
+        String semester = (String)chooseSemester.getSelectedItem();
+        List<Course> list = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null,
+                        "com.vcampus.server.teaching.CourseSelection.getAllCourses",
+                        new Object[] {}).send())
+                .getListReturn(Course.class);
+        ListIterator<Course> iter = list.listIterator();
+        while(iter.hasNext()){
+            Course course = iter.next();
+            if(course.getSemester().equals("全部")||course.getSemester().equals(semester)){
+                String[] courseInfo = {course.getId(), course.getSemester(),course.getClassName(),course.getCredit(),course.getTime()
+                        ,course.getClassroom(),course.getMajor(),course.getCapacity(),course.getSelectedNumber()};
+                model2.addRow(courseInfo);
+            }
+
+        }
     }
     public void close(){
         jf.setVisible(false);

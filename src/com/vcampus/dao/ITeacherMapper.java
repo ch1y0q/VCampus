@@ -1,5 +1,6 @@
 package com.vcampus.dao;
 
+import com.vcampus.entity.Student;
 import com.vcampus.entity.Teacher;
 
 import java.math.BigDecimal;
@@ -46,4 +47,30 @@ public interface ITeacherMapper {
     public Boolean resetPassword(Map map);
 
     public BigDecimal setBalance(Map map);
+
+
+    public int resetTeacherNumberByCard(Map<String, String> map);
+
+    public int resetSchoolByCard(Map<String, String> map);
+
+    public int resetTeacherRankByCard(Map<String, String> map);
+
+    public List<Teacher> fuzzySearchByName(String name);
+    public List<Teacher> fuzzySearchByCard(String cardNumber);
+    public List<Teacher> fuzzySearchBySchool(String school);
+    public List<Teacher> fuzzySearchByGender(String gender);
+
+    public List<Teacher> fuzzySearchByNameAndCard(Teacher teacher);
+    public List<Teacher> fuzzySearchByNameAndSchool(Teacher teacher);
+    public List<Teacher> fuzzySearchByNameAndGender(Teacher teacher);
+    public List<Teacher> fuzzySearchByCardAndSchool(Teacher teacher);
+    public List<Teacher> fuzzySearchByCardAndGender(Teacher teacher);
+    public List<Teacher> fuzzySearchBySchoolAndGender(Teacher teacher);
+
+    public List<Teacher> fuzzySearchByNameAndCardAndSchool(Teacher teacher);
+    public List<Teacher> fuzzySearchByNameAndCardAndGender(Teacher teacher);
+    public List<Teacher> fuzzySearchByCardAndSchoolAndGender(Teacher teacher);
+    public List<Teacher> fuzzySearchByNameAndSchoolAndGender(Teacher teacher);
+
+    public List<Teacher> fuzzySearchByNameAndCardAndSchoolAndGender(Teacher teacher);
 }

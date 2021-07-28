@@ -1,6 +1,8 @@
 package com.vcampus.client.main;
 
 //import com.vcampus.client.main.student.AppStudent;
+import com.vcampus.client.administrator.main.AppAdmin;
+import com.vcampus.client.main.dailyReport.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.RepairHistory;
@@ -16,6 +18,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -111,6 +115,21 @@ public class AppLife extends JFrame {
 
         //一卡通部分开始 - jp1
 
+        JButton btnBack = new JButton("返回");
+        btnBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==btnBack)
+                {
+                    AppStudent app=new AppStudent();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
+            }
+        });
+        btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack.setBounds(1050, 30, 100, 40);
+        jp1.add(btnBack);
 
         JLabel lblCardNum = new JLabel("一卡通号");
         lblCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -387,6 +406,23 @@ public class AppLife extends JFrame {
         //一卡通部分结束
 
         //宿舍部分开始 - jp2
+
+        JButton btnBack2 = new JButton("返回");
+        btnBack2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==btnBack2)
+                {
+                    AppStudent app=new AppStudent();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
+            }
+        });
+
+        btnBack2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack2.setBounds(1050, 30, 100, 40);
+        jp2.add(btnBack2);
 
         JLabel lblDormNum = new JLabel("宿舍号");
         lblDormNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));

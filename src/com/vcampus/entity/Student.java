@@ -42,7 +42,6 @@ public class Student {
         courses = null;
         school=null;
         courseList=null;
-        school=null;
         email=null;
         phoneNumber=null;
         gender=null;

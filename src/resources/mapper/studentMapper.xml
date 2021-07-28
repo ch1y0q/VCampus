@@ -37,7 +37,7 @@
     <insert id="insertStudent" parameterType="Student">
         INSERT INTO
             `students` VALUES ( #{name},"","",#{cardNumber}, #{studentNumber},
-                               "","","",0,"", "",  #{dormAddress}, #{gender},  #{email}, #{phoneNumber},
+                               #{bankAccount},"","",0,"", #{school},  #{dormAddress}, #{gender},  #{email}, #{phoneNumber},
                                 "")
     </insert>
 
