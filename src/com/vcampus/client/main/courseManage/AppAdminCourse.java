@@ -2,7 +2,6 @@ package com.vcampus.client.main.courseManage;
 
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.manager.ManCategory;
-import com.vcampus.entity.Book;
 import com.vcampus.entity.Course;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -11,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -154,6 +154,92 @@ public class AppAdminCourse {
         }
         );
 
+        //查询
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String searchClass = (String)chooseClass.getSelectedItem();
+                List<Course> list = new ArrayList<>();
+                ListIterator<Course> iter = list.listIterator();
+                if(searchClass.equals("课程编号")){
+                    String courseId = searchCourseField.getText();
+                    System.out.println("id= "+courseId);
+                    if(!courseId.equals("")){
+                        System.out.println("id= "+courseId);
+                        list = ResponseUtils
+                                .getResponseByHash(new Request(App.connectionToServer, null,
+                                        "com.vcampus.server.teaching.CourseSelection.fuzzySearchById",
+                                        new Object[] {courseId}).send())
+                                .getListReturn(Course.class);
+                    }
+                    while(model.getRowCount()>0){
+                        model.removeRow(0);
+                    }
+                    for (Course course : list) {
+                        String[] courseInfo = {course.getSemester(), course.getId(), course.getClassName(), course.getMajor(), course.getTeacher(), course.getTime()
+                                , course.getClassroom(), course.getCapacity(), course.getSelectedNumber(), course.getCredit()};
+                        model.addRow(courseInfo);
+                    }
+
+                }
+                else if(searchClass.equals("课程名称")){
+                    String courseName = searchCourseField.getText();
+                    if(!courseName.equals("")){
+                        list = ResponseUtils
+                                .getResponseByHash(new Request(App.connectionToServer, null,
+                                        "com.vcampus.server.teaching.CourseSelection.fuzzySearchByName",
+                                        new Object[] {courseName}).send())
+                                .getListReturn(Course.class);
+                    }
+                    while(model.getRowCount()>0){
+                        model.removeRow(0);
+                    }
+                    for (Course course : list) {
+                        String[] courseInfo = {course.getSemester(), course.getId(), course.getClassName(), course.getMajor(), course.getTeacher(), course.getTime()
+                                , course.getClassroom(), course.getCapacity(), course.getSelectedNumber(), course.getCredit()};
+                        model.addRow(courseInfo);
+                    }
+                }
+                else if(searchClass.equals("所属专业")){
+                    String courseMajor = searchCourseField.getText();
+                    if(!courseMajor.equals("")){
+                        list = ResponseUtils
+                                .getResponseByHash(new Request(App.connectionToServer, null,
+                                        "com.vcampus.server.teaching.CourseSelection.fuzzySearchByMajor",
+                                        new Object[] {courseMajor}).send())
+                                .getListReturn(Course.class);
+                    }
+                    while(model.getRowCount()>0){
+                        model.removeRow(0);
+                    }
+                    for (Course course : list) {
+                        String[] courseInfo = {course.getSemester(), course.getId(), course.getClassName(), course.getMajor(), course.getTeacher(), course.getTime()
+                                , course.getClassroom(), course.getCapacity(), course.getSelectedNumber(), course.getCredit()};
+                        model.addRow(courseInfo);
+                    }
+                }
+                else if(searchClass.equals("授课教师")){
+                    String courseTeacher = searchCourseField.getText();
+                    if(!courseTeacher.equals("")){
+                        list = ResponseUtils
+                                .getResponseByHash(new Request(App.connectionToServer, null,
+                                        "com.vcampus.server.teaching.CourseSelection.fuzzySearchByTeacher",
+                                        new Object[] {courseTeacher}).send())
+                                .getListReturn(Course.class);
+                    }
+                    while(model.getRowCount()>0){
+                        model.removeRow(0);
+                    }
+                    for (Course course : list) {
+                        String[] courseInfo = {course.getSemester(), course.getId(), course.getClassName(), course.getMajor(), course.getTeacher(), course.getTime()
+                                , course.getClassroom(), course.getCapacity(), course.getSelectedNumber(), course.getCredit()};
+                        model.addRow(courseInfo);
+                    }
+                }
+            }
+        }
+        );
+
 
     }
     private void refreshCourseTable(){
@@ -165,11 +251,9 @@ public class AppAdminCourse {
                         "com.vcampus.server.teaching.CourseSelection.getAllCourses",
                         new Object[] {}).send())
                 .getListReturn(Course.class);
-        ListIterator<Course> iter = list.listIterator();
-        while(iter.hasNext()){
-            Course course = iter.next();
-            String[] courseInfo = {course.getSemester(),course.getID(),course.getClassName(),course.getMajor(),course.getTeacher(),course.getTime()
-                    ,course.getClassroom(),course.getCapacity(),course.getSelectedNumber(),course.getCredit()};
+        for (Course course : list) {
+            String[] courseInfo = {course.getSemester(), course.getId(), course.getClassName(), course.getMajor(), course.getTeacher(), course.getTime()
+                    , course.getClassroom(), course.getCapacity(), course.getSelectedNumber(), course.getCredit()};
             model.addRow(courseInfo);
         }
 

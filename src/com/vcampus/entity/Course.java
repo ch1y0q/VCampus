@@ -24,15 +24,13 @@ public class Course {
     }
 
     // 历史遗留问题
-    public String getId() {
-        return id;
-    }
+
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public String getID() {
+    public String getId() {
         return id;
     }
 

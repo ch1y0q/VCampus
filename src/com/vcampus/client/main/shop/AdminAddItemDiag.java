@@ -1,5 +1,11 @@
 package com.vcampus.client.main.shop;
 
+/**
+ * 用于添加商品的对话框
+ * @author Huang Qiyue
+ * @date 2021-07-28
+ */
+
 import com.vcampus.client.main.App;
 import com.vcampus.entity.Book;
 import com.vcampus.entity.Goods;
@@ -76,20 +82,22 @@ public class AdminAddItemDiag extends JDialog {
     private void onOK() {
         int id;
         Goods goods;
-        Boolean result;
+        Boolean result=null;
         try{
             id = Integer.parseInt(txtNumber.getText());
-            goods = new Goods(id, txtName.getText(), Integer.parseInt(txtQuantity.getText()),
+            goods = new Goods(id, txtName.getText(),
                     txtCategory.getText(), new BigDecimal(txtPrice.getText()),
-                    txtAreaDescription.getText(), txtPic.getText(), txtStatus.getText());
+                    txtPic.getText(), Integer.parseInt(txtQuantity.getText()),
+                    txtAreaDescription.getText(), txtStatus.getText());
             result = ResponseUtils.getResponseByHash(
                     new Request(App.connectionToServer, null, "com.vcampus.server.shop.ShopAdminServer.insertNewGoods",
                             new Object[]{goods}).send())
                     .getReturn(Boolean.class);
         }catch(NumberFormatException e){
-            goods = new Goods(txtName.getText(), Integer.parseInt(txtQuantity.getText()),
+            goods = new Goods(txtName.getText(),
                     txtCategory.getText(), new BigDecimal(txtPrice.getText()),
-                    txtAreaDescription.getText(), txtPic.getText(), txtStatus.getText());
+                    txtPic.getText(), Integer.parseInt(txtQuantity.getText()),
+                    txtAreaDescription.getText(), txtStatus.getText());
             result = ResponseUtils.getResponseByHash(
                     new Request(App.connectionToServer, null, "com.vcampus.server.shop.ShopAdminServer.insertNewGoodsWithoutId",
                             new Object[]{goods}).send())
