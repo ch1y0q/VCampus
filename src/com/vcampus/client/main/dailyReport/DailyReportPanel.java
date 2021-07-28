@@ -5,6 +5,11 @@ import com.vcampus.UI.myJLabel;
 import com.vcampus.UI.myJLabel2;
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.AppLife;
+import com.vcampus.entity.PersonWhoReport;
+import com.vcampus.entity.Student;
+import com.vcampus.net.Request;
+import com.vcampus.net.Response;
+import com.vcampus.util.ResponseUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,6 +20,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Hashtable;
 
 /**
@@ -213,7 +220,7 @@ public class DailyReportPanel extends JPanel {
         JLabel jlSchool=new JLabel("目前所在校区");
         jlSchool.setBounds(10,130,150,30);
         jlSchool.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        String[] schooltxt={"","九龙湖校区","四牌楼校区","丁家桥校区"};
+        String[] schooltxt={"九龙湖校区","四牌楼校区","丁家桥校区"};
         JComboBox jcomSchool=new JComboBox(schooltxt);
         jcomSchool.setBounds(170,130,150,30);
 
@@ -278,6 +285,7 @@ public class DailyReportPanel extends JPanel {
         jcomiflvju.setBounds(170,330,150,30);
         jplDaily.add(jcomiflvju);
 
+
         //上传
         final JButton btnUpload = new JButton("上传");
         btnUpload.putClientProperty( StyleId.STYLE_PROPERTY, StyleId.buttonHover);
@@ -293,9 +301,23 @@ public class DailyReportPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnUpload)
                 {
+                    PersonWhoReport person=new PersonWhoReport();
+                    //person.setIdReport();
+                    person.setCardNumber(App.session.getStudent().getCardNumber());//获取一卡通
+                    person.setName(App.session.getStudent().getName());
+                    person.setSchool(App.session.getStudent().getSchool());
+                    person.setCampus(jcomSchool.getSelectedItem().toString());//获取combobox当前值
+                    person.setTemperature(36+(double)(slider.getValue())/10);
+                     Date date= new Date(System.currentTimeMillis());
+                    //SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    person.setDate(date);
+                    person.setCity(jtxtExact.getText());
+                    person.setIfQarantined(jcomifgeli.getSelectedItem().toString());
+                    person.setIfDefinite(jcomifquezhen.getSelectedItem().toString());
+                    person.setIfSuspected(jcomiflvju.getSelectedItem().toString());
+                    person.setIfHistoryOfRiskyArea(jcomiflvju.getSelectedItem().toString());
 
-
-
+                    upload(person);
                     JOptionPane.showMessageDialog(null, "上传成功");
                 }
             }
@@ -303,6 +325,17 @@ public class DailyReportPanel extends JPanel {
         jplDaily.add(btnUpload);
 
 
+    }
+    //上传信息
+    public void upload(PersonWhoReport personWhoReport)
+    {
+        Response resp = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
+                "com.vcampus.server.dailyReport.DailyReportServer.insertPerson", new Object[] { personWhoReport }).send());
+        if (resp.getReturn(Boolean.class)) {
+            System.out.println("success");
+        } else {
+            System.out.println("error");
+        }
     }
 
 

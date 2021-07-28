@@ -7,6 +7,7 @@ import java.util.Date;
  * @date 2021/7/28
  */
 public class PersonWhoReport {
+    private int idReport;
     private String personName;
     private String cardNumber;
     private String school;
@@ -21,18 +22,26 @@ public class PersonWhoReport {
     private String ifHistoryOfRiskyArea;//是否到过风险区
 
     public PersonWhoReport(){
-        personName = "";
+        idReport=1;
         cardNumber = "";
+        personName = "";
         school="计算机科学与工程学院";
+        date= new Date();
         temperature=37.0;
         location="在校区";
         city="";
-        date= new Date();
         campus="";
         ifQarantined="";
         ifSuspected="";
         ifDefinite="";
         ifHistoryOfRiskyArea="";
+    }
+    public int getIdReport() {
+        return idReport;
+    }
+    public void setIdReport(int idReport)
+    {
+        this.idReport=idReport;
     }
     public String getSchool() {
         return school;
