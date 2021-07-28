@@ -14,14 +14,36 @@ public class Teacher {
     private String password;
     private String cardNumber;
     private String teacherNumber;
+    private String bankAccount;
     private BigDecimal balance;
 
     /* optional */
     private String email;
+    private String school;
+    private String teacherRank;
+    private String homepage;
     private String phoneNumber;
+    private String lossStatus;
     private String gender;
 
     /* constructor */
+
+    public Teacher(){
+        name = "";
+        password = "";
+        cardNumber = "";
+        teacherNumber = "";
+        bankAccount="";
+        balance = new BigDecimal(0);
+        lossStatus=null;
+        school=null;
+        teacherRank=null;
+        gender=null;
+        email=null;
+        homepage=null;
+        phoneNumber=null;
+        bankAccount=null;
+    }
     public Teacher(String _cardNumber, String _password) {
         name = "";
         password = _password;
@@ -38,7 +60,7 @@ public class Teacher {
     }
 
     /* util */
-    public String getSchool() {
+    public String getSchoolByteacherNumber() {
         String school = "";
         try {
             school = getSchoolByCode(teacherNumber.substring(0, 2));
@@ -111,6 +133,19 @@ public class Teacher {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public String getBankAccount(){return bankAccount;}
+    public void setBankAccount(String bankAccount){this.bankAccount=bankAccount;}
+
+    public String getSchool(){return school;}
+    public void setSchool(String school){this.school=school;}
+
+    public String getTeacherRank(){return teacherRank;}
+    public void setTeacherRank(String teacherRank){this.teacherRank=teacherRank;}
+
+    public String getHomepage(){return homepage;}
+    public void setHomepage(String homepage){this.homepage=homepage;}
+
 
     /* TODO getCourses()  返回该老师所有课程 */
 }

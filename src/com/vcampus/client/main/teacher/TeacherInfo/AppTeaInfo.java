@@ -94,7 +94,7 @@ public class AppTeaInfo  extends JFrame {
         String teacherName = App.session.getTeacher().getName();//获取姓名
         String teacherCardNumber = App.session.getTeacher().getCardNumber();//获取一卡通号
         String teacherGender = App.session.getTeacher().getGender();//获取性别
-        String teacherSchool = App.session.getTeacher().getSchool();//获取学院
+        String teacherSchool = App.session.getTeacher().getSchoolByteacherNumber();//获取学院
         String teacherEmail = App.session.getTeacher().getEmail();//获取邮箱
         String teacherPassword = App.session.getTeacher().getPassword();//获取登录密码
         String teacherPhoneNumber = App.session.getTeacher().getPhoneNumber();//获取电话号码

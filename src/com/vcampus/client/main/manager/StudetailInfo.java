@@ -128,7 +128,7 @@ public class StudetailInfo extends JPanel {
         txtphone.setEditable(false);
         add(txtphone);
 
-        JButton edit = new JButton("启动编辑");
+        JButton edit = new JButton("添加编辑");
         edit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         edit.setBounds(600, 10, 200, 30);
         edit.addActionListener(new ActionListener() {
@@ -287,5 +287,13 @@ public class StudetailInfo extends JPanel {
         mapResetPlace.put("cardNumber", cardNumber);
         mapResetPlace.put("dormAddress",dormAddress);
         StuManageHelper.resetDormByCard(mapResetPlace);
+    }
+
+    public void changeedit()
+    {
+        closeedit();
+        Stunum.setEditable(true);
+        txtacademy.setEditable(true);
+        Studorm.setEditable(true);
     }
 }
