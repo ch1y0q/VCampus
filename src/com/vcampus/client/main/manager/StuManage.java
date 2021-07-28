@@ -85,6 +85,11 @@ public class StuManage extends JFrame{
         logout.setBounds(1330, 20, 60, 30);
         contentPane.add(logout);
 
+        StudetailInfo Studetail=new StudetailInfo();
+        Studetail.setBounds(210,610,800,200);
+        Studetail.setVisible(false);
+        contentPane.add(Studetail);
+
         JTextField txtfield1=new JTextField();    //创建文本框
         txtfield1.setText("输入学生姓名");
         txtfield1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -97,6 +102,8 @@ public class StuManage extends JFrame{
         addStu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Studetail.initnow();
+                Studetail.setVisible(true);
             }
         });
         contentPane.add(addStu);
@@ -150,17 +157,12 @@ public class StuManage extends JFrame{
         Stuinforselect.add(sex);
 
 
-        StudetailInfo Studetail=new StudetailInfo();
-        Studetail.setBounds(210,610,800,180);
-        Studetail.setVisible(false);
-        contentPane.add(Studetail);
-
         JLabel Stuinfor=new JLabel("学生信息：");
         Stuinfor.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         Stuinfor.setBounds(210,260,100,30);
         contentPane.add(Stuinfor);
 
-        String[] header = {"一卡通号", "姓名","性别","学院","班级","选择"};
+        String[] header = {"一卡通号", "姓名","性别","学院","学号","选择"};
         model = new DefaultTableModel(null,header);
         JTable table = new JTable(model)
         {
@@ -213,11 +215,9 @@ public class StuManage extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 int column = table.getSelectedColumn();
                 int row = table.getSelectedRow();
-                /**需增加
-                 * 判断逻辑
-                 */
                 if (column == 5) {
                     table.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>", row, column);
+                    Studetail.init(table.getValueAt(row,0).toString());
                     Studetail.setVisible(true);
                 }
             }
