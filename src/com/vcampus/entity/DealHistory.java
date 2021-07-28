@@ -26,11 +26,8 @@ public class DealHistory {
         cardNumber=_cardNumber;
         dealAmount=_dealAmount;
         dealType=_dealType;
-
     }
 
-    public Boolean insertDealHistory(Map map){return true;}
-
-
+    //public Boolean insertDealHistory(Map map){return true;}
 
 }

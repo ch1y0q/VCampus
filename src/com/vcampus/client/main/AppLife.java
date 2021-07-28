@@ -69,9 +69,6 @@ public class AppLife extends JFrame {
 
         int dealHistoryLineNum=0;
 
-
-
-
         setResizable(true);
         setTitle("生活服务 - Vcampus");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

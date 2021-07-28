@@ -159,6 +159,12 @@ public class BankServer {
         return result;
     }
 
+    /**
+     * 插入交易记录
+     *
+     * @param dealHistory 交易记录
+     * @return 插入操作的结果
+     */
     public static Boolean insertDealHistory(DealHistory dealHistory) {
 
         try {
@@ -175,6 +181,12 @@ public class BankServer {
         return true;
     }
 
+    /**
+     * 查询交易记录
+     *
+     * @param cardNumber 一卡通号
+     * @return 交易记录
+     */
     public static List<DealHistory> getDealHistory(String cardNumber){
         List<DealHistory> list =new ArrayList<>();
         SqlSession sqlSession=null;
