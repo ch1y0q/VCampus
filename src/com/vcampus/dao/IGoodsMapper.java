@@ -19,6 +19,8 @@ public interface IGoodsMapper {
 
     public Boolean insertNewGoods(Goods goods);
 
+    public Boolean insertNewGoodsWithoutId(Goods goods);
+
     public Boolean deleteGoods(Goods goods);
 
     public List<Goods> manageListGoods(Goods goods);

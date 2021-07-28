@@ -10,6 +10,7 @@ import com.vcampus.client.main.manager.StuManage;
 import com.vcampus.client.main.manager.TeaManage;
 import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
 import com.vcampus.client.main.shop.AppShop;
+import com.vcampus.client.main.shop.AppShopAdmin;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -240,8 +241,7 @@ public class AppAdmin extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()== ShopInfoLabel1)
                 {
-                    AppShop app=new AppShop();
-                    //setVisible(false);
+                    AppShopAdmin app=new AppShopAdmin();
                     app.setVisible(true);
                 }
             }

@@ -8,6 +8,12 @@ import com.vcampus.util.ResponseUtils;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+/**
+ * 生活服务需要用到的工具类。
+ *
+ * @author Huang Qiyue
+ * @date 2021-07-24
+ */
 public class AppLifeHelper {
     @NotNull
     public static BigDecimal chargeCard(HashMap map) {

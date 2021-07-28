@@ -14,6 +14,8 @@ public class AppDailyReportManageEntry {
                 WebLookAndFeel.install ();
                 AppDailyReportManage app = new AppDailyReportManage();
                 app.setVisible(true);
+//                AppDailyReport app2=new AppDailyReport();
+//                app.setVisible(true);
             }
         });
     }
