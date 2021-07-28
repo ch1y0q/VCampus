@@ -342,7 +342,7 @@ public class AppAdmin extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==CourseInfoLabel1)
                 {
-                    AppAdminCourse app=new AppAdminCourse();
+                    //AppAdminCourse app=new AppAdminCourse();
                     setVisible(false);
                 }
             }

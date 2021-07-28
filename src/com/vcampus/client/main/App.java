@@ -2,7 +2,6 @@ package com.vcampus.client.main;
 
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.administrator.main.AppAdmin;
-import com.vcampus.client.main.dailyReport.AppStudent;
 import com.vcampus.client.main.teacher.AppTeacher;
 import com.vcampus.client.messageQueue.ResponseQueue;
 import com.vcampus.net.ConnectionToServer;
@@ -41,7 +40,7 @@ public class App extends JFrame {
         JFrame target = null;
         UserType userType = App.session.getUserType();
         //ManagerType managerType = (userType == UserType.MANAGER ? App.session.getManager().getManagerType() : null);
-        target = userType == UserType.STUDENT ? new AppStudent()
+        target = userType == UserType.STUDENT ? new com.vcampus.client.main.dailyReport.AppStudent()
                 : userType == userType.TEACHER ? new AppTeacher()
                 : userType == userType.ADMIN ? new AppAdmin()
                 /*
