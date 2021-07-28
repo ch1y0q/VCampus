@@ -56,6 +56,23 @@
         SELECT *FROM courses
     </select>
 
+    <select id="fuzzySearchById" parameterType="String"
+            resultType="Course">
+        SELECT *FROM courses WHERE id LIKE '%${id}%'
+    </select>
 
+    <select id="fuzzySearchByName" parameterType="String"
+            resultType="Course">
+        SELECT *FROM courses WHERE courseName LIKE '%${name}%'
+    </select>
 
+    <select id="fuzzySearchByMajor" parameterType="String"
+            resultType="Course">
+        SELECT *FROM courses WHERE major LIKE '%${major}%'
+    </select>
+
+    <select id="fuzzySearchByTeacher" parameterType="String"
+            resultType="Course">
+        SELECT *FROM courses WHERE teacher LIKE '%${teacher}%'
+    </select>
 </mapper>

@@ -34,4 +34,11 @@ public interface ICourseMapper {
 
     public List<Course> getAllCourses();
 
+    public List<Course> fuzzySearchById(String id);
+
+    public List<Course> fuzzySearchByName(String name);
+
+    public List<Course> fuzzySearchByMajor(String major);
+
+    public List<Course> fuzzySearchByTeacher(String teacher);
 }
