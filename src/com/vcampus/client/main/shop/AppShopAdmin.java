@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class AppShopAdmin extends JFrame {
@@ -47,6 +49,14 @@ public class AppShopAdmin extends JFrame {
 
         JButton btnCommodityEntering=new JButton("商品信息录入...");
         btnCommodityEntering.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        btnCommodityEntering.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AdminAddItemDiag dialog = new AdminAddItemDiag();
+                dialog.pack();
+                dialog.setVisible(true);
+            }
+        });
         contentPane.add(btnCommodityEntering);
         btnCommodityEntering.setBounds(280,122,140,30);
 
@@ -54,12 +64,14 @@ public class AppShopAdmin extends JFrame {
         tblCommodityList.setBounds(330,200,1000,35*6);
         tblCommodityList.setRowHeight(35);
         tblCommodityList.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+
+        /* be careful changing order */
         tblCommodityList.getModel().setValueAt("商品编号",0,0);
         tblCommodityList.getModel().setValueAt("商品名称",0,1);
         tblCommodityList.getModel().setValueAt("售价",0,2);
-        tblCommodityList.getModel().setValueAt("成本",0,3);
-        tblCommodityList.getModel().setValueAt("库存",0,4);
+        tblCommodityList.getModel().setValueAt("库存数量",0,4);
         tblCommodityList.getModel().setValueAt("是否下架",0,5);
+        tblCommodityList.getModel().setValueAt("商品描述",0,3);
         tblCommodityList.setPreferredScrollableViewportSize(new Dimension(200, 100));
         DefaultTableCellRenderer rCommodityList =new DefaultTableCellRenderer();
         rCommodityList.setHorizontalAlignment(JLabel.CENTER);

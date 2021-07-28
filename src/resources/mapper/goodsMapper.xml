@@ -19,9 +19,16 @@
 
     <insert id="insertNewGoods" parameterType="Goods">
         INSERT INTO
-            `goods` VALUES (#{name}, #{category},
+            `goods` VALUES (#{id}, #{name}, #{category},
                                  #{price}, #{pic}, #{remaining},
                                  #{description}, #{status})
+    </insert>
+
+    <insert id="insertNewGoodsWithoutId" parameterType="Goods">
+        INSERT INTO `goods` (`name`, `category`, `price`, `pic`, `remaining`, `description`, `status`)
+        VALUES (#{name}, #{category},
+                            #{price}, #{pic}, #{remaining},
+                            #{description}, #{status})
     </insert>
 
     <select id="manageListGoods" parameterType="Goods"
