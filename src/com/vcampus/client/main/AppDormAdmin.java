@@ -338,6 +338,22 @@ public class AppDormAdmin extends JFrame {
 
         //jp1结束
 
+        JButton btnBack2 = new JButton("返回");
+        btnBack2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==btnBack2)
+                {
+                    AppAdmin app=new AppAdmin();
+                    setVisible(false);
+                    app.setVisible(true);
+                }
+            }
+        });
+        btnBack2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack2.setBounds(1050, 30, 100, 40);
+        jp2.add(btnBack2);
+
         JLabel lblDormRepairStateUpdateDormAddress = new JLabel("宿舍号");
         lblDormRepairStateUpdateDormAddress.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairStateUpdateDormAddress.setHorizontalAlignment(SwingConstants.CENTER);
