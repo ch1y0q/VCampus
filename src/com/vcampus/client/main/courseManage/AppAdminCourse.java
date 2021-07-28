@@ -1,16 +1,24 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.courseManage;
 
+import com.vcampus.client.main.App;
 import com.vcampus.client.main.manager.ManCategory;
+import com.vcampus.entity.Book;
+import com.vcampus.entity.Course;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+import java.util.ListIterator;
 
 public class AppAdminCourse {
     private JFrame jf = new JFrame("课程管理");
     private int width = 1151;
     private int height = 800;
+    private DefaultTableModel model;
     public AppAdminCourse(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         width = screenSize.width;
@@ -68,24 +76,25 @@ public class AppAdminCourse {
         JScrollPane sp = new JScrollPane();
         jp.add(sp);
         sp.setBounds(width/50,height/20+80,width*3/5,height*3/5);
-        String[] columnName = {"序号","课程编号","课程名称","所属专业","教师","上课时间"
-                ,"上课地点","课容量","已选学生容量","学分","状态"};
+        String[] columnName = {"学期","课程编号","课程名称","所属专业","教师","上课时间"
+                ,"上课地点","课容量","已选学生容量","学分"};
         String[][] emptyTable = {};
         String[] emptyData = {};
-        DefaultTableModel model = new DefaultTableModel(emptyTable,columnName);
+        model = new DefaultTableModel(emptyTable,columnName);
         JTable courseInformationTable = new JTable(model) {
             public boolean isCellEditable(int row, int column) {
                 this.setRowSelectionAllowed(false);
                 this.setColumnSelectionAllowed(false);
-                return false;
+                if(column==1){
+                    return false;
+                }else{
+                    return true;
+                }
             }
         };
         sp.getViewport().add(courseInformationTable);
-        for (int i = 0; i < 25; i++) {
-            model.addRow(emptyData);
-        }
-
-
+        refreshCourseTable();
+        courseInformationTable.setEnabled(false);
 
         jf.addComponentListener(new ComponentAdapter() {
             @Override
@@ -108,13 +117,61 @@ public class AppAdminCourse {
         });
 
         //编辑课程
-
+        startEditButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    courseInformationTable.setEnabled(true);
+                }
+            }
+        );
 
         //保存编辑
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                courseInformationTable.setEnabled(false);
+                for(int i=0;i<courseInformationTable.getRowCount();i++){
+                    String courseId = (String)model.getValueAt(i,1);
+                    Course course = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                            null,"com.vcampus.server.teaching.CourseSelection.getOneCourse",
+                            new Object[] {courseId}).send()).getReturn(Course.class);
+                    course.setSemester((String)model.getValueAt(i,0));
+                    course.setClassName((String)model.getValueAt(i,2));
+                    course.setMajor((String)model.getValueAt(i,3));
+                    course.setTeacher((String)model.getValueAt(i,4));
+                    course.setTime((String)model.getValueAt(i,5));
+                    course.setClassroom((String)model.getValueAt(i,6));
+                    course.setCapacity((String)model.getValueAt(i,7));
+                    course.setSelectedNumber((String)model.getValueAt(i,8));
+                    course.setCredit((String)model.getValueAt(i,9));
+                    ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                            null,"com.vcampus.server.teaching.CourseSelection.setCourse",
+                            new Object[] {course}).send());
+                }
+                refreshCourseTable();
+            }
+
+        }
+        );
 
 
     }
     private void refreshCourseTable(){
+        while(model.getRowCount()>0){
+            model.removeRow(0);
+        }
+        List<Course> list = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null,
+                        "com.vcampus.server.teaching.CourseSelection.getAllCourses",
+                        new Object[] {}).send())
+                .getListReturn(Course.class);
+        ListIterator<Course> iter = list.listIterator();
+        while(iter.hasNext()){
+            Course course = iter.next();
+            String[] courseInfo = {course.getSemester(),course.getID(),course.getClassName(),course.getMajor(),course.getTeacher(),course.getTime()
+                    ,course.getClassroom(),course.getCapacity(),course.getSelectedNumber(),course.getCredit()};
+            model.addRow(courseInfo);
+        }
 
     }
     private void close(){

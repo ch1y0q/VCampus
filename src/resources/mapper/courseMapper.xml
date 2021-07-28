@@ -75,4 +75,16 @@
             resultType="Course">
         SELECT *FROM courses WHERE teacher LIKE '%${teacher}%'
     </select>
+    <update id="setCourse" parameterType="Course">
+        UPDATE courses SET
+            semester=#{semester},
+            courseName=#{courseName},
+            major=#{major},
+            teacher=#{teacher},
+            time=#{time},
+            classroom=#{classroom},
+            capacity=#{capacity},
+            selectedNumber=#{selectedNumber},
+            credit=#{credit} WHERE id=#{id}
+    </update>
 </mapper>

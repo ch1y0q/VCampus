@@ -1,7 +1,7 @@
 package com.vcampus.client.main.student;
 
 import com.vcampus.client.main.AppLife;
-import com.vcampus.client.main.AppStuCourse;
+import com.vcampus.client.main.courseManage.AppStuCourse;
 import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.shop.AppShop;
@@ -87,7 +87,7 @@ public class StuCategory extends JTree{
                     }
                     else if(node==nodCourses||node==nodTimetable||node==nodGrades||node==nodChooseCourses
                             ||node==nodChosenCourses){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppStuCourse") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.courseManage.AppStuCourse") {
                             AppStuCourse app = new AppStuCourse();
                             app.open();
                             setVisible(false);

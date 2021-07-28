@@ -1,4 +1,4 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.courseManage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
+import com.vcampus.client.main.App;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.dao.ICourseMapper;
 import com.vcampus.net.Request;
