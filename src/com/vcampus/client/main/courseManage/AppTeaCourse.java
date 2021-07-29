@@ -228,9 +228,8 @@ public class AppTeaCourse extends JFrame {
                     chooseSemester_tab1.setBounds(currentWidth / 50 + 60, currentHeight / 40, 120, 30);
                     courseInformationLabel.setBounds(currentWidth / 50, currentHeight / 20 + 30, 65, 30);
                     enterScoreLabel.setBounds(currentWidth / 50, 60 + currentHeight * 7 / 40, 90, 30);
-                    
+                    saveButton.setBounds(currentWidth*31/50-60,60 + currentHeight * 7 / 40,60,30);
                 }
-
                 //jp2
                 {
                     jp2.setSize(currentWidth, currentHeight);

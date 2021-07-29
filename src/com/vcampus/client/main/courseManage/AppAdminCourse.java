@@ -3,6 +3,7 @@ package com.vcampus.client.main.courseManage;
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.manager.ManCategory;
 import com.vcampus.entity.Course;
+import com.vcampus.entity.Teacher;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 
@@ -13,6 +14,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Random;
 
 public class AppAdminCourse {
     private JFrame jf = new JFrame("课程管理");
@@ -37,11 +39,10 @@ public class AppAdminCourse {
         jp.setBackground(Color.white);
 
 
-        //侧边栏
-        JTree jt=new ManCategory().getJTree();
-        jf.add(jt);
-        jt.setBackground(Color.white);
-        jt.setBounds(0,height/50,width*2/11,height);
+//        //侧边栏
+//        JTree jt= new StuCategory().getJTree();
+//        add(jt);
+//        jt.setBounds(0,height/50,width*2/11,height);
 
 
         //管理员课程管理
@@ -67,6 +68,9 @@ public class AppAdminCourse {
         JButton searchButton = new JButton("查询");
         jp.add(searchButton);
         searchButton.setBounds(width*11/50+350,height/40,60,30);
+        JButton addCourseButton = new JButton("添加");
+        jp.add(addCourseButton);
+        addCourseButton.setBounds(width*29/50-220,height/40+50,60,30);
         JButton startEditButton = new JButton("启动编辑");
         jp.add(startEditButton);
         startEditButton.setBounds(width*3/5-160,height/40+50,100,30);
@@ -77,7 +81,7 @@ public class AppAdminCourse {
         jp.add(sp);
         sp.setBounds(width/50,height/20+80,width*3/5,height*3/5);
         String[] columnName = {"学期","课程编号","课程名称","所属专业","教师","上课时间"
-                ,"上课地点","课容量","已选学生容量","学分"};
+                ,"上课地点","课容量","已选学生容量","学分","操作"};
         String[][] emptyTable = {};
         String[] emptyData = {};
         model = new DefaultTableModel(emptyTable,columnName);
@@ -85,7 +89,7 @@ public class AppAdminCourse {
             public boolean isCellEditable(int row, int column) {
                 this.setRowSelectionAllowed(false);
                 this.setColumnSelectionAllowed(false);
-                if(column==1){
+                if(column==1&&column==10){
                     return false;
                 }else{
                     return true;
@@ -101,8 +105,7 @@ public class AppAdminCourse {
             public void componentResized(ComponentEvent e) {
                 int currentWidth = jf.getWidth();
                 int currentHeight = jf.getHeight();
-                jt.setBounds(0,currentHeight/50,currentWidth*2/11,currentHeight);
-                jp.setBounds(currentWidth*2/11,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
+                jp.setBounds(currentWidth/50,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
                 CourseInformationManagerLabel.setBounds(currentWidth/50,currentHeight/40,90,30);
                 anLabel.setBounds(currentWidth*6/50+90,currentHeight/40,20,30);
                 chooseClass.setBounds(currentWidth*6/50+110,currentHeight/40,80,30);
@@ -111,6 +114,7 @@ public class AppAdminCourse {
                 searchButton.setBounds(currentWidth*11/50+350,currentHeight/40,60,30);
                 startEditButton.setBounds(currentWidth*3/5-160,currentHeight/40+50,100,30);
                 saveButton.setBounds(currentWidth*31/50-60,currentHeight/40+50,60,30);
+                addCourseButton.setBounds(currentWidth*29/50-220,currentHeight/40+50,60,30);
                 sp.setBounds(currentWidth/50,currentHeight/20+80,currentWidth*3/5,currentHeight*3/5);
 
             }
@@ -120,9 +124,78 @@ public class AppAdminCourse {
         startEditButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    courseInformationTable.setEnabled(true);
+                for(int i=0;i< model.getRowCount();i++){
+                    model.setValueAt("<html><font color='red'>删除</font></html>",i,10);
+                }
+                courseInformationTable.setEnabled(true);
                 }
             }
+        );
+
+
+        courseInformationTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int column = courseInformationTable.getSelectedColumn();
+                int row = courseInformationTable.getSelectedRow();
+                if(column == 10){
+                    String courseId = (String)model.getValueAt(row,1);
+                    ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                            null,"com.vcampus.server.teaching.CourseSelection.deleteCourse",
+                            new Object[] {courseId}).send());
+                    model.removeRow(row);
+                }
+            }
+        });
+
+
+        addCourseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(addCourseButton.getText().equals("添加")){
+                    addCourseButton.setText("确认");
+                    courseInformationTable.setEnabled(true);
+                    model.addRow(emptyData);
+                    Random r = new Random();
+                    int id = r.nextInt(45000)+5000;
+                    id = id*2;
+                    String courseId = Integer.toString(id);
+                    model.setValueAt("请输入教师编号", model.getRowCount()-1,4);
+                    model.setValueAt(courseId, model.getRowCount()-1,1);
+                }else if(addCourseButton.getText().equals("确认")){
+                    addCourseButton.setText("添加");
+                    courseInformationTable.setEnabled(true);
+                    int i = model.getRowCount()-1;
+                    Course course = new Course();
+                    course.setSemester((String)model.getValueAt(i,0));
+                    course.setId((String)model.getValueAt(i,1));
+                    course.setClassName((String)model.getValueAt(i,2));
+                    course.setMajor((String)model.getValueAt(i,3));
+                    String teacherNumber = (String)model.getValueAt(i,4);
+                    if(teacherNumber.equals("请输入教师编号")){
+                        course.setTeacher("");
+                        course.setTeacherCard("");
+                    }else{
+                        course.setTeacherCard(teacherNumber);
+                        Teacher teacher = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                                null,"com.vcampus.server.TeacherManage.getTeacherDetailByCardNumber",
+                                new Object[] {teacherNumber}).send()).getReturn(Teacher.class);
+                        course.setTeacher(teacher.getName());
+                        model.setValueAt(teacher.getName(),i,4);
+                    }
+                    course.setTime((String)model.getValueAt(i,5));
+                    course.setClassroom((String)model.getValueAt(i,6));
+                    course.setCapacity((String)model.getValueAt(i,7));
+                    course.setSelectedNumber("0");
+                    model.setValueAt("0",i,8);
+                    course.setCredit((String)model.getValueAt(i,9));
+                    ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                            null,"com.vcampus.server.teaching.CourseSelection.addCourse",
+                            new Object[] {course}).send());
+                }
+
+            }
+        }
         );
 
         //保存编辑
@@ -131,6 +204,7 @@ public class AppAdminCourse {
             public void actionPerformed(ActionEvent e) {
                 courseInformationTable.setEnabled(false);
                 for(int i=0;i<courseInformationTable.getRowCount();i++){
+                    model.setValueAt("",i,10);
                     String courseId = (String)model.getValueAt(i,1);
                     Course course = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
                             null,"com.vcampus.server.teaching.CourseSelection.getOneCourse",
@@ -260,5 +334,8 @@ public class AppAdminCourse {
     }
     private void close(){
         jf.setVisible(false);
+    }
+    public void open(){
+        jf.setVisible(true);
     }
 }

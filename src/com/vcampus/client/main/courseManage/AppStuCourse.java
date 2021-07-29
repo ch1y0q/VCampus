@@ -210,7 +210,7 @@ public class AppStuCourse extends JFrame {
             public void componentResized(ComponentEvent e) {
                 int currentWidth = getWidth();
                 int currentHeight = getHeight();
-                tp.setBounds(currentWidth*2/11,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
+                tp.setBounds(currentWidth/50,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
                 // jt.setBounds(0,currentHeight/50,currentWidth*2/11,currentHeight);
                 //jp0
                 {
@@ -552,8 +552,5 @@ public class AppStuCourse extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args){
-
-    }
 }
 
