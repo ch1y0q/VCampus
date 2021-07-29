@@ -13,32 +13,32 @@ import java.awt.event.MouseEvent;
  * @author Dong Ruojing
  * @date 2021/7/18
  */
-public class AppAdminInfo  extends JFrame {
-    private JPanel contentPane;
+public class AdminInfoPanel extends JPanel {
+    //private JPanel contentPane;
 
-    public AppAdminInfo() {
-        setResizable(true);//允许窗口大小更改，建议不更改
-        setTitle("个人信息管理");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public AdminInfoPanel() {
+        //setResizable(true);//允许窗口大小更改，建议不更改
+        //setTitle("个人信息管理");
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //setBounds(400, 200, 800, 550);
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize(d.width, d.height);
-        contentPane = new JPanel();
-        contentPane.setBackground(new Color(240, 255, 240));
-        contentPane.setLocation(-871, -176);
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+        //Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+       // setSize(d.width, d.height);
 
-        JTree jt=new ManCategory().getJTree();
-        jt.setBounds(0,60,200,400);
-        contentPane.add(jt);
+        setBackground(new Color(240, 255, 240));
+       // setLocation(-871, -176);
+        //setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        setLayout(null);
+
+//        JTree jt=new ManCategory().getJTree();
+//        jt.setBounds(0,60,200,400);
+//        contentPane.add(jt);
 
         JButton returnButton = new JButton("← 返回");
         returnButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
         returnButton.setBounds(220,5,80,30);
         returnButton.setForeground(new Color(33, 117, 206,100));
-        contentPane.add(returnButton);
+        add(returnButton);
         returnButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -55,19 +55,19 @@ public class AppAdminInfo  extends JFrame {
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
         LogoutButton.setBounds(1450,5,50,30);
         LogoutButton.setForeground(new Color(33, 117, 206,100));
-        contentPane.add(LogoutButton);
+        add(LogoutButton);
 
         JButton EditButton = new JButton("启动编辑");
         EditButton.setFont(new Font("微软雅黑", Font.BOLD, 17));
         EditButton.setBounds(1150,670,90,40);
         EditButton.setForeground(new Color(58, 51, 168,100));
-        contentPane.add(EditButton);
+        add(EditButton);
 
         JButton btnLoadPortrait = new JButton("上传头像");
         btnLoadPortrait.setFont(new Font("微软雅黑", Font.BOLD, 14));
         btnLoadPortrait.setBounds(690,375,80,30);
         btnLoadPortrait.setForeground(new Color(58, 51, 168,100));
-        contentPane.add(btnLoadPortrait);
+        add(btnLoadPortrait);
 
 //        btnLoadPortrait.addActionListener(new ActionListener() {
 //
@@ -123,30 +123,30 @@ public class AppAdminInfo  extends JFrame {
         SaveButton.setFont(new Font("微软雅黑", Font.BOLD, 17));
         SaveButton.setBounds(1270,670,60,40);
         SaveButton.setForeground(new Color(58, 51, 168,100));
-        contentPane.add(SaveButton);
+        add(SaveButton);
 
         //输入框
         JTextField txt_1=new JTextField();
         txt_1.setBounds(1130,100,170,40);
-        contentPane.add(txt_1);
+        add(txt_1);
         JTextField txt_2=new JTextField();
         txt_2.setBounds(1130,160,170,40);
-        contentPane.add(txt_2);
+        add(txt_2);
         JTextField txt_3=new JTextField();
         txt_3.setBounds(1130,220,170,40);
-        contentPane.add(txt_3);
+        add(txt_3);
         JTextField txt_4=new JTextField();
         txt_4.setBounds(1130,280,170,40);
-        contentPane.add(txt_4);
+        add(txt_4);
         JTextField txt_5=new JTextField();
         txt_5.setBounds(1130,340,170,40);
-        contentPane.add(txt_5);
+        add(txt_5);
         JTextField txt_6=new JTextField();
         txt_6.setBounds(1130,400,170,40);
-        contentPane.add(txt_6);
+        add(txt_6);
         JTextField txt_7=new JTextField();
         txt_7.setBounds(1130,460,170,40);
-        contentPane.add(txt_7);
+        add(txt_7);
 
         JLabel label = new JLabel("姓名：");
         label.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -154,7 +154,7 @@ public class AppAdminInfo  extends JFrame {
         label.setForeground(new Color(19, 188, 210));
         label.setBackground(new Color(255,255,255,80));
         label.setBounds(945, 100, 100, 40);
-        contentPane.add(label);
+        add(label);
 
         JLabel label_1 = new JLabel("一卡通号：");
         label_1.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -162,7 +162,7 @@ public class AppAdminInfo  extends JFrame {
         label_1.setForeground(new Color(19, 188, 210));
         label_1.setBackground(new Color(255,255,255,80));
         label_1.setBounds(945, 160, 100, 40);
-        contentPane.add(label_1);
+        add(label_1);
 
         JLabel label_2 = new JLabel("性别：");
         label_2.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -170,7 +170,7 @@ public class AppAdminInfo  extends JFrame {
         label_2.setForeground(new Color(19, 188, 210));
         label_2.setBackground(new Color(255,255,255,80));
         label_2.setBounds(945, 220, 100, 40);
-        contentPane.add(label_2);
+        add(label_2);
 
         JLabel label_3 = new JLabel("电子邮箱：");
         label_3.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -178,7 +178,7 @@ public class AppAdminInfo  extends JFrame {
         label_3.setForeground(new Color(19, 188, 210));
         label_3.setBackground(new Color(255,255,255,80));
         label_3.setBounds(945, 280, 100, 40);
-        contentPane.add(label_3);
+        add(label_3);
 
         JLabel label_4 = new JLabel("电话：");
         label_4.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -186,7 +186,7 @@ public class AppAdminInfo  extends JFrame {
         label_4.setForeground(new Color(19, 188, 210));
         label_4.setBackground(new Color(255,255,255,80));
         label_4.setBounds(945, 340, 100, 40);
-        contentPane.add(label_4);
+        add(label_4);
 
         JLabel label_5 = new JLabel("身份证号：");
         label_5.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -194,7 +194,7 @@ public class AppAdminInfo  extends JFrame {
         label_5.setForeground(new Color(19, 188, 210));
         label_5.setBackground(new Color(255,255,255,80));
         label_5.setBounds(945, 400, 100, 40);
-        contentPane.add(label_5);
+        add(label_5);
 
         JLabel label_6 = new JLabel("地址：");
         label_6.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -202,34 +202,34 @@ public class AppAdminInfo  extends JFrame {
         label_6.setForeground(new Color(19, 188, 210));
         label_6.setBackground(new Color(255,255,255,80));
         label_6.setBounds(945, 460, 100, 40);
-        contentPane.add(label_6);
+        add(label_6);
 
         JLabel HeadPortrait= new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/adminInfo1.jpg")));
         HeadPortrait.setOpaque(true);
         HeadPortrait.setBorder(BorderFactory.createMatteBorder(8,8,8,8,
                 new Color(255, 255, 255, 255)));
         HeadPortrait.setBounds(500, 90, 280, 280);
-        contentPane.add(HeadPortrait);
+        add(HeadPortrait);
 
         JLabel TransLabel = new JLabel("");//半透明效果
         TransLabel.setHorizontalAlignment(SwingConstants.CENTER);
         TransLabel.setOpaque(true);
         TransLabel.setBackground(new Color(255,255,255,100));
         TransLabel.setBounds(220, 50, 602, 700);
-        contentPane.add(TransLabel);//先添加的label在最上层
+        add(TransLabel);//先添加的label在最上层
 
         JLabel TransLabel2 = new JLabel("");//半透明效果
         TransLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         TransLabel2.setOpaque(true);
         TransLabel2.setBackground(new Color(255,255,255,70));
         TransLabel2.setBounds(1100, 98, 230, 405);
-        contentPane.add(TransLabel2);//先添加的label在最上层
+        add(TransLabel2);//先添加的label在最上层
 
         JLabel bg = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/adminInfo1.jpg")));
         bg.setOpaque(true);
         //bg.setForeground(new Color(255, 255, 255,100));
         bg.setBounds(220, 50, 600, 700);
-        contentPane.add(bg);//背景
+        add(bg);//背景
 
         JLabel underLabel= new JLabel();
         underLabel.setOpaque(true);
@@ -237,7 +237,7 @@ public class AppAdminInfo  extends JFrame {
         //underLabel.setBackground(new Color(227, 145, 145,50));//这个颜色也很好看
         underLabel.setBackground(new Color(34, 189, 176,50));
         underLabel.setBounds(880, 50, 500, 700);
-        contentPane.add(underLabel);//总在最底层，代码段写在最后
+        add(underLabel);//总在最底层，代码段写在最后
 
 
     }

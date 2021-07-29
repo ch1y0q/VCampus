@@ -1,5 +1,6 @@
 package com.vcampus.client.main.manager;
 
+import com.kitfox.svg.A;
 import com.vcampus.client.main.courseManage.AppAdminCourse;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.dailyReport.AppDailyReportManage;
@@ -49,9 +50,9 @@ public class ManCategory extends JTree {
                 if (!jt.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) jt.getLastSelectedPathComponent();
                     if(node==nodInfor){
-                        if(this.getClass().getName()!="com.vcampus.client.administrator.AppAdminInfo")
+                        if(this.getClass().getName()!="com.vcampus.client.main.manager.AppAdminInfoFrame")
                         {
-                            AppAdminInfo app=new AppAdminInfo();
+                            AppAdminInfoFrame app=new AppAdminInfoFrame();
                             app.setVisible(true);
                             setVisible(false);
                         }

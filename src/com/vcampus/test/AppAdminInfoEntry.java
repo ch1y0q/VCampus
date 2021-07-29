@@ -1,7 +1,8 @@
 package com.vcampus.test;
 
 import com.alee.laf.WebLookAndFeel;
-import com.vcampus.client.main.manager.AppAdminInfo;
+import com.vcampus.client.main.manager.AdminInfoPanel;
+import com.vcampus.client.main.manager.AppAdminInfoFrame;
 
 /**
  * @author Dong Ruojing
@@ -12,7 +13,7 @@ public class AppAdminInfoEntry {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 WebLookAndFeel.install ();
-                AppAdminInfo app = new AppAdminInfo();
+                AppAdminInfoFrame app = new AppAdminInfoFrame();
                 app.setVisible(true);
             }
         });
