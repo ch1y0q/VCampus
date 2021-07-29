@@ -2,6 +2,7 @@ package com.vcampus.client.main.student;
 
 import com.alee.laf.WebLookAndFeel;
 import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.chat.AppChatDiag;
 import com.vcampus.client.main.courseManage.AppStuCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
@@ -130,6 +131,11 @@ public class StuCategory extends JTree{
                             app.setVisible(true);
                             setVisible(false);
                         }
+                    }
+                    else if(node==nodDailyReport){
+                            AppChatDiag app=new AppChatDiag();
+                            app.setVisible(true);
+                            setVisible(false);
                     }
                 }
             }
