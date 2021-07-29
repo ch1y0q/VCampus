@@ -25,7 +25,7 @@ public class CourseSelection {
             ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
             String temp = courseMapper.getStudentOfOneCourse(newClassId);
-            if(temp.equals("null")){
+            if(temp=="null"){
                 temp="";
             }
             temp += student.getCardNumber();
@@ -36,7 +36,7 @@ public class CourseSelection {
             one = courseMapper.updateScoreOfOneCourse(map);
             String cardNumber = student.getCardNumber();
             temp = courseMapper.getCourseSelection(student);
-            if(temp.equals("null")){
+            if(temp=="null"){
                 temp="";
             }
             temp+=newClassId;
@@ -295,6 +295,35 @@ public class CourseSelection {
             sqlSession.commit();
             sqlSession.close();
 
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public static void addCourse(Course course){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            courseMapper.insertNewCourse(course);
+            String teacherCard = course.getTeacherCard();
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteCourse(String id){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            courseMapper.deleteCourse(id);
+            sqlSession.commit();
+            sqlSession.close();
         } catch (Exception e) {
             sqlSession.rollback();
             e.printStackTrace();

@@ -16,11 +16,11 @@ public class Book implements java.io.Serializable{
     private String _publishingHouse;    //出版社
     private String _tabs;    //分类
     private String _place;              //摆放位置
-    private int chargable=1;
-    private String borrower;
-    private String borrowtime;
-    private String pictureURL;
-    private String srTime;
+    private int chargable=1;            //是否可借
+    private String borrower;//借阅者
+    private String borrowtime;//借阅时间
+    private String pictureURL;//图片地址
+    private String srTime;//应还时间
 
     public Book() {
         setISBN(null);
@@ -32,11 +32,11 @@ public class Book implements java.io.Serializable{
         setPublishingHouse(null);           //设置出版社
         setTabs(null);      //设置分类
         setPlace(null);                        //设置摆放位置
-        setChargable(1);
-        setBorrower(null);
-        setBorrowtime(null);
-        setPictureURL(null);
-        setsrTime(null);
+        setChargable(1);//设置可借
+        setBorrower(null);//设置借阅者
+        setBorrowtime(null);//设置借阅时间
+        setPictureURL(null);//设置图片地址
+        setsrTime(null);//设置应还时间
     }
 
     public Book(String ISBN, String _name, String _introduction, int _number, String _author, String _authorCountry, String _publishingHouse, String _tabs, String _place, int chargable, String borrower, String borrowtime, String pictureURL, String srTime)

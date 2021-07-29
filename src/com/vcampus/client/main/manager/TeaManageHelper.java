@@ -5,7 +5,10 @@ import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 
 import java.util.HashMap;
-
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-19
+ */
 public class TeaManageHelper {
     public static Boolean resetTeacherNumberByCard(HashMap map) {
         return ResponseUtils
