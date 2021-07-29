@@ -45,8 +45,6 @@ public class TeaManage extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==back)
                 {
-                    AppAdmin app=new AppAdmin();
-                    app.setVisible(true);
                     setVisible(false);
                 }
             }
@@ -176,6 +174,9 @@ public class TeaManage extends JFrame {
             }
         };
         table.setRowHeight(20);
+        /**
+         * 教师信息搜索
+         */
         Teaserch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -217,6 +218,9 @@ public class TeaManage extends JFrame {
                 }
             }
         });
+        /**
+         * 教师信息展示
+         */
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

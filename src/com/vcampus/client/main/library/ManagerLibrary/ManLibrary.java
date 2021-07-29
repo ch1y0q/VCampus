@@ -50,9 +50,7 @@ public class ManLibrary extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==back)
                 {
-                    AppAdmin app=new AppAdmin();
                     setVisible(false);
-                    app.setVisible(true);
                 }
             }
         });
@@ -92,11 +90,11 @@ public class ManLibrary extends JFrame {
         JTextField txtfield = new JTextField();    //创建文本框
         txtfield.setText("输入书名");
         txtfield.setBounds(320, 50, 300, 30);
-        JButton search = new JButton("查询");
-        search.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        search.setBounds(620, 50, 60, 30);
+        JButton nodSearch = new JButton("查询");
+        nodSearch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        nodSearch.setBounds(620, 50, 60, 30);
         contentPane.add(txtfield);
-        contentPane.add(search);
+        contentPane.add(nodSearch);
 
         JLabel recall=new JLabel("按分类检索");
         recall.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -135,10 +133,14 @@ public class ManLibrary extends JFrame {
         String[] header2 = {"一卡通号","书名","借书时间", "应还时间"};
         model2 = new DefaultTableModel(null, header2);
         table2.setModel(model2);
-        search.addActionListener(new ActionListener() {
+        /**
+         * 图书信息查询
+         * 通过书名返回listofBook
+         */
+        nodSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==search)
+                if(e.getSource()==nodSearch)
                 {
                     String str=jc.getSelectedItem().toString();
                     list = ResponseUtils
@@ -196,6 +198,9 @@ public class ManLibrary extends JFrame {
                 }
             }
         });
+        /**
+         * 图书详细信息显示
+         */
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

@@ -61,14 +61,12 @@ public class AppTeaCourse extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    AppTeacher app=new AppTeacher();
-                    app.setVisible(true);
                     setVisible(false);
                 }
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack.setBounds(width-60, height, 60, 30);
+        btnBack.setBounds(width-60, 0, 60, 30);
         container.add(btnBack);
 
 
@@ -127,7 +125,7 @@ public class AppTeaCourse extends JFrame {
         sp1_0.setBackground(Color.white);
         jp1.add(sp1_0);
         String[] columnName1_0 = {"课程编号", "课程名称", "学分", "上课时间", "上课地点", "所属专业",
-                "状态", "课容量", "已选学生数量"};
+                 "课容量", "已选学生数量"};
         model1_0 = new DefaultTableModel(emptyTable, columnName1_0);
         JTable courseInformationTable = new JTable(model1_0) {
             public boolean isCellEditable(int row, int column) {
@@ -225,7 +223,7 @@ public class AppTeaCourse extends JFrame {
                 int currentHeight = getHeight();
                 //jt.setBounds(0,currentHeight/50,currentWidth*2/11,currentHeight);
                 tp.setBounds(currentWidth /50, currentHeight / 50, currentWidth * 4 / 5, currentHeight * 4 / 5);
-                btnBack.setBounds(currentWidth-60, currentHeight, 60, 30);
+                btnBack.setBounds(currentWidth-60, 0, 60, 30);
                 //jp0
                 {
                     jp0.setSize(currentWidth, currentHeight);
@@ -425,8 +423,8 @@ public class AppTeaCourse extends JFrame {
                 .getListReturn(Course.class);
         for (Course course : list) {
             if (semester.equals("全部") || course.getSemester().equals(semester)) {
-                String[] courseInfo = {course.getId(), course.getSemester(), course.getClassName(), course.getCredit(), course.getTime()
-                        , course.getClassroom(), course.getMajor(), course.getCapacity(), course.getSelectedNumber()};
+                String[] courseInfo = {course.getId(), course.getClassName(), course.getCredit(), course.getTime(), course.getClassroom()
+                        , course.getMajor(), course.getCapacity(), course.getSelectedNumber()};
                 model1_0.addRow(courseInfo);
             }
         }

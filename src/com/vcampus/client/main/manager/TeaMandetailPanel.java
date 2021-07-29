@@ -18,7 +18,6 @@ import java.util.HashMap;
  * @date 2021-07-14
  */
 public class TeaMandetailPanel extends JPanel {
-    String[] strText=new String[11];
     public JTextField txtname;
     public JTextField txtcard;
     public JTextField txtSex;
@@ -131,16 +130,19 @@ public class TeaMandetailPanel extends JPanel {
         txtphone.setBounds(560, 70, 150, 30);
         txtphone.setEditable(false);
         add(txtphone);
-        JButton TeaSureAdd = new JButton("确认添加老师");
-        TeaSureAdd.setEnabled(false);
+        JButton nodTeaSureAdd = new JButton("确认添加老师");
+        nodTeaSureAdd.setEnabled(false);
         JButton save = new JButton("保存");
-        JButton edit = new JButton("编辑添加教师信息");
-        edit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        edit.setBounds(800, 10, 200, 30);
-        edit.addActionListener(new ActionListener() {
+        JButton nodTeaedit = new JButton("编辑添加教师信息");
+        nodTeaedit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        nodTeaedit.setBounds(800, 10, 200, 30);
+        /**
+         * 教师信息编辑启动
+         */
+        nodTeaedit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            if(e.getSource()==edit)
+            if(e.getSource()==nodTeaedit)
             {
                 txtname.setEditable(true);
                 txtcard.setEditable(true);
@@ -151,12 +153,12 @@ public class TeaMandetailPanel extends JPanel {
                 txtTeaNum.setEditable(true);
                 txtEntry.setEditable(true);
                 txtphone.setEditable(true);
-                TeaSureAdd.setEnabled(true);
+                nodTeaSureAdd.setEnabled(true);
                 save.setEnabled(false);
             }
             }
         });
-        add(edit);
+        add(nodTeaedit);
 
         save.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         save.setBounds(800, 50, 200, 30);
@@ -168,24 +170,30 @@ public class TeaMandetailPanel extends JPanel {
         });
         add(save);
 
-        JButton Teadelete = new JButton("删除该条教师信息");
-        Teadelete.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teadelete.setBounds(800, 90, 200, 30);
-        Teadelete.addActionListener(new ActionListener() {
+        JButton nodTeadelete = new JButton("删除该条教师信息");
+        nodTeadelete.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        nodTeadelete.setBounds(800, 90, 200, 30);
+        /**
+         * 教师信息删除
+         */
+        nodTeadelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 deleteTea(txtcard.getText());
             }
         });
-        add(Teadelete);
+        add(nodTeadelete);
 
 
-        TeaSureAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        TeaSureAdd.setBounds(800, 130, 200, 30);
-        TeaSureAdd.addActionListener(new ActionListener() {
+        nodTeaSureAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        nodTeaSureAdd.setBounds(800, 130, 200, 30);
+        /**
+         * 教师信息添加
+         */
+        nodTeaSureAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==TeaSureAdd)
+                if(e.getSource()==nodTeaSureAdd)
                 {
                     Teacher teacher=new Teacher();
                     teacher.setName(txtname.getText());
@@ -198,15 +206,18 @@ public class TeaMandetailPanel extends JPanel {
                     teacher.setHomepage(txtEntry.getText());
                     teacher.setPhoneNumber(txtphone.getText());
                     AddTea(teacher);
-                    TeaSureAdd.setEnabled(false);
+                    nodTeaSureAdd.setEnabled(false);
                     save.setEnabled(true);
                     closeedit();
                 }
             }
         });
-        add(TeaSureAdd);
+        add(nodTeaSureAdd);
 
     }
+    /**
+     * 教师信息设空
+     */
     public void initnow(){
         txtname.setText("");
         txtcard.setText("");
@@ -218,6 +229,9 @@ public class TeaMandetailPanel extends JPanel {
         txtemail.setText("");
         txtphone.setText("");
     }
+    /**
+     * 教师信息初始化
+     */
     public void init(String cardNumber)
     {
         Teacher teacher=new Teacher();
@@ -236,6 +250,9 @@ public class TeaMandetailPanel extends JPanel {
         txtemail.setText(teacher.getEmail());
         txtphone.setText(teacher.getPhoneNumber());
     }
+    /**
+     * 教师信息删除
+     */
     public void deleteTea(String cardNumber)
     {
         Response resp = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
@@ -246,6 +263,9 @@ public class TeaMandetailPanel extends JPanel {
             System.out.println("error");
         }
     }
+    /**
+     * 教师信息添加
+     */
     public void AddTea(Teacher teacher)
     {
         Response resp = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
@@ -256,6 +276,9 @@ public class TeaMandetailPanel extends JPanel {
             System.out.println("error");
         }
     }
+    /**
+     * 教师信息关闭编辑
+     */
     public void closeedit()
     {
         txtname.setEditable(false);
@@ -268,6 +291,9 @@ public class TeaMandetailPanel extends JPanel {
         txtemail.setEditable(false);
         txtphone.setEditable(false);
     }
+    /**
+     * 教师信息保存
+     */
     public void saveChange(){
         closeedit();
         String cardNumber=txtcard.getText();
@@ -290,7 +316,9 @@ public class TeaMandetailPanel extends JPanel {
         mapResetPlace.put("teacherRank",teacherRank);
         TeaManageHelper.resetTeacherRankByCard(mapResetPlace);
     }
-
+    /**
+     * 教师信息改变编辑
+     */
     public void changeedit(){
         closeedit();
         txtacademy.setEditable(true);

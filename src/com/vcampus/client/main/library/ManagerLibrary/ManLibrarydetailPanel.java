@@ -30,7 +30,6 @@ public class ManLibrarydetailPanel extends JPanel {
     public ManLibrarydetailPanel(){
         setLayout(null);
 
-
         JButton btnSure = new JButton("确认");
         btnSure.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         btnSure.setBounds(480, 0, 150, 30);
@@ -198,6 +197,11 @@ public class ManLibrarydetailPanel extends JPanel {
         txtIntro.setEditable(false);
         add(txtIntro);
     }
+
+    /**
+     * 图书信息查询
+     * 通过ISBN号返回Book
+     */
     public void init(String ISBN)
     {
         Book book=new Book();
@@ -216,6 +220,9 @@ public class ManLibrarydetailPanel extends JPanel {
         txtPlace.setText(book.getPlace());
         txtIntro.setText(book.getIntroduction());
     }
+    /**
+     * 设置文本框为可编辑
+     */
     public void startedit(){
         txtISBN.setEditable(true);
         txtBook.setEditable(true);
@@ -227,6 +234,9 @@ public class ManLibrarydetailPanel extends JPanel {
         txtPlace.setEditable(true);
         txtIntro.setEditable(true);
     }
+    /**
+     * 保存改变
+     */
     public void savechange(){
         String ISBN=txtISBN.getText();
         String txtTabs=txtClassify.getText();
@@ -247,6 +257,9 @@ public class ManLibrarydetailPanel extends JPanel {
         mapResetPlace.put("_place",txtPla);
         ManlibdetailHelper.resetPlaceByISBN(mapResetPlace);
     }
+    /**
+     * 图书添加功能实现
+     */
     public void addbook(){
         String txt1=txtISBN.getText();
         String txt2=txtBook.getText();
@@ -267,6 +280,9 @@ public class ManLibrarydetailPanel extends JPanel {
             System.out.println("新增失败！");
         }
     }
+    /**
+     * 图书信息初始化
+     */
     public void initnow()
     {
         txtISBN.setText("");
@@ -279,6 +295,9 @@ public class ManLibrarydetailPanel extends JPanel {
         txtPlace.setText("");
         txtIntro.setText("");
     }
+    /**
+     *关闭编辑功能
+     */
     public void closeedit()
     {
         txtISBN.setEditable(false);

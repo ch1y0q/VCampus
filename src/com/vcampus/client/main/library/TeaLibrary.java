@@ -52,8 +52,6 @@ public class TeaLibrary extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    AppTeacher app=new AppTeacher();
-                    app.setVisible(true);
                     setVisible(false);
                 }
             }
@@ -80,6 +78,10 @@ public class TeaLibrary extends JFrame {
             }
         };
         table.setRowHeight(20);
+        /**
+         * 图书借阅查询
+         * 通过一卡通号返回listofBook
+         */
         btnSerchborrowed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,7 +116,9 @@ public class TeaLibrary extends JFrame {
                 }
             }
         });
-
+        /**
+         * 图书续借
+         */
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

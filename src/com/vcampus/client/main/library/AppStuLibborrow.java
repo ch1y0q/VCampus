@@ -40,6 +40,10 @@ public class AppStuLibborrow extends JPanel {
             return false;
             }
         };
+        /**
+         * 图书模糊信息查询
+         * 通过书名返回listofBook
+         */
         btnQuery.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,6 +79,10 @@ public class AppStuLibborrow extends JPanel {
                 }
             }
         });
+        /**
+         * 图书借阅
+         * 通过一卡通号实现借阅
+         */
         table2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

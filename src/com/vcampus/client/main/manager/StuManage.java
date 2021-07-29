@@ -47,9 +47,7 @@ public class StuManage extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==back)
                 {
-                    AppAdmin app=new AppAdmin();
                     setVisible(false);
-                    app.setVisible(true);
                 }
             }
         });
@@ -172,6 +170,10 @@ public class StuManage extends JFrame{
             }
         };
         table.setRowHeight(20);
+        /**
+         * 学生信息查询
+         * 模糊查询返回listofStudent
+         */
         Stuserch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

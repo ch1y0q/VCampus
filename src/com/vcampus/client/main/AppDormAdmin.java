@@ -73,9 +73,7 @@ public class AppDormAdmin extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    AppAdmin app=new AppAdmin();
                     setVisible(false);
-                    app.setVisible(true);
                 }
             }
         });
