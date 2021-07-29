@@ -22,16 +22,11 @@ import com.alee.api.annotations.NotNull;
 import com.alee.api.data.BoxOrientation;
 import com.alee.api.data.CompassDirection;
 import com.alee.api.jdk.SerializableSupplier;
-import com.alee.api.resource.ClassResource;
 import com.alee.api.version.Version;
-import com.alee.demo.DemoApplication;
 import com.alee.demo.api.example.Example;
 import com.alee.demo.api.example.ExampleData;
 import com.alee.demo.content.ExamplesManager;
-import com.alee.demo.frames.examples.ExamplesTreeNode;
-import com.alee.demo.skin.*;
 import com.alee.demo.skin.decoration.FeatureStateBackground;
-import com.alee.demo.ui.tools.*;
 import com.alee.extended.behavior.ComponentResizeBehavior;
 import com.alee.extended.canvas.WebCanvas;
 import com.alee.extended.dock.SidebarButtonVisibility;
@@ -40,8 +35,6 @@ import com.alee.extended.dock.WebDockablePane;
 import com.alee.extended.label.TextWrap;
 import com.alee.extended.label.WebStyledLabel;
 import com.alee.extended.layout.AlignLayout;
-import com.alee.extended.link.UrlLinkAction;
-import com.alee.extended.link.WebLink;
 import com.alee.extended.memorybar.WebMemoryBar;
 import com.alee.extended.overlay.AlignedOverlay;
 import com.alee.extended.overlay.FillOverlay;
@@ -53,9 +46,6 @@ import com.alee.extended.tab.DocumentAdapter;
 import com.alee.extended.tab.DocumentData;
 import com.alee.extended.tab.PaneData;
 import com.alee.extended.tab.WebDocumentPane;
-import com.alee.extended.tree.ExTreeDataProvider;
-import com.alee.extended.tree.WebExTree;
-import com.alee.extended.tree.WebTreeFilterField;
 import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.desktoppane.WebDesktopPane;
 import com.alee.laf.panel.WebPanel;
@@ -65,9 +55,7 @@ import com.alee.laf.scroll.WebScrollPane;
 import com.alee.laf.separator.WebSeparator;
 import com.alee.laf.tabbedpane.WebTabbedPane;
 import com.alee.laf.toolbar.WebToolBar;
-import com.alee.laf.tree.TreeNodeEventRunnable;
 import com.alee.laf.tree.TreeSelectionStyle;
-import com.alee.laf.tree.TreeState;
 import com.alee.laf.tree.WebTree;
 import com.alee.laf.window.WebFrame;
 import com.alee.managers.hotkey.Hotkey;
@@ -76,24 +64,23 @@ import com.alee.managers.language.LanguageLocaleUpdater;
 import com.alee.managers.language.LanguageManager;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.settings.Configuration;
-import com.alee.managers.settings.SettingsManager;
 import com.alee.managers.style.*;
 import com.alee.managers.task.TaskGroup;
 import com.alee.managers.task.TaskManager;
 import com.alee.skin.dark.WebDarkSkin;
 import com.alee.utils.CollectionUtils;
 import com.alee.utils.CoreSwingUtils;
-import com.alee.utils.SystemUtils;
 import com.alee.utils.XmlUtils;
 import com.alee.utils.swing.Customizer;
 import com.alee.utils.swing.extensions.KeyEventRunnable;
+import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.student.StuCategory;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Huang Qiyue
@@ -122,7 +109,9 @@ public final class FancyUITest extends WebFrame
     WebDockablePane dockablePane;
     WebDocumentPane<DocumentData> mainPane;
     WebDockableFrame categoryFrame;
-
+    WebDesktopPane desktopPane;
+    WebStyledLabel information;
+    WebPanel overlayContainer;
     /**
      * Returns application instance.
      *
@@ -200,11 +189,12 @@ public final class FancyUITest extends WebFrame
         categoryFrame = new WebDockableFrame(StyleId.dockableframeCompact,"FancyUITest","vCampus");
         categoryFrame.setPosition(CompassDirection.west);
 
-        final WebTree appTree = new WebTree(getTreeNodes());
-
+        //final WebTree appTree = new WebTree(getTreeNodes());
+        WebTree appTree=  new WebTree(new StuCategory().getNode());
         appTree.setEditable(false);
         appTree.setRootVisible(false);
         appTree.setShowsRootHandles(true);
+        /* WebTree methods*/
         appTree.setMultipleSelectionAllowed(false);
         appTree.setSelectionStyle(TreeSelectionStyle.line);
         appTree.expandAll();
@@ -217,16 +207,7 @@ public final class FancyUITest extends WebFrame
                 //open ( appTree.getSelectedNode () );
             }
         } );
-        appTree.onNodeDoubleClick ( new TreeNodeEventRunnable<ExamplesTreeNode>()
-        {
-            @Override
-            public void run ( @NotNull final ExamplesTreeNode node )
-            {
-                //TODO
-                //open ( node );
-            }
-        } );
-        //appTree.registerSettings ( new Configuration<TreeState> ( "ExamplesTree" ) );
+
         final WebScrollPane appTreeScroll = new WebScrollPane ( StyleId.scrollpaneTransparentHoveringExtending, appTree );
         appTreeScroll.registerSettings ( new Configuration<ScrollPaneState> ( "ExamplesScroll" ) );
 
@@ -236,8 +217,9 @@ public final class FancyUITest extends WebFrame
 
         // Frame UI composition
         final WebSeparator separator = new WebSeparator ( StyleId.separatorHorizontal );
-       //categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, filter, separator, appTreeScroll ) );
+
        categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, separator, appTreeScroll ) );
+
     }
 
     /**
@@ -315,9 +297,9 @@ public final class FancyUITest extends WebFrame
 
         final WebOverlay overlay = new WebOverlay (mainPane);
 
-        final WebPanel overlayContainer = new WebPanel (new AlignLayout () );
+        overlayContainer = new WebPanel (new AlignLayout () );
 
-        final WebStyledLabel information = new WebStyledLabel ( );
+        information = new WebStyledLabel ( );
         information.setHorizontalTextAlignment ( WebStyledLabel.CENTER );
         information.setWrap ( TextWrap.none );
         information.changeFontSize ( 3 );
@@ -332,7 +314,10 @@ public final class FancyUITest extends WebFrame
         );*/
 
         overlayContainer.add ( information );
-        JDesktopPane desktopPane = new JDesktopPane();
+        overlay.addOverlay ( new FillOverlay ( overlayContainer ) );
+
+        desktopPane = new WebDesktopPane();
+        /* test
         int  x = 30, y = 30;
         for(int  i = 0; i < 10 ; ++i )
         {
@@ -341,13 +326,21 @@ public final class FancyUITest extends WebFrame
             jframe.setBounds(x, y, 250, 85);
             Container c1 = jframe.getContentPane( ) ;
             c1.add(new JLabel("I love my country"));
-            desktopPane.add( jframe );
             jframe.setVisible(true);
+            desktopPane.add( jframe );
             y += 85;
         }
-        overlayContainer.add ( desktopPane );
+        */
 
-        overlay.addOverlay ( new FillOverlay ( overlayContainer ) );
+        JInternalFrame internal = new JInternalFrame("AppShop",true,true,true, true);
+        internal.setContentPane(new LoginUI().getContentPane());
+        internal.pack();
+        internal.setVisible(true);
+        internal.setBounds(30,50,1000,1000);
+        desktopPane.add(internal);
+
+        mainPane.add(desktopPane);
+
 
         mainPane.addDocumentListener ( new DocumentAdapter<DocumentData>()
         {
@@ -366,7 +359,7 @@ public final class FancyUITest extends WebFrame
             @Override
             public void closed ( final DocumentData document, final PaneData<DocumentData> pane, final int index )
             {
-                if ( mainPane.getDocumentsCount () == 0 )
+                if ( desktopPane.getComponentCount () == 0 )
                 {
                     overlayContainer.setVisible ( true );
                     updateTitle ();

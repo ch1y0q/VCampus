@@ -104,7 +104,7 @@ public class AppLife extends JFrame {
         tabbedPane.setBounds(220, 0, 2000, 1100);
         this.add(tabbedPane);
 
-        JTree jt = new StuCategory().init();
+        JTree jt = new StuCategory().getJTree();
         jt.setBackground(new Color(240, 255, 240));
         jt.setBounds(0, 50, 200, 600);
         contentPane.add(jt);

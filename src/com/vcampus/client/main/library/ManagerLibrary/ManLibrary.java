@@ -44,7 +44,7 @@ public class ManLibrary extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt=new ManCategory().init();
+        JTree jt=new ManCategory().getJTree();
         jt.setBounds(0,60,100,400);
         contentPane.add(jt);
 

@@ -1,22 +1,13 @@
 package com.vcampus.client.main.dailyReport;
 
-import com.vcampus.client.main.App;
 import com.vcampus.client.main.expandTree;
-import com.vcampus.client.main.manager.ManCategory;
 import com.vcampus.client.main.student.StuCategory;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.Hashtable;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 
 public class AppDailyReport extends JFrame {
@@ -37,7 +28,7 @@ public class AppDailyReport extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt= new StuCategory().init();
+        JTree jt= new StuCategory().getJTree();
         jt.setBounds(0,0,200,d.height);
         expandTree.expandTree(jt,true);
         contentPane.add(jt);//设置目录

@@ -30,7 +30,7 @@ public class AppDailyReportManage extends JFrame{
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt= new ManCategory().init();
+        JTree jt= new ManCategory().getJTree();
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);//设置目录
 

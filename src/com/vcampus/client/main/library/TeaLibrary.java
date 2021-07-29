@@ -45,7 +45,7 @@ public class TeaLibrary extends JFrame {
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
 
-        JTree jt= new TeaCategory().init();
+        JTree jt= new TeaCategory().getJTree();
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);
 

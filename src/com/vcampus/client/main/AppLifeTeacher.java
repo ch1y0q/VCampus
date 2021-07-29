@@ -43,7 +43,7 @@ public class AppLifeTeacher extends JFrame{
         tabbedPane.setBounds(0,0,2000,1100);
         this.add(tabbedPane);
 
-        JTree jt= new TeaCategory().init();
+        JTree jt= new TeaCategory().getJTree();
         jt.setBackground(new Color(240, 255, 240));
         jt.setBounds(0,50,200,600);
         contentPane.add(jt);

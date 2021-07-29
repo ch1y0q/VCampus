@@ -59,7 +59,7 @@ public class AppStuCourse {
         jp3.setBackground(Color.white);
 
         //侧边栏
-        JTree jt= new StuCategory().init();
+        JTree jt= new StuCategory().getJTree();
         jf.add(jt);
         jt.setBounds(0,height/50,width*2/11,height);
 

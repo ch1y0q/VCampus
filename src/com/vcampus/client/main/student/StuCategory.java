@@ -18,9 +18,18 @@ import java.awt.*;
  * @date 2021-07-20
  */
 public class StuCategory extends JTree{
-    public JTree jt;
-    public JTree init () {
-        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("学生登陆");
+    private JTree jt;
+    private DefaultMutableTreeNode nodLogin;
+    /* constructor */
+    public StuCategory() {
+        init();
+    }
+
+    /**
+     * Build a JTree.
+     */
+    private void init() {
+        nodLogin= new DefaultMutableTreeNode("学生登陆");
         jt=new JTree(nodLogin);
         DefaultMutableTreeNode nodPersonalInfo = new DefaultMutableTreeNode("个人信息");
         DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
@@ -35,13 +44,13 @@ public class StuCategory extends JTree{
 
         //DefaultMutableTreeNode nodInfoLookup = new DefaultMutableTreeNode("个人信息查询");
         DefaultMutableTreeNode nodInfoManage = new DefaultMutableTreeNode("个人信息维护");
-       // nodPersonalInfo.add(nodInfoLookup);
+        // nodPersonalInfo.add(nodInfoLookup);
         nodPersonalInfo.add(nodInfoManage);
         DefaultMutableTreeNode nodBorrowLookup = new DefaultMutableTreeNode("图书查询借阅");
         //DefaultMutableTreeNode nodBookLookup = new DefaultMutableTreeNode("书籍查询");
         DefaultMutableTreeNode nodBorrowHistory = new DefaultMutableTreeNode("已借图书");
         nodLibrary.add(nodBorrowLookup);
-       // nodLibrary.add(nodBookLookup);
+        // nodLibrary.add(nodBookLookup);
         nodLibrary.add(nodBorrowHistory);
         DefaultMutableTreeNode nodTimetable = new DefaultMutableTreeNode("课程表");
         DefaultMutableTreeNode nodGrades = new DefaultMutableTreeNode("成绩查询");
@@ -110,7 +119,14 @@ public class StuCategory extends JTree{
                 }
             }
         });
+    }
+
+    public JTree getJTree() {
         return jt;
-}
+    }
+
+    public DefaultMutableTreeNode getNode() {
+        return nodLogin;
+    }
 }
 

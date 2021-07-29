@@ -47,7 +47,7 @@ public class AppStuInfo  extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt= new StuCategory().init();
+        JTree jt= new StuCategory().getJTree();
         jt.setBounds(0,0,200,d.height);
         jt.setOpaque(false);
         jt.setBackground(new Color(240, 255, 240));

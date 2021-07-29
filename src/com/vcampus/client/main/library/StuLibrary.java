@@ -42,7 +42,7 @@ public class StuLibrary extends JFrame {
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
 
-        JTree jt= new StuCategory().init();
+        JTree jt= new StuCategory().getJTree();
         jt.setBounds(0,60,200,600);
         contentPane.add(jt);
 

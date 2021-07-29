@@ -43,7 +43,7 @@ public class AppTeaCourse {
 
 
         //侧边栏
-        JTree jt=new TeaCategory().init();
+        JTree jt=new TeaCategory().getJTree();
         jf.add(jt);
         jt.setBounds(0,height/50,width*2/11,height);
 

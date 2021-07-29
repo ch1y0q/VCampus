@@ -16,7 +16,17 @@ import javax.swing.tree.TreeSelectionModel;
  * @date 2021-07-13
  */
 public class TeaCategory extends JTree {
-    public JTree init(){
+    private JTree jt;
+    private DefaultMutableTreeNode nodLogin;
+    /* constructor */
+    public TeaCategory() {
+        init();
+    }
+
+    /**
+     * Build a JTree.
+     */
+    private void init() {
         DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("教师登陆");
         DefaultMutableTreeNode nodPersonalInfo = new DefaultMutableTreeNode("个人信息");
         DefaultMutableTreeNode nodChooseCourses = new DefaultMutableTreeNode("课程管理");
@@ -33,7 +43,7 @@ public class TeaCategory extends JTree {
         DefaultMutableTreeNode nodShoppingHistoty = new DefaultMutableTreeNode("购买历史");
         nodShop.add(nodGoods); nodShop.add(nodCart); nodShop.add(nodShoppingHistoty);
 
-        JTree jt = new JTree(nodLogin);
+        jt = new JTree(nodLogin);
 
         TreeSelectionModel treeSelectionModel;
         treeSelectionModel=jt.getSelectionModel();
@@ -81,7 +91,13 @@ public class TeaCategory extends JTree {
                 }
                 }
         });
+    }
+
+    public JTree getJTree() {
         return jt;
     }
 
+    public DefaultMutableTreeNode getNode() {
+        return nodLogin;
+    }
 }

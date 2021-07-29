@@ -16,8 +16,17 @@ import javax.swing.tree.TreeSelectionModel;
  * @date 2021-07-20
  */
 public class ManCategory extends JTree {
-    public JTree init()
-    {
+    private JTree jt;
+    private DefaultMutableTreeNode nodLogin;
+    /* constructor */
+    public ManCategory() {
+        init();
+    }
+
+    /**
+     * Build a JTree.
+     */
+    private void init() {
         DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("管理员登陆");
         DefaultMutableTreeNode nodInfor = new DefaultMutableTreeNode("个人信息");
         DefaultMutableTreeNode nodTeaInfor = new DefaultMutableTreeNode("教师信息管理");
@@ -30,7 +39,7 @@ public class ManCategory extends JTree {
         nodLogin.add(nodClassManage);nodLogin.add(nodLibrary);nodLogin.add(nodDorm);
         nodLogin.add(nodDailyReport);
 
-        JTree jt = new JTree(nodLogin);
+        jt = new JTree(nodLogin);
 
         TreeSelectionModel treeSelectionModel;
         treeSelectionModel=jt.getSelectionModel();
@@ -92,6 +101,13 @@ public class ManCategory extends JTree {
                 }
             }
         });
+    }
+
+    public JTree getJTree() {
         return jt;
+    }
+
+    public DefaultMutableTreeNode getNode() {
+        return nodLogin;
     }
 }
