@@ -2,6 +2,7 @@ package com.vcampus.client.main.teacher;
 
 import com.alee.managers.style.StyleId;
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.App;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.courseManage.AppTeaCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
@@ -42,7 +43,7 @@ public class AppTeacher extends JFrame {
         contentPane.setLayout(null);
 
         JLabel label =new JLabel();
-        label.setText(" 欢迎您,"+"xxx" );//App.session.getTeacher().getName()
+        label.setText(" 欢迎您,"+ App.session.getTeacher().getName() );//App.session.getTeacher().getName()
         label.setFont(new Font("微软雅黑", Font.BOLD, 14));
         label.setOpaque(true);
         label.setForeground(new Color(33, 117, 206));
@@ -88,8 +89,8 @@ public class AppTeacher extends JFrame {
                 if(e.getSource()==selfin)
                 {
                     AppTeaInfo app=new AppTeaInfo();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
             public void mousePressed(MouseEvent e) { }
@@ -123,8 +124,8 @@ public class AppTeacher extends JFrame {
                 if(e.getSource()==classin)
                 {
                     AppTeaCourse app=new AppTeaCourse();
+                    app.open();
                     setVisible(false);
-                    app.close();
                 }
             }
             public void mousePressed(MouseEvent e) { }
@@ -157,8 +158,8 @@ public class AppTeacher extends JFrame {
                 if(e.getSource()==cardin)
                 {
                     AppLife app=new AppLife();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
             public void mousePressed(MouseEvent e) { }
@@ -192,8 +193,8 @@ public class AppTeacher extends JFrame {
                 if(e.getSource()==shopin)
                 {
                     AppShop app=new AppShop();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }}
             public void mousePressed(MouseEvent e) { }
             public void mouseReleased(MouseEvent e) { }
@@ -225,8 +226,8 @@ public class AppTeacher extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==Libin) {
                     TeaLibrary app=new TeaLibrary();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
             public void mousePressed(MouseEvent e) { }

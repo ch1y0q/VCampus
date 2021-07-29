@@ -201,6 +201,7 @@ public class ManLibrarydetailPanel extends JPanel {
                 new Request(App.connectionToServer, null, "com.vcampus.server.library.BookServer.searchBookDetail",
                         new Object[] { ISBN }).send())
                 .getReturn(Book.class);
+        detailicon.setIcon(new ImageIcon(getClass().getResource(book.getpictureURL())));
         txtISBN.setText(book.getISBN());
         txtBook.setText(book.getName());
         txtWriter.setText(book.getAuthor());

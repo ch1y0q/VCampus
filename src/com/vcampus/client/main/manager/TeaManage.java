@@ -127,7 +127,10 @@ public class TeaManage extends JFrame {
         academylabel.setBorder(new EmptyBorder(0,0,0,0));
         Teainforselect.add(academylabel);
         JComboBox academy=new JComboBox();
-        String[] recalltxt1={"","computer","ruanjian","ai"};
+        String[] recalltxt1={"","建筑学院", "机械工程学院", "能源与环境学院", "信息科学与工程学院", "土木工程学院", "电子科学与工程学院",
+                "数学学院", "自动化学院", "计算机科学与工程学院", "物理学院", "生物科学与医学工程学院", "材料科学与工程学院", "人文学院",
+                "经济管理学院", "马克思主义学院", "电气工程学院", "外国语学院", "化学化工学院", "交通学院", "仪器科学与工程学院", "艺术学院",
+                "法学院", "医学院1", "公共卫生学院", "医学院2", "网络空间安全学院", "人工智能学院", "吴健雄学院", "软件学院"};
         for(String s :recalltxt1){
             academy.addItem(s);
         }
@@ -149,7 +152,7 @@ public class TeaManage extends JFrame {
         sexlabel.setBorder(new EmptyBorder(0,0,0,0));
         Teainforselect.add(sexlabel);
         JComboBox sex=new JComboBox();
-        String[] recalltxt3={"","man","woman"};
+        String[] recalltxt3={"","男","女"};
         for(String s :recalltxt3){
             sex.addItem(s);
         }
@@ -177,6 +180,7 @@ public class TeaManage extends JFrame {
                 return false;
             }
         };
+        table.setRowHeight(20);
         Teaserch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

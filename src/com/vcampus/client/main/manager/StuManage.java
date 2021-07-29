@@ -138,7 +138,10 @@ public class StuManage extends JFrame{
         classlabel.setBounds(250, 90, 50, 30);
         classlabel.setBorder(new EmptyBorder(0,0,0,0));
         Stuinforselect.add(classlabel);
-        String[] recalltxt2={"","computer","ruanjian","science"};
+        String[] recalltxt2={"","建筑学院", "机械工程学院", "能源与环境学院", "信息科学与工程学院", "土木工程学院", "电子科学与工程学院",
+                "数学学院", "自动化学院", "计算机科学与工程学院", "物理学院", "生物科学与医学工程学院", "材料科学与工程学院", "人文学院",
+                "经济管理学院", "马克思主义学院", "电气工程学院", "外国语学院", "化学化工学院", "交通学院", "仪器科学与工程学院", "艺术学院",
+                "法学院", "医学院1", "公共卫生学院", "医学院2", "网络空间安全学院", "人工智能学院", "吴健雄学院", "软件学院"};
         JComboBox Stuclass=new JComboBox(recalltxt2);
         Stuclass.setBounds(300,90,150,30);
         Stuinforselect.add(Stuclass);
@@ -173,6 +176,7 @@ public class StuManage extends JFrame{
                 return false;
             }
         };
+        table.setRowHeight(20);
         Stuserch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
