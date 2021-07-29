@@ -22,9 +22,12 @@ import com.alee.api.annotations.NotNull;
 import com.alee.api.data.BoxOrientation;
 import com.alee.api.data.CompassDirection;
 import com.alee.api.jdk.SerializableSupplier;
+import com.alee.api.resource.ClassResource;
+import com.alee.api.resource.Resource;
 import com.alee.api.version.Version;
 import com.alee.demo.content.ExamplesManager;
 import com.alee.demo.skin.decoration.FeatureStateBackground;
+import com.alee.demo.ui.tools.SkinChooserTool;
 import com.alee.extended.behavior.ComponentResizeBehavior;
 import com.alee.extended.canvas.WebCanvas;
 import com.alee.extended.dock.SidebarButtonVisibility;
@@ -40,10 +43,12 @@ import com.alee.extended.overlay.WebOverlay;
 import com.alee.extended.panel.GroupPanel;
 import com.alee.extended.panel.GroupingType;
 import com.alee.extended.statusbar.WebStatusBar;
+import com.alee.extended.svg.SvgIconSource;
 import com.alee.extended.tab.DocumentAdapter;
 import com.alee.extended.tab.DocumentData;
 import com.alee.extended.tab.PaneData;
 import com.alee.extended.tab.WebDocumentPane;
+import com.alee.extended.tree.WebTreeFilterField;
 import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.desktoppane.WebDesktopPane;
 import com.alee.laf.panel.WebPanel;
@@ -57,6 +62,9 @@ import com.alee.laf.tree.TreeSelectionStyle;
 import com.alee.laf.tree.WebTree;
 import com.alee.laf.window.WebFrame;
 import com.alee.managers.hotkey.Hotkey;
+import com.alee.managers.icon.IconManager;
+import com.alee.managers.icon.set.IconSet;
+import com.alee.managers.icon.set.RuntimeIconSet;
 import com.alee.managers.language.LM;
 import com.alee.managers.language.LanguageLocaleUpdater;
 import com.alee.managers.language.LanguageManager;
@@ -71,8 +79,8 @@ import com.alee.utils.CoreSwingUtils;
 import com.alee.utils.XmlUtils;
 import com.alee.utils.swing.Customizer;
 import com.alee.utils.swing.extensions.KeyEventRunnable;
-import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.courseManage.AppStuCourse;
+import com.vcampus.client.main.dailyReport.AppStudent;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.shop.AppShop;
 import com.vcampus.client.main.student.StuCategory;
@@ -87,9 +95,12 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
+ * 学生的主界面。左侧有常驻的树状结构目录，从目录选择项目，可在右侧打开，
+ *
  * @author Huang Qiyue
  * @date 2021-07-19
  */
+
 public final class StudentFancyUI extends WebFrame
 {
     /**
@@ -98,7 +109,7 @@ public final class StudentFancyUI extends WebFrame
     public static ArrayList<Skin> skins;
 
     /**
-     * Demo application instance.
+     * Application instance.
      */
     private static StudentFancyUI instance;
 
@@ -108,7 +119,7 @@ public final class StudentFancyUI extends WebFrame
     private final Version version;
 
     /**
-     * Demo application base UI elements.
+     * Application base UI elements.
      */
     WebDockablePane dockablePane;
     WebDocumentPane<DocumentData> mainPane;
@@ -133,7 +144,7 @@ public final class StudentFancyUI extends WebFrame
     }
 
     /**
-     * Constructs new FancyUI.
+     * Constructs new FancyUI
      */
     StudentFancyUI()
     {
@@ -148,17 +159,15 @@ public final class StudentFancyUI extends WebFrame
         initializeToolBar();
        // initializeCategoryFrame();
 
-        setDefaultCloseOperation ( WindowConstants.EXIT_ON_CLOSE );
-        registerSettings ( new Configuration<WindowState> ( "application", new SerializableSupplier<WindowState> ()
-        {
-            @Override
-            public WindowState get ()
-            {
-                return new WindowState ( new Dimension ( 1200, 820 ) );
-            }
-        } ) );
-
-
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        registerSettings(new Configuration<WindowState>("application", new SerializableSupplier<WindowState>() {
+                    @Override
+                    public WindowState get() {
+                        return new WindowState(new Dimension(1200, 820));
+                    }
+                }
+                )
+        );
     }
 
     /**
@@ -215,6 +224,9 @@ public final class StudentFancyUI extends WebFrame
 
         appTree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
+            /**
+             * 判断需要打开的窗口
+             */
             public void valueChanged(TreeSelectionEvent e) {
                 if (!appTree.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) appTree.getLastSelectedPathComponent();
@@ -287,13 +299,13 @@ public final class StudentFancyUI extends WebFrame
         appTreeScroll.registerSettings ( new Configuration<ScrollPaneState> ( "ExamplesScroll" ) );
 
         // Filtering field
-        // unimplemented - requires WebExTree
-        //final WebTreeFilterField filter = new WebTreeFilterField ( appTree );
+        // not implemented - requires tree models that implement FilterableNodes e.g. WebExTree
+        // final WebTreeFilterField filter = new WebTreeFilterField ( appTree );
 
         // Frame UI composition
         final WebSeparator separator = new WebSeparator ( StyleId.separatorHorizontal );
-
-       categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, separator, appTreeScroll ) );
+        //categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, filter, separator, appTreeScroll ) );
+        categoryFrame.add ( new GroupPanel( GroupingType.fillLast, 0, false, appTreeScroll ) );
 
     }
 
@@ -323,7 +335,6 @@ public final class StudentFancyUI extends WebFrame
         statusBar.addToEnd ( memoryBarOverlay );
 
         add ( statusBar, BorderLayout.SOUTH );
-
         // Custom status bar margin for notification manager
         NotificationManager.setMargin ( 0, 0, statusBar.getPreferredSize ().height, 0 );
     }
@@ -337,7 +348,7 @@ public final class StudentFancyUI extends WebFrame
         final WebToolBar toolBar = new WebToolBar ( StyleId.toolbarAttachedNorth );
         toolBar.setFloatable ( false );
 
-       // toolBar.add ( new SkinChooserTool() );
+        toolBar.add ( new com.vcampus.UI.SkinChooserTool() );
         toolBar.addSeparator ();
         //toolBar.add ( new LanguageChooserTool() );
 
@@ -370,6 +381,7 @@ public final class StudentFancyUI extends WebFrame
             }
         } );
 
+        /* Add a label, no need
         final WebOverlay overlay = new WebOverlay (mainPane);
 
         overlayContainer = new WebPanel (new AlignLayout () );
@@ -380,16 +392,10 @@ public final class StudentFancyUI extends WebFrame
         information.changeFontSize ( 3 );
         information.setFontName("微软雅黑");
         information.setText("请从左侧选择要进行的操作");
-        /*
-        information.setLanguage (
-                "demo.content.information.overlay.empty",
-                version.name (), version.toString (),
-                SystemUtils.getJavaName (),
-                SystemUtils.getJavaVersion ().versionString (), SystemUtils.getOsArch ()
-        );*/
 
         overlayContainer.add ( information );
         overlay.addOverlay ( new FillOverlay ( overlayContainer ) );
+        */
 
         desktopPane = new WebDesktopPane();
         /* an example for JInternalFrame
@@ -406,6 +412,13 @@ public final class StudentFancyUI extends WebFrame
             y += 85;
         }
         */
+
+        JInternalFrame internal = new JInternalFrame("学生入口",true,true,true, true);
+        internal.setContentPane(new AppStudent().getContentPane());
+        internal.pack();
+        internal.setVisible(true);
+        internal.setBounds(10,10,1600,1000);
+        desktopPane.add(internal);
 
         mainPane.add(desktopPane);
 
@@ -435,7 +448,8 @@ public final class StudentFancyUI extends WebFrame
             }
         } );
 
-        dockablePane.setContent ( overlay );
+        //dockablePane.setContent ( overlay );
+        dockablePane.setContent( desktopPane );
 
         /**
          * Frames.
@@ -543,6 +557,11 @@ public final class StudentFancyUI extends WebFrame
                //SettingsManager.setDefaultSettingsGroup ( "WebLookAndFeelDemo" );
                //SettingsManager.setSaveOnChange ( true );
 
+                /* TODO
+                final IconSet iconSet = new RuntimeIconSet( "my-icon-set" );
+                iconSet.addIcon ( new SvgIconSource( "brush16", (Resource) getClass().getResourceAsStream("/resources/assets/icon/brush.svg")) ); // Adding IconSet into IconManager
+                IconManager.addIconSet ( iconSet );
+                   */
 
                 // Adding demo data aliases before styles using it are read
                 XmlUtils.processAnnotations ( FeatureStateBackground.class );
