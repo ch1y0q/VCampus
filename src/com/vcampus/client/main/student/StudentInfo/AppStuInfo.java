@@ -1,9 +1,9 @@
 package com.vcampus.client.main.student.StudentInfo;
 
-import com.vcampus.client.main.App;
 import com.vcampus.util.imageIO.ByteArray;
 import com.vcampus.util.imageIO.Client;
 import com.vcampus.util.imageIO.MessageForImage;
+import com.vcampus.client.main.App;
 import com.vcampus.client.main.student.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.util.StringUtils;
@@ -298,12 +298,7 @@ public class AppStuInfo  extends JFrame {
             }
         });
 
-        txt_1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
         //启动编辑
         EditButton.addActionListener(new ActionListener() {
             @Override

@@ -40,7 +40,28 @@
         FROM `admins`
         WHERE `cardNumber` = #{cardNumber}
     </select>
-    
+
+    <update id="resetPhoneNumber" parameterType="Map">
+        UPDATE `admins` SET
+            `phoneNumber` =  #{phoneNumber} WHERE `cardNumber`
+                                                      = #{cardNumber}
+        LIMIT 1
+    </update>
+
+    <update id="resetEmail" parameterType="Map">
+        UPDATE `admins` SET
+            `email` =  #{email} WHERE `cardNumber`
+                                          = #{cardNumber}
+        LIMIT 1
+    </update>
+
+    <update id="resetPassword" parameterType="Map">
+        UPDATE `admins` SET
+            `password` = #{password} WHERE `cardNumber`
+                                               = #{cardNumber}
+        LIMIT 1
+    </update>
+
     <!-- Used By Auth Module -->
 
 </mapper>
