@@ -4,6 +4,7 @@ import com.alee.managers.style.StyleId;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.AppLifeTeacher;
 import com.vcampus.client.main.courseManage.AppTeaCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.dailyReport.AppDailyReportManage;
@@ -157,7 +158,7 @@ public class AppTeacher extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==cardin)
                 {
-                    AppLife app=new AppLife();
+                    AppLifeTeacher app=new AppLifeTeacher();
                     app.setVisible(true);
                     setVisible(false);
                 }
