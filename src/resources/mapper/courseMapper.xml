@@ -27,7 +27,9 @@
     <insert id="insertNewCourse" parameterType="Course">
         INSERT INTO
             `courses` VALUES (#{id}, #{courseName}, #{time}, #{teacher},
-                               #{classroom},  #{teacherCard})
+                               #{classroom},  #{teacherCard},  #{credit}
+                            ,  #{semester},  #{capacity},  #{selectedNumber}
+                             ,  #{major},  #{students})
     </insert>
     <delete id="deleteCourse" parameterType="String">
         DELETE FROM

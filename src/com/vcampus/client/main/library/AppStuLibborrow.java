@@ -13,7 +13,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-19
+ */
 public class AppStuLibborrow extends JPanel {
     private List<Book> list = null;
     private DefaultTableModel model2;

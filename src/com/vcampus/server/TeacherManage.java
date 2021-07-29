@@ -7,7 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-19
+ */
 public class TeacherManage {
     public static Teacher getTeacherDetailByCardNumber(String cardNumber) {
         Teacher result = null;

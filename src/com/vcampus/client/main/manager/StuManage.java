@@ -147,7 +147,7 @@ public class StuManage extends JFrame{
         sexlabel.setBorder(new EmptyBorder(0,0,0,0));
         Stuinforselect.add(sexlabel);
         JComboBox sex=new JComboBox();
-        String[] recalltxt3={"","man","woman"};
+        String[] recalltxt3={"","男","女"};
         for(String s :recalltxt3){
             sex.addItem(s);
         }
