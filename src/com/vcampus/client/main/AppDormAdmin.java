@@ -23,7 +23,9 @@ import java.util.List;
 /**
  * @author Y
  * @date 2021/7/22
+ * 参见AppLife
  */
+
 
 public class AppDormAdmin extends JFrame {
     private static JPanel contentPane;
