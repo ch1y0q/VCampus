@@ -123,6 +123,7 @@ public class AppChatDiag extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         textAreaSay.addKeyListener(new KeyListener() {
+            // http://www.uxys.com/html/JavaScript/20160809/42930.html
             @Override
             public void keyTyped(KeyEvent e) {
                 // nothing
@@ -131,6 +132,7 @@ public class AppChatDiag extends JDialog {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    e.consume();
                     sendMessage();
                     textAreaSay.setText("");
                 }

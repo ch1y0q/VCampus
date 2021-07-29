@@ -132,10 +132,13 @@ public class StuCategory extends JTree{
                             setVisible(false);
                         }
                     }
-                    else if(node==nodDailyReport){
+                    else if(node==nodChat){
+                        if(this.getClass().getName()!="com.vcampus.client.main.chat.AppChatDiag"){
+                            WebLookAndFeel.install();
                             AppChatDiag app=new AppChatDiag();
                             app.setVisible(true);
                             setVisible(false);
+                        }
                     }
                 }
             }
