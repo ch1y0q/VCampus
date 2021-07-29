@@ -107,14 +107,14 @@ public class ManLibrary extends JFrame {
         recall.setBounds(850, 50, 200, 30);
         recall.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(recall);
-        String[] recalltxt={"","计算机用书","数学用书","文学艺术"};
+        String[] recalltxt={"","计算机用书","数学用书","中国文学"};
         JComboBox jc=new JComboBox(recalltxt);
         jc.setBounds(1000,50,150,30);
         contentPane.add(jc);
 
         ManLibrarydetailPanel Bookdetail=new ManLibrarydetailPanel();
         Bookdetail.setBackground(new Color(255, 255, 255));
-        Bookdetail.setBounds(800,120,600,350);
+        Bookdetail.setBounds(800,120,700,350);
         Bookdetail.setVisible(false);
         contentPane.add(Bookdetail);
 
@@ -129,6 +129,7 @@ public class ManLibrary extends JFrame {
                 return false;
             }
         };
+        table.setRowHeight(20);
         JTable table2 = new JTable(model2);
         JLabel Borrow=new JLabel("借书记录");
         Borrow.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -157,7 +158,7 @@ public class ManLibrary extends JFrame {
                         model.setRowCount(0);
                         int len = list.size();
                         for (int i = 0; i < len; i++) {
-                            listData[i][0]=String.valueOf(i);
+                            listData[i][0]=String.valueOf(i+1);
                             listData[i][1]=list.get(i).getISBN();
                             listData[i][2]=list.get(i).getName();
                             listData[i][3]=String.valueOf(list.get(i).getNumber());

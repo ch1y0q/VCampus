@@ -319,6 +319,9 @@ public class DailyReportPanel extends JPanel {
 
                     upload(person);
                     JOptionPane.showMessageDialog(null, "上传成功");
+                    btnUpload.setText("已上传");
+                    btnUpload.setEnabled(false);//按钮无法再次点击
+                    btnUpload.repaint();
                 }
             }
         });
@@ -337,6 +340,8 @@ public class DailyReportPanel extends JPanel {
             System.out.println("error");
         }
     }
+
+
 
 
 }

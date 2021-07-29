@@ -19,11 +19,10 @@
                `teacherCard`,`credit`,`semester`,`capacity`,`selectedNumber`,`major`,`students` FROM
             `courses` WHERE id=#{id} LIMIT 1
     </select>
-    <select id="getClassOfOneTeacher" parameterType="String"
+    <select id="getCourseOfOneTeacher" parameterType="String"
             resultType="Course">
-        SELECT `id`,`courseName`,`time`,`teacher`,`classroom`,
-               `teacherCard` FROM
-            `courses` WHERE teacherCard=#{card}
+        SELECT * FROM
+            `courses` WHERE teacherCard=#{cardNumber}
     </select>
     <insert id="insertNewCourse" parameterType="Course">
         INSERT INTO
@@ -92,4 +91,20 @@
         INSERT INTO
             `courseScore` (studentCardNumber,courseId,status) VALUES (#{studentCardNumber}, #{courseId}, #{status})
     </insert>
+
+    <delete id="deleteLineFromCourseScore" parameterType="CourseScore">
+        DELETE FROM
+            `courseScore`
+        WHERE `studentCardNumber` = #{studentCardNumber} AND courseId = #{courseId} LIMIT 1
+    </delete>
+
+    <select id="getCourseScore" parameterType="CourseScore"
+            resultType="CourseScore">
+        SELECT *FROM courseScore WHERE `studentCardNumber` = #{studentCardNumber} AND courseId = #{courseId} LIMIT 1
+    </select>
+
+    <update id="setScore" parameterType="CourseScore">
+        UPDATE courseScore SET
+                           score=#{score} WHERE `studentCardNumber` = #{studentCardNumber} AND courseId = #{courseId} LIMIT 1
+    </update>
 </mapper>

@@ -1,7 +1,9 @@
 package com.vcampus.client.main.student;
 
+import com.alee.laf.WebLookAndFeel;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.courseManage.AppStuCourse;
+import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.shop.AppShop;
@@ -36,11 +38,13 @@ public class StuCategory extends JTree{
         DefaultMutableTreeNode nodCourses = new DefaultMutableTreeNode("课程管理");
         DefaultMutableTreeNode nodLivingServices = new DefaultMutableTreeNode(   "生活服务");
         DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        DefaultMutableTreeNode nodDailyReport=new DefaultMutableTreeNode("每日上报");
         nodLogin.add(nodPersonalInfo);
         nodLogin.add(nodCourses);
         nodLogin.add(nodLibrary);
         nodLogin.add(nodLivingServices);
         nodLogin.add(nodShop);
+        nodLogin.add(nodDailyReport);
 
         //DefaultMutableTreeNode nodInfoLookup = new DefaultMutableTreeNode("个人信息查询");
         DefaultMutableTreeNode nodInfoManage = new DefaultMutableTreeNode("个人信息维护");
@@ -112,6 +116,14 @@ public class StuCategory extends JTree{
                     else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
                         if(this.getClass().getName()!="com.vcampus.client.main.shop.AppShop") {
                             AppShop app = new AppShop();
+                            app.setVisible(true);
+                            setVisible(false);
+                        }
+                    }
+                    else if(node==nodDailyReport){
+                        if(this.getClass().getName()!="com.vcampus.client.main.dailyReport.AppDailyReport"){
+                            WebLookAndFeel.install();
+                            AppDailyReport app=new AppDailyReport();
                             app.setVisible(true);
                             setVisible(false);
                         }

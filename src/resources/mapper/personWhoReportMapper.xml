@@ -12,4 +12,21 @@
                                    #{ifDefinite},#{ifHistoryOfRiskyArea}
                                  )
     </insert>
+
+    <select id="tableDisplayBySchool" parameterType="String"
+            resultType="PersonWhoReport">
+        SELECT `cardNumber`, `personName`, `school`,`date`,`temperature`,`location`,`city`,
+               `campus`,`ifQarantined`,`ifSuspected`,`ifDefinite`,`ifHistoryOfRiskyArea`
+        FROM `dailyReport`
+        WHERE `school` LIKE '%${school}%'
+    </select>
+
+    <select id="tableDisplay"
+            resultType="PersonWhoReport">
+        SELECT `cardNumber`, `personName`, `school`,`date`,`temperature`,`location`,`city`,
+               `campus`,`ifQarantined`,`ifSuspected`,`ifDefinite`,`ifHistoryOfRiskyArea`
+        FROM `dailyReport`
+    </select>
+
+
 </mapper>

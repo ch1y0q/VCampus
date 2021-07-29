@@ -51,7 +51,7 @@ public class AppShop extends JFrame {
     private static DefaultTableModel cartTableModel;
     private static JTable tblCart;
     private static Vector cartData;
-    private static BigDecimal totalCost;
+    private static BigDecimal totalCost= BigDecimal.valueOf(0);;
 
     private static final String EMPTY_GOODS_PIC = "/resources/assets/bg/bg3.jpg";
     private static final String EMPTY_GOODS_DESCRIPTION = "这里应该是商品详细信息";
@@ -135,6 +135,8 @@ public class AppShop extends JFrame {
                 return;
         }
         BigDecimal prevBalance=getBalance(cardNumber,App.session.getUserType());
+        System.out.println(prevBalance);
+        System.out.println(totalCost);
         if (prevBalance.compareTo(totalCost)==-1)
         {
             JOptionPane.showMessageDialog(null, "余额不足", "错误", JOptionPane.ERROR_MESSAGE);
@@ -252,7 +254,7 @@ public class AppShop extends JFrame {
             tblCart.setValueAt(legacy+x,index,2);
             BigDecimal total= targetPrice.multiply(BigDecimal.valueOf(legacy+x));
             tblCart.setValueAt(total,index,4);
-            totalCost.add(targetPrice.multiply(BigDecimal.valueOf(x)));
+            totalCost=totalCost.add(targetPrice.multiply(BigDecimal.valueOf(x)));
             lblTotalCost.setText(totalCost.toString());
         }
         else
@@ -261,7 +263,8 @@ public class AppShop extends JFrame {
             newEntry.add(targetId);newEntry.add(targetName);newEntry.add(x);newEntry.add(targetPrice);newEntry.add(targetPrice.multiply(BigDecimal.valueOf(x)));
             cartTableModel.addRow(newEntry);
             tblCart.setModel(cartTableModel);
-            totalCost.add(targetPrice.multiply(BigDecimal.valueOf(x)));
+            totalCost=totalCost.add(targetPrice.multiply(BigDecimal.valueOf(x)));
+            System.out.println(totalCost);
             lblTotalCost.setText(totalCost.toString());
         }
     }
@@ -289,14 +292,14 @@ public class AppShop extends JFrame {
             if (legacy-x<1){
                 cartTableModel.removeRow(index);
                 tblCart.setModel(cartTableModel);
-                totalCost.subtract(targetPrice.multiply(BigDecimal.valueOf(legacy)));
+                totalCost=totalCost.subtract(targetPrice.multiply(BigDecimal.valueOf(legacy)));
                 lblTotalCost.setText(totalCost.toString());
             }
             else {
                 tblCart.setValueAt(legacy - x, index, 2);
                 BigDecimal total = targetPrice.multiply(BigDecimal.valueOf(legacy - x));
                 tblCart.setValueAt(total, index, 4);
-                totalCost.subtract(targetPrice.multiply(BigDecimal.valueOf(x)));
+                totalCost=totalCost.subtract(targetPrice.multiply(BigDecimal.valueOf(x)));
                 lblTotalCost.setText(totalCost.toString());
             }
         }
@@ -588,9 +591,9 @@ public class AppShop extends JFrame {
         lblTotalCost=new JLabel("共需付款");
         lblTotalCost.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblTotalCost.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTotalCost.setBounds(400, 1100, 100, 40);
+        lblTotalCost.setBounds(1200, 900, 100, 40);
         contentPane.add(lblTotalCost);
-        totalCost= BigDecimal.valueOf(0);
-        lblTotalCost.setText("0.00");
+
+        lblTotalCost.setText(totalCost.toString());
     }
 }

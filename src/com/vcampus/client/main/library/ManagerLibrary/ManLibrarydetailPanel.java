@@ -117,7 +117,7 @@ public class ManLibrarydetailPanel extends JPanel {
         ISBNnum.setBorder(new EmptyBorder(0,0,0,0));
         add(ISBNnum);
         txtISBN = new JTextField();    //创建文本框
-        txtISBN.setBounds(360, 70, 100, 30);
+        txtISBN.setBounds(360, 70, 200, 30);
         txtISBN.setEditable(false);
         add(txtISBN);
         JLabel Bookname=new JLabel("书名");
@@ -126,7 +126,7 @@ public class ManLibrarydetailPanel extends JPanel {
         Bookname.setBorder(new EmptyBorder(0,0,0,0));
         add(Bookname);
         txtBook = new JTextField();    //创建文本框
-        txtBook.setBounds(360, 100, 100, 30);
+        txtBook.setBounds(360, 100, 200, 30);
         txtBook.setEditable(false);
         add(txtBook);
         JLabel Writer=new JLabel("作者");
@@ -135,7 +135,7 @@ public class ManLibrarydetailPanel extends JPanel {
         Writer.setBorder(new EmptyBorder(0,0,0,0));
         add(Writer);
         txtWriter = new JTextField();    //创建文本框
-        txtWriter.setBounds(360, 130, 100, 30);
+        txtWriter.setBounds(360, 130, 200, 30);
         txtWriter.setEditable(false);
         add(txtWriter);
         JLabel Country=new JLabel("作者国籍");
@@ -144,7 +144,7 @@ public class ManLibrarydetailPanel extends JPanel {
         Country.setBorder(new EmptyBorder(0,0,0,0));
         add(Country);
         txtCountry = new JTextField();    //创建文本框
-        txtCountry.setBounds(360, 160, 100, 30);
+        txtCountry.setBounds(360, 160, 200, 30);
         txtCountry.setEditable(false);
         add(txtCountry);
         JLabel Print=new JLabel("出版社");
@@ -153,7 +153,7 @@ public class ManLibrarydetailPanel extends JPanel {
         Print.setBorder(new EmptyBorder(0,0,0,0));
         add(Print);
         txtPrint = new JTextField();    //创建文本框
-        txtPrint.setBounds(360, 190, 100, 30);
+        txtPrint.setBounds(360, 190, 200, 30);
         txtPrint.setEditable(false);
         add(txtPrint);
         JLabel Classify=new JLabel("分类");
@@ -162,7 +162,7 @@ public class ManLibrarydetailPanel extends JPanel {
         Classify.setBorder(new EmptyBorder(0,0,0,0));
         add(Classify);
         txtClassify = new JTextField();    //创建文本框
-        txtClassify.setBounds(360, 220, 100, 30);
+        txtClassify.setBounds(360, 220, 200, 30);
         txtClassify.setEditable(false);
         add(txtClassify);
 
@@ -172,7 +172,7 @@ public class ManLibrarydetailPanel extends JPanel {
         RemainNum.setBorder(new EmptyBorder(0,0,0,0));
         add(RemainNum);
         txtRemain = new JTextField();    //创建文本框
-        txtRemain.setBounds(360, 250, 100, 30);
+        txtRemain.setBounds(360, 250, 200, 30);
         txtRemain.setEditable(false);
         add(txtRemain);
         JLabel Place=new JLabel("摆放位置");
@@ -181,7 +181,7 @@ public class ManLibrarydetailPanel extends JPanel {
         Place.setBorder(new EmptyBorder(0,0,0,0));
         add(Place);
         txtPlace = new JTextField();    //创建文本框
-        txtPlace.setBounds(360, 280, 100, 30);
+        txtPlace.setBounds(360, 280, 200, 30);
         txtPlace.setEditable(false);
         add(txtPlace);
         JLabel Intro=new JLabel("介绍");
@@ -190,7 +190,7 @@ public class ManLibrarydetailPanel extends JPanel {
         Intro.setBorder(new EmptyBorder(0,0,0,0));
         add(Intro);
         txtIntro = new JTextField();    //创建文本框
-        txtIntro.setBounds(360, 310, 100, 30);
+        txtIntro.setBounds(360, 310, 200, 30);
         txtIntro.setEditable(false);
         add(txtIntro);
     }
