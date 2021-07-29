@@ -1,6 +1,6 @@
 package com.vcampus.client.main.dailyReport;
 
-import com.vcampus.client.main.expandTree;
+import com.vcampus.UI.TreeUtils;
 import com.vcampus.client.main.student.StuCategory;
 
 import javax.swing.*;
@@ -30,7 +30,7 @@ public class AppDailyReport extends JFrame {
 
         JTree jt= new StuCategory().getJTree();
         jt.setBounds(0,0,200,d.height);
-        expandTree.expandTree(jt,true);
+        TreeUtils.expandTree(jt,true);
         contentPane.add(jt);//设置目录
 
 

@@ -1,9 +1,10 @@
-package com.vcampus.client.main.imageIO;
+package com.vcampus.util.imageIO;
 
 /**
  * @author Dong Ruojing
  * @date 2021/7/27
  */
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -17,6 +18,7 @@ public class Client {
             new TestClient().start(1101, person);
         }
     */
+
     @SuppressWarnings("finally")
     public MessageForImage start(MessageForImage clientobj)
             throws ClassNotFoundException {
@@ -40,7 +42,7 @@ public class Client {
             //JOptionPane.showMessageDialog(null, "Error:登入失败，请查看网络是否正常！");
             e.printStackTrace();
         } catch (IOException e) {
-           // JOptionPane.showMessageDialog(null, "Error:登入失败，请查看网络是否正常！");
+            // JOptionPane.showMessageDialog(null, "Error:登入失败，请查看网络是否正常！");
             e.printStackTrace();
         } finally {
             return (MessageForImage) obj;

@@ -1,8 +1,7 @@
 package com.vcampus.client.main;
 
 //import com.vcampus.client.main.student.AppStudent;
-import com.vcampus.client.administrator.main.AppAdmin;
-import com.vcampus.client.main.dailyReport.AppStudent;
+import com.vcampus.client.main.student.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.RepairHistory;

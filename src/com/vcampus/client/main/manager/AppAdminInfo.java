@@ -1,9 +1,8 @@
-package com.vcampus.client.administrator.main;
+package com.vcampus.client.main.manager;
 
 //import com.mysql.cj.xdevapi.Client;
-import com.vcampus.client.main.manager.ManCategory;
 
-        import javax.swing.*;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
         import java.awt.*;
         import java.awt.event.MouseAdapter;

@@ -1,15 +1,14 @@
-package com.vcampus.client.main;
+package com.vcampus.util;
 
 import java.io.IOException;
 import java.net.Socket;
 import com.vcampus.net.*;
-import com.vcampus.util.*;
 
 /**
  * @author Franklin Yang
  * @date 2021/7/12
  */
-public class Utils {
+public class ConnectionUtils {
     public static String getServerHost() {
         return ServerUtils.getServerHost();
     }
@@ -26,7 +25,7 @@ public class Utils {
     public static ConnectionToServer formConnection() throws IOException {
         ConnectionToServer connectionToServer = null;
 
-        connectionToServer = new ConnectionToServer(new Socket(Utils.getServerHost(), Utils.getMainPort()));
+        connectionToServer = new ConnectionToServer(new Socket(ConnectionUtils.getServerHost(), ConnectionUtils.getMainPort()));
         /*
         try {
             connectionToServer = new ConnectionToServer(new Socket(Utils.getServerHost(), Utils.getMainPort()));

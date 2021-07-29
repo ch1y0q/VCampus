@@ -1,12 +1,13 @@
 package com.vcampus.client.main;
 
 import com.vcampus.client.LoginUI;
-import com.vcampus.client.administrator.main.AppAdmin;
+import com.vcampus.client.main.manager.AppAdmin;
 import com.vcampus.client.main.teacher.AppTeacher;
 import com.vcampus.client.messageQueue.ResponseQueue;
 import com.vcampus.net.ConnectionToServer;
 import com.vcampus.net.ResponseListener;
 import com.vcampus.net.Session;
+import com.vcampus.util.ConnectionUtils;
 import com.vcampus.util.SwingUtils;
 import com.vcampus.entity.UserType;
 
@@ -65,10 +66,10 @@ public class App extends JFrame {
         res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
         // 连接到服务器
-        App.connectionToServer = Utils.formConnection();
+        App.connectionToServer = ConnectionUtils.formConnection();
         // 报错，结束运行
         if (App.connectionToServer == null) {
-            SwingUtils.showError(null, String.format(res.getString("connection_to_server_failure") ,Utils.getServerHost() , Utils.getMainPort()), res.getString("error"));
+            SwingUtils.showError(null, String.format(res.getString("connection_to_server_failure") , ConnectionUtils.getServerHost() , ConnectionUtils.getMainPort()), res.getString("error"));
             System.exit(0);
         }
         // 初始化响应队列

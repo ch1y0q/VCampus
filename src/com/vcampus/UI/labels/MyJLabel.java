@@ -1,4 +1,4 @@
-package com.vcampus.UI;
+package com.vcampus.UI.labels;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,8 +8,9 @@ import com.vcampus.UI.DropShadowBorder;
  * @author Dong Ruojing
  * @date 2021/7/24
  */
-public class myJLabel extends JLabel {
-    public  myJLabel(){
+
+public class MyJLabel extends JLabel {
+    public MyJLabel(){
         DropShadowBorder shadow = new DropShadowBorder();
         shadow.setShadowSize(25);
         //shadow.setShadowColor(Color.BLACK);

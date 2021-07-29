@@ -1,7 +1,6 @@
 package com.vcampus.client.main.manager;
 
 import com.vcampus.client.LoginUI;
-import com.vcampus.client.administrator.main.AppAdmin;
 import com.vcampus.client.main.App;
 import com.vcampus.entity.Student;
 import com.vcampus.net.Request;
@@ -85,7 +84,7 @@ public class StuManage extends JFrame{
         logout.setBounds(1330, 20, 60, 30);
         contentPane.add(logout);
 
-        StudetailInfo Studetail=new StudetailInfo();
+        StuDetailInfo Studetail=new StuDetailInfo();
         Studetail.setBounds(210,610,800,200);
         Studetail.setVisible(false);
         contentPane.add(Studetail);

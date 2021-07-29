@@ -146,6 +146,7 @@ public class AppChatDiag extends JDialog {
     private void onSend() {
         // add your code here
         sendMessage();
+        textAreaSay.setText("");
         dispose();
     }
 

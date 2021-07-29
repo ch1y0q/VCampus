@@ -19,7 +19,7 @@ import java.util.HashMap;
  * @date 2021-07-13
  */
 
-public class StudetailInfo extends JPanel {
+public class StuDetailInfo extends JPanel {
     String[] strText=new String[11];
     public JLabel detailicon;
     public JTextField txtname;
@@ -31,7 +31,7 @@ public class StudetailInfo extends JPanel {
     public JTextField txtbodynumber;
     public JTextField txtemail;
     public JTextField txtphone;
-    public StudetailInfo()
+    public StuDetailInfo()
     {
         setBackground(new Color(255, 255, 255));
         setLayout(null);

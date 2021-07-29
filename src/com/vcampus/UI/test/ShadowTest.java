@@ -1,6 +1,6 @@
 package com.vcampus.UI.test;
 
-import com.vcampus.UI.myJLabel;
+import com.vcampus.UI.labels.MyJLabel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -25,7 +25,7 @@ public class ShadowTest extends JFrame{
         contentPane.setLayout(null);
 
         Icon icon =new ImageIcon(getClass().getResource("/resources/assets/bg/bg4.jpg"));
-        myJLabel bg7 = new myJLabel();
+        MyJLabel bg7 = new MyJLabel();
         bg7.setIcon(icon);
         contentPane.add(bg7);
         bg7.setBounds(50, 50, 500, 500);

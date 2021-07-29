@@ -1,4 +1,4 @@
-package com.vcampus.client.main.imageIO;
+package com.vcampus.util.imageIO;
 
 
 import java.net.InetAddress;
@@ -20,6 +20,6 @@ public class Config {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        MessageForImage._IP=IP;
+        MessageForImage.IP=IP;
     }
 }

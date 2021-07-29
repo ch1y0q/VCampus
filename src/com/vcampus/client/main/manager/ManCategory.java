@@ -1,6 +1,5 @@
 package com.vcampus.client.main.manager;
 
-import com.vcampus.client.administrator.main.AppAdminInfo;
 import com.vcampus.client.main.courseManage.AppAdminCourse;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.dailyReport.AppDailyReportManage;

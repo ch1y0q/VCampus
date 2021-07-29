@@ -1,6 +1,6 @@
 package com.vcampus.client.main;
 
-import com.vcampus.client.administrator.main.AppAdmin;
+import com.vcampus.client.main.manager.AppAdmin;
 import com.vcampus.client.main.manager.ManCategory;
 import com.vcampus.entity.RepairHistory;
 import com.vcampus.net.Request;

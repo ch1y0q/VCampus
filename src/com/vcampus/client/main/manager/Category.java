@@ -1,4 +1,4 @@
-package com.vcampus.client.administrator.main;
+package com.vcampus.client.main.manager;
 
 /**
  * JTree目录测试
@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@Deprecated
 public class Category extends JFrame
 {
     public JPanel createComponent()

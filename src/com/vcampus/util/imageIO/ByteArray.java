@@ -1,4 +1,4 @@
-package com.vcampus.client.main.imageIO;
+package com.vcampus.util.imageIO;
 
 /**
  *

@@ -1,12 +1,10 @@
 package com.vcampus.client.main.dailyReport;
 
 import com.alee.managers.style.StyleId;
-import com.vcampus.UI.myJLabel;
-import com.vcampus.UI.myJLabel2;
+import com.vcampus.UI.labels.MyJLabel2;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.student.AppStudent;
 import com.vcampus.entity.PersonWhoReport;
-import com.vcampus.entity.Student;
 import com.vcampus.net.Request;
 import com.vcampus.net.Response;
 import com.vcampus.util.ResponseUtils;
@@ -20,7 +18,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -61,7 +58,7 @@ public class DailyReportPanel extends JPanel {
         jplDetail.setLayout(null);
         jplDetail.setBounds(0,70,300,220);
         jplDetail.setBackground(new Color(0xC0C0F6));
-        myJLabel2 jlBasicInfo = new myJLabel2();
+        MyJLabel2 jlBasicInfo = new MyJLabel2();
         jlBasicInfo.setText("基本信息");
         jlBasicInfo.setFont(new Font("微软雅黑", Font.BOLD, 18));
         jlBasicInfo.setBounds(0,0,100,50);
@@ -93,7 +90,7 @@ public class DailyReportPanel extends JPanel {
         add(jplDaily);
         jplDaily.setBounds(330,70,350,470);
         jplDaily.setBackground(new Color(0xE0CDFA));
-        myJLabel2 jlDailyInfo = new myJLabel2();
+        MyJLabel2 jlDailyInfo = new MyJLabel2();
         jlDailyInfo.setText("每日情况");
         jlDailyInfo.setForeground(Color.WHITE);
         jlDailyInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -120,7 +117,7 @@ public class DailyReportPanel extends JPanel {
         jcomlocal.setBounds(170,90,150,30);
         jplDaily.add(jcomlocal);
 
-        myJLabel2 lblHealth= new myJLabel2();//设置健康标签
+        MyJLabel2 lblHealth= new MyJLabel2();//设置健康标签
         lblHealth.setText("今日体温：37℃");
         lblHealth.setBounds(800,90,280,60);
         lblHealth.setFont(new Font("微软雅黑", Font.BOLD, 23));
@@ -130,7 +127,7 @@ public class DailyReportPanel extends JPanel {
         lblHealth.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblHealth);
 
-        myJLabel2 lblAdvice= new myJLabel2();//设置建议标签
+        MyJLabel2 lblAdvice= new MyJLabel2();//设置建议标签
         lblAdvice.setText("体温正常");
         lblAdvice.setBounds(800,170,280,60);
         lblAdvice.setFont(new Font("微软雅黑", Font.BOLD, 20));
@@ -140,7 +137,7 @@ public class DailyReportPanel extends JPanel {
         lblAdvice.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblAdvice);
 
-        myJLabel2 lblAdvice2= new myJLabel2();//设置建议标签
+        MyJLabel2 lblAdvice2= new MyJLabel2();//设置建议标签
         lblAdvice2.setText("开启快乐学习生活(≧∇≦)ﾉ");
         lblAdvice2.setBounds(800,250,280,60);
         lblAdvice2.setFont(new Font("微软雅黑", Font.BOLD, 20));

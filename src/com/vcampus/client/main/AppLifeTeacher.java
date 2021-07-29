@@ -1,11 +1,9 @@
 package com.vcampus.client.main;
 
 //import com.vcampus.client.main.student.AppStudent;
-import com.vcampus.client.main.dailyReport.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.client.main.teacher.AppTeacher;
 import com.vcampus.entity.DealHistory;
-import com.vcampus.entity.RepairHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 import com.vcampus.util.StringUtils;

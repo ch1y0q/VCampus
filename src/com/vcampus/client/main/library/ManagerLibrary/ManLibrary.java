@@ -1,7 +1,7 @@
 package com.vcampus.client.main.library.ManagerLibrary;
 
 import com.vcampus.client.LoginUI;
-import com.vcampus.client.administrator.main.AppAdmin;
+import com.vcampus.client.main.manager.AppAdmin;
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.manager.ManCategory;
 import com.vcampus.entity.Book;

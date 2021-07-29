@@ -1,13 +1,13 @@
-package com.vcampus.client.main.dailyReport;
+package com.vcampus.client.main.student;
 
 import com.alee.laf.WebLookAndFeel;
 import com.alee.managers.style.StyleId;
-import com.vcampus.UI.myJLabel;
+import com.vcampus.UI.labels.MyJLabel;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.courseManage.AppStuCourse;
+import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.student.StuCoursePanel;
 import com.vcampus.client.main.student.StuInfoPanel;
@@ -31,7 +31,7 @@ public class AppStudent extends JFrame {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     static int index=0;
-    public myJLabel selficon=new myJLabel();
+    public MyJLabel selficon=new MyJLabel();
     private class TimeListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -136,7 +136,7 @@ public class AppStudent extends JFrame {
         logout.setForeground(new Color(33, 117, 206,100));
         contentPane.add(logout);
 
-        myJLabel lblNews = new myJLabel();
+        MyJLabel lblNews = new MyJLabel();
         lblNews.setText("每日新闻");
         lblNews.setBounds(780,470,165,85);
         lblNews.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -281,7 +281,7 @@ public class AppStudent extends JFrame {
 
 
 
-        myJLabel lblNewLabel_1 = new myJLabel();
+        MyJLabel lblNewLabel_1 = new MyJLabel();
         lblNewLabel_1.setText("关于我(点击可进行编辑)");
         lblNewLabel_1.setFont(new Font("微软雅黑", Font.BOLD, 18));
         lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -306,7 +306,7 @@ public class AppStudent extends JFrame {
         jplStuInfo.setBounds(1006,170,350,230);
         contentPane.add(jplStuInfo);
 
-        myJLabel lblNewLabel_2 = new myJLabel();
+        MyJLabel lblNewLabel_2 = new MyJLabel();
         lblNewLabel_2.setText("今日课程");
         lblNewLabel_2.setFont(new Font("微软雅黑", Font.BOLD, 18));
         lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);

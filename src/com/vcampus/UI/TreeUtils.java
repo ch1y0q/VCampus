@@ -1,18 +1,22 @@
-package com.vcampus.client.main;
+package com.vcampus.UI;
+
 import java.util.Enumeration;
 import javax.swing.JTree;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 /**
- * 让目录全部展开
  * @author Dong Ruojing
  * @date 2021/7/28
  */
 
-public class expandTree {
-//如果bo为true展开所有节点，为false关闭所有节点。
-    public static void expandTree(JTree tree,boolean bo) {
+public class TreeUtils {
+
+    /**
+     * 让目录全部展开
+     * 如果bo为true展开所有节点，为false关闭所有节点
+     */
+    public static void expandTree(JTree tree, boolean bo) {
         TreeNode root = (TreeNode) tree.getModel().getRoot();
 
         expandAll(tree, new TreePath(root), bo);

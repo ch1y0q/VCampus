@@ -1,23 +1,20 @@
-package com.vcampus.client.administrator.test;
+package com.vcampus.test;
 
 import com.alee.laf.WebLookAndFeel;
-import com.vcampus.client.administrator.main.AppAdmin;
+import com.vcampus.client.main.manager.AppAdminInfo;
 
 /**
- * 管理员登录界面测试
  * @author Dong Ruojing
- * @date 2021/7/16
+ * @date 2021/7/18
  */
-public class AppAdminEntry {
+public class AppAdminInfoEntry {
     public static void main(String[]args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 WebLookAndFeel.install ();
-                AppAdmin app = new AppAdmin();
+                AppAdminInfo app = new AppAdminInfo();
                 app.setVisible(true);
             }
         });
     }
-
-
 }

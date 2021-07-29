@@ -1,4 +1,6 @@
-package com.vcampus.UI;
+package com.vcampus.UI.labels;
+
+import com.vcampus.UI.DropShadowBorder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,8 +9,8 @@ import java.awt.*;
  * @author Dong Ruojing
  * @date 2021/7/28
  */
-public class myJLabel3 extends JLabel {
-    public  myJLabel3(){
+public class MyJLabel2 extends JLabel {
+    public MyJLabel2(){
         DropShadowBorder shadow = new DropShadowBorder();
         shadow.setShadowSize(10);
         //shadow.setShadowColor(Color.BLACK);
@@ -16,7 +18,7 @@ public class myJLabel3 extends JLabel {
         shadow.setShowRightShadow(true);
         shadow.setShowBottomShadow(true);
         shadow.setShowTopShadow(true);
-        shadow.setShadowColor(new Color(243, 238, 188, 230));
+        shadow.setShadowColor(new Color(255, 255, 255, 230));
         shadow.setCornerSize(10);//默认12
         shadow.setShadowOpacity((float) 0.55);//透明度为0-1的浮点数
         //System.out.println(shadow.getShadowOpacity());

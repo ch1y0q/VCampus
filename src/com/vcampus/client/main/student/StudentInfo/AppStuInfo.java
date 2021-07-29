@@ -1,13 +1,13 @@
 package com.vcampus.client.main.student.StudentInfo;
 
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.imageIO.ByteArray;
-import com.vcampus.client.main.imageIO.Client;
-import com.vcampus.client.main.imageIO.MessageForImage;
-import com.vcampus.client.main.dailyReport.AppStudent;
+import com.vcampus.util.imageIO.ByteArray;
+import com.vcampus.util.imageIO.Client;
+import com.vcampus.util.imageIO.MessageForImage;
+import com.vcampus.client.main.student.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.util.StringUtils;
-import com.vcampus.client.main.expandTree;
+import com.vcampus.UI.TreeUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -51,7 +51,7 @@ public class AppStuInfo  extends JFrame {
         jt.setBounds(0,0,200,d.height);
         jt.setOpaque(false);
         jt.setBackground(new Color(240, 255, 240));
-        expandTree.expandTree(jt,true);
+        TreeUtils.expandTree(jt,true);
         contentPane.add(jt);
 
         JButton returnButton = new JButton("← 返回");//返回按钮

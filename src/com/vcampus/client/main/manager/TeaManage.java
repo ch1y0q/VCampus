@@ -1,7 +1,6 @@
 package com.vcampus.client.main.manager;
 
 import com.vcampus.client.LoginUI;
-import com.vcampus.client.administrator.main.AppAdmin;
 import com.vcampus.client.main.App;
 import com.vcampus.entity.Teacher;
 import com.vcampus.net.Request;
