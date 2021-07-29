@@ -40,12 +40,14 @@ public class StuCategory extends JTree{
         DefaultMutableTreeNode nodLivingServices = new DefaultMutableTreeNode(   "生活服务");
         DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
         DefaultMutableTreeNode nodDailyReport=new DefaultMutableTreeNode("每日上报");
+        DefaultMutableTreeNode nodChat=new DefaultMutableTreeNode("聊天室");
         nodLogin.add(nodPersonalInfo);
         nodLogin.add(nodCourses);
         nodLogin.add(nodLibrary);
         nodLogin.add(nodLivingServices);
         nodLogin.add(nodShop);
         nodLogin.add(nodDailyReport);
+        nodLogin.add(nodChat);
 
         //DefaultMutableTreeNode nodInfoLookup = new DefaultMutableTreeNode("个人信息查询");
         DefaultMutableTreeNode nodInfoManage = new DefaultMutableTreeNode("个人信息维护");
