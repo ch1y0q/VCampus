@@ -24,9 +24,11 @@ public class AppStuCourse extends JFrame {
     private Student student;
     private DefaultTableModel model0; //课表
     private DefaultTableModel model1; //选课
-    private DefaultTableModel model2; //已选课
+    private DefaultTableModel model2;//已选课
+    private DefaultTableModel model3;
     private JComboBox chooseSemester0;
     private JComboBox chooseSemester;
+    private JLabel numOfCreditInSemesterLabel;
     public AppStuCourse(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setVisible(true);
@@ -162,9 +164,9 @@ public class AppStuCourse extends JFrame {
         sp3.setBorder(BorderFactory.createLineBorder(Color.red, 1));
         sp3.setBackground(Color.white);
         jp3.add(sp3);
-        String[] columnName3={"课程编号","课程名称","学分","学期","成绩","课程性质",
+        String[] columnName3={"课程编号","课程名称","学分","学期","成绩",
                 "是否首修"};
-        DefaultTableModel model3 = new DefaultTableModel(emptyTable,columnName3);
+        model3 = new DefaultTableModel(emptyTable,columnName3);
         JTable checkScoreTable = new JTable(model3){
             public boolean isCellEditable(int row, int column){
                 this.setRowSelectionAllowed(false);
@@ -188,7 +190,7 @@ public class AppStuCourse extends JFrame {
         JLabel creditInSemesterLabel = new JLabel("学分",JLabel.CENTER);
         creditInSemesterLabel.setBounds(width/25+240,height/40,40,30);
         jp3.add(creditInSemesterLabel);
-        JLabel numOfCreditInSemesterLabel = new JLabel();
+        numOfCreditInSemesterLabel = new JLabel();
         numOfCreditInSemesterLabel.setBounds(width/25+295,height/40,40,30);
         jp3.add(numOfCreditInSemesterLabel);
         JLabel scoreLabel = new JLabel("绩点",JLabel.CENTER);
@@ -197,6 +199,7 @@ public class AppStuCourse extends JFrame {
         JLabel numOfScoreLabel = new JLabel();
         numOfScoreLabel.setBounds(width*2/25+450,height/40,40,30);
         jp3.add(numOfScoreLabel);
+        refreshCheckScoreTable();
 
         //事件
 
@@ -298,6 +301,14 @@ public class AppStuCourse extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 refreshCourseTable();
+            }
+        }
+        );
+
+        chooseSemester.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshCheckScoreTable();
             }
         }
         );
@@ -432,6 +443,49 @@ public class AppStuCourse extends JFrame {
         DecimalFormat df = new DecimalFormat("0.00");
         String sCredit = df.format(credit);
         return sCredit;
+    }
+
+    public void refreshCheckScoreTable(){
+        while(model3.getRowCount()>0){
+            model3.removeRow(0);
+        }
+        String semester = (String)chooseSemester.getSelectedItem();
+        String selectedCourses = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null,
+                        "com.vcampus.server.teaching.CourseSelection.getCourseSelection",
+                        new Object[] {App.session.getStudent()}).send())
+                .getReturn(String.class);
+        String cardNumber = App.session.getStudent().getCardNumber();
+        if(selectedCourses!=""){
+            String[] splitSelectedCourses = selectedCourses.split(",");
+            for(String s:splitSelectedCourses){
+                Course course = ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null,
+                                "com.vcampus.server.teaching.CourseSelection.getOneCourse",
+                                new Object[] {s}).send())
+                        .getReturn(Course.class);
+                String courseId = course.getId();
+                if(semester.equals("All")||course.getSemester().equals(semester)){
+                    CourseScore courseScore = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                            null,"com.vcampus.server.teaching.CourseSelection.getCourseScore",
+                            new Object[] {cardNumber,courseId}).send()).getReturn(CourseScore.class);
+                    String[] data = {courseId,course.getClassName(),course.getCredit(),course.getSemester(),courseScore.getScore(),
+                            courseScore.getStatus()};
+                    model3.addRow(data);
+                }
+                double credit = 0;
+                for(int i = 0;i<model3.getRowCount();i++){
+                    String n = (String)model3.getValueAt(i,2);
+                    if(n!=null){
+                        Double d = Double.parseDouble(n);
+                        credit+=d;
+                    }
+                }
+                DecimalFormat df = new DecimalFormat("0.00");
+                String sCredit = df.format(credit);
+                numOfCreditInSemesterLabel.setText(sCredit);
+            }
+        }
     }
 
     public void open(){
