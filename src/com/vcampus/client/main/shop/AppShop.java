@@ -385,7 +385,7 @@ public class AppShop extends JFrame {
         lblBalanceVal = new JLabel();
         switch(App.session.getUserType()){
             case STUDENT:
-                lblBalanceVal.setText(getBalance(App.session.getStudent().getCardNumber(), UserType.STUDENT).toString());
+                lblBalanceVal.setText(getBalance(App.session.getStudent().getCardNumber(), STUDENT).toString());
                 break;
             case TEACHER:
                 lblBalanceVal.setText(getBalance(App.session.getTeacher().getCardNumber(), TEACHER).toString());

@@ -124,7 +124,7 @@ public final class StudentFancyUI extends FancyUI
         chatFrame.setContentPane(new AppChatDiag().getContentPane());
         chatFrame.pack();
         chatFrame.setVisible(true);
-        chatFrame.setBounds(1000,700,300,500);
+        chatFrame.setBounds(1000,400,300,500);
         desktopPane.add(chatFrame);
     }
 
@@ -233,6 +233,14 @@ public final class StudentFancyUI extends FancyUI
                             internal.pack();
                             internal.setVisible(true);
                             internal.setBounds(30,50,1000,1000);
+                            desktopPane.add(internal);
+                            break;
+                        case "聊天室":
+                            internal = new JInternalFrame("聊天室",true,true,true, true);
+                            internal.setContentPane(new AppChatDiag().getContentPane());
+                            internal.pack();
+                            internal.setVisible(true);
+                            internal.setBounds(100,400,300,500);
                             desktopPane.add(internal);
                             break;
                         default:
