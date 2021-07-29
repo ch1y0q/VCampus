@@ -181,7 +181,7 @@ public class AppAdmin extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==PersonInfoLabel1)
                 {
-                    AppAdminInfo app=new AppAdminInfo();
+                    AppAdminInfoFrame app=new AppAdminInfoFrame();
                     app.setVisible(true);
                     setVisible(false);
                 }

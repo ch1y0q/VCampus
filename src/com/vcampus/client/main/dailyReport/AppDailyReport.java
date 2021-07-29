@@ -28,15 +28,15 @@ public class AppDailyReport extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt= new StuCategory().getJTree();
-        jt.setBounds(0,0,200,d.height);
-        TreeUtils.expandTree(jt,true);
-        contentPane.add(jt);//设置目录
+//        JTree jt= new StuCategory().getJTree();
+//        jt.setBounds(0,0,200,d.height);
+//        TreeUtils.expandTree(jt,true);
+//        contentPane.add(jt);//设置目录
 
 
 
         DailyReportPanel panel=new DailyReportPanel();
-        panel.setBounds(300,20,1300,700);
+        panel.setBounds(50,20,1300,700);
         contentPane.add(panel);//绘制panel
 
 
