@@ -135,9 +135,9 @@ public class AppStudent extends JFrame {
         contentPane.add(logout);
 
         MyJLabel lblNews = new MyJLabel();
-        lblNews.setText("每日新闻");
-        lblNews.setBounds(780,470,165,85);
-        lblNews.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        lblNews.setText("点击进入东大网站");
+        lblNews.setBounds(760,470,185,85);
+        lblNews.setFont(new Font("微软雅黑", Font.BOLD, 16));
         lblNews.setForeground(new Color(17, 70, 123));
         lblNews.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblNews);

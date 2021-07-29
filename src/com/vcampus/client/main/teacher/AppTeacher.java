@@ -244,12 +244,12 @@ public class AppTeacher extends JFrame {
         self.add(Libicon,2);
         contentPane.add(self);
 
-        //每日上报
+        //按钮
         final JButton btnReport = new JButton ();
         btnReport.putClientProperty ( StyleId.STYLE_PROPERTY, StyleId.buttonHover );
-        btnReport.setText("每日上报");btnReport.setBounds(445, 395, 140, 95);
+        btnReport.setText("I love SEU");btnReport.setBounds(445, 395, 140, 95);
         btnReport.setOpaque(true);
-        btnReport.setFont( new Font("微软雅黑", Font.BOLD, 16));
+        btnReport.setFont( new Font("微软雅黑", Font.BOLD, 18));
         btnReport.setForeground(new Color(0, 0, 0,150));
         btnReport.setBackground(new Color(0x7ACBB5));
         btnReport.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
@@ -262,6 +262,8 @@ public class AppTeacher extends JFrame {
                     //AppDailyReport app=new AppDailyReport();
                     //setVisible(false);
                     //app.setVisible(true);
+                    btnReport.setForeground(new Color(236, 116, 116));
+                    btnReport.setBackground(new  Color(255, 255, 255));
                 }
             }
         });
