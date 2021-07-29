@@ -97,7 +97,7 @@ public class AppStuLibborrow extends JPanel {
         jScrollPane2.setViewportView(table2);
         table2.setGridColor(Color.BLACK);
         table2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setBounds(0, 50, 980, 700);
+        jScrollPane2.setBounds(0, 50, 1300, 600);
         add(btnQuery);
         add(txtBookOrIsbn);
         add(jScrollPane2);

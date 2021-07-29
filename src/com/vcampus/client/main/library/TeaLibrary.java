@@ -45,9 +45,6 @@ public class TeaLibrary extends JFrame {
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
 
-        JTree jt= new TeaCategory().getJTree();
-        jt.setBounds(0,50,200,600);
-        contentPane.add(jt);
 
         JButton btnBack = new JButton("返回");
         btnBack.addActionListener(new ActionListener() {
@@ -62,13 +59,13 @@ public class TeaLibrary extends JFrame {
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack.setBounds(0, 25, 60, 30);
+        btnBack.setBounds(0, 10, 60, 30);
         contentPane.add(btnBack);
 
         JButton btnSerchborrowed = new JButton("查询");
 
         btnSerchborrowed.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnSerchborrowed.setBounds(500, 0, 60, 30);
+        btnSerchborrowed.setBounds(600, 0, 60, 30);
         jp1.add(btnSerchborrowed);
 
         String[] header = {"ISBN", "书名","作者","借阅时间","应当归还时间","备注","续借"};
@@ -82,7 +79,7 @@ public class TeaLibrary extends JFrame {
                 return false;
             }
         };
-
+        table.setRowHeight(20);
         btnSerchborrowed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,7 +87,7 @@ public class TeaLibrary extends JFrame {
                 {
                     list = ResponseUtils.getResponseByHash(
                             new Request(App.connectionToServer, null, "com.vcampus.server.library.AddoneBook.getBorrowedBookList",
-                                    new Object[] { App.session.getStudent().getCardNumber() }).send())
+                                    new Object[] { App.session.getTeacher().getCardNumber() }).send())
                             .getListReturn(Book.class);
                     String[][] listData = new String[list.size()][7];
                     if (list == null || list.size() == 0) {
@@ -126,10 +123,12 @@ public class TeaLibrary extends JFrame {
                 if (column == 6) {
                     int result = ResponseUtils
                             .getResponseByHash(new Request(App.connectionToServer, null,
-                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { "8888" }).send())
+                                    "com.vcampus.server.library.BookServer.renewBook", new Object[] { table.getValueAt(row,0) }).send())
                             .getReturn(Integer.class);
                     if (result == 0)
-                        System.out.println("error");
+                    {   System.out.println("error");
+                        JOptionPane.showMessageDialog(null,"超时还书 无法续借 请至图书馆及时还书");
+                    }
                     else
                     {
                         System.out.println("noerror");
@@ -160,14 +159,14 @@ public class TeaLibrary extends JFrame {
             }
         });
         btnLogout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnLogout.setBounds(1200, 25, 60, 30);
+        btnLogout.setBounds(1200, 10, 60, 30);
         contentPane.add(btnLogout);
 
         // 创建选项卡面板
         tabbedPane = new JTabbedPane();
         tabbedPane.add("已借图书",jp1);
         tabbedPane.add("图书查询借阅",jp2);
-        tabbedPane.setBounds(200,50,1000,700);
+        tabbedPane.setBounds(50,50,1300,800);
         contentPane.add(tabbedPane);
 
 

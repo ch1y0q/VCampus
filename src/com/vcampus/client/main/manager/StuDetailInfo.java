@@ -52,7 +52,7 @@ public class StuDetailInfo extends JPanel {
         Teaname.setBorder(new EmptyBorder(0,0,0,0));
         add(Teaname);
         txtname = new JTextField();    //创建文本框
-        txtname.setBounds(190, 10, 100, 30);
+        txtname.setBounds(190, 10, 150, 30);
         txtname.setEditable(false);
         add(txtname);
         JLabel cardnumber=new JLabel("一卡通号");
@@ -61,7 +61,7 @@ public class StuDetailInfo extends JPanel {
         cardnumber.setBorder(new EmptyBorder(0,0,0,0));
         add(cardnumber);
         txtcard = new JTextField();    //创建文本框
-        txtcard.setBounds(190, 40, 100, 30);
+        txtcard.setBounds(190, 40, 150, 30);
         txtcard.setEditable(false);
         add(txtcard);
         JLabel Sex=new JLabel("性别");
@@ -70,7 +70,7 @@ public class StuDetailInfo extends JPanel {
         Sex.setBorder(new EmptyBorder(0,0,0,0));
         add(Sex);
         txtSex = new JTextField();    //创建文本框
-        txtSex.setBounds(190, 70, 100, 30);
+        txtSex.setBounds(190, 70, 150, 30);
         txtSex.setEditable(false);
         add(txtSex);
         JLabel Teaacademy=new JLabel("学院");
@@ -79,16 +79,16 @@ public class StuDetailInfo extends JPanel {
         Teaacademy.setBorder(new EmptyBorder(0,0,0,0));
         add(Teaacademy);
         txtacademy = new JTextField();    //创建文本框
-        txtacademy.setBounds(190, 100, 100, 30);
+        txtacademy.setBounds(190, 100, 150, 30);
         txtacademy.setEditable(false);
         add(txtacademy);
         JLabel Stunumber=new JLabel("学号");
         Stunumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Stunumber.setBounds(100, 130, 90, 30);
+        Stunumber.setBounds(100, 130, 80, 30);
         Stunumber.setBorder(new EmptyBorder(0,0,0,0));
         add(Stunumber);
         Stunum = new JTextField();    //创建文本框
-        Stunum.setBounds(190, 130, 100, 30);
+        Stunum.setBounds(190, 130, 150, 30);
         Stunum.setEditable(false);
         add(Stunum);
         JLabel Studormad=new JLabel("宿舍");
@@ -97,40 +97,43 @@ public class StuDetailInfo extends JPanel {
         Studormad.setBorder(new EmptyBorder(0,0,0,0));
         add(Studormad);
         Studorm = new JTextField();    //创建文本框
-        Studorm.setBounds(190, 160, 100, 30);
+        Studorm.setBounds(190, 160, 150, 30);
         Studorm.setEditable(false);
         add(Studorm);
         JLabel bodynumber=new JLabel("银行卡号");
         bodynumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        bodynumber.setBounds(300, 10, 80, 30);
+        bodynumber.setBounds(400, 10, 80, 30);
         bodynumber.setBorder(new EmptyBorder(0,0,0,0));
         add(bodynumber);
         txtbodynumber = new JTextField();    //创建文本框
-        txtbodynumber.setBounds(390, 10, 200, 30);
+        txtbodynumber.setBounds(500, 10, 200, 30);
         txtbodynumber.setEditable(false);
         add(txtbodynumber);
         JLabel Teaemail=new JLabel("邮箱");
         Teaemail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teaemail.setBounds(300, 70, 80, 30);
+        Teaemail.setBounds(400, 70, 80, 30);
         Teaemail.setBorder(new EmptyBorder(0,0,0,0));
         add(Teaemail);
         txtemail = new JTextField();    //创建文本框
-        txtemail.setBounds(390, 70, 200, 30);
+        txtemail.setBounds(500, 70, 200, 30);
         txtemail.setEditable(false);
         add(txtemail);
         JLabel phone=new JLabel("电话");
         phone.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        phone.setBounds(300, 130, 80, 30);
+        phone.setBounds(400, 130, 80, 30);
         phone.setBorder(new EmptyBorder(0,0,0,0));
         add(phone);
         txtphone = new JTextField();    //创建文本框
-        txtphone.setBounds(390, 130, 200, 30);
+        txtphone.setBounds(500, 130, 200, 30);
         txtphone.setEditable(false);
         add(txtphone);
 
-        JButton edit = new JButton("添加编辑");
+        JButton StuSureAdd = new JButton("确认添加学生");
+        StuSureAdd.setEnabled(false);
+        JButton save = new JButton("保存");
+        JButton edit = new JButton("编辑添加学生信息");
         edit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        edit.setBounds(600, 10, 200, 30);
+        edit.setBounds(800, 10, 200, 30);
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -145,14 +148,15 @@ public class StuDetailInfo extends JPanel {
                     txtbodynumber.setEditable(true);
                     txtemail.setEditable(true);
                     txtphone.setEditable(true);
+                    StuSureAdd.setEnabled(true);
+                    save.setEnabled(false);
                 }
             }
         });
         add(edit);
 
-        JButton save = new JButton("保存");
         save.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        save.setBounds(600, 50, 200, 30);
+        save.setBounds(800, 50, 200, 30);
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -167,7 +171,7 @@ public class StuDetailInfo extends JPanel {
 
         JButton Studelete = new JButton("删除该条学生信息");
         Studelete.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Studelete.setBounds(600, 90, 200, 30);
+        Studelete.setBounds(800, 90, 200, 30);
         Studelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -179,9 +183,8 @@ public class StuDetailInfo extends JPanel {
         });
         add(Studelete);
 
-        JButton StuSureAdd = new JButton("确认添加学生");
         StuSureAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        StuSureAdd.setBounds(600, 130, 200, 30);
+        StuSureAdd.setBounds(800, 130, 200, 30);
         StuSureAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -198,6 +201,8 @@ public class StuDetailInfo extends JPanel {
                     student.setEmail(txtemail.getText());
                     student.setPhoneNumber(txtphone.getText());
                     AddStu(student);
+                    StuSureAdd.setEnabled(false);
+                    save.setEnabled(true);
                     closeedit();
                 }
             }

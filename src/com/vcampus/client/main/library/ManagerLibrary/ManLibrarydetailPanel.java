@@ -108,7 +108,7 @@ public class ManLibrarydetailPanel extends JPanel {
         add(detail);
 
         detailicon=new JLabel("");
-        detailicon.setBounds(0,60,180,240);
+        detailicon.setBounds(0,70,180,240);
         add(detailicon);
 
         JLabel ISBNnum=new JLabel("ISBN号");

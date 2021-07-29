@@ -45,7 +45,7 @@ public class TeaMandetailPanel extends JPanel {
         add(Teaname);
         txtname = new JTextField();    //创建文本框
         txtname.setText("姓名");
-        txtname.setBounds(190, 10, 100, 30);
+        txtname.setBounds(190, 10, 150, 30);
         txtname.setEditable(false);
         add(txtname);
         JLabel cardnumber=new JLabel("一卡通号");
@@ -55,7 +55,7 @@ public class TeaMandetailPanel extends JPanel {
         add(cardnumber);
         txtcard = new JTextField();    //创建文本框
         txtcard.setText("一卡通号");
-        txtcard.setBounds(190, 40, 100, 30);
+        txtcard.setBounds(190, 40, 150, 30);
         txtcard.setEditable(false);
         add(txtcard);
         JLabel Sex=new JLabel("性别");
@@ -65,7 +65,7 @@ public class TeaMandetailPanel extends JPanel {
         add(Sex);
         txtSex = new JTextField();    //创建文本框
         txtSex.setText("性别");
-        txtSex.setBounds(190, 70, 100, 30);
+        txtSex.setBounds(190, 70, 150, 30);
         txtSex.setEditable(false);
         add(txtSex);
         JLabel Teaacademy=new JLabel("学院");
@@ -75,7 +75,7 @@ public class TeaMandetailPanel extends JPanel {
         add(Teaacademy);
         txtacademy = new JTextField();    //创建文本框
         txtacademy.setText("学院");
-        txtacademy.setBounds(190, 100, 100, 30);
+        txtacademy.setBounds(190, 100, 150, 30);
         txtacademy.setEditable(false);
         add(txtacademy);
         JLabel Tealevel=new JLabel("职称");
@@ -85,7 +85,7 @@ public class TeaMandetailPanel extends JPanel {
         add(Tealevel);
         txtlevel = new JTextField();    //创建文本框
         txtlevel.setText("职称");
-        txtlevel.setBounds(190, 130, 100, 30);
+        txtlevel.setBounds(190, 130, 150, 30);
         txtlevel.setEditable(false);
         add(txtlevel);
         JLabel TeaNumber=new JLabel("工号");
@@ -95,43 +95,45 @@ public class TeaMandetailPanel extends JPanel {
         add(TeaNumber);
         txtTeaNum = new JTextField();    //创建文本框
         txtTeaNum.setText("工号");
-        txtTeaNum.setBounds(190, 160, 100, 30);
+        txtTeaNum.setBounds(190, 160, 150, 30);
         txtTeaNum.setEditable(false);
         add(txtTeaNum);
         JLabel Teaemail=new JLabel("邮箱");
         Teaemail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teaemail.setBounds(300, 10, 150, 30);
+        Teaemail.setBounds(400, 10, 150, 30);
         Teaemail.setBorder(new EmptyBorder(0,0,0,0));
         add(Teaemail);
         txtemail = new JTextField();    //创建文本框
         txtemail.setText("邮箱");
-        txtemail.setBounds(460, 10, 100, 30);
+        txtemail.setBounds(560, 10, 150, 30);
         txtemail.setEditable(false);
         add(txtemail);
         JLabel selfEntry=new JLabel("个人主页链接");
         selfEntry.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        selfEntry.setBounds(300, 40, 150, 30);
+        selfEntry.setBounds(400, 40, 150, 30);
         selfEntry.setBorder(new EmptyBorder(0,0,0,0));
         add(selfEntry);
         txtEntry = new JTextField();    //创建文本框
         txtEntry.setText("个人主页链接");
-        txtEntry.setBounds(460, 40, 100, 30);
+        txtEntry.setBounds(560, 40, 150, 30);
         txtEntry.setEditable(false);
         add(txtEntry);
         JLabel phone=new JLabel("电话");
         phone.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        phone.setBounds(300, 70, 150, 30);
+        phone.setBounds(400, 70, 150, 30);
         phone.setBorder(new EmptyBorder(0,0,0,0));
         add(phone);
         txtphone = new JTextField();    //创建文本框
         txtphone.setText("电话");
-        txtphone.setBounds(460, 70, 100, 30);
+        txtphone.setBounds(560, 70, 150, 30);
         txtphone.setEditable(false);
         add(txtphone);
-
-        JButton edit = new JButton("添加编辑");
+        JButton TeaSureAdd = new JButton("确认添加老师");
+        TeaSureAdd.setEnabled(false);
+        JButton save = new JButton("保存");
+        JButton edit = new JButton("编辑添加教师信息");
         edit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        edit.setBounds(600, 10, 200, 30);
+        edit.setBounds(800, 10, 200, 30);
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -146,14 +148,15 @@ public class TeaMandetailPanel extends JPanel {
                 txtTeaNum.setEditable(true);
                 txtEntry.setEditable(true);
                 txtphone.setEditable(true);
+                TeaSureAdd.setEnabled(true);
+                save.setEnabled(false);
             }
             }
         });
         add(edit);
 
-        JButton save = new JButton("保存");
         save.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        save.setBounds(600, 50, 200, 30);
+        save.setBounds(800, 50, 200, 30);
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -164,7 +167,7 @@ public class TeaMandetailPanel extends JPanel {
 
         JButton Teadelete = new JButton("删除该条教师信息");
         Teadelete.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teadelete.setBounds(600, 90, 200, 30);
+        Teadelete.setBounds(800, 90, 200, 30);
         Teadelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -174,9 +177,8 @@ public class TeaMandetailPanel extends JPanel {
         add(Teadelete);
 
 
-        JButton TeaSureAdd = new JButton("确认添加老师");
         TeaSureAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        TeaSureAdd.setBounds(600, 130, 200, 30);
+        TeaSureAdd.setBounds(800, 130, 200, 30);
         TeaSureAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -193,6 +195,8 @@ public class TeaMandetailPanel extends JPanel {
                     teacher.setHomepage(txtEntry.getText());
                     teacher.setPhoneNumber(txtphone.getText());
                     AddTea(teacher);
+                    TeaSureAdd.setEnabled(false);
+                    save.setEnabled(true);
                     closeedit();
                 }
             }

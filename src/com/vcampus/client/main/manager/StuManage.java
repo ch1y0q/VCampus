@@ -40,9 +40,6 @@ public class StuManage extends JFrame{
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt=new ManCategory().getJTree();
-        jt.setBounds(0,60,200,400);
-        contentPane.add(jt);
 
         JButton back = new JButton("返回");
         back.addMouseListener(new MouseAdapter() {
@@ -57,14 +54,13 @@ public class StuManage extends JFrame{
             }
         });
         back.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        back.setBounds(0, 20, 60, 30);
+        back.setBounds(0, 10, 60, 30);
         contentPane.add(back);
-
 
         JLabel tf = new JLabel();
         tf.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        tf.setText("欢迎你:" + "XXX");
-        tf.setBounds(1000, 20, 200, 30);
+        tf.setText("欢迎你:" + App.session.getAdmin().getName());
+        tf.setBounds(650, 10, 200, 30);
         tf.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(tf);
 
@@ -81,22 +77,22 @@ public class StuManage extends JFrame{
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        logout.setBounds(1330, 20, 60, 30);
+        logout.setBounds(1000, 10, 60, 30);
         contentPane.add(logout);
 
         StuDetailInfo Studetail=new StuDetailInfo();
-        Studetail.setBounds(210,610,800,200);
+        Studetail.setBounds(60,610,1000,200);
         Studetail.setVisible(false);
         contentPane.add(Studetail);
 
         JTextField txtfield1=new JTextField();    //创建文本框
         txtfield1.setText("输入学生姓名");
         txtfield1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        txtfield1.setBounds(210,50,300,30);
+        txtfield1.setBounds(60,50,300,30);
         contentPane.add(txtfield1);
 
         JButton addStu=new JButton("学生信息录入");
-        addStu.setBounds(210,130,150,30);
+        addStu.setBounds(60,130,150,30);
         addStu.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         addStu.addActionListener(new ActionListener() {
             @Override
@@ -108,7 +104,7 @@ public class StuManage extends JFrame{
         contentPane.add(addStu);
 
         JPanel Stuinforselect=new JPanel();
-        Stuinforselect.setBounds(600,50,500,200);
+        Stuinforselect.setBounds(450,50,500,200);
         Stuinforselect.setLayout(null);
         contentPane.add(Stuinforselect);
         JLabel Stuse=new JLabel("学生信息筛选");
@@ -117,7 +113,7 @@ public class StuManage extends JFrame{
         Stuinforselect.add(Stuse);
 
         JButton Stuserch=new JButton("学生信息查询");
-        Stuserch.setBounds(1100,80,150,30);
+        Stuserch.setBounds(950,80,150,30);
         Stuserch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         contentPane.add(Stuserch);
 
@@ -161,7 +157,7 @@ public class StuManage extends JFrame{
 
         JLabel Stuinfor=new JLabel("学生信息：");
         Stuinfor.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Stuinfor.setBounds(210,260,100,30);
+        Stuinfor.setBounds(60,260,100,30);
         contentPane.add(Stuinfor);
 
         String[] header = {"一卡通号", "姓名","性别","学院","学号","选择"};
@@ -231,7 +227,7 @@ public class StuManage extends JFrame{
         jScrollPane.setViewportView(table);
         table.setGridColor(Color.BLACK);
         table.getTableHeader().setReorderingAllowed(false);
-        jScrollPane.setBounds(210, 300, 980, 300);
+        jScrollPane.setBounds(60, 300, 800, 300);
         contentPane.add(jScrollPane);
 
     }

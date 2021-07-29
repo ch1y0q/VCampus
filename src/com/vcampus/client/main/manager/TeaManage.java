@@ -39,10 +39,6 @@ public class TeaManage extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt=new ManCategory().getJTree();
-        jt.setBounds(0,60,200,400);
-        contentPane.add(jt);
-
         JButton back = new JButton("返回");
         back.addMouseListener(new MouseAdapter() {
             @Override
@@ -63,7 +59,7 @@ public class TeaManage extends JFrame {
         JLabel tf = new JLabel();
         tf.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         tf.setText("欢迎你:" + App.session.getAdmin().getName());
-        tf.setBounds(1000, 20, 200, 30);
+        tf.setBounds(650, 20, 200, 30);
         tf.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(tf);
 
@@ -80,18 +76,18 @@ public class TeaManage extends JFrame {
             }
         });
         logout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        logout.setBounds(1330, 20, 60, 30);
+        logout.setBounds(1000, 20, 60, 30);
         contentPane.add(logout);
 
 
         JTextField txtfield1=new JTextField();    //创建文本框
         txtfield1.setText("输入教师姓名");
         txtfield1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        txtfield1.setBounds(210,50,300,30);
+        txtfield1.setBounds(60,50,300,30);
         contentPane.add(txtfield1);
 
         JButton addTea=new JButton("教师信息录入");
-        addTea.setBounds(210,130,150,30);
+        addTea.setBounds(60,130,150,30);
         addTea.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         TeaMandetailPanel Teadetail=new TeaMandetailPanel();
         addTea.addActionListener(new ActionListener() {
@@ -107,7 +103,7 @@ public class TeaManage extends JFrame {
         contentPane.add(addTea);
 
         JPanel Teainforselect=new JPanel();
-        Teainforselect.setBounds(600,50,500,200);
+        Teainforselect.setBounds(450,50,500,200);
         Teainforselect.setLayout(null);
         contentPane.add(Teainforselect);
         JLabel Tease=new JLabel("教师信息筛选");
@@ -116,7 +112,7 @@ public class TeaManage extends JFrame {
         Teainforselect.add(Tease);
 
         JButton Teaserch=new JButton("教师信息查询");
-        Teaserch.setBounds(1100,80,150,30);
+        Teaserch.setBounds(950,80,150,30);
         Teaserch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         contentPane.add(Teaserch);
 
@@ -159,13 +155,13 @@ public class TeaManage extends JFrame {
         Teainforselect.add(sex);
 
         Teadetail.setBackground(new Color(255, 255, 255));
-        Teadetail.setBounds(210,610,800,180);
+        Teadetail.setBounds(60,610,1000,300);
         Teadetail.setVisible(false);
         contentPane.add(Teadetail);
 
         JLabel Teainfor=new JLabel("教师信息：");
         Teainfor.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teainfor.setBounds(210,260,100,30);
+        Teainfor.setBounds(60,260,100,30);
         contentPane.add(Teainfor);
 
         String[] header = {"一卡通号", "姓名","性别","学院","职称","选择"};
@@ -238,7 +234,7 @@ public class TeaManage extends JFrame {
         jScrollPane.setViewportView(table);
         table.setGridColor(Color.BLACK);
         table.getTableHeader().setReorderingAllowed(false);
-        jScrollPane.setBounds(210, 300, 980, 300);
+        jScrollPane.setBounds(60, 300, 800, 300);
         contentPane.add(jScrollPane);
     }
 }

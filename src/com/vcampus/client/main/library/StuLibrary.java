@@ -42,9 +42,6 @@ public class StuLibrary extends JFrame {
         jp1.setLayout(null);
         jp1.setBackground(new Color(255, 255, 255));
 
-        JTree jt= new StuCategory().getJTree();
-        jt.setBounds(0,60,200,600);
-        contentPane.add(jt);
 
         JButton btnBack = new JButton("返回");
         btnBack.addActionListener(new ActionListener() {
@@ -59,13 +56,13 @@ public class StuLibrary extends JFrame {
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack.setBounds(0, 25, 60, 30);
+        btnBack.setBounds(0, 10, 60, 30);
         contentPane.add(btnBack);
 
         JButton btnSerchborrowed = new JButton("查询");
 
         btnSerchborrowed.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnSerchborrowed.setBounds(500, 0, 60, 30);
+        btnSerchborrowed.setBounds(600, 0, 60, 30);
         jp1.add(btnSerchborrowed);
 
         String[] header = {"ISBN", "书名","作者","借阅时间","应当归还时间","备注","续借"};
@@ -79,7 +76,7 @@ public class StuLibrary extends JFrame {
                 return false;
             }
         };
-
+        table.setRowHeight(20);
         btnSerchborrowed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,7 +138,7 @@ public class StuLibrary extends JFrame {
         jScrollPane.setViewportView(table);
         table.setGridColor(Color.BLACK);
         table.getTableHeader().setReorderingAllowed(false);
-        jScrollPane.setBounds(0, 30, 980, 700);
+        jScrollPane.setBounds(0, 30, 1300, 700);
         jp1.add(jScrollPane);
 
         jp2=new AppStuLibborrow();
@@ -159,14 +156,14 @@ public class StuLibrary extends JFrame {
             }
         });
         btnLogout.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnLogout.setBounds(1200, 25, 60, 30);
+        btnLogout.setBounds(1200, 10, 60, 30);
         contentPane.add(btnLogout);
 
         // 创建选项卡面板
         tabbedPane = new JTabbedPane();
         tabbedPane.add("已借图书",jp1);
         tabbedPane.add("图书查询借阅",jp2);
-        tabbedPane.setBounds(200,50,1000,700);
+        tabbedPane.setBounds(50,50,1300,800);
         contentPane.add(tabbedPane);
     }
 }
