@@ -1,28 +1,27 @@
-package com.vcampus.client.main.dailyReport;
+package com.vcampus.client.main.manager;
 
-import com.vcampus.client.main.manager.ManCategory;
+import com.vcampus.client.main.dailyReport.DailyReportManagePanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
- * 管理员接受每日健康上报界面
  * @author Dong Ruojing
- * @date 2021/7/27
+ * @date 2021/7/29
  */
-public class AppDailyReportManage extends JFrame{
+public class AppAdminInfoFrame extends JFrame {
     private JPanel contentPane;
     private int width = 1151;
     private int height = 800;
 
-    public AppDailyReportManage()
+    public AppAdminInfoFrame()
     {
         setResizable(true);//允许窗口大小更改
-        setTitle("每日上报查看");
+        setTitle("个人信息管理");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize(d.width, d.height);
+        setSize(1400, d.height);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(240, 255, 240));
         contentPane.setLocation(-871, -176);
@@ -35,11 +34,11 @@ public class AppDailyReportManage extends JFrame{
 //        contentPane.add(jt);//设置目录
 
         //绘制panel
-        DailyReportManagePanel jplDailyReportManage =new DailyReportManagePanel();
-        jplDailyReportManage.setBounds(50,70,1300,600);
-        contentPane.add(jplDailyReportManage);
+       AdminInfoPanel AdminInfoPanel =new AdminInfoPanel();
+        AdminInfoPanel.setBounds(-150,0,1450,800);
+        contentPane.add(AdminInfoPanel);
 
 
 
- }
+    }
 }

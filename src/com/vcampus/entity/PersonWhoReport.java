@@ -22,7 +22,7 @@ public class PersonWhoReport {
     private String ifHistoryOfRiskyArea;//是否到过风险区
 
     public PersonWhoReport(){
-        idReport=1;
+       // idReport=1;
         cardNumber = "";
         personName = "";
         school="计算机科学与工程学院";

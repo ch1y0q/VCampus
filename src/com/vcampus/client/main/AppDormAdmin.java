@@ -47,11 +47,13 @@ public class AppDormAdmin extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JTree jt=new ManCategory().getJTree();
+        /*JTree jt=new ManCategory().getJTree();
         jt.setBackground(new Color(240, 255, 240));
         jt.setBounds(0,60,200,400);
         contentPane.add(jt);
 
+
+         */
         jp1.setLayout(null);
         jp1.setBackground(new Color(240, 255, 240));
         jp2.setLayout(null);
@@ -60,7 +62,7 @@ public class AppDormAdmin extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.add("宿舍信息管理",jp1);
         tabbedPane.add("宿舍报修处理",jp2);
-        tabbedPane.setBounds(200,0,2000,1100);
+        tabbedPane.setBounds(0,0,2000,1100);
         this.add(tabbedPane);
 
         JButton btnBack = new JButton("返回");
@@ -76,44 +78,34 @@ public class AppDormAdmin extends JFrame {
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack.setBounds(1050, 30, 100, 40);
+        btnBack.setBounds(1250, 30, 100, 40);
         jp1.add(btnBack);
 
         JLabel lblDormHygieneMarkEntering = new JLabel("宿舍卫生分数录入");
         lblDormHygieneMarkEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormHygieneMarkEntering.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormHygieneMarkEntering.setBounds(80, 190, 250, 40);
+        lblDormHygieneMarkEntering.setBounds(230, 120, 250, 40);
         jp1.add(lblDormHygieneMarkEntering);
 
         JComboBox cmbDormHygieneMarkWeek=new JComboBox();
         for(int i=1;i<17;i++) {
             cmbDormHygieneMarkWeek.addItem("第"+i+"周");
         }
-        cmbDormHygieneMarkWeek.setBounds(300,197,100,30);
-        /*
-        cmbDormHygieneMarkWeek.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String weekText=cmbDormHygieneMarkWeek.getSelectedItem().toString();
-                int weekNo=Integer.valueOf(weekText.substring(1,2));
-                System.out.println(weekNo);
-            }
-        });
-         */
+        cmbDormHygieneMarkWeek.setBounds(450,117,100,30);
         jp1.add(cmbDormHygieneMarkWeek);
 
         JLabel lblDormHygieneMarkEnteringDormAddress = new JLabel("宿舍号");
         lblDormHygieneMarkEnteringDormAddress.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormHygieneMarkEnteringDormAddress.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormHygieneMarkEnteringDormAddress.setBounds(80, 260, 250, 40);
+        lblDormHygieneMarkEnteringDormAddress.setBounds(230, 190, 250, 40);
         jp1.add(lblDormHygieneMarkEnteringDormAddress);
 
         JTextField txtDormHygieneRateEnteringDormAddress = new JTextField();
-        txtDormHygieneRateEnteringDormAddress.setBounds(300, 266, 100, 30);
+        txtDormHygieneRateEnteringDormAddress.setBounds(450, 196, 100, 30);
         jp1.add(txtDormHygieneRateEnteringDormAddress);
 
         JTable tblDormHygieneMark=new JTable(2,3);
-        tblDormHygieneMark.setBounds(60,420,400,100);
+        tblDormHygieneMark.setBounds(210,350,400,100);
         tblDormHygieneMark.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblDormHygieneMark.setRowHeight(50);
         tblDormHygieneMark.getModel().setValueAt("宿舍号",0,0);
@@ -126,7 +118,7 @@ public class AppDormAdmin extends JFrame {
 
         JButton btnDormHygieneRateLookUp = new JButton("查询");
         btnDormHygieneRateLookUp.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
-        btnDormHygieneRateLookUp.setBounds(220, 337, 100, 30);
+        btnDormHygieneRateLookUp.setBounds(370, 267, 100, 30);
         btnDormHygieneRateLookUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -155,16 +147,16 @@ public class AppDormAdmin extends JFrame {
         JLabel lblDormHygieneMarkEnteringMark = new JLabel("分数");
         lblDormHygieneMarkEnteringMark.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormHygieneMarkEnteringMark.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormHygieneMarkEnteringMark.setBounds(30, 580, 250, 40);
+        lblDormHygieneMarkEnteringMark.setBounds(180, 510, 250, 40);
         jp1.add(lblDormHygieneMarkEnteringMark);
 
         JTextField txtDormHygieneRateEnteringMark = new JTextField();
-        txtDormHygieneRateEnteringMark.setBounds(205, 586, 90, 30);
+        txtDormHygieneRateEnteringMark.setBounds(355, 516, 90, 30);
         jp1.add(txtDormHygieneRateEnteringMark);
 
         JButton btnDormHygieneRateEntering = new JButton("录入");
         btnDormHygieneRateEntering.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
-        btnDormHygieneRateEntering.setBounds(330, 586, 100, 30);
+        btnDormHygieneRateEntering.setBounds(480, 516, 100, 30);
         btnDormHygieneRateEntering.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -195,28 +187,28 @@ public class AppDormAdmin extends JFrame {
         JLabel lblDormBillEntering = new JLabel("宿舍水电费录入");
         lblDormBillEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormBillEntering.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormBillEntering.setBounds(630, 190, 250, 40);
+        lblDormBillEntering.setBounds(830, 120, 250, 40);
         jp1.add(lblDormBillEntering);
 
         JComboBox cmbDormBill=new JComboBox();
         for(int i=1;i<13;i++) {
             cmbDormBill.addItem("第"+i+"月");
         }
-        cmbDormBill.setBounds(850,197,100,30);
+        cmbDormBill.setBounds(1050,127,100,30);
         jp1.add(cmbDormBill);
 
         JLabel lblDormWaterElectricityRateEnteringDormAddress = new JLabel("宿舍号");
         lblDormWaterElectricityRateEnteringDormAddress.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormWaterElectricityRateEnteringDormAddress.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormWaterElectricityRateEnteringDormAddress.setBounds(630, 260, 250, 40);
+        lblDormWaterElectricityRateEnteringDormAddress.setBounds(830, 190, 250, 40);
         jp1.add(lblDormWaterElectricityRateEnteringDormAddress);
 
         JTextField txtDormWaterElectricityRateEnteringDormAddress = new JTextField();
-        txtDormWaterElectricityRateEnteringDormAddress.setBounds(850, 266, 100, 30);
+        txtDormWaterElectricityRateEnteringDormAddress.setBounds(1050, 196, 100, 30);
         jp1.add(txtDormWaterElectricityRateEnteringDormAddress);
 
         JTable tblDormBill=new JTable(2,4);
-        tblDormBill.setBounds(550,420,600,100);
+        tblDormBill.setBounds(750,350,600,100);
         tblDormBill.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblDormBill.setRowHeight(50);
         tblDormBill.getModel().setValueAt("宿舍号",0,0);
@@ -260,22 +252,22 @@ public class AppDormAdmin extends JFrame {
             }
         });
         jp1.add(btnDormWaterElectricityRateLookUp);
-        btnDormWaterElectricityRateLookUp.setBounds(770, 337, 100, 30);
+        btnDormWaterElectricityRateLookUp.setBounds(970, 267, 100, 30);
 
 
         JLabel lblDormWaterRateEntering = new JLabel("水费");
         lblDormWaterRateEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormWaterRateEntering.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormWaterRateEntering.setBounds(580, 580, 250, 40);
+        lblDormWaterRateEntering.setBounds(780, 510, 250, 40);
         jp1.add(lblDormWaterRateEntering);
 
         JTextField txtDormWaterRateEntering = new JTextField();
-        txtDormWaterRateEntering.setBounds(755, 586, 90, 30);
+        txtDormWaterRateEntering.setBounds(955, 516, 90, 30);
         jp1.add(txtDormWaterRateEntering);
 
         JButton btnDormWaterRateEntering = new JButton("录入");
         btnDormWaterRateEntering.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
-        btnDormWaterRateEntering.setBounds(880, 586, 100, 30);
+        btnDormWaterRateEntering.setBounds(1080, 516, 100, 30);
         btnDormWaterRateEntering.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -302,16 +294,16 @@ public class AppDormAdmin extends JFrame {
         JLabel lblDormElectricityRateEntering = new JLabel("电费");
         lblDormElectricityRateEntering.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormElectricityRateEntering.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormElectricityRateEntering.setBounds(580, 640, 250, 40);
+        lblDormElectricityRateEntering.setBounds(780, 570, 250, 40);
         jp1.add(lblDormElectricityRateEntering);
 
         JTextField txtDormElectricityRateEntering = new JTextField();
-        txtDormElectricityRateEntering.setBounds(755, 646, 90, 30);
+        txtDormElectricityRateEntering.setBounds(955, 576, 90, 30);
         jp1.add(txtDormElectricityRateEntering);
 
         JButton btnDormElectricityRateEntering = new JButton("录入");
         btnDormElectricityRateEntering.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
-        btnDormElectricityRateEntering.setBounds(880, 646, 100, 30);
+        btnDormElectricityRateEntering.setBounds(1080, 576, 100, 30);
         btnDormElectricityRateEntering.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -351,17 +343,17 @@ public class AppDormAdmin extends JFrame {
             }
         });
         btnBack2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack2.setBounds(1050, 30, 100, 40);
+        btnBack2.setBounds(1250, 30, 100, 40);
         jp2.add(btnBack2);
 
         JLabel lblDormRepairStateUpdateDormAddress = new JLabel("宿舍号");
         lblDormRepairStateUpdateDormAddress.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairStateUpdateDormAddress.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairStateUpdateDormAddress.setBounds(150, 100, 450, 40);
+        lblDormRepairStateUpdateDormAddress.setBounds(340, 100, 450, 40);
         jp2.add(lblDormRepairStateUpdateDormAddress);
 
         JTextField txtDormRepairStateUpdateDormAddress = new JTextField();
-        txtDormRepairStateUpdateDormAddress.setBounds(455, 106, 90, 30);
+        txtDormRepairStateUpdateDormAddress.setBounds(645, 106, 90, 30);
         jp2.add(txtDormRepairStateUpdateDormAddress);
 
         String[] head={"宿舍号","报修时间","报修内容","报修状态"};
@@ -369,7 +361,7 @@ public class AppDormAdmin extends JFrame {
 
         JTable tblDormRepairState=new JTable(6,4);
         tblDormRepairState.setModel(defaultTableModel);
-        tblDormRepairState.setBounds(150,200,800,300);
+        tblDormRepairState.setBounds(340,200,800,300);
         tblDormRepairState.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblDormRepairState.setRowHeight(50);
         DefaultTableCellRenderer rDormRepairState =new DefaultTableCellRenderer();
@@ -419,22 +411,22 @@ public class AppDormAdmin extends JFrame {
             }
         });
         jp2.add(btnDormRepairStatusLookUp);
-        btnDormRepairStatusLookUp.setBounds(680, 106, 100, 30);
+        btnDormRepairStatusLookUp.setBounds(870, 106, 100, 30);
 
         JLabel lblDormRepairStateUpdate = new JLabel("修改表中第                          条的报修状态为");
         lblDormRepairStateUpdate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairStateUpdate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairStateUpdate.setBounds(160, 570, 450, 40);
+        lblDormRepairStateUpdate.setBounds(350, 570, 450, 40);
         jp2.add(lblDormRepairStateUpdate);
 
         JTextField txtDormRepairStateUpdateNoSelect = new JTextField();
-        txtDormRepairStateUpdateNoSelect.setBounds(325, 576, 90, 30);
+        txtDormRepairStateUpdateNoSelect.setBounds(515, 576, 90, 30);
         jp2.add(txtDormRepairStateUpdateNoSelect);
 
         JComboBox cmbDormRepairStatus=new JComboBox();
         cmbDormRepairStatus.addItem("已修理");
         cmbDormRepairStatus.addItem("待修理");
-        cmbDormRepairStatus.setBounds(600,576,100,30);
+        cmbDormRepairStatus.setBounds(790,576,100,30);
         jp2.add(cmbDormRepairStatus);
 
         JButton btnDormRepairStatusUpdate = new JButton("确认");
@@ -498,6 +490,6 @@ public class AppDormAdmin extends JFrame {
             }
         });
         jp2.add(btnDormRepairStatusUpdate);
-        btnDormRepairStatusUpdate.setBounds(780, 576, 100, 30);
+        btnDormRepairStatusUpdate.setBounds(970, 576, 100, 30);
     }
 }

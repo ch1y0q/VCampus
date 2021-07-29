@@ -104,13 +104,15 @@ public class AppLife extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.add("一卡通", jp1);
         tabbedPane.add("宿舍", jp2);
-        tabbedPane.setBounds(220, 0, 2000, 1100);
+        tabbedPane.setBounds(0, 0, 2000, 1100);
         this.add(tabbedPane);
 
-        JTree jt = new StuCategory().getJTree();
+        /*JTree jt = new StuCategory().getJTree();
         jt.setBackground(new Color(240, 255, 240));
         jt.setBounds(0, 50, 200, 600);
         contentPane.add(jt);
+
+         */
 
         //一卡通部分开始 - jp1
 
@@ -127,91 +129,91 @@ public class AppLife extends JFrame {
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack.setBounds(1050, 30, 100, 40);
+        btnBack.setBounds(1250, 30, 100, 40);
         jp1.add(btnBack);
 
         JLabel lblCardNum = new JLabel("一卡通号");
         lblCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCardNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCardNum.setBounds(5, 30, 100, 40);
+        lblCardNum.setBounds(155, 30, 100, 40);
         jp1.add(lblCardNum);
 
         JLabel lblCurCardNum = new JLabel(studentCardNumber);
         lblCurCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCurCardNum.setBounds(105, 30, 100, 40);
+        lblCurCardNum.setBounds(255, 30, 100, 40);
         jp1.add(lblCurCardNum);
 
         JLabel lblCardStatus = new JLabel("一卡通状态");
         lblCardStatus.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCardStatus.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCardStatus.setBounds(220, 30, 100, 40);
+        lblCardStatus.setBounds(370, 30, 100, 40);
         jp1.add(lblCardStatus);
 
         JLabel lblCurCardStatus = new JLabel(lossJudgeChinese);
         lblCurCardStatus.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardStatus.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCurCardStatus.setBounds(300, 30, 100, 40);
+        lblCurCardStatus.setBounds(450, 30, 100, 40);
         jp1.add(lblCurCardStatus);
 
         JLabel lblCardBalance = new JLabel("一卡通余额");
         lblCardBalance.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCardBalance.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCardBalance.setBounds(410, 30, 100, 40);
+        lblCardBalance.setBounds(560, 30, 100, 40);
         jp1.add(lblCardBalance);
 
         JLabel lblCurCardBalance = new JLabel(App.session.getStudent().getBalance().toString());
         lblCurCardBalance.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardBalance.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCurCardBalance.setBounds(500, 30, 100, 40);
+        lblCurCardBalance.setBounds(650, 30, 100, 40);
         jp1.add(lblCurCardBalance);
 
         JLabel lblCardOp = new JLabel("一卡通业务");
         lblCardOp.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCardOp.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCardOp.setBounds(250, 130, 100, 40);
+        lblCardOp.setBounds(400, 130, 100, 40);
         jp1.add(lblCardOp);
 
 
         JLabel lblCardRecharge = new JLabel("一卡通充值");
         lblCardRecharge.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCardRecharge.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCardRecharge.setBounds(35, 210, 100, 40);
+        lblCardRecharge.setBounds(185, 210, 100, 40);
         jp1.add(lblCardRecharge);
 
         JLabel lblCardRechargeBankAccount = new JLabel("绑定的银行账号");
         lblCardRechargeBankAccount.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCardRechargeBankAccount.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCardRechargeBankAccount.setBounds(140, 210, 150, 40);
+        lblCardRechargeBankAccount.setBounds(290, 210, 150, 40);
         jp1.add(lblCardRechargeBankAccount);
 
         JLabel lblCurCardRechargeBankAccount = new JLabel(studentBankAccount);
         lblCurCardRechargeBankAccount.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurCardRechargeBankAccount.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCurCardRechargeBankAccount.setBounds(300, 210, 200, 40);
+        lblCurCardRechargeBankAccount.setBounds(450, 210, 200, 40);
         jp1.add(lblCurCardRechargeBankAccount);
 
         JLabel lblCardRechargeBankAccountPassword = new JLabel("银行账号密码");
         lblCardRechargeBankAccountPassword.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCardRechargeBankAccountPassword.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCardRechargeBankAccountPassword.setBounds(140, 260, 150, 40);
+        lblCardRechargeBankAccountPassword.setBounds(290, 260, 150, 40);
         jp1.add(lblCardRechargeBankAccountPassword);
 
         JPasswordField txtPassword = new JPasswordField();
         txtPassword.setText("");
-        txtPassword.setBounds(315, 267, 160, 30);
+        txtPassword.setBounds(465, 267, 160, 30);
         jp1.add(txtPassword);
 
         JLabel lblCardRechargeAmount = new JLabel("充值金额");
         lblCardRechargeAmount.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCardRechargeAmount.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCardRechargeAmount.setBounds(140, 310, 150, 40);
+        lblCardRechargeAmount.setBounds(290, 310, 150, 40);
         jp1.add(lblCardRechargeAmount);
 
         JTextField txtAmount = new JTextField();
         txtAmount.setText("");
         txtAmount.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
-        txtAmount.setBounds(315, 317, 160, 30);
+        txtAmount.setBounds(465, 317, 160, 30);
         jp1.add(txtAmount);
 
 
@@ -220,13 +222,13 @@ public class AppLife extends JFrame {
         lblCardLossReport.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCardLossReport.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblCardLossReport.setBounds(35, 500, 100, 40);
+        lblCardLossReport.setBounds(185, 500, 100, 40);
         jp1.add(lblCardLossReport);
 
         JTextField txtLossReport = new JTextField();
         txtLossReport.setText("挂失说明（非必要）");
         txtLossReport.setFont((new Font("微软雅黑", Font.PLAIN, 14)));
-        txtLossReport.setBounds(165, 507, 160, 30);
+        txtLossReport.setBounds(315, 507, 160, 30);
         jp1.add(txtLossReport);
 
         JButton btnCardLossReport = new JButton("确认挂失");
@@ -240,19 +242,19 @@ public class AppLife extends JFrame {
             }
         });
         jp1.add(btnCardLossReport);
-        btnCardLossReport.setBounds(360, 507, 110, 30);
+        btnCardLossReport.setBounds(510, 507, 110, 30);
 
         JLabel CardFoundReportLabel = new JLabel("一卡通解挂");
         CardFoundReportLabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         CardFoundReportLabel.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        CardFoundReportLabel.setBounds(35, 550, 100, 40);
+        CardFoundReportLabel.setBounds(185, 550, 100, 40);
         jp1.add(CardFoundReportLabel);
 
         JTextField txtFoundReport = new JTextField();
         txtFoundReport.setText("解挂说明（非必要）");
         txtFoundReport.setFont((new Font("微软雅黑", Font.PLAIN, 14)));
-        txtFoundReport.setBounds(165, 557, 160, 30);
+        txtFoundReport.setBounds(315, 557, 160, 30);
         jp1.add(txtFoundReport);
 
         JButton btnCardFoundReport = new JButton("确认解挂");
@@ -266,13 +268,13 @@ public class AppLife extends JFrame {
             }
         });
         jp1.add(btnCardFoundReport);
-        btnCardFoundReport.setBounds(360, 557, 110, 30);
+        btnCardFoundReport.setBounds(510, 557, 110, 30);
 
         JLabel lblWaterBillTable = new JLabel("一卡通交易记录");
         lblWaterBillTable.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblWaterBillTable.setHorizontalAlignment(SwingConstants.CENTER);
         //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
-        lblWaterBillTable.setBounds(820, 130, 150, 40);
+        lblWaterBillTable.setBounds(1020, 130, 150, 40);
         jp1.add(lblWaterBillTable);
 
         String[] headModelDealHistory ={"时间","金额","类型"};
@@ -280,7 +282,7 @@ public class AppLife extends JFrame {
 
         JTable tblWaterBill = new JTable(10, 3);
         tblWaterBill.setModel(modelDealHistory);
-        tblWaterBill.setBounds(600, 180, 600, 500);
+        tblWaterBill.setBounds(800, 180, 600, 500);
         tblWaterBill.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
         tblWaterBill.setRowHeight(50);
         DefaultTableCellRenderer rWaterBill = new DefaultTableCellRenderer();
@@ -400,7 +402,7 @@ public class AppLife extends JFrame {
 
 
         jp1.add(btnCardRecharge);
-        btnCardRecharge.setBounds(260, 380, 110, 35);
+        btnCardRecharge.setBounds(410, 380, 110, 35);
 
         //一卡通部分结束
 
@@ -420,43 +422,43 @@ public class AppLife extends JFrame {
         });
 
         btnBack2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack2.setBounds(1050, 30, 100, 40);
+        btnBack2.setBounds(1250, 30, 100, 40);
         jp2.add(btnBack2);
 
         JLabel lblDormNum = new JLabel("宿舍号");
         lblDormNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormNum.setBounds(25, 30, 100, 40);
+        lblDormNum.setBounds(175, 30, 100, 40);
         jp2.add(lblDormNum);
 
         JLabel lblCurDormNum = new JLabel(studentDormAddress);
         lblCurDormNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCurDormNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCurDormNum.setBounds(115, 30, 100, 40);
+        lblCurDormNum.setBounds(265, 30, 100, 40);
         jp2.add(lblCurDormNum);
 
         JLabel lblDormInfo = new JLabel("宿舍信息查询");
         lblDormInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormInfo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormInfo.setBounds(180, 100, 150, 40);
+        lblDormInfo.setBounds(330, 100, 150, 40);
         jp2.add(lblDormInfo);
 
         JLabel lblDormHygieneRate = new JLabel("卫生分数查询");
         lblDormHygieneRate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormHygieneRate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormHygieneRate.setBounds(50, 160, 150, 40);
+        lblDormHygieneRate.setBounds(200, 160, 150, 40);
         jp2.add(lblDormHygieneRate);
 
 
         JTextField txtDormHygieneRate = new JTextField();
-        txtDormHygieneRate.setBounds(360, 166, 70, 30);
+        txtDormHygieneRate.setBounds(510, 166, 70, 30);
         jp2.add(txtDormHygieneRate);
 
         JComboBox cmbDormHygieneRateWeek = new JComboBox();
         for (int i = 1; i < 17; i++) {
             cmbDormHygieneRateWeek.addItem("第" + i + "周");
         }
-        cmbDormHygieneRateWeek.setBounds(220, 166, 100, 30);
+        cmbDormHygieneRateWeek.setBounds(370, 166, 100, 30);
         cmbDormHygieneRateWeek.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -484,18 +486,18 @@ public class AppLife extends JFrame {
         JLabel lblDormWaterRate = new JLabel("水费查询");
         lblDormWaterRate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormWaterRate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormWaterRate.setBounds(75, 210, 100, 40);
+        lblDormWaterRate.setBounds(225, 210, 100, 40);
         jp2.add(lblDormWaterRate);
 
         JTextField txtDormWaterRate = new JTextField();
-        txtDormWaterRate.setBounds(360, 216, 70, 30);
+        txtDormWaterRate.setBounds(510, 216, 70, 30);
         jp2.add(txtDormWaterRate);
 
         JComboBox cmbDormWaterRateMonth = new JComboBox();
         for (int i = 1; i < 13; i++) {
             cmbDormWaterRateMonth.addItem("第" + i + "月");
         }
-        cmbDormWaterRateMonth.setBounds(220, 216, 100, 30);
+        cmbDormWaterRateMonth.setBounds(370, 216, 100, 30);
         cmbDormWaterRateMonth.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -523,18 +525,18 @@ public class AppLife extends JFrame {
         JLabel lblDormElectricityRate = new JLabel("电费查询");
         lblDormElectricityRate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormElectricityRate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormElectricityRate.setBounds(75, 260, 100, 40);
+        lblDormElectricityRate.setBounds(225, 260, 100, 40);
         jp2.add(lblDormElectricityRate);
 
         JTextField txtDormElectricityRate = new JTextField();
-        txtDormElectricityRate.setBounds(360, 266, 70, 30);
+        txtDormElectricityRate.setBounds(510, 266, 70, 30);
         jp2.add(txtDormElectricityRate);
 
         JComboBox cmbDormElectricityRateMonth = new JComboBox();
         for (int i = 1; i < 13; i++) {
             cmbDormElectricityRateMonth.addItem("第" + i + "月");
         }
-        cmbDormElectricityRateMonth.setBounds(220, 266, 100, 30);
+        cmbDormElectricityRateMonth.setBounds(370, 266, 100, 30);
         cmbDormElectricityRateMonth.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -562,17 +564,17 @@ public class AppLife extends JFrame {
         JLabel lblDormRepairReport = new JLabel("宿舍报修");
         lblDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReport.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReport.setBounds(205, 350, 100, 40);
+        lblDormRepairReport.setBounds(355, 350, 100, 40);
         jp2.add(lblDormRepairReport);
 
         JLabel lblDormRepairReportThing = new JLabel("报修内容");
         lblDormRepairReportThing.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReportThing.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReportThing.setBounds(75, 470, 100, 40);
+        lblDormRepairReportThing.setBounds(225, 470, 100, 40);
         jp2.add(lblDormRepairReportThing);
 
         JTextField txtDormRepairReport = new JTextField();
-        txtDormRepairReport.setBounds(195, 476, 150, 30);
+        txtDormRepairReport.setBounds(345, 476, 150, 30);
         jp2.add(txtDormRepairReport);
 
         /*JLabel lblDormRepairReportDate = new JLabel("报修日期");
@@ -603,7 +605,7 @@ public class AppLife extends JFrame {
         JLabel lblDormRepairReportHistory = new JLabel("报修历史");
         lblDormRepairReportHistory.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblDormRepairReportHistory.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReportHistory.setBounds(800, 100, 100, 40);
+        lblDormRepairReportHistory.setBounds(1000, 100, 100, 40);
         jp2.add(lblDormRepairReportHistory);
 
         String[] headModelRepairHistory={"时间","内容","状态"};
@@ -611,7 +613,7 @@ public class AppLife extends JFrame {
 
         JTable tblDormRepairHistory = new JTable(9, 3);
         tblDormRepairHistory.setModel(modelRepairHistory);
-        tblDormRepairHistory.setBounds(600, 150, 500, 450);
+        tblDormRepairHistory.setBounds(800, 150, 500, 450);
         tblDormRepairHistory.setRowHeight(50);
         tblDormRepairHistory.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         DefaultTableCellRenderer rDormRepairHistory = new DefaultTableCellRenderer();
@@ -653,7 +655,7 @@ public class AppLife extends JFrame {
 
         JButton btnDormRepairReport = new JButton("确认报修");
         btnDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        btnDormRepairReport.setBounds(380, 479, 110, 35);
+        btnDormRepairReport.setBounds(530, 474, 110, 35);
         btnDormRepairReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
