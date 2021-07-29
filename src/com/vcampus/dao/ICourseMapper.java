@@ -46,4 +46,10 @@ public interface ICourseMapper {
     public void setCourse(Course course);
 
     public void addLineInCourseScore(CourseScore courseScore);
+
+    public CourseScore getCourseScore(CourseScore courseScore);
+
+    public void setScore(CourseScore courseScore);
+
+    public void deleteLineFromCourseScore(CourseScore courseScore);
 }
