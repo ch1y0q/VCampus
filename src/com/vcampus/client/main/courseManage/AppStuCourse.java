@@ -29,6 +29,7 @@ public class AppStuCourse extends JFrame {
     private JComboBox chooseSemester0;
     private JComboBox chooseSemester;
     private JLabel numOfCreditInSemesterLabel;
+    private JLabel numOfScoreLabel;
     public AppStuCourse(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setVisible(true);
@@ -196,7 +197,7 @@ public class AppStuCourse extends JFrame {
         JLabel scoreLabel = new JLabel("绩点",JLabel.CENTER);
         scoreLabel.setBounds(width*2/25+395,height/40,40,30);
         jp3.add(scoreLabel);
-        JLabel numOfScoreLabel = new JLabel();
+        numOfScoreLabel = new JLabel();
         numOfScoreLabel.setBounds(width*2/25+450,height/40,40,30);
         jp3.add(numOfScoreLabel);
         refreshCheckScoreTable();
@@ -292,6 +293,8 @@ public class AppStuCourse extends JFrame {
                     model2.removeRow(row);
                     numOfCreditText.setText(calculateCredit());
                     refreshCourseTable();
+                    refreshCheckScoreTable();
+                    refreshSelectCourseTable();
                 }
             }
         });
@@ -474,18 +477,75 @@ public class AppStuCourse extends JFrame {
                     model3.addRow(data);
                 }
                 double credit = 0;
+                double zongJiDian = 0;
                 for(int i = 0;i<model3.getRowCount();i++){
                     String n = (String)model3.getValueAt(i,2);
+                    String score = (String)model3.getValueAt(i,4);
                     if(n!=null){
                         Double d = Double.parseDouble(n);
+                        double jiDian = stringToDouble(score);
+                        zongJiDian+=d*jiDian;
                         credit+=d;
                     }
                 }
+                zongJiDian = zongJiDian/credit;
                 DecimalFormat df = new DecimalFormat("0.00");
                 String sCredit = df.format(credit);
+                String sZongJiDian = df.format(zongJiDian);
                 numOfCreditInSemesterLabel.setText(sCredit);
+                numOfScoreLabel.setText(sZongJiDian);
             }
         }
+    }
+
+    private double stringToDouble(String score){
+        double res = 0;
+        if(!score.equals("")){
+            double d = Double.parseDouble(score);
+            if(d>=96){
+                return 4.8;
+            }
+            else if(d>=93&&d<96){
+                return 4.5;
+            }
+            else if(d>=90&&d<93){
+                return 4.0;
+            }
+            else if(d>=86&&d<90){
+                return 3.8;
+            }
+            else if(d>=83&&d<86){
+                return 3.5;
+            }
+            else if(d>=80&&d<83){
+                return 3.0;
+            }
+            else if(d>=76&&d<80){
+                return 2.8;
+            }
+            else if(d>=73&&d<76){
+                return 2.5;
+            }
+            else if(d>=70&&d<73){
+                return 2.0;
+            }
+            else if(d>=66&&d<70){
+                return 1.8;
+            }
+            else if(d>=63&&d<66){
+                return 1.5;
+            }
+            else if(d>=60&&d<63){
+                return 1.0;
+            }
+            else if(d<60){
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
+        return res;
     }
 
     public void open(){
