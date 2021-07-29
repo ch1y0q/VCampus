@@ -11,6 +11,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-19
+ */
 
 public class ManLibrarydetailPanel extends JPanel {
     public JTextField txtISBN;

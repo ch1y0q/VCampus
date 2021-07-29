@@ -13,7 +13,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-14
+ */
 public class TeaMandetailPanel extends JPanel {
     String[] strText=new String[11];
     public JTextField txtname;

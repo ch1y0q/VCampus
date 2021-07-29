@@ -14,9 +14,11 @@ import com.vcampus.entity.Student;
 /**
  * 学生管理类
  *
- * @author Franklin Yang
- * @date 2021/7/12
+ *
+ * @author Xiao Kaijie
+ * @date 2021-07-19
  */
+
 public class StudentManage {
 
     //通过一卡通号检索返回姓名

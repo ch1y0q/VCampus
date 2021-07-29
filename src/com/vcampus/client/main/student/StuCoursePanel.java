@@ -5,7 +5,10 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
+/**
+ * @author Xiao Kaijie
+ * @date 2021-07-19
+ */
 public class StuCoursePanel extends JPanel {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
