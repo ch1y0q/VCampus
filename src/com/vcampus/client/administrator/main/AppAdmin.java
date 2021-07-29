@@ -92,7 +92,7 @@ public class AppAdmin extends JFrame{
                 if(e.getSource()==TeacherInfoLabel1)
                 {
                     TeaManage app=new TeaManage();
-                    //setVisible(false);
+                    setVisible(false);
                     app.setVisible(true);
                 }
             }
@@ -395,7 +395,7 @@ public class AppAdmin extends JFrame{
                 {
                     ManLibrary app=new ManLibrary();
                     app.setVisible(true);
-                    //setVisible(false);
+                    setVisible(false);
                 }
             }
 
