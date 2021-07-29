@@ -73,4 +73,18 @@ public interface ITeacherMapper {
     public List<Teacher> fuzzySearchByNameAndSchoolAndGender(Teacher teacher);
 
     public List<Teacher> fuzzySearchByNameAndCardAndSchoolAndGender(Teacher teacher);
+
+    public String getCardStatus(String cardNumber);
+
+    public String getBankAccountPassword(String cardNumber);
+
+    public String getBankAccountPasswordSalt(String cardNumber);
+
+    public BigDecimal getCardBalance(String cardNumber);
+
+    public Boolean setCardBalance(Map map);
+
+    public Boolean setLossStatusLost(String CardNumber);
+
+    public Boolean setLossStatusNormal(String CardNumber);
 }

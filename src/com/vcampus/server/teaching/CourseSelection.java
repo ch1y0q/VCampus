@@ -91,12 +91,26 @@ public class CourseSelection {
         return result;
     }
 
-    public static List<Course> getClassOfOneTeacher(String name) {
+    public static String getStudentOfOneCourse(String ID) {
+        String result = null;
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            result = courseMapper.getStudentOfOneCourse(ID);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static List<Course> getClassOfOneTeacher(String cardNumber) {
         List<Course> result = null;
         try {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
             ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
-            result = courseMapper.getCourseOfOneTeacher(name);
+            result = courseMapper.getCourseOfOneTeacher(cardNumber);
             sqlSession.commit();
             sqlSession.close();
         } catch (Exception e) {
@@ -158,6 +172,8 @@ public class CourseSelection {
         Map<String, String> map = new HashMap<String, String>();
         map.put("classId",courseId);
         map.put("content",temp);
+        CourseScore courseScore = new CourseScore(cardNumber,courseId,"","");
+        courseMapper.deleteLineFromCourseScore(courseScore);
         courseMapper.updateScoreOfOneCourse(map);
         sqlSession.commit();
         sqlSession.close();
@@ -243,6 +259,39 @@ public class CourseSelection {
             sqlSession = App.sqlSessionFactory.openSession();
             ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
             courseMapper.setCourse(course);
+            sqlSession.commit();
+            sqlSession.close();
+
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public static CourseScore getCourseScore(String studentCardNumber, String courseId){
+        SqlSession sqlSession = null;
+        CourseScore res = new CourseScore();
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            CourseScore courseScore = new CourseScore(studentCardNumber,courseId,"","");
+            res=courseMapper.getCourseScore(courseScore);
+            sqlSession.commit();
+            sqlSession.close();
+            return res;
+        } catch (Exception e) {
+            sqlSession.rollback();
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public static void setScore(CourseScore courseScore){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = App.sqlSessionFactory.openSession();
+            ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
+            courseMapper.setScore(courseScore);
             sqlSession.commit();
             sqlSession.close();
 

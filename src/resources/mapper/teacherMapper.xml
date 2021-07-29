@@ -201,4 +201,49 @@
         UPDATE teachers
         SET `teacherRank` = #{teacherRank} WHERE cardNumber=#{cardNumber}
     </update>
+
+    <select id="getCardStatus" parameterType="String"
+            resultType="String">
+        SELECT `lossStatus` FROM `teachers` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
+
+    <select id="getBankAccountPassword" parameterType="String"
+            resultType="String">
+        SELECT `bankAccountPassword` FROM `teachers` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
+
+    <select id="getBankAccountPasswordSalt" parameterType="String"
+            resultType="String">
+        SELECT `bankAccountPasswordSalt` FROM `teachers` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
+
+    <select id="getCardBalance" parameterType="String"
+            resultType="BigDecimal">
+        SELECT `balance` FROM `teachers` WHERE
+            `cardNumber`=#{cardNumber}
+    </select>
+
+    <update id="setCardBalance" parameterType="Map">
+        UPDATE `teachers` SET
+            `balance` = #{money} WHERE `cardNumber`
+                                                        = #{cardNumber}
+        LIMIT 1
+    </update>
+
+    <update id="setLossStatusLost" parameterType="String">
+        UPDATE `teachers` SET
+            `lossStatus` = 'LOST' WHERE `cardNumber`
+                                           = #{cardNumber}
+        LIMIT 1
+    </update>
+    <update id="setLossStatusNormal" parameterType="String">
+        UPDATE `teachers` SET
+            `lossStatus` = 'NORMAL' WHERE `cardNumber`
+                                            = #{cardNumber}
+        LIMIT 1
+    </update>
+
 </mapper>
