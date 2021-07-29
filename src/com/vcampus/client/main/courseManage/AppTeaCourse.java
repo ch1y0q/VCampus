@@ -271,5 +271,6 @@ public class AppTeaCourse {
     public void close(){
         jf.setVisible(false);
     }
+    public void open(){jf.setVisible(true);}
 }
 

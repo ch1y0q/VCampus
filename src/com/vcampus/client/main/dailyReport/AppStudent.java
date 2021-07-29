@@ -186,8 +186,8 @@ public class AppStudent extends JFrame {
                 if(e.getSource()==btnLibrary)
                 {
                     StuLibrary app=new StuLibrary();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
@@ -208,8 +208,8 @@ public class AppStudent extends JFrame {
                 if(e.getSource()==btnOpencourse)
                 {
                     AppLife app=new AppLife();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
@@ -229,8 +229,8 @@ public class AppStudent extends JFrame {
                 if(e.getSource()==btnShop)
                 {
                     AppShop app=new AppShop();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
@@ -247,7 +247,7 @@ public class AppStudent extends JFrame {
         btnTeaching.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==btnLibrary)
+                if(e.getSource()==btnTeaching)
                 {
                     AppStuCourse app=new AppStuCourse();
                     app.open();

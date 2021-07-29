@@ -107,7 +107,7 @@ public class ManLibrary extends JFrame {
         recall.setBounds(850, 50, 200, 30);
         recall.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(recall);
-        String[] recalltxt={"","china","usa","japan"};
+        String[] recalltxt={"","计算机用书","数学用书","文学艺术"};
         JComboBox jc=new JComboBox(recalltxt);
         jc.setBounds(1000,50,150,30);
         contentPane.add(jc);
