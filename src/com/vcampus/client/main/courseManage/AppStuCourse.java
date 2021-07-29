@@ -123,7 +123,11 @@ public class AppStuCourse extends JFrame {
             }
         };
         sp1.setViewportView(selectCourseTable);
+        JButton refreshButton = new JButton("刷新");
+        refreshButton.setBounds(width*16/25,height/40,60,30);
+        jp1.add(refreshButton);
         refreshSelectCourseTable();
+
 
         //已选课程
         JScrollPane sp2 = new JScrollPane();
@@ -217,6 +221,7 @@ public class AppStuCourse extends JFrame {
                 {
                     jp1.setSize(currentWidth, currentHeight);
                     sp1.setBounds(currentWidth / 50, currentHeight / 50, currentWidth * 3 / 5, currentHeight * 3 / 5);
+                    refreshButton.setBounds(currentWidth*16/25,currentHeight/40,60,30);
                 }
                 //jp2
                 {
@@ -298,6 +303,14 @@ public class AppStuCourse extends JFrame {
         }
         );
 
+        //刷新选课表
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshSelectCourseTable();
+            }
+        }
+        );
         //成绩查询页面选择学期
 
 
@@ -349,11 +362,20 @@ public class AppStuCourse extends JFrame {
                         new Object[] {}).send())
                 .getListReturn(Course.class);
         ListIterator<Course> iter = list.listIterator();
+        String cardNumber = App.session.getStudent().getCardNumber();
         while(iter.hasNext()){
             Course course = iter.next();
+            String courseId = course.getId();
+            String status = "选择";
+            CourseScore courseScore = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                    null,"com.vcampus.server.teaching.CourseSelection.getCourseScore",
+                    new Object[] {cardNumber,courseId}).send()).getReturn(CourseScore.class);
+            if(courseScore != null){
+                status = "已选";
+            }
             String[] courseInfo = {course.getId(),course.getClassName(),course.getSemester(),course.getCredit()
                     ,course.getTeacher(),course.getTime(),course.getClassroom(),course.getMajor(),course.getCapacity()
-                    ,course.getSelectedNumber(),"选择"};
+                    ,course.getSelectedNumber(),status};
             model1.addRow(courseInfo);
         }
     }

@@ -5,9 +5,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Socket;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.vcampus.server.chat.ChatService;
+import com.vcampus.server.chat.ClientManager;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -25,7 +28,7 @@ import com.vcampus.entity.Student;
  * @author Franklin Yang
  * @date 2021/7/12
  */
-public class App extends JFrame {
+public class App extends JFrame implements ChatService.OnSocketAcceptListener {
 
     private JPanel contentPane;
     private Locale locale;
@@ -37,6 +40,8 @@ public class App extends JFrame {
     public static SqlSessionFactory sqlSessionFactory; // MyBatis连接工厂
     public static SqlSession foreverSqlSession; // 永久公有MyBatis连接会话，该会话仅一份，可能出现资源争抢，严禁关闭
     // 如非大量连续请求场景，请使用工厂自行创建SqlSession
+
+    private ChatService chatService;
 
     public static JTextPane paneLog;
 
@@ -88,9 +93,8 @@ public class App extends JFrame {
         App.paneLog.setEditable(false);
         scrollPane.setViewportView(paneLog);
         App.paneLog.setFont(new Font("宋体", Font.PLAIN, 14));
-        /**
-         * 新增部分
-         */
+
+        /* 新增部分 */
         // 初始化全局消息队列
         App.requestQueue = RequestQueue.getInstance();
         // 初始化MyBatis的SqlSession工厂
@@ -101,9 +105,10 @@ public class App extends JFrame {
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             App.paneLog.setText(res.getString("db_config_success"));
         } catch (IOException e) {
-            App.paneLog.setText(res.getString("db_config_failure") + e.toString());
+            App.paneLog.setText(res.getString("db_config_failure") + e);
             e.printStackTrace();
         }
+
         // 尝试连接数据库
         try {
             SqlSession sqlSession = App.sqlSessionFactory.openSession();
@@ -117,9 +122,11 @@ public class App extends JFrame {
             App.paneLog.setText(res.getString("db_connection_failure"));
             e.printStackTrace();
         }
+
         // 启动服务器端侦听
         requestListener = new RequestListener(Integer.parseInt(ServerUtils.getMainPort()));
         requestListener.start();
+
         // 启动请求处理器
         App.requestHandler = new RequestHandler();
         App.requestHandler.start();
@@ -127,10 +134,22 @@ public class App extends JFrame {
                 paneLog.getText() + (paneLog.getText().equals("") ? "" : "\n") + String.format(res.getString("start_listening_on"), ServerUtils.getMainPort()));
         foreverSqlSession = sqlSessionFactory.openSession();
 
+        /* 启动聊天服务 */
+        ClientManager clientManager = new ClientManager();
+        chatService = new ChatService(clientManager);
+        this.chatService.setOnAcceptListener(this);
+        chatService.startup();
+
+        App.paneLog.setText(
+                paneLog.getText() + (paneLog.getText().equals("") ? "" : "\n") + String.format(res.getString("start_chat_listening_on"), ServerUtils.getChatPort()));
     }
 
     public static void appendLog(String msg) {
         App.paneLog.setText(App.paneLog.getText() + "\n" + msg);
     }
 
+    @Override
+    public void onSocketAccept(Socket socket) {
+        App.appendLog(String.format(res.getString("client_joined"), socket.getInetAddress()));
+    }
 }
