@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class AppStuCourse extends JFrame {
-    private JFrame jf = new JFrame("课程管理");
     private double credit = 0;
     private int width = 1151;
     private int height = 800;
@@ -59,15 +58,12 @@ public class AppStuCourse extends JFrame {
         jp2.setBackground(Color.white);
         jp3.setBackground(Color.white);
 
-
-
+        /*
         //侧边栏
         JTree jt= new StuCategory().getJTree();
         add(jt);
         jt.setBounds(0,height/50,width*2/11,height);
-
-
-
+        */
 
         //课程表
         JScrollPane sp0 = new JScrollPane();
@@ -110,9 +106,6 @@ public class AppStuCourse extends JFrame {
         courseTable.setDefaultRenderer(Object.class, tcr);
         refreshCourseTable();
 
-
-
-
         //选课
         JScrollPane sp1 = new JScrollPane();
         sp1.setBounds(width/50, height/40, width * 3 / 5, height * 3 / 5);
@@ -131,8 +124,6 @@ public class AppStuCourse extends JFrame {
         };
         sp1.setViewportView(selectCourseTable);
         refreshSelectCourseTable();
-
-
 
         //已选课程
         JScrollPane sp2 = new JScrollPane();
@@ -161,10 +152,6 @@ public class AppStuCourse extends JFrame {
         sp2.setBounds(width / 50, 30+height / 20, width * 3 / 5, height * 3 / 5);
         initSelectedCourseTable();
         numOfCreditText.setText(calculateCredit());
-
-
-
-
 
         //成绩查询
         JScrollPane sp3 = new JScrollPane();
@@ -208,9 +195,6 @@ public class AppStuCourse extends JFrame {
         numOfScoreLabel.setBounds(width*2/25+450,height/40,40,30);
         jp3.add(numOfScoreLabel);
 
-
-
-
         //事件
 
         //监听窗口大小变化
@@ -220,7 +204,7 @@ public class AppStuCourse extends JFrame {
                 int currentWidth = getWidth();
                 int currentHeight = getHeight();
                 tp.setBounds(currentWidth*2/11,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
-                jt.setBounds(0,currentHeight/50,currentWidth*2/11,currentHeight);
+                // jt.setBounds(0,currentHeight/50,currentWidth*2/11,currentHeight);
                 //jp0
                 {
                     jp0.setSize(currentWidth, currentHeight);
@@ -258,7 +242,6 @@ public class AppStuCourse extends JFrame {
             }
         });
 
-
         //选课
         selectCourseTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -285,9 +268,6 @@ public class AppStuCourse extends JFrame {
                 }
             }
         });
-
-
-
 
         //退课
         selectedCourseTable.addMouseListener(new MouseAdapter() {
@@ -358,7 +338,6 @@ public class AppStuCourse extends JFrame {
         }
     }
 
-
     //刷新选课表
     private void refreshSelectCourseTable(){
         while(model1.getRowCount()>0){
@@ -379,7 +358,6 @@ public class AppStuCourse extends JFrame {
         }
     }
 
-
     //清空课表
     private void clearCourseTable(){
         for(int i =0;i<13;i++){
@@ -388,7 +366,6 @@ public class AppStuCourse extends JFrame {
             }
         }
     }
-
 
     //初始化已选课表
     private void initSelectedCourseTable(){
@@ -414,14 +391,12 @@ public class AppStuCourse extends JFrame {
                 model2.addRow(courseInfo);
             }
         }
-
     }
 
     //关闭窗口
     public void close(){
         setVisible(false);
     }
-
 
     //计算学分
     private String calculateCredit(){
@@ -438,6 +413,8 @@ public class AppStuCourse extends JFrame {
         return sCredit;
     }
 
-    public void open(){setVisible(true);}
+    public void open(){
+        setVisible(true);
+    }
 }
 

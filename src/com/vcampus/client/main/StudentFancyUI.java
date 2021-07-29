@@ -76,6 +76,7 @@ import com.vcampus.client.main.courseManage.AppStuCourse;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.shop.AppShop;
 import com.vcampus.client.main.student.StuCategory;
+import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -221,7 +222,7 @@ public final class StudentFancyUI extends WebFrame
                     switch((String)node.getUserObject()) {
                         case "个人信息维护":
                             internal = new JInternalFrame("个人信息维护",true,true,true, true);
-                            internal.setContentPane(new LoginUI().getContentPane());
+                            internal.setContentPane(new AppStuInfo().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
                             internal.setBounds(30,50,1000,1000);
@@ -391,7 +392,7 @@ public final class StudentFancyUI extends WebFrame
         overlay.addOverlay ( new FillOverlay ( overlayContainer ) );
 
         desktopPane = new WebDesktopPane();
-        /* test
+        /* an example for JInternalFrame
         int  x = 30, y = 30;
         for(int  i = 0; i < 10 ; ++i )
         {
@@ -405,13 +406,6 @@ public final class StudentFancyUI extends WebFrame
             y += 85;
         }
         */
-
-        JInternalFrame internal = new JInternalFrame("AppShop",true,true,true, true);
-        internal.setContentPane(new LoginUI().getContentPane());
-        internal.pack();
-        internal.setVisible(true);
-        internal.setBounds(30,50,1000,1000);
-        desktopPane.add(internal);
 
         mainPane.add(desktopPane);
 

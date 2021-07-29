@@ -267,10 +267,13 @@ public class AppShop extends JFrame {
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        /* left category panel, deprecated
         JTree jt = new StuCategory().getJTree();
         jt.setBackground(new Color(240, 255, 240));
         jt.setBounds(0, 50, 200, 600);
         contentPane.add(jt);
+        */
 
         JLabel lblGoodsSearch = new JLabel("商品查询");
         lblGoodsSearch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -355,7 +358,6 @@ public class AppShop extends JFrame {
         tblGoodsList.setAutoResizeMode ( JTable.AUTO_RESIZE_ALL_COLUMNS );
         tblGoodsList.setRowSelectionAllowed(true);
         tblGoodsList.setCellSelectionEnabled(false);
-       // tblGoodsList.setBounds(330, 150, 500, 600);
         tblGoodsList.setRowHeight(40);
         tblGoodsList.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         tblGoodsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
