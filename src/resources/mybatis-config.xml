@@ -26,6 +26,7 @@
         <typeAlias type="com.vcampus.entity.Goods" alias="Goods" />
         <typeAlias type="com.vcampus.entity.CourseScore" alias="CourseScore" />
         <typeAlias type="com.vcampus.entity.PersonWhoReport" alias="PersonWhoReport" />
+        <typeAlias type="com.vcampus.entity.GoodsHistory" alias="GoodsHistory" />
     </typeAliases>
 
     <!-- 环境配置 -->
@@ -57,6 +58,7 @@
         <mapper resource="resources/mapper/courseMapper.xml"/>
         <mapper resource="resources/mapper/goodsMapper.xml"/>
         <mapper resource="resources/mapper/personWhoReportMapper.xml"/>
+        <mapper resource="resources/mapper/goodsHistoryMapper.xml"/>
     </mappers>
 
 </configuration>

@@ -6,6 +6,13 @@ import java.util.Map;
 
 import com.vcampus.entity.DormLife;
 
+/**
+ * 参见IStudentMapper
+ *
+ * @author Y
+ * @date 2021/7/25
+ */
+
 public interface IDormLifeMapper {
 
     public Integer getHygieneMark(Map map);

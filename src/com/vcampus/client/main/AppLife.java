@@ -36,6 +36,7 @@ import java.awt.Toolkit;
 /**
  * @author Y
  * @date 2021/7/21
+ * 学生生活服务界面
  */
 
 public class AppLife extends JFrame {
@@ -49,6 +50,11 @@ public class AppLife extends JFrame {
     public DefaultTableModel modelRepairHistory;
 
     public AppLife() {
+
+        /**
+         * 以下是获取必要参数方便使用
+         * 使用AppLifeHelper和直接使用ResponseUtils.效果实际相同
+         */
 
         String studentCardNumber;
         studentCardNumber = App.session.getStudent().getCardNumber();
@@ -84,6 +90,11 @@ public class AppLife extends JFrame {
                         .getReturn(String.class);
 
 
+        /**
+         * 获取参数结束
+         * 以下是面板设置
+         */
+
         setResizable(true);
         setTitle("生活服务 - Vcampus");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,7 +117,11 @@ public class AppLife extends JFrame {
         tabbedPane.add("宿舍", jp2);
         tabbedPane.setBounds(0, 0, 2000, 1100);
         this.add(tabbedPane);
+        //选项卡面板
 
+        /**
+         * @deprecated 旧目录
+         */
         /*JTree jt = new StuCategory().getJTree();
         jt.setBackground(new Color(240, 255, 240));
         jt.setBounds(0, 50, 200, 600);
@@ -131,6 +146,7 @@ public class AppLife extends JFrame {
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         btnBack.setBounds(1250, 30, 100, 40);
         jp1.add(btnBack);
+        //返回按钮
 
         JLabel lblCardNum = new JLabel("一卡通号");
         lblCardNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -174,6 +190,8 @@ public class AppLife extends JFrame {
         lblCardOp.setBounds(400, 130, 100, 40);
         jp1.add(lblCardOp);
 
+        //基础信息显示
+
 
         JLabel lblCardRecharge = new JLabel("一卡通充值");
         lblCardRecharge.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -216,6 +234,8 @@ public class AppLife extends JFrame {
         txtAmount.setBounds(465, 317, 160, 30);
         jp1.add(txtAmount);
 
+        //充值相关的部件布局。由于充值功能需要刷新交易记录表格，故实现功能的按钮放于后部分。
+
 
 
         JLabel lblCardLossReport = new JLabel("一卡通挂失");
@@ -239,10 +259,12 @@ public class AppLife extends JFrame {
                 AppLifeHelper.lossJudge(studentCardNumber);
                 lblCurCardStatus.setText("挂失");
                 JOptionPane.showMessageDialog(null, "挂失成功");
+                //调用了AppLifeHelper中的.lossJudge功能实现通信。这个功能是将卡状态改为挂失。紧下有将卡状态改为正常，不再重复。
             }
         });
         jp1.add(btnCardLossReport);
         btnCardLossReport.setBounds(510, 507, 110, 30);
+        //挂失
 
         JLabel CardFoundReportLabel = new JLabel("一卡通解挂");
         CardFoundReportLabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -269,11 +291,12 @@ public class AppLife extends JFrame {
         });
         jp1.add(btnCardFoundReport);
         btnCardFoundReport.setBounds(510, 557, 110, 30);
+        //解冻
+        //卡状态的相关实现结束
 
         JLabel lblWaterBillTable = new JLabel("一卡通交易记录");
         lblWaterBillTable.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblWaterBillTable.setHorizontalAlignment(SwingConstants.CENTER);
-        //lblNewLabel_1.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/aboutme.png")));
         lblWaterBillTable.setBounds(1020, 130, 150, 40);
         jp1.add(lblWaterBillTable);
 
@@ -293,6 +316,7 @@ public class AppLife extends JFrame {
 
         listDealHistory = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.bank.BankServer.getDealHistory",
                 new Object[]{studentCardNumber}).send()).getListReturn(DealHistory.class);
+        //从服务器得到List<DealHistory>的返回值
 
         modelDealHistory.setRowCount(0);
         String[][] listDataDealHistory =null;
@@ -317,12 +341,16 @@ public class AppLife extends JFrame {
                 listDataDealHistory[i][2]=dealTypeChinese;
             }
         }
+        //返回不为空时按照数据的对应存储位置将数据映射在表格中。
         modelDealHistory =new DefaultTableModel(listDataDealHistory,headModelDealHistory){
             @Override
             public boolean isCellEditable(int a,int b){return false;}
         };
+        //应用ListData到model
         tblWaterBill.setModel(modelDealHistory);
+        //应用model到表格
 
+        //交易记录表实现结束
 
         JButton btnCardRecharge = new JButton("确认充值");
         btnCardRecharge.setFont((new Font("微软雅黑", Font.PLAIN, 16)));
@@ -361,6 +389,8 @@ public class AppLife extends JFrame {
 
                     Boolean flag = AppLifeHelper.insertDealHistory(studentCardNumber, balanceAdded, "INCOME");
 
+                    //更改数据库部分，调用了AppLifeHelper.insertDealHistory实现与服务器通信。
+                    //需要传递多个参数时封装为map
 
                     listDealHistory = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.bank.BankServer.getDealHistory",
                             new Object[]{studentCardNumber}).send()).getListReturn(DealHistory.class);
@@ -395,12 +425,10 @@ public class AppLife extends JFrame {
                     };
                     tblWaterBill.setModel(modelDealHistory);
 
-
+                    //复用代码实现即时刷新交易记录表。
                 }
             }
         });
-
-
         jp1.add(btnCardRecharge);
         btnCardRecharge.setBounds(410, 380, 110, 35);
 
@@ -420,6 +448,7 @@ public class AppLife extends JFrame {
                 }
             }
         });
+        //返回按钮
 
         btnBack2.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         btnBack2.setBounds(1250, 30, 100, 40);
@@ -436,6 +465,8 @@ public class AppLife extends JFrame {
         lblCurDormNum.setHorizontalAlignment(SwingConstants.CENTER);
         lblCurDormNum.setBounds(265, 30, 100, 40);
         jp2.add(lblCurDormNum);
+
+        //基本信息显示
 
         JLabel lblDormInfo = new JLabel("宿舍信息查询");
         lblDormInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -475,8 +506,10 @@ public class AppLife extends JFrame {
                         .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLife.getDormHygieneMark",
                                 new Object[]{map}).send())
                         .getReturn(Integer.class);
-
+                //唤起server的getDormHygieneMark函数得到数据
                 txtDormHygieneRate.setText(String.valueOf(hygieneMark));
+                //界面更新
+                //查询卫生分数功能，查水电费功能类似，不表
             }
         });
         jp2.add(cmbDormHygieneRateWeek);
@@ -519,6 +552,7 @@ public class AppLife extends JFrame {
             }
         });
         jp2.add(cmbDormWaterRateMonth);
+        //水费
 
 
 
@@ -558,7 +592,7 @@ public class AppLife extends JFrame {
             }
         });
         jp2.add(cmbDormElectricityRateMonth);
-
+        //电费
 
 
         JLabel lblDormRepairReport = new JLabel("宿舍报修");
@@ -576,31 +610,6 @@ public class AppLife extends JFrame {
         JTextField txtDormRepairReport = new JTextField();
         txtDormRepairReport.setBounds(345, 476, 150, 30);
         jp2.add(txtDormRepairReport);
-
-        /*JLabel lblDormRepairReportDate = new JLabel("报修日期");
-        lblDormRepairReportDate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        lblDormRepairReportDate.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReportDate.setBounds(75, 470, 100, 40);
-        jp2.add(lblDormRepairReportDate);
-
-        JTextField txtDormRepairReportDate = new JTextField();
-        txtDormRepairReportDate.setBounds(195, 476, 150, 30);
-        jp2.add(txtDormRepairReportDate);
-
-        JLabel lblDormRepairReportDetail = new JLabel("具体信息");
-        lblDormRepairReportDetail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        lblDormRepairReportDetail.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDormRepairReportDetail.setBounds(75, 520, 100, 40);
-        jp2.add(lblDormRepairReportDetail);
-
-        JTextField txtDormRepairReportDetail = new JTextField();
-        txtDormRepairReportDetail.setBounds(195, 526, 150, 30);
-        jp2.add(txtDormRepairReportDetail);
-
-         */
-
-
-
 
         JLabel lblDormRepairReportHistory = new JLabel("报修历史");
         lblDormRepairReportHistory.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -652,6 +661,7 @@ public class AppLife extends JFrame {
             public boolean isCellEditable(int a,int b){return false;}
         };
         tblDormRepairHistory.setModel(modelRepairHistory);
+        //宿舍报修历史显示，与交易记录类似。
 
         JButton btnDormRepairReport = new JButton("确认报修");
         btnDormRepairReport.setFont(new Font("微软雅黑", Font.PLAIN, 16));
@@ -701,6 +711,7 @@ public class AppLife extends JFrame {
             }
         });
         jp2.add(btnDormRepairReport);
+        //报修功能，与充值功能类似。
 
         //宿舍部分结束
     //

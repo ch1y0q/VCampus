@@ -1,33 +1,40 @@
-package com.vcampus.client.main.library.ManagerLibrary;
+package com.vcampus.client.main.manager;
 
+import com.alee.api.annotations.NotNull;
 import com.vcampus.client.main.App;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 
 import java.util.HashMap;
+
 /**
- * @author Xiao Kaijie
- * @date 2021-07-19
+ * @author Dong Ruojing
+ * @date 2021/7/29
  */
-public class ManlibdetailHelper {
-    public static Boolean resetTabsByISBN(HashMap map) {
+public class AppAdminInfoHelper {
+    @NotNull
+    //修改电话
+    public static Boolean resetPhoneNumber(HashMap map) {
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer,
-                        null, "com.vcampus.server.library.BookServer.resetTabsByISBN",
+                        null, "com.vcampus.server.AppAdminInfo.resetPhoneNumber",
                         new Object[]{map}).send())
                 .getReturn(Boolean.class);
     }
-    public static Boolean resetNumByISBN(HashMap map) {
+
+    //修改邮箱
+    public static Boolean resetEmail(HashMap map) {
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer,
-                        null, "com.vcampus.server.library.BookServer.resetNumByISBN",
+                        null, "com.vcampus.server.AppAdminInfo.resetEmail",
                         new Object[]{map}).send())
                 .getReturn(Boolean.class);
     }
-    public static Boolean resetPlaceByISBN(HashMap map) {
+    //修改密码
+    public static Boolean resetPassword(HashMap map){
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer,
-                        null, "com.vcampus.server.library.BookServer.resetPlaceByISBN",
+                        null, "com.vcampus.server.AppAdminInfo.resetPassword",
                         new Object[]{map}).send())
                 .getReturn(Boolean.class);
     }

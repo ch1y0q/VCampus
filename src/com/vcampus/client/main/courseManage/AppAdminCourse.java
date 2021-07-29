@@ -1,7 +1,9 @@
 package com.vcampus.client.main.courseManage;
 
 import com.vcampus.client.main.App;
+import com.vcampus.client.main.manager.AppAdmin;
 import com.vcampus.client.main.manager.ManCategory;
+import com.vcampus.client.main.teacher.AppTeacher;
 import com.vcampus.entity.Course;
 import com.vcampus.entity.Teacher;
 import com.vcampus.net.Request;
@@ -15,8 +17,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
+/**
+ * @author ryp
+ *
+ */
 
+//管理员课程界面
 public class AppAdminCourse {
+    /**
+     * AppAdminCourse类是管理员进行课程管理的界面，
+     * 在这个界面中可以实现添加课程，删除课程，
+     * 修改课程信息等操作。
+     * 为了方便使用，设置了各种类型的查找功能，
+     * 方便管理员快速找到需要修改的找到的课程
+     *
+     */
+
     private JFrame jf = new JFrame("课程管理");
     private int width = 1151;
     private int height = 800;
@@ -37,14 +53,26 @@ public class AppAdminCourse {
         jp.setLayout(null);
         jp.setBounds(width*2/11,height/50,width*4/5,height*4/5);
         jp.setBackground(Color.white);
+        JButton btnBack = new JButton("返回");
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnBack)
+                {
+                    AppAdmin app=new AppAdmin();
+                    app.setVisible(true);
+                    jf.setVisible(false);
+                }
+            }
+        });
+        btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack.setBounds(width-60, height, 60, 30);
+        container.add(btnBack);
 
 
-//        //侧边栏
-//        JTree jt= new StuCategory().getJTree();
-//        add(jt);
-//        jt.setBounds(0,height/50,width*2/11,height);
-
-
+        /**
+         * 界面布局
+         */
         //管理员课程管理
         JLabel CourseInformationManagerLabel = new JLabel("课程信息管理",JLabel.CENTER);
         jp.add(CourseInformationManagerLabel);
@@ -100,12 +128,24 @@ public class AppAdminCourse {
         refreshCourseTable();
         courseInformationTable.setEnabled(false);
 
+        /**
+         * 界面上的组件触发的事件
+         */
+        //界面事件
+
+
+        /**
+         * 监听窗口大小变化的事件，
+         * 大小变化时，窗口内组件大小，位置相应变化
+         */
+        //监听窗口大小变化
         jf.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 int currentWidth = jf.getWidth();
                 int currentHeight = jf.getHeight();
                 jp.setBounds(currentWidth/50,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
+                btnBack.setBounds(currentWidth-60, 0, 60, 30);
                 CourseInformationManagerLabel.setBounds(currentWidth/50,currentHeight/40,90,30);
                 anLabel.setBounds(currentWidth*6/50+90,currentHeight/40,20,30);
                 chooseClass.setBounds(currentWidth*6/50+110,currentHeight/40,80,30);
@@ -120,6 +160,11 @@ public class AppAdminCourse {
             }
         });
 
+
+        /**
+         * 点击“启动编辑”按钮，表格变为可编辑状态，课程编号列由于是课程类中的关键字不可编辑
+         * 双击需要编辑的单元格即可对其中内容进行编辑
+         */
         //编辑课程
         startEditButton.addActionListener(new ActionListener() {
             @Override
@@ -133,6 +178,10 @@ public class AppAdminCourse {
         );
 
 
+        /**
+         * 点击“删除”，将该行课程删除
+         */
+        //删除课程
         courseInformationTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -148,7 +197,13 @@ public class AppAdminCourse {
             }
         });
 
-
+        /**
+         * 点击按钮“添加”开始添加课程，点击后该按钮变成确认按钮，
+         * 课程编号由系统自动生成并且不可修改，此时该按钮变成确认按钮
+         * 已选课程人数设置为0，请根据提示在教师一栏中填入教师一卡通号而不是教师姓名
+         * 点击确认按钮，完成课程添加，此时点击保存将不会将新加入的课程加入数据库中
+         */
+        //添加课程
         addCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -198,6 +253,10 @@ public class AppAdminCourse {
         }
         );
 
+
+        /**
+         * 点击“保存”按钮，保存对课程所作的编辑，表格变回不可编辑状态
+         */
         //保存编辑
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -228,6 +287,10 @@ public class AppAdminCourse {
         }
         );
 
+        /**
+         * 点击查询按钮，对于文本框中内容按照左边下拉列表选中的类别检索课程，
+         * 将符合的课程展示在表格中
+         */
         //查询
         searchButton.addActionListener(new ActionListener() {
             @Override
@@ -235,11 +298,11 @@ public class AppAdminCourse {
                 String searchClass = (String)chooseClass.getSelectedItem();
                 List<Course> list = new ArrayList<>();
                 ListIterator<Course> iter = list.listIterator();
+                //按课程编号查找
                 if(searchClass.equals("课程编号")){
                     String courseId = searchCourseField.getText();
                     System.out.println("id= "+courseId);
                     if(!courseId.equals("")){
-                        System.out.println("id= "+courseId);
                         list = ResponseUtils
                                 .getResponseByHash(new Request(App.connectionToServer, null,
                                         "com.vcampus.server.teaching.CourseSelection.fuzzySearchById",
@@ -254,8 +317,8 @@ public class AppAdminCourse {
                                 , course.getClassroom(), course.getCapacity(), course.getSelectedNumber(), course.getCredit()};
                         model.addRow(courseInfo);
                     }
-
                 }
+                //按课程名称查找
                 else if(searchClass.equals("课程名称")){
                     String courseName = searchCourseField.getText();
                     if(!courseName.equals("")){
@@ -274,6 +337,7 @@ public class AppAdminCourse {
                         model.addRow(courseInfo);
                     }
                 }
+                //按专业查找
                 else if(searchClass.equals("所属专业")){
                     String courseMajor = searchCourseField.getText();
                     if(!courseMajor.equals("")){
@@ -292,6 +356,7 @@ public class AppAdminCourse {
                         model.addRow(courseInfo);
                     }
                 }
+                //按教师查找
                 else if(searchClass.equals("授课教师")){
                     String courseTeacher = searchCourseField.getText();
                     if(!courseTeacher.equals("")){
@@ -313,9 +378,12 @@ public class AppAdminCourse {
             }
         }
         );
-
-
     }
+
+    /**
+     * 刷新表格，重新从数据库中提取数据填充表格
+     */
+    //刷新课表
     private void refreshCourseTable(){
         while(model.getRowCount()>0){
             model.removeRow(0);
@@ -330,11 +398,14 @@ public class AppAdminCourse {
                     , course.getClassroom(), course.getCapacity(), course.getSelectedNumber(), course.getCredit()};
             model.addRow(courseInfo);
         }
-
     }
+
+    //关闭页面
     private void close(){
         jf.setVisible(false);
     }
+
+    //打开页面
     public void open(){
         jf.setVisible(true);
     }

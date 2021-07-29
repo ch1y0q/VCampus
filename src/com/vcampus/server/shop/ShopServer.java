@@ -1,9 +1,12 @@
 package com.vcampus.server.shop;
 
+import com.vcampus.dao.IDealHistoryMapper;
 import com.vcampus.dao.IGoodsMapper;
 import com.vcampus.dao.IStudentMapper;
+import com.vcampus.dao.IGoodsHistoryMapper;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.Goods;
+import com.vcampus.entity.GoodsHistory;
 import com.vcampus.net.Request;
 import com.vcampus.server.App;
 import com.vcampus.util.ResponseUtils;
@@ -158,4 +161,26 @@ public class ShopServer {
         return result;
     }
 
+
+
+    /**
+     * 新增交易记录，记录交易的商品和数量
+     * @param  goodsHistory
+     * @return 是否成功
+     */
+    public static Boolean insertGoodsHistory(GoodsHistory goodsHistory) {
+
+        try {
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IGoodsHistoryMapper goodsHistoryMapper =sqlSession.getMapper(IGoodsHistoryMapper.class);
+
+            goodsHistoryMapper.insertGoodsHistory(goodsHistory);
+
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 }

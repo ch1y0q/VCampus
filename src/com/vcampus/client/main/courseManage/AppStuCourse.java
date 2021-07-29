@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.text.DecimalFormat;
 
 import com.vcampus.client.main.App;
+import com.vcampus.client.main.student.AppStudent;
 import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.net.Request;
 import com.vcampus.util.*;
@@ -16,6 +17,11 @@ import com.vcampus.entity.*;
 
 import java.util.List;
 import java.util.ListIterator;
+
+/**
+ * @author ryp
+ */
+
 
 public class AppStuCourse extends JFrame {
     private double credit = 0;
@@ -40,7 +46,7 @@ public class AppStuCourse extends JFrame {
         Container container = getContentPane();
         container.setBackground(new Color(0xD8F6F6));
         JTabbedPane tp = new JTabbedPane();
-        tp.setBounds(width*2/11,height/50,width*4/5,height*4/5);
+        tp.setBounds(width/50,height/50,width*4/5,height*4/5);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         container.add(tp);
         JPanel jp0 = new JPanel();
@@ -59,7 +65,21 @@ public class AppStuCourse extends JFrame {
         jp1.setBackground(Color.white);
         jp2.setBackground(Color.white);
         jp3.setBackground(Color.white);
-
+        JButton btnBack = new JButton("返回");
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnBack)
+                {
+                    AppStudent app=new AppStudent();
+                    app.setVisible(true);
+                    setVisible(false);
+                }
+            }
+        });
+        btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack.setBounds(width-60, 0, 60, 30);
+        container.add(btnBack);
         /*
         //侧边栏
         JTree jt= new StuCategory().getJTree();
@@ -211,6 +231,7 @@ public class AppStuCourse extends JFrame {
                 int currentWidth = getWidth();
                 int currentHeight = getHeight();
                 tp.setBounds(currentWidth/50,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
+                btnBack.setBounds(currentWidth-60, 0, 60, 30);
                 // jt.setBounds(0,currentHeight/50,currentWidth*2/11,currentHeight);
                 //jp0
                 {

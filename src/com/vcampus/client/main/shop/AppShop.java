@@ -4,6 +4,7 @@ import com.alee.managers.style.StyleId;
 import com.vcampus.client.main.App;
 import com.vcampus.entity.Goods;
 import com.vcampus.entity.UserType;
+import com.vcampus.entity.GoodsHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 import com.vcampus.util.SwingUtils;
@@ -191,6 +192,11 @@ public class AppShop extends JFrame {
         {
             int result=submitPurchase(cardNumber, App.session.getUserType(),
                     tblCart.getValueAt(i, 0) + "@" + tblCart.getValueAt(i,2)+"@" + tblCart.getValueAt(i,3));
+            if (result==0)
+            {
+                GoodsHistory thistime=new GoodsHistory(tblCart.getValueAt(i, 0).toString(),(int) tblCart.getValueAt(i,2),(BigDecimal) tblCart.getValueAt(i,3));
+                insertPurchaseHistory(thistime);
+            }
             checker+=result;
         }
         if (checker==0)

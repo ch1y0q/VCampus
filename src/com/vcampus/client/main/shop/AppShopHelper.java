@@ -3,6 +3,7 @@ package com.vcampus.client.main.shop;
 import com.vcampus.client.main.App;
 import com.vcampus.entity.Student;
 import com.vcampus.entity.UserType;
+import com.vcampus.entity.GoodsHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 
@@ -46,5 +47,13 @@ public class AppShopHelper {
                 return -1;
         }
 
+    }
+
+    public static boolean insertPurchaseHistory(GoodsHistory goodsHistory)
+    {
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.shop.ShopServer.insertGoodsHistory",
+                        new Object[]{goodsHistory}).send())
+                .getReturn(Boolean.class);
     }
 }

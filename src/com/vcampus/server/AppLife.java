@@ -14,18 +14,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author Y
+ * @date 2021/7/21
+ * 学生生活服务的服务器端，通过调用接口实现修改数据库或获取数据库数据。各函数大同小异
+ */
+
 public class AppLife {
     @Deprecated
     // moved to BankServer
     public static BigDecimal chargeCard(HashMap map) {
         BigDecimal result = new BigDecimal(0);
         try {
-            SqlSession sqlSession = App.sqlSessionFactory.openSession();
-            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
+            SqlSession sqlSession = App.sqlSessionFactory.openSession(); //MyBatis提供的方法函数用于通信
+            IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);//对应接口的实体
 
-            studentMapper.chargeCard(map);
+            studentMapper.chargeCard(map);//接口中的函数
 
-            result = studentMapper.getBalance((String) map.get("cardNumber"));
+            result = studentMapper.getBalance((String) map.get("cardNumber"));//返回值
 
             sqlSession.commit();
             sqlSession.close();

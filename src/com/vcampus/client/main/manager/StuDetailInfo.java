@@ -131,13 +131,16 @@ public class StuDetailInfo extends JPanel {
         JButton StuSureAdd = new JButton("确认添加学生");
         StuSureAdd.setEnabled(false);
         JButton save = new JButton("保存");
-        JButton edit = new JButton("编辑添加学生信息");
-        edit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        edit.setBounds(800, 10, 200, 30);
-        edit.addActionListener(new ActionListener() {
+        JButton nodNewStuedit = new JButton("编辑添加学生信息");
+        nodNewStuedit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        nodNewStuedit.setBounds(800, 10, 200, 30);
+        /**
+         * 学生信息添加
+         */
+        nodNewStuedit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==edit)
+                if(e.getSource()==nodNewStuedit)
                 {
                     txtname.setEditable(true);
                     txtcard.setEditable(true);
@@ -153,7 +156,7 @@ public class StuDetailInfo extends JPanel {
                 }
             }
         });
-        add(edit);
+        add(nodNewStuedit);
 
         save.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         save.setBounds(800, 50, 200, 30);
@@ -210,6 +213,9 @@ public class StuDetailInfo extends JPanel {
         add(StuSureAdd);
 
     }
+    /**
+     * 学生信息设空
+     */
     public void initnow(){
         txtname.setText("");
         txtcard.setText("");
@@ -221,6 +227,9 @@ public class StuDetailInfo extends JPanel {
         txtemail.setText("");
         txtphone.setText("");
     }
+    /**
+     * 学生信息初始化
+     */
     public void init(String cardNumber)
     {
         Student student=new Student();
@@ -239,6 +248,9 @@ public class StuDetailInfo extends JPanel {
         txtemail.setText(student.getEmail());
         txtphone.setText(student.getPhoneNumber());
     }
+    /**
+     * 学生信息删除
+     */
     public void deleteStu(String cardNumber)
     {
         Response resp = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
@@ -249,6 +261,9 @@ public class StuDetailInfo extends JPanel {
             System.out.println("error");
         }
     }
+    /**
+     * 学生信息添加
+     */
     public void AddStu(Student student)
     {
         Response resp = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
@@ -259,6 +274,9 @@ public class StuDetailInfo extends JPanel {
             System.out.println("error");
         }
     }
+    /**
+     * 学生信息设置不可编辑
+     */
     public void closeedit()
     {
         txtname.setEditable(false);
@@ -271,6 +289,9 @@ public class StuDetailInfo extends JPanel {
         txtemail.setEditable(false);
         txtphone.setEditable(false);
     }
+    /**
+     * 学生信息保存修改
+     */
     public void saveChange(){
         closeedit();
         String cardNumber=txtcard.getText();
@@ -293,7 +314,9 @@ public class StuDetailInfo extends JPanel {
         mapResetPlace.put("dormAddress",dormAddress);
         StuManageHelper.resetDormByCard(mapResetPlace);
     }
-
+    /**
+     * 学生信息编辑
+     */
     public void changeedit()
     {
         closeedit();

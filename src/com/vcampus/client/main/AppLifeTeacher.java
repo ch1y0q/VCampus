@@ -35,6 +35,8 @@ import java.awt.Toolkit;
 /**
  * @author Y
  * @date 2021/7/21
+ * 参见AppLife
+ * 该Java类是去掉AppLife中部分功能实现的。
  */
 
 public class AppLifeTeacher extends JFrame {
