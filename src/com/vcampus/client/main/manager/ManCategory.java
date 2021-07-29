@@ -58,14 +58,14 @@ public class ManCategory extends JTree {
                         }
                     }
                     else if(node==nodTeaInfor){
-                        if(this.getClass().getName()!="com.vcampus.client.main.Manager.TeaManage") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.manager.TeaManage") {
                             TeaManage app = new TeaManage();
                             app.setVisible(true);
                             setVisible(false);
                         }
                     }
                     else if(node==nodStuInfor){
-                        if(this.getClass().getName()!="com.vcampus.client.main.Manager.StuManage") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.manager.StuManage") {
                             StuManage app = new StuManage();
                             app.setVisible(true);
                             setVisible(false);
@@ -92,7 +92,7 @@ public class ManCategory extends JTree {
                         }
                     }
                     else if(node==nodDailyReport){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppDailyReportManage") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.dailyReport.AppDailyReportManage") {
                             setVisible(false);
                             AppDailyReportManage app = new AppDailyReportManage();
                             app.setVisible(true);
