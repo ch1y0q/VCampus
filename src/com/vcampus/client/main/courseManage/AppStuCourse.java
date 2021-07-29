@@ -24,17 +24,19 @@ public class AppStuCourse extends JFrame {
     private Student student;
     private DefaultTableModel model0; //课表
     private DefaultTableModel model1; //选课
-    private DefaultTableModel model2; //已选课
+    private DefaultTableModel model2;//已选课
+    private DefaultTableModel model3;
     private JComboBox chooseSemester0;
     private JComboBox chooseSemester;
+    private JLabel numOfCreditInSemesterLabel;
+    private JLabel numOfScoreLabel;
     public AppStuCourse(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        width = screenSize.width;
-        height = screenSize.height;
         setVisible(true);
         setLayout(null);
         setResizable(true);
-        setBounds(0,0,width,height);
+        setSize(screenSize);
+
         Container container = getContentPane();
         container.setBackground(new Color(0xD8F6F6));
         JTabbedPane tp = new JTabbedPane();
@@ -163,9 +165,9 @@ public class AppStuCourse extends JFrame {
         sp3.setBorder(BorderFactory.createLineBorder(Color.red, 1));
         sp3.setBackground(Color.white);
         jp3.add(sp3);
-        String[] columnName3={"课程编号","课程名称","学分","学期","成绩","课程性质",
+        String[] columnName3={"课程编号","课程名称","学分","学期","成绩",
                 "是否首修"};
-        DefaultTableModel model3 = new DefaultTableModel(emptyTable,columnName3);
+        model3 = new DefaultTableModel(emptyTable,columnName3);
         JTable checkScoreTable = new JTable(model3){
             public boolean isCellEditable(int row, int column){
                 this.setRowSelectionAllowed(false);
@@ -189,15 +191,16 @@ public class AppStuCourse extends JFrame {
         JLabel creditInSemesterLabel = new JLabel("学分",JLabel.CENTER);
         creditInSemesterLabel.setBounds(width/25+240,height/40,40,30);
         jp3.add(creditInSemesterLabel);
-        JLabel numOfCreditInSemesterLabel = new JLabel();
+        numOfCreditInSemesterLabel = new JLabel();
         numOfCreditInSemesterLabel.setBounds(width/25+295,height/40,40,30);
         jp3.add(numOfCreditInSemesterLabel);
         JLabel scoreLabel = new JLabel("绩点",JLabel.CENTER);
         scoreLabel.setBounds(width*2/25+395,height/40,40,30);
         jp3.add(scoreLabel);
-        JLabel numOfScoreLabel = new JLabel();
+        numOfScoreLabel = new JLabel();
         numOfScoreLabel.setBounds(width*2/25+450,height/40,40,30);
         jp3.add(numOfScoreLabel);
+        refreshCheckScoreTable();
 
         //事件
 
@@ -290,6 +293,8 @@ public class AppStuCourse extends JFrame {
                     model2.removeRow(row);
                     numOfCreditText.setText(calculateCredit());
                     refreshCourseTable();
+                    refreshCheckScoreTable();
+                    refreshSelectCourseTable();
                 }
             }
         });
@@ -299,6 +304,14 @@ public class AppStuCourse extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 refreshCourseTable();
+            }
+        }
+        );
+
+        chooseSemester.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshCheckScoreTable();
             }
         }
         );
@@ -435,8 +448,112 @@ public class AppStuCourse extends JFrame {
         return sCredit;
     }
 
+    public void refreshCheckScoreTable(){
+        while(model3.getRowCount()>0){
+            model3.removeRow(0);
+        }
+        String semester = (String)chooseSemester.getSelectedItem();
+        String selectedCourses = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null,
+                        "com.vcampus.server.teaching.CourseSelection.getCourseSelection",
+                        new Object[] {App.session.getStudent()}).send())
+                .getReturn(String.class);
+        String cardNumber = App.session.getStudent().getCardNumber();
+        if(selectedCourses!=""){
+            String[] splitSelectedCourses = selectedCourses.split(",");
+            for(String s:splitSelectedCourses){
+                Course course = ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null,
+                                "com.vcampus.server.teaching.CourseSelection.getOneCourse",
+                                new Object[] {s}).send())
+                        .getReturn(Course.class);
+                String courseId = course.getId();
+                if(semester.equals("All")||course.getSemester().equals(semester)){
+                    CourseScore courseScore = ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
+                            null,"com.vcampus.server.teaching.CourseSelection.getCourseScore",
+                            new Object[] {cardNumber,courseId}).send()).getReturn(CourseScore.class);
+                    String[] data = {courseId,course.getClassName(),course.getCredit(),course.getSemester(),courseScore.getScore(),
+                            courseScore.getStatus()};
+                    model3.addRow(data);
+                }
+                double credit = 0;
+                double zongJiDian = 0;
+                for(int i = 0;i<model3.getRowCount();i++){
+                    String n = (String)model3.getValueAt(i,2);
+                    String score = (String)model3.getValueAt(i,4);
+                    if(n!=null){
+                        Double d = Double.parseDouble(n);
+                        double jiDian = stringToDouble(score);
+                        zongJiDian+=d*jiDian;
+                        credit+=d;
+                    }
+                }
+                zongJiDian = zongJiDian/credit;
+                DecimalFormat df = new DecimalFormat("0.00");
+                String sCredit = df.format(credit);
+                String sZongJiDian = df.format(zongJiDian);
+                numOfCreditInSemesterLabel.setText(sCredit);
+                numOfScoreLabel.setText(sZongJiDian);
+            }
+        }
+    }
+
+    private double stringToDouble(String score){
+        double res = 0;
+        if(!score.equals("")){
+            double d = Double.parseDouble(score);
+            if(d>=96){
+                return 4.8;
+            }
+            else if(d>=93&&d<96){
+                return 4.5;
+            }
+            else if(d>=90&&d<93){
+                return 4.0;
+            }
+            else if(d>=86&&d<90){
+                return 3.8;
+            }
+            else if(d>=83&&d<86){
+                return 3.5;
+            }
+            else if(d>=80&&d<83){
+                return 3.0;
+            }
+            else if(d>=76&&d<80){
+                return 2.8;
+            }
+            else if(d>=73&&d<76){
+                return 2.5;
+            }
+            else if(d>=70&&d<73){
+                return 2.0;
+            }
+            else if(d>=66&&d<70){
+                return 1.8;
+            }
+            else if(d>=63&&d<66){
+                return 1.5;
+            }
+            else if(d>=60&&d<63){
+                return 1.0;
+            }
+            else if(d<60){
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
+        return res;
+    }
+
     public void open(){
         setVisible(true);
+    }
+
+    public static void main(String[] args){
+
     }
 }
 

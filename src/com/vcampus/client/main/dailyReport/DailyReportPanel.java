@@ -26,6 +26,7 @@ import java.util.Hashtable;
  * @author Dong Ruojing
  * @date 2021/7/28
  */
+
 public class DailyReportPanel extends JPanel {
     public DailyReportPanel(){
         setLayout(null);
@@ -53,69 +54,69 @@ public class DailyReportPanel extends JPanel {
         add(back);
 
 
-        JPanel jplDetail=new JPanel();
-        add(jplDetail);
-        jplDetail.setLayout(null);
-        jplDetail.setBounds(0,70,300,220);
-        jplDetail.setBackground(new Color(0xC0C0F6));
-        MyJLabel2 jlBasicInfo = new MyJLabel2();
-        jlBasicInfo.setText("基本信息");
-        jlBasicInfo.setFont(new Font("微软雅黑", Font.BOLD, 18));
-        jlBasicInfo.setBounds(0,0,100,50);
-        jlBasicInfo.setForeground(Color.WHITE);
-        jplDetail.add(jlBasicInfo);
-        JLabel jlCardnumber = new JLabel();
-        jlCardnumber.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jlCardnumber.setText("一卡通号:  "+" "+ App.session.getStudent().getCardNumber());
-        jlCardnumber.setBounds(10, 50, 180, 30);
-        jlCardnumber.setBorder(new EmptyBorder(0,0,0,0));
-        jplDetail.add(jlCardnumber);
+        JPanel paneDetail=new JPanel();
+        add(paneDetail);
+        paneDetail.setLayout(null);
+        paneDetail.setBounds(0,70,300,220);
+        paneDetail.setBackground(new Color(0xC0C0F6));
+        MyJLabel2 lblBasicInfo = new MyJLabel2();
+        lblBasicInfo.setText("基本信息");
+        lblBasicInfo.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        lblBasicInfo.setBounds(0,0,100,50);
+        lblBasicInfo.setForeground(Color.WHITE);
+        paneDetail.add(lblBasicInfo);
+        JLabel lblCardNumber = new JLabel();
+        lblCardNumber.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblCardNumber.setText("一卡通号:  "+" "+ App.session.getStudent().getCardNumber());
+        lblCardNumber.setBounds(10, 50, 180, 30);
+        lblCardNumber.setBorder(new EmptyBorder(0,0,0,0));
+        paneDetail.add(lblCardNumber);
 
         JLabel jlName = new JLabel();
         jlName.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         jlName.setText("姓名:        "+" "+App.session.getStudent().getName());
         jlName.setBounds(10, 100, 180, 30);
         jlName.setBorder(new EmptyBorder(0,0,0,0));
-        jplDetail.add(jlName);
+        paneDetail.add(jlName);
 
-        JLabel jlAcademy = new JLabel();
-        jlAcademy.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jlAcademy.setText("学院:        "+" "+App.session.getStudent().getSchool());
-        jlAcademy.setBounds(10, 150, 250, 30);
-        jlAcademy.setBorder(new EmptyBorder(0,0,0,0));
-        jplDetail.add(jlAcademy);
+        JLabel lblSchool = new JLabel();
+        lblSchool.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblSchool.setText("学院:        "+" "+App.session.getStudent().getSchool());
+        lblSchool.setBounds(10, 150, 250, 30);
+        lblSchool.setBorder(new EmptyBorder(0,0,0,0));
+        paneDetail.add(lblSchool);
 
-        JPanel jplDaily=new JPanel();
-        jplDaily.setLayout(null);
-        add(jplDaily);
-        jplDaily.setBounds(330,70,350,470);
-        jplDaily.setBackground(new Color(0xE0CDFA));
-        MyJLabel2 jlDailyInfo = new MyJLabel2();
-        jlDailyInfo.setText("每日情况");
-        jlDailyInfo.setForeground(Color.WHITE);
-        jlDailyInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        jlDailyInfo.setBounds(0,0,100,50);
-        jplDaily.add(jlDailyInfo);
+        JPanel paneDaily=new JPanel();
+        paneDaily.setLayout(null);
+        add(paneDaily);
+        paneDaily.setBounds(330,70,350,470);
+        paneDaily.setBackground(new Color(0xE0CDFA));
+        MyJLabel2 lblDailyInfo = new MyJLabel2();
+        lblDailyInfo.setText("每日情况");
+        lblDailyInfo.setForeground(Color.WHITE);
+        lblDailyInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblDailyInfo.setBounds(0,0,100,50);
+        paneDaily.add(lblDailyInfo);
 
-        JLabel jlTemper =new JLabel("当日晨检温度");
-        jlTemper.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jlTemper.setBounds(10, 50,150,30);
-        jplDaily.add(jlTemper);
+        JLabel lblTemperature =new JLabel("当日晨检温度");
+        lblTemperature.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblTemperature.setBounds(10, 50,150,30);
+        paneDaily.add(lblTemperature);
 
-        JTextField jtxtTemper=new JTextField();
-        jtxtTemper.setBounds(170,50,60,30);
-        jtxtTemper.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        jtxtTemper.setEditable(false);
-        jplDaily.add(jtxtTemper);
+        JTextField txtTemperature=new JTextField();
+        txtTemperature.setBounds(170,50,60,30);
+        txtTemperature.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        txtTemperature.setEditable(false);
+        paneDaily.add(txtTemperature);
 
-        JLabel jllocal=new JLabel("目前所在位置");
-        jllocal.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jllocal.setBounds(10,90,150,30);
-        jplDaily.add(jllocal);
-        String[]localtxt={"在校内","在校外"};
-        JComboBox jcomlocal=new JComboBox(localtxt);
-        jcomlocal.setBounds(170,90,150,30);
-        jplDaily.add(jcomlocal);
+        JLabel lblLocation=new JLabel("目前所在位置");
+        lblLocation.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblLocation.setBounds(10,90,150,30);
+        paneDaily.add(lblLocation);
+        String[]onOrOffCampus={"在校内","在校外"};
+        JComboBox cmbLocal=new JComboBox(onOrOffCampus);
+        cmbLocal.setBounds(170,90,150,30);
+        paneDaily.add(cmbLocal);
 
         MyJLabel2 lblHealth= new MyJLabel2();//设置健康标签
         lblHealth.setText("今日体温：37℃");
@@ -173,12 +174,12 @@ public class DailyReportPanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 double temperature=36+(double)(slider.getValue())/10;
-                System.out.println("当前值: " + slider.getValue());
-                jtxtTemper.setText(String.valueOf(temperature));
+                //System.out.println("当前值: " + slider.getValue());
+                txtTemperature.setText(String.valueOf(temperature));
                 lblHealth.setText("今日体温："+String.valueOf(temperature)+"℃");
                 if(temperature<37.3)
                 {
-                    jtxtTemper.setForeground(new Color(0xF22D8B4C, true));
+                    txtTemperature.setForeground(new Color(0xF22D8B4C, true));
                     lblHealth.setForeground(new Color(0xF22D8B4C, true));
                     lblAdvice.setText("体温正常");
                     lblAdvice2.setText("开启快乐学习生活(≧∇≦)ﾉ");
@@ -186,7 +187,7 @@ public class DailyReportPanel extends JPanel {
                     lblAdvice.setBackground(new Color(0x53ADA2));
                     lblAdvice2.setBackground(new Color(0x357171));
                 } else if(temperature<37.9){
-                    jtxtTemper.setForeground(new Color(0xD4733F));
+                    txtTemperature.setForeground(new Color(0xD4733F));
                     lblHealth.setForeground(new Color(0xD4733F));
                     lblAdvice.setText("体温较高");
                     lblAdvice2.setText("需要注意身体QAQ");
@@ -194,7 +195,7 @@ public class DailyReportPanel extends JPanel {
                     lblAdvice.setBackground(new Color(0xE3A75F));
                     lblAdvice2.setBackground(new Color(0xE78C5B));
                 } else{
-                    jtxtTemper.setForeground(new Color(0xEA0909));
+                    txtTemperature.setForeground(new Color(0xEA0909));
                     lblHealth.setForeground(new Color(0xEA0909));
                     lblAdvice.setText("发烧啦！");
                     lblAdvice2.setText("请快去医院o(╥﹏╥)o");
@@ -202,7 +203,7 @@ public class DailyReportPanel extends JPanel {
                     lblAdvice.setBackground(new Color(0xDC6757));
                     lblAdvice2.setBackground(new Color(0xEA3423));
                 }
-                jtxtTemper.repaint();
+                txtTemperature.repaint();
                 lblHealth.repaint();
                 lblAdvice.repaint();
                 lblAdvice2.repaint();
@@ -212,75 +213,73 @@ public class DailyReportPanel extends JPanel {
         slider.setBounds(720,70,60,600);
         add(slider);
 
+        JLabel lblCampus=new JLabel("目前所在校区");
+        lblCampus.setBounds(10,130,150,30);
+        lblCampus.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        String[] campuses={"九龙湖校区","四牌楼校区","丁家桥校区"};
+        JComboBox cmbCampus=new JComboBox(campuses);
+        cmbCampus.setBounds(170,130,150,30);
 
+        JLabel lblExactLocation=new JLabel("具体所在城市");
+        lblExactLocation.setBounds(10,170,150,30);
+        lblExactLocation.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        JTextField txtExact=new JTextField();
+        txtExact.setBounds(170,170,150,30);
 
-        JLabel jlSchool=new JLabel("目前所在校区");
-        jlSchool.setBounds(10,130,150,30);
-        jlSchool.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        String[] schooltxt={"九龙湖校区","四牌楼校区","丁家桥校区"};
-        JComboBox jcomSchool=new JComboBox(schooltxt);
-        jcomSchool.setBounds(170,130,150,30);
-
-        JLabel jlExactlocation=new JLabel("具体所在城市");
-        jlExactlocation.setBounds(10,170,150,30);
-        jlExactlocation.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        JTextField jtxtExact=new JTextField();
-        jtxtExact.setBounds(170,170,150,30);
-
-        jcomlocal.addActionListener(new ActionListener() {
+        cmbLocal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==jcomlocal) {
-                    if (jcomlocal.getSelectedItem().toString() == "在校外") {
-                        jplDaily.add(jlExactlocation);
-                        jplDaily.add(jtxtExact);
-                        jplDaily.remove(jcomSchool);
-                        jplDaily.remove(jlSchool);
-                        jplDaily.repaint();
+                if(e.getSource()==cmbLocal) {
+                    if (cmbLocal.getSelectedItem().toString() == "在校外") {
+                        paneDaily.add(lblExactLocation);
+                        paneDaily.add(txtExact);
+                        paneDaily.remove(cmbCampus);
+                        paneDaily.remove(lblCampus);
+                        paneDaily.repaint();
                     }
-                    else if(jcomlocal.getSelectedItem().toString() == "在校内"){
-                        jplDaily.add(jcomSchool);
-                        jplDaily.add(jlSchool);
-                        jplDaily.remove(jlExactlocation);
-                        jplDaily.remove(jtxtExact);
-                        jplDaily.repaint();
+                    else if(cmbLocal.getSelectedItem().toString() == "在校内"){
+                        paneDaily.add(cmbCampus);
+                        paneDaily.add(lblCampus);
+                        paneDaily.remove(lblExactLocation);
+                        paneDaily.remove(txtExact);
+                        paneDaily.repaint();
                     }
                 }
             }
         });
 
-        JLabel jlifgeli=new JLabel("今天是否还在隔离期");
-        jlifgeli.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jlifgeli.setBounds(10,210,150,30);
-        jplDaily.add(jlifgeli);
+        JLabel lblQuarantined=new JLabel("今天是否还在隔离期");
+        lblQuarantined.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblQuarantined.setBounds(10,210,150,30);
+        paneDaily.add(lblQuarantined);
         String[] strYN={"是","否"};
-        JComboBox jcomifgeli=new JComboBox(strYN);
-        jcomifgeli.setBounds(170,210,150,30);
-        jplDaily.add(jcomifgeli);
+        JComboBox cmbQuarantined=new JComboBox(strYN);
+        cmbQuarantined.setBounds(170,210,150,30);
+        paneDaily.add(cmbQuarantined);
 
-        JLabel jlifyisi=new JLabel("目前是否为疑似病例");
-        jlifyisi.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jlifyisi.setBounds(10,250,150,30);
-        jplDaily.add(jlifyisi);
-        JComboBox jcomifyisi=new JComboBox(strYN);
-        jcomifyisi.setBounds(170,250,150,30);
-        jplDaily.add(jcomifyisi);
+        JLabel lblSuspectedCase=new JLabel("目前是否为疑似病例");
+        lblSuspectedCase.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblSuspectedCase.setBounds(10,250,150,30);
+        paneDaily.add(lblSuspectedCase);
+        JComboBox cmbSuspectedCase=new JComboBox(strYN);
+        cmbSuspectedCase.setBounds(170,250,150,30);
+        paneDaily.add(cmbSuspectedCase);
 
-        JLabel jlifquezhen=new JLabel("目前是否为确诊病例");
-        jlifquezhen.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jlifquezhen.setBounds(10,290,150,30);
-        jplDaily.add(jlifquezhen);
-        JComboBox jcomifquezhen=new JComboBox(strYN);
-        jcomifquezhen.setBounds(170,290,150,30);
-        jplDaily.add(jcomifquezhen);
+        JLabel lblDiagnosed=new JLabel("目前是否为确诊病例");
+        lblDiagnosed.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblDiagnosed.setBounds(10,290,150,30);
+        paneDaily.add(lblDiagnosed);
+        JComboBox cmbDiagnosed=new JComboBox(strYN);
+        cmbDiagnosed.setBounds(170,290,150,30);
+        paneDaily.add(cmbDiagnosed);
 
-        JLabel jliflvju=new JLabel("存在风险区旅居史");
-        jliflvju.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jliflvju.setBounds(10,330,150,30);
-        jplDaily.add(jliflvju);
-        JComboBox jcomiflvju=new JComboBox(strYN);
-        jcomiflvju.setBounds(170,330,150,30);
-        jplDaily.add(jcomiflvju);
+        JLabel lblRiskyVisit=new JLabel("存在风险区旅居史");
+        lblRiskyVisit.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblRiskyVisit.setBounds(10,330,150,30);
+        paneDaily.add(lblRiskyVisit);
+        JComboBox cmbRiskyVisit=new JComboBox(strYN);
+        cmbRiskyVisit.setBounds(170,330,150,30);
+        paneDaily.add(cmbRiskyVisit);
 
 
         //上传
@@ -303,16 +302,16 @@ public class DailyReportPanel extends JPanel {
                     person.setCardNumber(App.session.getStudent().getCardNumber());//获取一卡通
                     person.setName(App.session.getStudent().getName());
                     person.setSchool(App.session.getStudent().getSchool());
-                    person.setCampus(jcomSchool.getSelectedItem().toString());//获取combobox当前值
+                    person.setCampus(cmbCampus.getSelectedItem().toString());//获取combobox当前值
                     person.setTemperature(36+(double)(slider.getValue())/10);
                      Date date= new Date(System.currentTimeMillis());
                     //SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     person.setDate(date);
-                    person.setCity(jtxtExact.getText());
-                    person.setIfQarantined(jcomifgeli.getSelectedItem().toString());
-                    person.setIfDefinite(jcomifquezhen.getSelectedItem().toString());
-                    person.setIfSuspected(jcomiflvju.getSelectedItem().toString());
-                    person.setIfHistoryOfRiskyArea(jcomiflvju.getSelectedItem().toString());
+                    person.setCity(txtExact.getText());
+                    person.setIfQarantined(cmbQuarantined.getSelectedItem().toString());
+                    person.setIfDefinite(cmbDiagnosed.getSelectedItem().toString());
+                    person.setIfSuspected(cmbRiskyVisit.getSelectedItem().toString());
+                    person.setIfHistoryOfRiskyArea(cmbRiskyVisit.getSelectedItem().toString());
 
                     upload(person);
                     JOptionPane.showMessageDialog(null, "上传成功");
@@ -322,9 +321,7 @@ public class DailyReportPanel extends JPanel {
                 }
             }
         });
-        jplDaily.add(btnUpload);
-
-
+        paneDaily.add(btnUpload);
     }
     //上传信息
     public void upload(PersonWhoReport personWhoReport)
@@ -337,8 +334,5 @@ public class DailyReportPanel extends JPanel {
             System.out.println("error");
         }
     }
-
-
-
 
 }

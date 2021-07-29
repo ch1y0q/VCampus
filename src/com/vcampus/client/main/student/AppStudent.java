@@ -9,8 +9,6 @@ import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.courseManage.AppStuCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.library.StuLibrary;
-import com.vcampus.client.main.student.StuCoursePanel;
-import com.vcampus.client.main.student.StuInfoPanel;
 import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
 import com.vcampus.client.main.shop.AppShop;
 
@@ -31,13 +29,13 @@ public class AppStudent extends JFrame {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     static int index=0;
-    public MyJLabel selficon=new MyJLabel();
+    public MyJLabel avatarPhoto =new MyJLabel();
     private class TimeListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(index==3) index=0;
             else index++;
-            selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
+            avatarPhoto.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
         }
     }
 
@@ -64,9 +62,9 @@ public class AppStudent extends JFrame {
         JLayeredPane self=new JLayeredPane();
         self.setBounds(70,50,820,600);
 
-        selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic0.jpg")));
-        selficon.setBounds(20,60,800,400);
-        selficon.addMouseListener(new MouseAdapter() {
+        avatarPhoto.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic0.jpg")));
+        avatarPhoto.setBounds(20,60,800,400);
+        avatarPhoto.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
@@ -76,34 +74,34 @@ public class AppStudent extends JFrame {
                 }
             }
         });
-        JButton addphoto=new JButton("←");
-        addphoto.addActionListener(new ActionListener() {
+        JButton btnAddPhoto=new JButton("←");
+        btnAddPhoto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(index<3) index++;
                 else index=0;
-                selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
+                avatarPhoto.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
             }
         });
-        addphoto.setBounds(20,241,50,50);
-        addphoto.setFont(new Font("微软雅黑", Font.BOLD, 25));
-        addphoto.setForeground(new Color(0xDA2E2E95, true));
-        JButton decreasephoto=new JButton("→");
-        decreasephoto.addActionListener(new ActionListener() {
+        btnAddPhoto.setBounds(20,241,50,50);
+        btnAddPhoto.setFont(new Font("微软雅黑", Font.BOLD, 25));
+        btnAddPhoto.setForeground(new Color(0xDA2E2E95, true));
+        JButton nextPhoto=new JButton("→");
+        nextPhoto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(index>0)  index--;
                 else index=3;
-                selficon.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
+                avatarPhoto.setIcon(new ImageIcon(getClass().getResource("/resources/assets/testphoto/pic"+index+".jpg")));
             }
         });
-        decreasephoto.setBounds(745,240,50,50);
-        decreasephoto.setFont(new Font("微软雅黑", Font.BOLD, 25));
-        decreasephoto.setForeground(new Color(0xDA2E2E95, true));
+        nextPhoto.setBounds(745,240,50,50);
+        nextPhoto.setFont(new Font("微软雅黑", Font.BOLD, 25));
+        nextPhoto.setForeground(new Color(0xDA2E2E95, true));
 
-        self.add(addphoto,1);
-        self.add(decreasephoto,1);
-        self.add(selficon,2);
+        self.add(btnAddPhoto,1);
+        self.add(nextPhoto,1);
+        self.add(avatarPhoto,2);
         contentPane.add(self);
 
         Timer timer=new Timer(5000,new TimeListener());
@@ -279,8 +277,6 @@ public class AppStudent extends JFrame {
         });
         contentPane.add(btnReport);
 
-
-
         MyJLabel lblNewLabel_1 = new MyJLabel();
         lblNewLabel_1.setText("关于我(点击可进行编辑)");
         lblNewLabel_1.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -315,10 +311,10 @@ public class AppStudent extends JFrame {
         lblNewLabel_2.setBounds(1006, 430, 200, 80);
         contentPane.add(lblNewLabel_2);
 
-        StuCoursePanel jplStuCorse=new StuCoursePanel();
-        jplStuCorse.init();
-        jplStuCorse.setBounds(1006,500,350,230);
-        contentPane.add(jplStuCorse);
+        StuCoursePanel jplStuCourse=new StuCoursePanel();
+        jplStuCourse.init();
+        jplStuCourse.setBounds(1006,500,350,230);
+        contentPane.add(jplStuCourse);
     }
 
 }
