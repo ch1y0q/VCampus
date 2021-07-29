@@ -172,6 +172,10 @@ public class StuManage extends JFrame{
             }
         };
         table.setRowHeight(20);
+        /**
+         * 学生信息查询
+         * 模糊查询返回listofStudent
+         */
         Stuserch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

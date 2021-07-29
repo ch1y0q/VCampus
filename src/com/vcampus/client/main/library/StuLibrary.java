@@ -77,6 +77,10 @@ public class StuLibrary extends JFrame {
             }
         };
         table.setRowHeight(20);
+        /**
+         * 图书借阅信息查询
+         * 通过一卡通号返回listofBook
+         */
         btnSerchborrowed.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,7 +115,9 @@ public class StuLibrary extends JFrame {
                 }
             }
         });
-
+        /**
+         * 图书续借
+         */
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
