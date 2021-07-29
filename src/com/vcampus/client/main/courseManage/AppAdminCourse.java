@@ -1,7 +1,9 @@
 package com.vcampus.client.main.courseManage;
 
 import com.vcampus.client.main.App;
+import com.vcampus.client.main.manager.AppAdmin;
 import com.vcampus.client.main.manager.ManCategory;
+import com.vcampus.client.main.teacher.AppTeacher;
 import com.vcampus.entity.Course;
 import com.vcampus.entity.Teacher;
 import com.vcampus.net.Request;
@@ -37,7 +39,21 @@ public class AppAdminCourse {
         jp.setLayout(null);
         jp.setBounds(width*2/11,height/50,width*4/5,height*4/5);
         jp.setBackground(Color.white);
-
+        JButton btnBack = new JButton("返回");
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnBack)
+                {
+                    AppAdmin app=new AppAdmin();
+                    app.setVisible(true);
+                    jf.setVisible(false);
+                }
+            }
+        });
+        btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack.setBounds(width-60, height, 60, 30);
+        container.add(btnBack);
 
 //        //侧边栏
 //        JTree jt= new StuCategory().getJTree();
@@ -106,6 +122,7 @@ public class AppAdminCourse {
                 int currentWidth = jf.getWidth();
                 int currentHeight = jf.getHeight();
                 jp.setBounds(currentWidth/50,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
+                btnBack.setBounds(currentWidth-60, currentHeight, 60, 30);
                 CourseInformationManagerLabel.setBounds(currentWidth/50,currentHeight/40,90,30);
                 anLabel.setBounds(currentWidth*6/50+90,currentHeight/40,20,30);
                 chooseClass.setBounds(currentWidth*6/50+110,currentHeight/40,80,30);

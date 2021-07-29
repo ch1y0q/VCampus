@@ -1,6 +1,8 @@
 package com.vcampus.client.main.courseManage;
 
 import com.vcampus.client.main.App;
+import com.vcampus.client.main.student.AppStudent;
+import com.vcampus.client.main.teacher.AppTeacher;
 import com.vcampus.client.main.teacher.TeaCategory;
 import com.vcampus.entity.Course;
 import com.vcampus.entity.CourseScore;
@@ -37,7 +39,7 @@ public class AppTeaCourse extends JFrame {
         Container container = getContentPane();
         container.setBackground(new Color(0xD8F6F6));
         JTabbedPane tp = new JTabbedPane();
-        tp.setBounds(width *2/ 11, height / 50, width * 4 / 5, height * 4 / 5);
+        tp.setBounds(width /50, height / 50, width * 4 / 5, height * 4 / 5);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         container.add(tp);
         JPanel jp0 = new JPanel();
@@ -53,13 +55,27 @@ public class AppTeaCourse extends JFrame {
         jp0.setBackground(Color.white);
         jp1.setBackground(Color.white);
         jp2.setBackground(Color.white);
+        JButton btnBack = new JButton("返回");
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==btnBack)
+                {
+                    AppTeacher app=new AppTeacher();
+                    app.setVisible(true);
+                    setVisible(false);
+                }
+            }
+        });
+        btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBack.setBounds(width-60, height, 60, 30);
+        container.add(btnBack);
 
 
-
-        //侧边栏
-        JTree jt=new TeaCategory().getJTree();
-        add(jt);
-        jt.setBounds(0,height/50,width*2/11,height);
+//        //侧边栏
+//        JTree jt=new TeaCategory().getJTree();
+//        add(jt);
+//        jt.setBounds(0,height/50,width*2/11,height);
 
 
         //课程表
@@ -207,8 +223,9 @@ public class AppTeaCourse extends JFrame {
             public void componentResized(ComponentEvent e) {
                 int currentWidth = getWidth();
                 int currentHeight = getHeight();
-                jt.setBounds(0,currentHeight/50,currentWidth*2/11,currentHeight);
-                tp.setBounds(currentWidth *2/ 11, currentHeight / 50, currentWidth * 4 / 5, currentHeight * 4 / 5);
+                //jt.setBounds(0,currentHeight/50,currentWidth*2/11,currentHeight);
+                tp.setBounds(currentWidth /50, currentHeight / 50, currentWidth * 4 / 5, currentHeight * 4 / 5);
+                btnBack.setBounds(currentWidth-60, currentHeight, 60, 30);
                 //jp0
                 {
                     jp0.setSize(currentWidth, currentHeight);
