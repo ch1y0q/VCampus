@@ -1,4 +1,4 @@
-package com.vcampus.test;
+package com.vcampus.client.main;
 
 
 /*
@@ -23,8 +23,6 @@ import com.alee.api.data.BoxOrientation;
 import com.alee.api.data.CompassDirection;
 import com.alee.api.jdk.SerializableSupplier;
 import com.alee.api.version.Version;
-import com.alee.demo.api.example.Example;
-import com.alee.demo.api.example.ExampleData;
 import com.alee.demo.content.ExamplesManager;
 import com.alee.demo.skin.decoration.FeatureStateBackground;
 import com.alee.extended.behavior.ComponentResizeBehavior;
@@ -74,9 +72,14 @@ import com.alee.utils.XmlUtils;
 import com.alee.utils.swing.Customizer;
 import com.alee.utils.swing.extensions.KeyEventRunnable;
 import com.vcampus.client.LoginUI;
+import com.vcampus.client.main.courseManage.AppStuCourse;
+import com.vcampus.client.main.library.StuLibrary;
+import com.vcampus.client.main.shop.AppShop;
 import com.vcampus.client.main.student.StuCategory;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -86,7 +89,7 @@ import java.util.ArrayList;
  * @author Huang Qiyue
  * @date 2021-07-19
  */
-public final class FancyUITest extends WebFrame
+public final class StudentFancyUI extends WebFrame
 {
     /**
      * Available application and example skins.
@@ -96,7 +99,7 @@ public final class FancyUITest extends WebFrame
     /**
      * Demo application instance.
      */
-    private static FancyUITest instance;
+    private static StudentFancyUI instance;
 
     /**
      * Demo application {@link Version}.
@@ -112,17 +115,18 @@ public final class FancyUITest extends WebFrame
     WebDesktopPane desktopPane;
     WebStyledLabel information;
     WebPanel overlayContainer;
+
     /**
      * Returns application instance.
      *
      * @return application instance
      */
     @NotNull
-    public static FancyUITest getInstance ()
+    public static StudentFancyUI getInstance ()
     {
         if ( instance == null )
         {
-            instance = new FancyUITest();
+            instance = new StudentFancyUI();
         }
         return instance;
     }
@@ -130,10 +134,10 @@ public final class FancyUITest extends WebFrame
     /**
      * Constructs new FancyUI.
      */
-    FancyUITest()
+    StudentFancyUI()
     {
         super ();
-        version = new Version ( FancyUITest.class );
+        version = new Version ( StudentFancyUI.class );
 
         setIconImages ( WebLookAndFeel.getImages () );
         updateTitle ();
@@ -208,6 +212,76 @@ public final class FancyUITest extends WebFrame
             }
         } );
 
+        appTree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                if (!appTree.isSelectionEmpty()) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) appTree.getLastSelectedPathComponent();
+                    JInternalFrame internal = null;
+                    switch((String)node.getUserObject()) {
+                        case "个人信息维护":
+                            internal = new JInternalFrame("个人信息维护",true,true,true, true);
+                            internal.setContentPane(new LoginUI().getContentPane());
+                            internal.pack();
+                            internal.setVisible(true);
+                            internal.setBounds(30,50,1000,1000);
+                            desktopPane.add(internal);
+                            break;
+                        case "图书查询借阅":
+                            // fall through
+                        case "已借图书":
+                            // fall through
+                        case "书籍查询":
+                            internal = new JInternalFrame("图书馆",true,true,true, true);
+                            internal.setContentPane(new StuLibrary().getContentPane());
+                            internal.pack();
+                            internal.setVisible(true);
+                            internal.setBounds(30,50,1000,1000);
+                            desktopPane.add(internal);
+                            break;
+                        case "课程表":
+                            // fall through
+                        case "成绩查询":
+                            // fall through
+                        case "选课系统":
+                            // fall through
+                        case "已选课程":
+                            internal = new JInternalFrame("在线课程管理",true,true,true, true);
+                            internal.setContentPane(new AppStuCourse().getContentPane());
+                            internal.pack();
+                            internal.setVisible(true);
+                            internal.setBounds(30,50,1000,1000);
+                            desktopPane.add(internal);
+                            break;
+                        case "宿舍管理":
+                            // fall through
+                        case "一卡通":
+                            internal = new JInternalFrame("生活服务",true,true,true, true);
+                            internal.setContentPane(new AppLife().getContentPane());
+                            internal.pack();
+                            internal.setVisible(true);
+                            internal.setBounds(30,50,1000,1000);
+                            desktopPane.add(internal);
+                            break;
+                        case "商品列表":
+                            // fall through
+                        case "购物车":
+                            // fall through
+                        case "购买历史":
+                            internal = new JInternalFrame("在线商店",true,true,true, true);
+                            internal.setContentPane(new AppShop().getContentPane());
+                            internal.pack();
+                            internal.setVisible(true);
+                            internal.setBounds(30,50,1000,1000);
+                            desktopPane.add(internal);
+                            break;
+                        default:
+                            //System.out.println("Nothing selected");
+                            break;
+                    }
+                }
+            }
+        });
         final WebScrollPane appTreeScroll = new WebScrollPane ( StyleId.scrollpaneTransparentHoveringExtending, appTree );
         appTreeScroll.registerSettings ( new Configuration<ScrollPaneState> ( "ExamplesScroll" ) );
 
@@ -386,10 +460,11 @@ public final class FancyUITest extends WebFrame
 
     /**
      * Initialize a tree with all functionalities.
-     *
+     * Replaced by StuCategory.getNode()
      * @author Huang Qiyue
      * @date 2021-07-22
      */
+    @Deprecated
     private DefaultMutableTreeNode getTreeNodes(){
         DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("学生登陆");
         DefaultMutableTreeNode nodPersonalInfo = new DefaultMutableTreeNode("个人信息");
@@ -445,18 +520,6 @@ public final class FancyUITest extends WebFrame
     public WebDocumentPane<DocumentData> getMainPane()
     {
         return mainPane;
-    }
-
-
-    /**
-     * Opens specified example in content pane.
-     *
-     * @param example example to open
-     */
-    @Deprecated
-    public void open ( @NotNull final Example example )
-    {
-        mainPane.openDocument ( ExampleData.forExample ( example ) );
     }
 
     /**
@@ -525,7 +588,7 @@ public final class FancyUITest extends WebFrame
                 ExamplesManager.initialize ();
 
                 // Starting demo application
-                FancyUITest.getInstance ().display ();
+                StudentFancyUI.getInstance ().display ();
             }
         } );
     }

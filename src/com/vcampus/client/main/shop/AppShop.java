@@ -27,7 +27,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * @author Y, Huang Qiyue
@@ -37,7 +39,6 @@ import java.util.List;
 public class AppShop extends JFrame {
     private static JPanel contentPane;
     private static JTabbedPane tabbedPane;
-    private static JPanel jp1, jp2;
     private static JComboBox cmbGoodsCategory;
     private static JTable tblGoodsList;
     private static JTextField txtGoodsNum;
