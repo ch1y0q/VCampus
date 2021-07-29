@@ -48,8 +48,6 @@ public class AppTeaInfo  extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==returnButton)
                 {
-                    AppTeacher app=new AppTeacher();
-                    app.setVisible(true);
                     setVisible(false);
                 }
             }

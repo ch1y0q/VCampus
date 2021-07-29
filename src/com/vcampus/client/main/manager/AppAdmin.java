@@ -11,10 +11,7 @@ import com.vcampus.client.main.shop.AppShop;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 /**
  * 管理员登录界面
@@ -45,7 +42,7 @@ public class AppAdmin extends JFrame{
 
 
         JLabel label =new JLabel();
-        label.setText(" 欢迎您,"+"xxx" );//App.session.getAdmin().getName()
+        label.setText(" 欢迎您,"+App.session.getAdmin().getName() );//App.session.getAdmin().getName()
         label.setFont(new Font("微软雅黑", Font.BOLD, 14));
         label.setOpaque(true);
         label.setForeground(new Color(33, 117, 206));
@@ -58,7 +55,13 @@ public class AppAdmin extends JFrame{
         returnButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
         returnButton.setBounds(10,5,80,30);
         returnButton.setForeground(new Color(33, 117, 206,100));
-        //contentPane.add(returnButton);
+        contentPane.add(returnButton);
+        returnButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setVisible(false);
+            }
+        });
 
         JButton LogoutButton = new JButton("登出");
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));

@@ -52,8 +52,6 @@ public class TeaLibrary extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    AppTeacher app=new AppTeacher();
-                    app.setVisible(true);
                     setVisible(false);
                 }
             }

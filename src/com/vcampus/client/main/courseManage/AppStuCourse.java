@@ -71,8 +71,6 @@ public class AppStuCourse extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    AppStudent app=new AppStudent();
-                    app.setVisible(true);
                     setVisible(false);
                 }
             }

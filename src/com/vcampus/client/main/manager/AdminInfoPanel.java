@@ -63,9 +63,7 @@ public class AdminInfoPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==returnButton)
                 {
-                    AppAdmin app=new AppAdmin();
-                    //setVisible(false);
-                    app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });

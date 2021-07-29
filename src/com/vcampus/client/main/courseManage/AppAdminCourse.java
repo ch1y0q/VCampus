@@ -59,8 +59,6 @@ public class AppAdminCourse {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    AppAdmin app=new AppAdmin();
-                    app.setVisible(true);
                     jf.setVisible(false);
                 }
             }

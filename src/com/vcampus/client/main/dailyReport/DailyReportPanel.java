@@ -42,8 +42,6 @@ public class DailyReportPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==back)
                 {
-                    AppStudent app=new AppStudent();
-                    app.setVisible(true);
                     setVisible(false);//合并的时候这一块不需要，这只能做到jpanel消失
                 }
             }

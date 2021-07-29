@@ -45,8 +45,6 @@ public class TeaManage extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==back)
                 {
-                    AppAdmin app=new AppAdmin();
-                    app.setVisible(true);
                     setVisible(false);
                 }
             }
