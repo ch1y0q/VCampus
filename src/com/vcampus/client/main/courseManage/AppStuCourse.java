@@ -29,12 +29,11 @@ public class AppStuCourse extends JFrame {
     private JComboBox chooseSemester;
     public AppStuCourse(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        width = screenSize.width;
-        height = screenSize.height;
         setVisible(true);
         setLayout(null);
         setResizable(true);
-        setBounds(0,0,width,height);
+        setSize(screenSize);
+
         Container container = getContentPane();
         container.setBackground(new Color(0xD8F6F6));
         JTabbedPane tp = new JTabbedPane();
@@ -437,6 +436,10 @@ public class AppStuCourse extends JFrame {
 
     public void open(){
         setVisible(true);
+    }
+
+    public static void main(String[] args){
+
     }
 }
 

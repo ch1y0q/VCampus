@@ -70,10 +70,10 @@ public class StuCategory extends JTree{
         nodLivingServices.add(nodDormManage);
         DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
         DefaultMutableTreeNode nodCart = new DefaultMutableTreeNode("购物车");
-        DefaultMutableTreeNode nodShoppingHistoty = new DefaultMutableTreeNode("购买历史");
+        DefaultMutableTreeNode nodShoppingHistory = new DefaultMutableTreeNode("购买历史");
         nodShop.add(nodGoods);
         nodShop.add(nodCart);
-        nodShop.add(nodShoppingHistoty);
+        nodShop.add(nodShoppingHistory);
 
         TreeSelectionModel treeSelectionModel;
         treeSelectionModel=jt.getSelectionModel();
@@ -113,7 +113,7 @@ public class StuCategory extends JTree{
                             setVisible(false);
                         }
                     }
-                    else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
+                    else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistory){
                         if(this.getClass().getName()!="com.vcampus.client.main.shop.AppShop") {
                             AppShop app = new AppShop();
                             app.setVisible(true);

@@ -70,6 +70,7 @@ import com.alee.utils.swing.Customizer;
 import com.alee.utils.swing.extensions.KeyEventRunnable;
 import com.vcampus.client.main.chat.AppChatDiag;
 import com.vcampus.client.main.courseManage.AppStuCourse;
+import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.student.AppStudent;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.shop.AppShop;
@@ -274,6 +275,14 @@ public final class StudentFancyUI extends WebFrame
                         case "购买历史":
                             internal = new JInternalFrame("在线商店",true,true,true, true);
                             internal.setContentPane(new AppShop().getContentPane());
+                            internal.pack();
+                            internal.setVisible(true);
+                            internal.setBounds(30,50,1000,1000);
+                            desktopPane.add(internal);
+                            break;
+                        case "每日上报":
+                            internal = new JInternalFrame("每日上报",true,true,true, true);
+                            internal.setContentPane(new AppDailyReport().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
                             internal.setBounds(30,50,1000,1000);
