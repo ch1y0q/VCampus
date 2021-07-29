@@ -35,4 +35,6 @@ public interface IGoodsMapper {
 
     public int buySomething(Map<String, Integer> map);  //<cardNumber, id>
 
+
+
 }

@@ -131,4 +131,6 @@ public class Goods {
     public void setCategory(String category) {
         this.category = category;
     }
+
+
 }

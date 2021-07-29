@@ -194,7 +194,8 @@ public class AppShop extends JFrame {
                     tblCart.getValueAt(i, 0) + "@" + tblCart.getValueAt(i,2)+"@" + tblCart.getValueAt(i,3));
             if (result==0)
             {
-                GoodsHistory thistime=new GoodsHistory(tblCart.getValueAt(i, 0).toString(),(int) tblCart.getValueAt(i,2),(BigDecimal) tblCart.getValueAt(i,3));
+                int num= (int) tblCart.getValueAt(i,2);BigDecimal per=(BigDecimal) tblCart.getValueAt(i,3);
+                GoodsHistory thistime=new GoodsHistory(tblCart.getValueAt(i, 0).toString(),num,per.multiply(BigDecimal.valueOf(num)));
                 insertPurchaseHistory(thistime);
             }
             checker+=result;
