@@ -79,6 +79,7 @@ import com.alee.utils.CoreSwingUtils;
 import com.alee.utils.XmlUtils;
 import com.alee.utils.swing.Customizer;
 import com.alee.utils.swing.extensions.KeyEventRunnable;
+import com.vcampus.client.main.chat.AppChatDiag;
 import com.vcampus.client.main.courseManage.AppStuCourse;
 import com.vcampus.client.main.dailyReport.AppStudent;
 import com.vcampus.client.main.library.StuLibrary;
@@ -223,10 +224,11 @@ public final class StudentFancyUI extends WebFrame
         } );
 
         appTree.addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
+
             /**
              * 判断需要打开的窗口
              */
+            @Override
             public void valueChanged(TreeSelectionEvent e) {
                 if (!appTree.isSelectionEmpty()) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) appTree.getLastSelectedPathComponent();
@@ -420,6 +422,13 @@ public final class StudentFancyUI extends WebFrame
         internal.setBounds(10,10,1600,1000);
         desktopPane.add(internal);
 
+        final JInternalFrame chatFrame = new JInternalFrame("聊天室",true,true,true, true);
+        chatFrame.setContentPane(new AppChatDiag().getContentPane());
+        chatFrame.pack();
+        chatFrame.setVisible(true);
+        chatFrame.setBounds(1000,700,300,500);
+        desktopPane.add(chatFrame);
+
         mainPane.add(desktopPane);
 
 
@@ -552,7 +561,7 @@ public final class StudentFancyUI extends WebFrame
             @Override
             public void run ()
             {
-                // Configuring settings location
+               // Configuring settings location
                //SettingsManager.setDefaultSettingsDirName ( ".weblaf-demo" );
                //SettingsManager.setDefaultSettingsGroup ( "WebLookAndFeelDemo" );
                //SettingsManager.setSaveOnChange ( true );
@@ -586,7 +595,6 @@ public final class StudentFancyUI extends WebFrame
                         new XmlSkinExtension( new ClassResource ( com.alee.demo.skin.DemoDarkSkinExtension.class, "resources/demo-dark-extension.xml" )) );
                 */
                 StyleManager.setSkin(com.alee.skin.flat.FlatSkin.class);
-                System.out.println(StyleManager.getSkin());
 
                 /* Adding demo language dictionary
                 LanguageManager.addDictionary ( new Dictionary (

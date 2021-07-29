@@ -80,7 +80,6 @@ public class LoginUI extends JFrame {
 
     private void adminLogin(){
         type = UserType.ADMIN;
-        System.out.println(txtPassword.getPassword()+"TEST1");// TODO remove this
         Admin admin = Verifier.checkAdmin(txtCardNumber.getText(), new String(txtPassword.getPassword()));
         if (admin != null) {
             SwingUtils.showMessage(null, res.getString("admin_login_success"), res.getString("info"));
