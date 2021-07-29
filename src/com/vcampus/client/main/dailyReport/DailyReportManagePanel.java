@@ -80,18 +80,19 @@ public class DailyReportManagePanel extends JPanel {
         chooseSchool.setBounds(width / 50 + 60, height / 40, 120, 30);
         add(chooseSchool);
 
-        JLabel numNotReport = new JLabel("未上报人数", JLabel.CENTER);
+        JLabel numNotReport = new JLabel("上报人数", JLabel.CENTER);
         numNotReport.setBounds(width / 25 + 240, height / 40, 100, 30);
         add(numNotReport);
 
-        JLabel lblNumNotReport = new JLabel();
-        lblNumNotReport.setBounds(width / 25 + 350, height / 40, 80, 30);
-        lblNumNotReport.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        lblNumNotReport.setOpaque(true);
-        lblNumNotReport.setForeground(new Color(33, 117, 206));
-        lblNumNotReport.setBackground(new Color(33, 177, 206, 80));
-        lblNumNotReport.setHorizontalAlignment(SwingConstants.CENTER);
-        add(lblNumNotReport);
+        JLabel lblNumReport = new JLabel();
+        lblNumReport.setBounds(width / 25 + 350, height / 40, 80, 30);
+        lblNumReport.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        lblNumReport.setOpaque(true);
+        lblNumReport.setText("0");
+        lblNumReport.setForeground(new Color(33, 117, 206));
+        lblNumReport.setBackground(new Color(33, 177, 206, 80));
+        lblNumReport.setHorizontalAlignment(SwingConstants.CENTER);
+        add(lblNumReport);
 
         JLabel numAbnormal = new JLabel("体温>37.3℃的人数", JLabel.CENTER);
         numAbnormal.setBounds(width * 2 / 25 + 450, height / 40, 150, 30);
@@ -104,7 +105,7 @@ public class DailyReportManagePanel extends JPanel {
         lblNumAbnormal.setForeground(new Color(33, 117, 206));
         lblNumAbnormal.setBackground(new Color(33, 177, 206, 80));
         lblNumAbnormal.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNumAbnormal.setText("5");
+        lblNumAbnormal.setText("0");
         add(lblNumAbnormal);
 
 
@@ -121,19 +122,23 @@ public class DailyReportManagePanel extends JPanel {
         btnRenew.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int countAbnormal=0;//统计体温>37.3的人数
+                while(model.getRowCount()>0){
+                    model.removeRow(model.getRowCount()-1);//清空表格
+                } Table.setModel(model);
                 if (e.getSource() == btnRenew) {
                     String[][] listData;
                     //是否选择学院
-                    if(chooseSchool.getSelectedItem().toString()!="") {//显示全部
-                        System.out.println("llll");
+                    if(chooseSchool.getSelectedItem().toString()!="") {//筛选
+                        System.out.println(chooseSchool.getSelectedItem().toString());
 
                         renewBySchool(chooseSchool.getSelectedItem().toString());
                         listData = new String[list.size()][12];
 
                     }
-                    else {
+                    else {//显示全部
                         renew();listData = new String[list.size()][12];
-                        System.out.println("筛选");
+                        System.out.println("筛选all");
                     }
 
                     if (list == null || list.size() == 0) {
@@ -143,12 +148,16 @@ public class DailyReportManagePanel extends JPanel {
                     } else {
                         model.setRowCount(0);
                         int len = list.size();
+
                         for (int i = 0; i < len; i++) {
                             listData[i][0]=list.get(i).getCardNumber();
                             listData[i][1]=list.get(i).getName();
                             listData[i][2]=list.get(i).getSchool();
                             listData[i][3]=list.get(i).getDate().toString();
                             String temp=String.valueOf(list.get(i).getTemperature());
+                            if(list.get(i).getTemperature()>37.3){
+                                countAbnormal++;
+                            }
                             listData[i][4]=temp;
                             listData[i][5]=list.get(i).getLocation();
                             listData[i][6]=list.get(i).getCity();
@@ -166,6 +175,10 @@ public class DailyReportManagePanel extends JPanel {
                         };
                         Table.setModel(model);
                     }
+                    lblNumReport.setText(String.valueOf(model.getRowCount()));
+                    lblNumReport.repaint();
+                    lblNumAbnormal.setText(String.valueOf(countAbnormal));
+                    lblNumAbnormal.repaint();
 
                     JOptionPane.showMessageDialog(null, "刷新成功");
 
