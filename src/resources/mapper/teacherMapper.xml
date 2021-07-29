@@ -36,8 +36,9 @@
 
     <insert id="insertTeacher" parameterType="Teacher">
         INSERT INTO
-            `teachers` VALUES (#{cardNumber}, #{teacherNumber}, #{password},
-                               #{school}, #{name}, 0, "")
+            `teachers` VALUES (#{name},"","",#{cardNumber}, #{teacherNumber},
+                               "","","",0,"", #{school},  #{teacherRank}, #{gender},  #{email},#{homepage},
+                               #{phoneNumber},"")
     </insert>
 
     <delete id="deleteTeacher" parameterType="String">
@@ -98,5 +99,106 @@
             `password` = #{password} WHERE `cardNumber`
                                                = #{cardNumber}
         LIMIT 1
+    </update>
+
+    <select id="fuzzySearchByName" parameterType="String"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE name LIKE '%${name}%'
+    </select>
+
+    <select id="fuzzySearchByCard" parameterType="String"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE cardNumber LIKE '%${cardNumber}%'
+    </select>
+
+    <select id="fuzzySearchBySchool" parameterType="String"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE school LIKE '%${school}%'
+    </select>
+
+    <select id="fuzzySearchByGender" parameterType="String"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndCard" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE name LIKE '%${name}%' AND
+            cardNumber LIKE '%${cardNumber}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndSchool" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE name LIKE '%${name}%' AND
+            school LIKE '%${school}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndGender" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE name LIKE '%${name}%' AND
+            gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByCardAndSchool" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE cardNumber LIKE '%${cardNumber}%' AND
+            school LIKE '%${school}%'
+    </select>
+
+    <select id="fuzzySearchByCardAndGender" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE cardNumber LIKE '%${cardNumber}%' AND
+            gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchBySchoolAndGender" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE school LIKE '%${school}%' AND
+            gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndCardAndSchool" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE name LIKE '%${name}%' AND
+            cardNumber LIKE '%${cardNumber}%' AND school LIKE '%${school}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndCardAndGender" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE name LIKE '%${name}%' AND
+            cardNumber LIKE '%${cardNumber}%' AND gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByCardAndSchoolAndGender" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE cardNumber LIKE '%${cardNumber}%' AND school LIKE '%${school}%'
+                                AND gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndSchoolAndGender" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE name LIKE '%${name}%' AND school LIKE '%${school}%'
+                                AND gender LIKE '%${gender}%'
+    </select>
+
+    <select id="fuzzySearchByNameAndCardAndSchoolAndGender" parameterType="Teacher"
+            resultType="Teacher">
+        SELECT *FROM teachers WHERE name LIKE '%${name}%' AND cardNumber LIKE '%${cardNumber}%'
+                                AND school LIKE '%${school}%' AND gender LIKE '%${gender}%'
+    </select>
+
+    <update id="resetTeacherNumberByCard" parameterType="Map">
+        UPDATE teachers
+        SET `teacherNumber` = #{teacherNumber} WHERE cardNumber=#{cardNumber}
+    </update>
+
+    <update id="resetSchoolByCard" parameterType="Map">
+        UPDATE teachers
+        SET `school` = #{school} WHERE cardNumber=#{cardNumber}
+    </update>
+
+    <update id="resetTeacherRankByCard" parameterType="Map">
+        UPDATE teachers
+        SET `teacherRank` = #{teacherRank} WHERE cardNumber=#{cardNumber}
     </update>
 </mapper>

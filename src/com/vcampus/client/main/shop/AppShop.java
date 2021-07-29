@@ -47,6 +47,9 @@ public class AppShop extends JFrame {
     private static List<Goods> list;
     private static JTextArea goodsDetail;
     private static DefaultTableModel tableModel;
+    private static DefaultTableModel cartTableModel;
+    private static JTable tblCart;
+    private static Vector cartData;
 
     private static final String EMPTY_GOODS_PIC = "/resources/assets/bg/bg3.jpg";
     private static final String EMPTY_GOODS_DESCRIPTION = "这里应该是商品详细信息";
@@ -170,6 +173,83 @@ public class AppShop extends JFrame {
             default:
                 JOptionPane.showMessageDialog(null, "发生错误", "错误", JOptionPane.ERROR_MESSAGE);
                 break;
+        }
+    }
+
+    private void addToCart(int x)
+    {
+        int row = tblGoodsList.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "未选中商品", "错误", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String targetId= tblGoodsList.getValueAt(row,0).toString();
+        String targetName=tblGoodsList.getValueAt(row,1).toString();
+        int leftNum= (int) tblGoodsList.getValueAt(row,3);
+        BigDecimal targetPrice= (BigDecimal) tblGoodsList.getValueAt(row,5);
+        if (leftNum-x<0){
+            JOptionPane.showMessageDialog(null, "剩余数量不足", "错误", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        boolean flag=false;
+        int index=0;
+        for (int i=0;i<tblCart.getRowCount();i++)
+        {
+            if (targetId.equals(tblCart.getValueAt(i, 0))) {flag=true;index=i;}
+        }
+        if (flag)
+        {
+            int legacy= (int) tblCart.getValueAt(index,2);
+            if (legacy+x>leftNum) {
+                JOptionPane.showMessageDialog(null, "剩余数量不足", "错误", JOptionPane.ERROR_MESSAGE);
+                return;}
+            tblCart.setValueAt(legacy+x,index,2);
+            BigDecimal total= targetPrice.multiply(BigDecimal.valueOf(legacy+x));
+            tblCart.setValueAt(total,index,4);
+
+        }
+        else
+        {
+            Vector newEntry=new Vector();
+            newEntry.add(targetId);newEntry.add(targetName);newEntry.add(x);newEntry.add(targetPrice);newEntry.add(targetPrice.multiply(BigDecimal.valueOf(x)));
+            cartTableModel.addRow(newEntry);
+            tblCart.setModel(cartTableModel);
+        }
+    }
+
+    private void removeFromCart(int x)
+    {
+        int row = tblGoodsList.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "未选中商品", "错误", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String targetId= tblGoodsList.getValueAt(row,0).toString();
+        String targetName=tblGoodsList.getValueAt(row,1).toString();
+        int leftNum= (int) tblGoodsList.getValueAt(row,3);
+        BigDecimal targetPrice= (BigDecimal) tblGoodsList.getValueAt(row,5);
+        boolean flag=false;
+        int index=0;
+        for (int i=0;i<tblCart.getRowCount();i++)
+        {
+            if (targetId.equals(tblCart.getValueAt(i, 0))) {flag=true;index=i;}
+        }
+        if (flag)
+        {
+            int legacy= (int) tblCart.getValueAt(index,2);
+            if (legacy-x<1){
+                cartTableModel.removeRow(index);
+                tblCart.setModel(cartTableModel);
+            }
+            else {
+                tblCart.setValueAt(legacy - x, index, 2);
+                BigDecimal total = targetPrice.multiply(BigDecimal.valueOf(legacy - x));
+                tblCart.setValueAt(total, index, 4);
+            }
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -376,5 +456,55 @@ public class AppShop extends JFrame {
 
         /* show all goods upon show-up */
         handleCategorySelection(CATEGORY_UNFILTERED);
+
+        /* 购物车 */
+        String[] cartColumnNames={
+                "商品编号",
+                "商品名称",
+                "购买数量",
+                "单价",
+                "总价"
+        };
+        //Vector cartData=new Vector();
+        cartTableModel =new DefaultTableModel(null,cartColumnNames);
+        tblCart=new JTable(cartTableModel){
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;
+            }
+        };
+        tblCart.setRowSelectionAllowed(true);
+        tblCart.setCellSelectionEnabled(false);
+        tblCart.setRowHeight(40);
+        tblCart.setFont(new Font("微软雅黑",Font.PLAIN,16));
+        tblCart.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        //tblCart.setBounds(300, 800, 500, 80);
+        JScrollPane cartScrollPane=new JScrollPane(tblCart);
+        cartScrollPane.setBounds(300, 800, 500, 160);
+        //contentPane.add(tblCart);
+        contentPane.add(cartScrollPane);
+
+        JButton btnAddOne = new JButton("添加一件");
+        btnAddOne.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addToCart(1);
+            }
+        });
+        btnAddOne.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        contentPane.add(btnAddOne);
+        btnAddOne.setBounds(1050, 900, 110, 35);
+
+        JButton btnRemoveOne = new JButton("删除一件");
+        btnRemoveOne.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeFromCart(1);
+            }
+        });
+        btnRemoveOne.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        contentPane.add(btnRemoveOne);
+        btnRemoveOne.setBounds(1050, 1000, 110, 35);
     }
 }

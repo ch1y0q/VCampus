@@ -1,10 +1,18 @@
 package com.vcampus.client.main.manager;
 
+import com.vcampus.client.main.App;
+import com.vcampus.entity.Student;
+import com.vcampus.entity.Teacher;
+import com.vcampus.net.Request;
+import com.vcampus.net.Response;
+import com.vcampus.util.ResponseUtils;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 public class TeaMandetailPanel extends JPanel {
     String[] strText=new String[11];
@@ -13,12 +21,10 @@ public class TeaMandetailPanel extends JPanel {
     public JTextField txtSex;
     public JTextField txtacademy;
     public JTextField txtlevel;
-    public JTextField txtbodynumber;
-    public JTextField txtBirth;
     public JTextField txtemail;
     public JTextField txtEntry;
     public JTextField txtphone;
-
+    public JTextField txtTeaNum;
     public TeaMandetailPanel(){
         setLayout(null);
         JLabel detail=new JLabel("详细信息");
@@ -82,58 +88,48 @@ public class TeaMandetailPanel extends JPanel {
         txtlevel.setBounds(190, 130, 100, 30);
         txtlevel.setEditable(false);
         add(txtlevel);
-        JLabel bodynumber=new JLabel("身份证号");
-        bodynumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        bodynumber.setBounds(300, 10, 150, 30);
-        bodynumber.setBorder(new EmptyBorder(0,0,0,0));
-        add(bodynumber);
-        txtbodynumber = new JTextField();    //创建文本框
-        txtbodynumber.setText("身份证号");
-        txtbodynumber.setBounds(460, 10, 100, 30);
-        txtbodynumber.setEditable(false);
-        add(txtbodynumber);
-        JLabel TeaBirth=new JLabel("出生日期");
-        TeaBirth.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        TeaBirth.setBounds(300, 40, 150, 30);
-        TeaBirth.setBorder(new EmptyBorder(0,0,0,0));
-        add(TeaBirth);
-        txtBirth = new JTextField();    //创建文本框
-        txtBirth.setText("出生日期");
-        txtBirth.setBounds(460, 40, 100, 30);
-        txtBirth.setEditable(false);
-        add(txtBirth);
+        JLabel TeaNumber=new JLabel("工号");
+        TeaNumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        TeaNumber.setBounds(100, 160, 90, 30);
+        TeaNumber.setBorder(new EmptyBorder(0,0,0,0));
+        add(TeaNumber);
+        txtTeaNum = new JTextField();    //创建文本框
+        txtTeaNum.setText("工号");
+        txtTeaNum.setBounds(190, 160, 100, 30);
+        txtTeaNum.setEditable(false);
+        add(txtTeaNum);
         JLabel Teaemail=new JLabel("邮箱");
         Teaemail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teaemail.setBounds(300, 70, 150, 30);
+        Teaemail.setBounds(300, 10, 150, 30);
         Teaemail.setBorder(new EmptyBorder(0,0,0,0));
         add(Teaemail);
         txtemail = new JTextField();    //创建文本框
         txtemail.setText("邮箱");
-        txtemail.setBounds(460, 70, 100, 30);
+        txtemail.setBounds(460, 10, 100, 30);
         txtemail.setEditable(false);
         add(txtemail);
         JLabel selfEntry=new JLabel("个人主页链接");
         selfEntry.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        selfEntry.setBounds(300, 100, 150, 30);
+        selfEntry.setBounds(300, 40, 150, 30);
         selfEntry.setBorder(new EmptyBorder(0,0,0,0));
         add(selfEntry);
         txtEntry = new JTextField();    //创建文本框
         txtEntry.setText("个人主页链接");
-        txtEntry.setBounds(460, 100, 100, 30);
+        txtEntry.setBounds(460, 40, 100, 30);
         txtEntry.setEditable(false);
         add(txtEntry);
         JLabel phone=new JLabel("电话");
         phone.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        phone.setBounds(300, 130, 150, 30);
+        phone.setBounds(300, 70, 150, 30);
         phone.setBorder(new EmptyBorder(0,0,0,0));
         add(phone);
         txtphone = new JTextField();    //创建文本框
         txtphone.setText("电话");
-        txtphone.setBounds(460, 130, 100, 30);
+        txtphone.setBounds(460, 70, 100, 30);
         txtphone.setEditable(false);
         add(txtphone);
 
-        JButton edit = new JButton("启动编辑");
+        JButton edit = new JButton("添加编辑");
         edit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         edit.setBounds(600, 10, 200, 30);
         edit.addActionListener(new ActionListener() {
@@ -142,25 +138,14 @@ public class TeaMandetailPanel extends JPanel {
             if(e.getSource()==edit)
             {
                 txtname.setEditable(true);
-                strText[0]=txtname.getText();
                 txtcard.setEditable(true);
-                strText[1]=txtcard.getText();
                 txtSex.setEditable(true);
-                strText[2]=txtSex.getText();
                 txtacademy.setEditable(true);
-                strText[3]=txtacademy.getText();
                 txtlevel.setEditable(true);
-                strText[4]=txtlevel.getText();
-                txtbodynumber.setEditable(true);
-                strText[5]=txtbodynumber.getText();
-                txtBirth.setEditable(true);
-                strText[6]=txtBirth.getText();
                 txtemail.setEditable(true);
-                strText[7]=txtemail.getText();
+                txtTeaNum.setEditable(true);
                 txtEntry.setEditable(true);
-                strText[8]=txtEntry.getText();
                 txtphone.setEditable(true);
-                strText[9]=txtphone.getText();
             }
             }
         });
@@ -172,7 +157,7 @@ public class TeaMandetailPanel extends JPanel {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                saveChange();
             }
         });
         add(save);
@@ -183,23 +168,126 @@ public class TeaMandetailPanel extends JPanel {
         Teadelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                deleteTea(txtcard.getText());
             }
         });
         add(Teadelete);
+
+
+        JButton TeaSureAdd = new JButton("确认添加老师");
+        TeaSureAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        TeaSureAdd.setBounds(600, 130, 200, 30);
+        TeaSureAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==TeaSureAdd)
+                {
+                    Teacher teacher=new Teacher();
+                    teacher.setName(txtname.getText());
+                    teacher.setCardNumber(txtcard.getText());
+                    teacher.setGender(txtSex.getText());
+                    teacher.setSchool(txtacademy.getText());
+                    teacher.setTeacherRank(txtlevel.getText());
+                    teacher.setTeacherNumber(txtTeaNum.getText());
+                    teacher.setEmail(txtemail.getText());
+                    teacher.setHomepage(txtEntry.getText());
+                    teacher.setPhoneNumber(txtphone.getText());
+                    AddTea(teacher);
+                    closeedit();
+                }
+            }
+        });
+        add(TeaSureAdd);
+
     }
-    public void init()
-    {
-        txtname.setText("xkk");
+    public void initnow(){
+        txtname.setText("");
         txtcard.setText("");
         txtSex.setText("");
         txtacademy.setText("");
         txtlevel.setText("");
-        txtbodynumber.setText("");
-        txtBirth.setText("");
-        txtemail.setText("");
+        txtTeaNum.setText("");
         txtEntry.setText("");
+        txtemail.setText("");
         txtphone.setText("");
     }
+    public void init(String cardNumber)
+    {
+        Teacher teacher=new Teacher();
+        teacher= ResponseUtils.getResponseByHash(
+                new Request(App.connectionToServer, null, "com.vcampus.server.TeacherManage.getTeacherDetailByCardNumber",
+                        new Object[] { cardNumber }).send())
+                .getReturn(Teacher.class);
 
+        txtname.setText(teacher.getName());
+        txtcard.setText(teacher.getCardNumber());
+        txtSex.setText(teacher.getGender());
+        txtacademy.setText(teacher.getSchool());
+        txtlevel.setText(teacher.getTeacherRank());
+        txtTeaNum.setText(teacher.getTeacherNumber());
+        txtEntry.setText(teacher.getHomepage());
+        txtemail.setText(teacher.getEmail());
+        txtphone.setText(teacher.getPhoneNumber());
+    }
+    public void deleteTea(String cardNumber)
+    {
+        Response resp = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
+                "com.vcampus.server.TeacherManage.deleteTeacher", new Object[] { cardNumber }).send());
+        if (resp.getReturn(Boolean.class)) {
+            System.out.println("success");
+        } else {
+            System.out.println("error");
+        }
+    }
+    public void AddTea(Teacher teacher)
+    {
+        Response resp = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
+                "com.vcampus.server.TeacherManage.insertTeacher", new Object[] { teacher }).send());
+        if (resp.getReturn(Boolean.class)) {
+            System.out.println("success");
+        } else {
+            System.out.println("error");
+        }
+    }
+    public void closeedit()
+    {
+        txtname.setEditable(false);
+        txtcard.setEditable(false);
+        txtSex.setEditable(false);
+        txtacademy.setEditable(false);
+        txtlevel.setEditable(false);
+        txtTeaNum.setEditable(false);
+        txtEntry.setEditable(false);
+        txtemail.setEditable(false);
+        txtphone.setEditable(false);
+    }
+    public void saveChange(){
+        closeedit();
+        String cardNumber=txtcard.getText();
+        String teacherNumber=txtTeaNum.getText();
+        String school=txtacademy.getText();
+        String teacherRank=txtlevel.getText();
+
+        HashMap<String,String> mapResetTabs = new HashMap<String, String>();
+        mapResetTabs.put("cardNumber", cardNumber );
+        mapResetTabs.put("teacherNumber",teacherNumber);
+        TeaManageHelper.resetTeacherNumberByCard(mapResetTabs);
+
+        HashMap<String,String> mapResetNum = new HashMap<String, String>();
+        mapResetNum.put("cardNumber", cardNumber);
+        mapResetNum.put("school",school);
+        TeaManageHelper.resetSchoolByCard(mapResetNum);
+
+        HashMap<String,String> mapResetPlace = new HashMap<String, String>();
+        mapResetPlace.put("cardNumber", cardNumber);
+        mapResetPlace.put("teacherRank",teacherRank);
+        TeaManageHelper.resetTeacherRankByCard(mapResetPlace);
+    }
+
+    public void changeedit(){
+        closeedit();
+        txtacademy.setEditable(true);
+        txtlevel.setEditable(true);
+        txtTeaNum.setEditable(true);
+    }
 }

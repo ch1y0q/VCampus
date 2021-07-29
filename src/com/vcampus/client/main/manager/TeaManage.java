@@ -2,6 +2,10 @@ package com.vcampus.client.main.manager;
 
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.administrator.main.AppAdmin;
+import com.vcampus.client.main.App;
+import com.vcampus.entity.Teacher;
+import com.vcampus.net.Request;
+import com.vcampus.util.ResponseUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -21,7 +26,8 @@ import java.util.ResourceBundle;
 public class TeaManage extends JFrame {
     private static Locale locale = Locale.getDefault();
     private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
-
+    private List<Teacher> list = null;
+    private DefaultTableModel model;
     public TeaManage(){
         setResizable(true);
         setTitle("教师信息管理");
@@ -45,8 +51,8 @@ public class TeaManage extends JFrame {
                 if(e.getSource()==back)
                 {
                     AppAdmin app=new AppAdmin();
-                    setVisible(false);
                     app.setVisible(true);
+                    setVisible(false);
                 }
             }
         });
@@ -57,7 +63,7 @@ public class TeaManage extends JFrame {
 
         JLabel tf = new JLabel();
         tf.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        tf.setText("欢迎你:" + "XXX");
+        tf.setText("欢迎你:" + App.session.getAdmin().getName());
         tf.setBounds(1000, 20, 200, 30);
         tf.setBorder(new EmptyBorder(0,0,0,0));
         contentPane.add(tf);
@@ -80,7 +86,7 @@ public class TeaManage extends JFrame {
 
 
         JTextField txtfield1=new JTextField();    //创建文本框
-        txtfield1.setText("输入教师一卡通号或姓名");
+        txtfield1.setText("输入教师姓名");
         txtfield1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         txtfield1.setBounds(210,50,300,30);
         contentPane.add(txtfield1);
@@ -88,12 +94,14 @@ public class TeaManage extends JFrame {
         JButton addTea=new JButton("教师信息录入");
         addTea.setBounds(210,130,150,30);
         addTea.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        TeaMandetailPanel Teadetail=new TeaMandetailPanel();
         addTea.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==addTea)
                 {
-
+                    Teadetail.initnow();
+                    Teadetail.setVisible(true);
                 }
             }
         });
@@ -111,15 +119,6 @@ public class TeaManage extends JFrame {
         JButton Teaserch=new JButton("教师信息查询");
         Teaserch.setBounds(1100,80,150,30);
         Teaserch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        Teaserch.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==Teaserch)
-                {
-
-                }
-            }
-        });
         contentPane.add(Teaserch);
 
         JLabel academylabel=new JLabel("学院");
@@ -128,25 +127,21 @@ public class TeaManage extends JFrame {
         academylabel.setBorder(new EmptyBorder(0,0,0,0));
         Teainforselect.add(academylabel);
         JComboBox academy=new JComboBox();
-        String[] recalltxt1={"","计算机科学与工程学院","网络安全学院","软件学院"};
+        String[] recalltxt1={"","computer","ruanjian","ai"};
         for(String s :recalltxt1){
             academy.addItem(s);
         }
         academy.setBounds(300,40,150,30);
         Teainforselect.add(academy);
 
-        JLabel levellabel=new JLabel("职称");
-        levellabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        levellabel.setBounds(250, 90, 50, 30);
-        levellabel.setBorder(new EmptyBorder(0,0,0,0));
-        Teainforselect.add(levellabel);
-        JComboBox level=new JComboBox();
-        String[] recalltxt2={"","讲师","副教授","教授"};
-        for(String s :recalltxt2){
-            level.addItem(s);
-        }
-        level.setBounds(300,90,150,30);
-        Teainforselect.add(level);
+        JLabel cardlabel=new JLabel("Card");
+        cardlabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        cardlabel.setBounds(250, 90, 50, 30);
+        cardlabel.setBorder(new EmptyBorder(0,0,0,0));
+        Teainforselect.add(cardlabel);
+        JTextField cardNum=new JTextField();
+        cardNum.setBounds(300,90,150,30);
+        Teainforselect.add(cardNum);
 
         JLabel sexlabel=new JLabel("性别");
         sexlabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -154,14 +149,13 @@ public class TeaManage extends JFrame {
         sexlabel.setBorder(new EmptyBorder(0,0,0,0));
         Teainforselect.add(sexlabel);
         JComboBox sex=new JComboBox();
-        String[] recalltxt3={"","男","女"};
+        String[] recalltxt3={"","man","woman"};
         for(String s :recalltxt3){
             sex.addItem(s);
         }
         sex.setBounds(300,140,150,30);
         Teainforselect.add(sex);
 
-        TeaMandetailPanel Teadetail=new TeaMandetailPanel();
         Teadetail.setBackground(new Color(255, 255, 255));
         Teadetail.setBounds(210,610,800,180);
         Teadetail.setVisible(false);
@@ -173,8 +167,7 @@ public class TeaManage extends JFrame {
         contentPane.add(Teainfor);
 
         String[] header = {"一卡通号", "姓名","性别","学院","职称","选择"};
-        String[][] data = {{"", "","","","",""}};
-        DefaultTableModel model = new DefaultTableModel(data,header);
+        model = new DefaultTableModel(null,header);
         JTable table = new JTable(model)
         {
             @Override
@@ -184,16 +177,56 @@ public class TeaManage extends JFrame {
                 return false;
             }
         };
+        Teaserch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==Teaserch)
+                {
+                    Teadetail.initnow();
+                    String txt1=txtfield1.getText();
+                    String txt2=cardNum.getText();
+                    String txt3=academy.getSelectedItem().toString();
+                    String txt4=sex.getSelectedItem().toString();
+                    list = ResponseUtils
+                            .getResponseByHash(new Request(App.connectionToServer, null,
+                                    "com.vcampus.server.TeacherManage.ByNameAndCardAndSchoolAndGender",
+                                    new Object[] {txt1,txt2,txt3,txt4}).send())
+                            .getListReturn(Teacher.class);
+                    String[][] listData = new String[list.size()][6];
+                    if (list == null || list.size() == 0) {
+                        System.out.println("error");
+                        model.setRowCount(0);
+                        table.setModel(model);
+                    } else {
+                        model.setRowCount(0);
+                        int len = list.size();
+                        for (int i = 0; i < len; i++) {
+                            listData[i][0]=list.get(i).getCardNumber();
+                            listData[i][1]=list.get(i).getName();
+                            listData[i][2]=list.get(i).getGender();
+                            listData[i][3]=list.get(i).getSchool();
+                            listData[i][4]=list.get(i).getTeacherRank();
+                            listData[i][5]="<html><font color='rgb(110,110,110)'>查看</font></html>";
+                        }
+                        model = new DefaultTableModel(listData, header){
+                            public boolean isCellEditable(int a, int b) {
+                                return false;
+                            }
+                        };
+                        table.setModel(model);
+                    }
+                }
+            }
+        });
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int column = table.getSelectedColumn();
                 int row = table.getSelectedRow();
-                /**需增加
-                 * 判断逻辑
-                 */
                 if (column == 5) {
                     table.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>", row, column);
+                    Teadetail.changeedit();
+                    Teadetail.init(table.getValueAt(row,0).toString());
                     Teadetail.setVisible(true);
                 }
             }

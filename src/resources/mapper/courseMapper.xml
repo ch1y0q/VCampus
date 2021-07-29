@@ -87,4 +87,9 @@
             selectedNumber=#{selectedNumber},
             credit=#{credit} WHERE id=#{id}
     </update>
+
+    <insert id="addLineInCourseScore" parameterType="CourseScore">
+        INSERT INTO
+            `courseScore` (studentCardNumber,courseId,status) VALUES (#{studentCardNumber}, #{courseId}, #{status})
+    </insert>
 </mapper>

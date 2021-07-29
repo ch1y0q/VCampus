@@ -27,6 +27,7 @@ public class AppStuCourse {
     private DefaultTableModel model1; //选课
     private DefaultTableModel model2; //已选课
     private JComboBox chooseSemester0;
+    private JComboBox chooseSemester;
     public AppStuCourse(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         width = screenSize.width;
@@ -58,10 +59,14 @@ public class AppStuCourse {
         jp2.setBackground(Color.white);
         jp3.setBackground(Color.white);
 
+
+
         //侧边栏
         JTree jt= new StuCategory().getJTree();
         jf.add(jt);
         jt.setBounds(0,height/50,width*2/11,height);
+
+
 
 
         //课程表
@@ -87,13 +92,12 @@ public class AppStuCourse {
                 this.setColumnSelectionAllowed(false);
                 return false;
             }
-
         };
         JLabel semesterLabel0 = new JLabel("学期", JLabel.CENTER);
         semesterLabel0.setBounds(width / 50, height / 40, 40, 30);
         jp0.add(semesterLabel0);
         chooseSemester0 = new JComboBox();
-        String[] semesters = {"2020-2021-1", "2020-2021-2", "2020-2021-3", "2020-2021-4"};
+        String[] semesters = {"All","2020-2021-1", "2020-2021-2", "2020-2021-3", "2020-2021-4"};
         for (String s : semesters) {
             chooseSemester0.addItem(s);
         }
@@ -105,6 +109,8 @@ public class AppStuCourse {
         tcr.setHorizontalAlignment(JLabel.CENTER);
         courseTable.setDefaultRenderer(Object.class, tcr);
         refreshCourseTable();
+
+
 
 
         //选课
@@ -144,12 +150,6 @@ public class AppStuCourse {
             }
         };
         sp2.getViewport().add(selectedCourseTable);
-        for (int i = 0; i < 5; i++) {
-            model2.addRow(emptyData);
-        }
-        for (int i = 0; i < 5; i++) {
-            model2.setValueAt("退选", i, 10);
-        }
         JLabel selectedCreditLabel = new JLabel("已选学分");
         selectedCreditLabel.setBorder(BorderFactory.createLineBorder(Color.black,1));
         selectedCreditLabel.setBounds(width/50,height/40,80,30);
@@ -159,16 +159,10 @@ public class AppStuCourse {
         numOfCreditText.setEditable(false);
         jp2.add(numOfCreditText);
         sp2.setBounds(width / 50, 30+height / 20, width * 3 / 5, height * 3 / 5);
-        for(int i = 0;i<selectedCourseTable.getRowCount();i++){
-            Object n = model2.getValueAt(i,3);
-            if(n!=null){
-                Double d = Double.parseDouble((String)n);
-                credit+=d;
-            }
-        }
-        DecimalFormat df = new DecimalFormat("0.00");
-        String sCredit = df.format(credit);
-        numOfCreditText.setText(sCredit);
+        initSelectedCourseTable();
+        numOfCreditText.setText(calculateCredit());
+
+
 
 
 
@@ -195,8 +189,7 @@ public class AppStuCourse {
         JLabel semesterLabel = new JLabel("学期",JLabel.CENTER);
         semesterLabel.setBounds(width/50,height/40,40,30);
         jp3.add(semesterLabel);
-
-        JComboBox chooseSemester = new JComboBox();
+        chooseSemester = new JComboBox();
         for (String s : semesters) {
             chooseSemester.addItem(s);
         }
@@ -214,6 +207,8 @@ public class AppStuCourse {
         JLabel numOfScoreLabel = new JLabel();
         numOfScoreLabel.setBounds(width*2/25+450,height/40,40,30);
         jp3.add(numOfScoreLabel);
+
+
 
 
         //事件
@@ -266,7 +261,6 @@ public class AppStuCourse {
 
         //选课
         selectCourseTable.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 int column = selectCourseTable.getSelectedColumn();
@@ -287,18 +281,12 @@ public class AppStuCourse {
                             ,course.getSelectedNumber(),"退课"};
                     model2.addRow(courseInfo);
                     refreshCourseTable();
-                    for(int i = 0;i<selectedCourseTable.getRowCount();i++){
-                        Object n = model2.getValueAt(i,3);
-                        if(n!=null){
-                            double d = Double.parseDouble((String)n);
-                            credit+=d;
-                        }
-                    }
-                    String sCredit = df.format(credit);
-                    numOfCreditText.setText(sCredit);
+                    numOfCreditText.setText(calculateCredit());
                 }
             }
         });
+
+
 
 
         //退课
@@ -315,31 +303,36 @@ public class AppStuCourse {
                             new Object[] {App.session.getStudent(),courseId}).send()).getReturn(String.class);
                     System.out.println("result= "+res);
                     model2.removeRow(row);
-                    credit=0;
-                    for(int i = 0;i<selectedCourseTable.getRowCount();i++){
-                        Object n = model2.getValueAt(i,3);
-                        if(n!=null){
-                            double d = Double.parseDouble((String)n);
-                            credit+=d;
-                        }
-                    }
-                    String sCredit = df.format(credit);
-                    numOfCreditText.setText(sCredit);
+                    numOfCreditText.setText(calculateCredit());
+                    refreshCourseTable();
                 }
             }
         });
+
+        //课表：选择学期
+        chooseSemester0.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshCourseTable();
+            }
+        }
+        );
 
         //成绩查询页面选择学期
 
 
     }
+
+
+    //刷新课表
     private void refreshCourseTable(){
+        clearCourseTable();
+        String semester = (String)chooseSemester0.getSelectedItem();
         String selectedCourses = ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null,
                         "com.vcampus.server.teaching.CourseSelection.getCourseSelection",
                         new Object[] {App.session.getStudent()}).send())
                 .getReturn(String.class);
-
         if(selectedCourses!=""){
             String[] splitSelectedCourses = selectedCourses.split(",");
             for(String s:splitSelectedCourses){
@@ -348,21 +341,29 @@ public class AppStuCourse {
                                 "com.vcampus.server.teaching.CourseSelection.getOneCourse",
                                 new Object[] {s}).send())
                         .getReturn(Course.class);
-                String time = course.getTime();
-                String[] splitTime = time.split("-");
-                int start = Integer.parseInt(splitTime[1]);
-                int end = Integer.parseInt(splitTime[2]);
-                int day = Integer.parseInt(splitTime[0]);
-                for(int i = start-1;i<=end-1;i++){
-                    String name = course.getClassName();
-                    String classroom = course.getClassroom();
-                    model0.setValueAt("<html><center>"+name+"<br>"+classroom+"</center></html>",i,day);
+                if(semester.equals("All")||course.getSemester().equals(semester)){
+                    String time = course.getTime();
+                    String[] splitTime = time.split("-");
+                    int start = Integer.parseInt(splitTime[1]);
+                    int end = Integer.parseInt(splitTime[2]);
+                    int day = Integer.parseInt(splitTime[0]);
+                    for(int i = start-1;i<=end-1;i++){
+                        String name = course.getClassName();
+                        String classroom = course.getClassroom();
+                        model0.setValueAt("<html><center>"+name+"<br>"+classroom+"</center></html>",i,day);
+                    }
                 }
+
             }
         }
-
     }
+
+
+    //刷新选课表
     private void refreshSelectCourseTable(){
+        while(model1.getRowCount()>0){
+            model1.removeRow(0);
+        }
         List<Course> list = ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer, null,
                         "com.vcampus.server.teaching.CourseSelection.getAllCourses",
@@ -376,11 +377,67 @@ public class AppStuCourse {
                     ,course.getSelectedNumber(),"选择"};
             model1.addRow(courseInfo);
         }
+    }
+
+
+    //清空课表
+    private void clearCourseTable(){
+        for(int i =0;i<13;i++){
+            for(int j=0;j<7;j++){
+                model0.setValueAt("",i,j);
+            }
+        }
+    }
+
+
+    //初始化已选课表
+    private void initSelectedCourseTable(){
+        while(model2.getRowCount()>0){
+            model2.removeRow(0);
+        }
+        String selectedCourses = ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer, null,
+                        "com.vcampus.server.teaching.CourseSelection.getCourseSelection",
+                        new Object[] {App.session.getStudent()}).send())
+                .getReturn(String.class);
+        if(selectedCourses!=""){
+            String[] splitSelectedCourses = selectedCourses.split(",");
+            for(String s:splitSelectedCourses){
+                Course course = ResponseUtils
+                        .getResponseByHash(new Request(App.connectionToServer, null,
+                                "com.vcampus.server.teaching.CourseSelection.getOneCourse",
+                                new Object[] {s}).send())
+                        .getReturn(Course.class);
+                String[] courseInfo = {course.getId(),course.getClassName(),course.getSemester(),course.getCredit()
+                        ,course.getTeacher(),course.getTime(),course.getClassroom(),course.getMajor(),course.getCapacity()
+                        ,course.getSelectedNumber(),"退课"};
+                model2.addRow(courseInfo);
+            }
+        }
 
     }
+
+    //关闭窗口
     public void close(){
         jf.setVisible(false);
     }
+
+
+    //计算学分
+    private String calculateCredit(){
+        credit = 0;
+        for(int i = 0;i<model2.getRowCount();i++){
+            String n = (String)model2.getValueAt(i,3);
+            if(n!=null){
+                Double d = Double.parseDouble(n);
+                credit+=d;
+            }
+        }
+        DecimalFormat df = new DecimalFormat("0.00");
+        String sCredit = df.format(credit);
+        return sCredit;
+    }
+
     public void open(){jf.setVisible(true);}
 }
 

@@ -176,6 +176,7 @@ public class StuManage extends JFrame{
         Stuserch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Studetail.initnow();
                 String txt1=txtfield1.getText();
                 String txt2=txtfield2.getText();
                 String txt3=Stuclass.getSelectedItem().toString();
@@ -217,6 +218,7 @@ public class StuManage extends JFrame{
                 int row = table.getSelectedRow();
                 if (column == 5) {
                     table.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>", row, column);
+                    Studetail.changeedit();
                     Studetail.init(table.getValueAt(row,0).toString());
                     Studetail.setVisible(true);
                 }

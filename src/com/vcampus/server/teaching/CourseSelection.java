@@ -25,7 +25,7 @@ public class CourseSelection {
             ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
             String temp = courseMapper.getStudentOfOneCourse(newClassId);
-            if(temp=="null"){
+            if(temp.equals("null")){
                 temp="";
             }
             temp += student.getCardNumber();
@@ -36,7 +36,7 @@ public class CourseSelection {
             one = courseMapper.updateScoreOfOneCourse(map);
             String cardNumber = student.getCardNumber();
             temp = courseMapper.getCourseSelection(student);
-            if(temp=="null"){
+            if(temp.equals("null")){
                 temp="";
             }
             temp+=newClassId;
@@ -50,6 +50,8 @@ public class CourseSelection {
             int sn = Integer.parseInt(selectedNumber);
             sn+=1;
             selectedNumber = Integer.toString(sn);
+            CourseScore courseScore = new CourseScore(cardNumber,newClassId,"","首修");
+            courseMapper.addLineInCourseScore(courseScore);
             course.setSelectedNumber(selectedNumber);
             courseMapper.setSelectedNumber(course);
             sqlSession.commit();
