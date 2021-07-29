@@ -1,7 +1,9 @@
 package com.vcampus.client.main.teacher;
 
+import com.alee.laf.WebLookAndFeel;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.courseManage.AppTeaCourse;
+import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.teacher.TeacherInfo.AppTeaInfo;
 import com.vcampus.client.main.shop.AppShop;
@@ -34,8 +36,10 @@ public class TeaCategory extends JTree {
         DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
         DefaultMutableTreeNode nodCard = new DefaultMutableTreeNode("生活管理");
         DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        DefaultMutableTreeNode nodDailyReport=new DefaultMutableTreeNode("每日上报");
         nodLogin.add(nodPersonalInfo);nodLogin.add(nodChooseCourses);nodLogin.add(nodGrades);
         nodLogin.add(nodLibrary);nodLogin.add(nodCard);nodLogin.add(nodShop);
+        nodLogin.add(nodDailyReport);
 
 
         DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
@@ -62,15 +66,16 @@ public class TeaCategory extends JTree {
                         }
                     }
                     else if(node==nodLibrary){
-                        if(!this.getClass().getName().equals("com.vcampus.client.main.StudentLibrary.StuLibrary")) {
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.library.StuLibrary")) {
                             StuLibrary app = new StuLibrary();
                             app.setVisible(true);
                             setVisible(false);
                         }
                     }
                     else if(node==nodGrades||node==nodChooseCourses){
-                        if(!this.getClass().getName().equals("com.vcampus.client.main.courseManage.AppStuCourse")) {
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.courseManage.AppTeaCourse")) {
                             AppTeaCourse app = new AppTeaCourse();
+                            app.open();
                             setVisible(false);
                         }
                     }
@@ -82,8 +87,16 @@ public class TeaCategory extends JTree {
                         }
                     }
                     else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
-                        if(!this.getClass().getName().equals("com.vcampus.client.main.AppShopTeacher")) {
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.shop.AppShop")) {
                             AppShop app = new AppShop();
+                            app.setVisible(true);
+                            setVisible(false);
+                        }
+                    }
+                    else if(node==nodDailyReport){
+                        if(this.getClass().getName()!="com.vcampus.client.main.dailyReport.AppDailyReport"){
+                            WebLookAndFeel.install();
+                            AppDailyReport app=new AppDailyReport();
                             app.setVisible(true);
                             setVisible(false);
                         }
