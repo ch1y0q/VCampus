@@ -13,7 +13,7 @@ import static com.vcampus.util.CommonUtils.getSchoolByCode;
  * @date 2021-07-09
  */
 
-public class Student {
+public class Student implements IOnCampus{
     /* required */
     private String name;
     private String password;

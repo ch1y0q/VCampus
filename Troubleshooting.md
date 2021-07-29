@@ -240,3 +240,7 @@ public void setPassword(String Password) {
 }
 ```
 第一行误将`password`写为`Password`...
+
+## Misc
+### 重命名
+IntelliJ IDEA很智能，但是，在使用Refactor功能重命名类名的时候一定要先用全局文本搜索（在我这的快捷键是Ctrl+Shift+F）查找包名是否出现在字符串里。尤其是本项目，不少后端API是通过字符串的方式获得的。

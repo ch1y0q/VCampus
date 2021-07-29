@@ -2,13 +2,9 @@ package com.vcampus.client.main.dailyReport;
 
 import com.alee.managers.style.StyleId;
 import com.vcampus.client.main.App;
-import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.PersonWhoReport;
-import com.vcampus.entity.Student;
 import com.vcampus.net.Request;
-import com.vcampus.net.Response;
 import com.vcampus.util.ResponseUtils;
-import org.apache.ibatis.session.SqlSession;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -16,9 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -162,10 +155,10 @@ public class DailyReportManagePanel extends JPanel {
                             listData[i][5]=list.get(i).getLocation();
                             listData[i][6]=list.get(i).getCity();
                             listData[i][7]=list.get(i).getCampus();
-                            listData[i][8]=list.get(i).getIfQarantined();
-                            listData[i][9]=list.get(i).getIfSuspected();
-                            listData[i][10]=list.get(i).getIfDefinite();
-                            listData[i][11]=list.get(i).getIfHistoryOfRiskyArea();
+                            listData[i][8]=list.get(i).getIsQuarantined();
+                            listData[i][9]=list.get(i).getIsSuspected();
+                            listData[i][10]=list.get(i).getIsDefinite();
+                            listData[i][11]=list.get(i).getIsHistoryOfRiskyArea();
 
                         }
                         model = new DefaultTableModel(listData, columnName){

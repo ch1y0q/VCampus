@@ -31,6 +31,7 @@ public class StuCategory extends JTree{
      * Build a JTree.
      */
     private void init() {
+        /* ALSO CHANGE in com.vcampus.client.main.StudentFancyUI */
         nodLogin= new DefaultMutableTreeNode("学生登陆");
         jt=new JTree(nodLogin);
         DefaultMutableTreeNode nodPersonalInfo = new DefaultMutableTreeNode("个人信息");

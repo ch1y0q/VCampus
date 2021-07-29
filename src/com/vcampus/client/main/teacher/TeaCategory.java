@@ -29,13 +29,15 @@ public class TeaCategory extends JTree {
      * Build a JTree.
      */
     private void init() {
-        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("教师登陆");
+        /* ALSO CHANGE in com.vcampus.client.main.TeacherFancyUI */
+        nodLogin= new DefaultMutableTreeNode("教师登陆");
+        jt=new JTree(nodLogin);
         DefaultMutableTreeNode nodPersonalInfo = new DefaultMutableTreeNode("个人信息");
         DefaultMutableTreeNode nodChooseCourses = new DefaultMutableTreeNode("课程管理");
         DefaultMutableTreeNode nodGrades = new DefaultMutableTreeNode("成绩录入");
         DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
         DefaultMutableTreeNode nodCard = new DefaultMutableTreeNode("生活管理");
-        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode(   "网上商店");
+        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode("网上商店");
         DefaultMutableTreeNode nodDailyReport=new DefaultMutableTreeNode("每日上报");
         nodLogin.add(nodPersonalInfo);nodLogin.add(nodChooseCourses);nodLogin.add(nodGrades);
         nodLogin.add(nodLibrary);nodLogin.add(nodCard);nodLogin.add(nodShop);
@@ -44,10 +46,8 @@ public class TeaCategory extends JTree {
 
         DefaultMutableTreeNode nodGoods = new DefaultMutableTreeNode("商品列表");
         DefaultMutableTreeNode nodCart = new DefaultMutableTreeNode("购物车");
-        DefaultMutableTreeNode nodShoppingHistoty = new DefaultMutableTreeNode("购买历史");
-        nodShop.add(nodGoods); nodShop.add(nodCart); nodShop.add(nodShoppingHistoty);
-
-        jt = new JTree(nodLogin);
+        DefaultMutableTreeNode nodShoppingHistory = new DefaultMutableTreeNode("购买历史");
+        nodShop.add(nodGoods); nodShop.add(nodCart); nodShop.add(nodShoppingHistory);
 
         TreeSelectionModel treeSelectionModel;
         treeSelectionModel=jt.getSelectionModel();
@@ -86,7 +86,7 @@ public class TeaCategory extends JTree {
                             setVisible(false);
                         }
                     }
-                    else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistoty){
+                    else if(node==nodShop||node==nodGoods||node==nodCart||node==nodShoppingHistory){
                         if(!this.getClass().getName().equals("com.vcampus.client.main.shop.AppShop")) {
                             AppShop app = new AppShop();
                             app.setVisible(true);

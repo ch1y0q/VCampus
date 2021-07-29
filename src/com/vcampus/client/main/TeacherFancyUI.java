@@ -70,13 +70,13 @@ import com.alee.utils.swing.Customizer;
 import com.alee.utils.swing.extensions.KeyEventRunnable;
 import com.vcampus.UI.FancyUI;
 import com.vcampus.client.main.chat.AppChatDiag;
-import com.vcampus.client.main.courseManage.AppStuCourse;
+import com.vcampus.client.main.courseManage.AppTeaCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
-import com.vcampus.client.main.student.AppStudent;
-import com.vcampus.client.main.library.StuLibrary;
+import com.vcampus.client.main.library.TeaLibrary;
 import com.vcampus.client.main.shop.AppShop;
-import com.vcampus.client.main.student.StuCategory;
-import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
+import com.vcampus.client.main.teacher.AppTeacher;
+import com.vcampus.client.main.teacher.TeaCategory;
+import com.vcampus.client.main.teacher.TeacherInfo.AppTeaInfo;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -87,13 +87,14 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
- * 学生的主界面。左侧有常驻的树状结构目录，从目录选择项目，可在右侧打开。继承自抽象类FancyUI
- *
+ * 教师的主界面，继承自抽象类FancyUI
+ * 
  * @author Huang Qiyue
- * @date 2021-07-19
+ * @date 2021-07-29
  */
 
-public final class StudentFancyUI extends FancyUI
+
+public final class TeacherFancyUI extends FancyUI
 {
 
     /**
@@ -102,30 +103,32 @@ public final class StudentFancyUI extends FancyUI
      * @return application instance
      */
     @NotNull
-    protected static StudentFancyUI getInstance() {
+    protected static TeacherFancyUI getInstance() {
         if ( instance == null )
         {
-            instance = new StudentFancyUI();
+            instance = new TeacherFancyUI();
         }
-        return (StudentFancyUI) instance;   //polymorphism
+        return (TeacherFancyUI) instance;   //polymorphism
     }
 
-    public StudentFancyUI() {
+    public TeacherFancyUI() {
         super();
 
-        JInternalFrame internal = new JInternalFrame("学生入口",true,true,true, true);
-        internal.setContentPane(new AppStudent().getContentPane());
+        JInternalFrame internal = new JInternalFrame("教师入口",true,true,true, true);
+        internal.setContentPane(new AppTeacher().getContentPane());
         internal.pack();
         internal.setVisible(true);
         internal.setBounds(10,10,1600,1000);
         desktopPane.add(internal);
 
+        /* Teachers need no chatroom
         final JInternalFrame chatFrame = new JInternalFrame("聊天室",true,true,true, true);
         chatFrame.setContentPane(new AppChatDiag().getContentPane());
         chatFrame.pack();
         chatFrame.setVisible(true);
         chatFrame.setBounds(1000,700,300,500);
         desktopPane.add(chatFrame);
+         */
     }
 
     @Override
@@ -142,7 +145,7 @@ public final class StudentFancyUI extends FancyUI
         categoryFrame.setPosition(CompassDirection.west);
 
         //final WebTree appTree = new WebTree(getTreeNodes());
-        WebTree appTree=  new WebTree(new StuCategory().getNode());
+        WebTree appTree=  new WebTree(new TeaCategory().getNode());
         appTree.setEditable(false);
         appTree.setRootVisible(false);
         appTree.setShowsRootHandles(true);
@@ -171,45 +174,41 @@ public final class StudentFancyUI extends FancyUI
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) appTree.getLastSelectedPathComponent();
                     JInternalFrame internal = null;
                     switch((String)node.getUserObject()) {
-                        case "个人信息维护":
+                        case "个人信息":
                             internal = new JInternalFrame("个人信息维护",true,true,true, true);
-                            internal.setContentPane(new AppStuInfo().getContentPane());
+                            internal.setContentPane(new AppTeaInfo().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
                             internal.setBounds(30,50,1000,1000);
                             desktopPane.add(internal);
                             break;
+                        case "图书馆":
+                            // fall through
                         case "图书查询借阅":
                             // fall through
                         case "已借图书":
                             // fall through
                         case "书籍查询":
                             internal = new JInternalFrame("图书馆",true,true,true, true);
-                            internal.setContentPane(new StuLibrary().getContentPane());
+                            internal.setContentPane(new TeaLibrary().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
                             internal.setBounds(30,50,1000,1000);
                             desktopPane.add(internal);
                             break;
-                        case "课程表":
+                        case "成绩录入":
                             // fall through
-                        case "成绩查询":
-                            // fall through
-                        case "选课系统":
-                            // fall through
-                        case "已选课程":
+                        case "课程管理":
                             internal = new JInternalFrame("在线课程管理",true,true,true, true);
-                            internal.setContentPane(new AppStuCourse().getContentPane());
+                            internal.setContentPane(new AppTeaCourse().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
                             internal.setBounds(30,50,1000,1000);
                             desktopPane.add(internal);
                             break;
-                        case "宿舍管理":
-                            // fall through
-                        case "一卡通":
+                        case "生活管理":
                             internal = new JInternalFrame("生活服务",true,true,true, true);
-                            internal.setContentPane(new AppLife().getContentPane());
+                            internal.setContentPane(new AppLifeTeacher().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
                             internal.setBounds(30,50,1000,1000);

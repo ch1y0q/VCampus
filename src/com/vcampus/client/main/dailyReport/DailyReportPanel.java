@@ -67,21 +67,21 @@ public class DailyReportPanel extends JPanel {
         paneDetail.add(lblBasicInfo);
         JLabel lblCardNumber = new JLabel();
         lblCardNumber.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        lblCardNumber.setText("一卡通号:  "+" "+ App.session.getStudent().getCardNumber());
+        lblCardNumber.setText("一卡通号:  "+" "+ App.session.getPersonBelongsToSchool().getCardNumber());
         lblCardNumber.setBounds(10, 50, 180, 30);
         lblCardNumber.setBorder(new EmptyBorder(0,0,0,0));
         paneDetail.add(lblCardNumber);
 
         JLabel jlName = new JLabel();
         jlName.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        jlName.setText("姓名:        "+" "+App.session.getStudent().getName());
+        jlName.setText("姓名:        "+" "+App.session.getPersonBelongsToSchool().getName());
         jlName.setBounds(10, 100, 180, 30);
         jlName.setBorder(new EmptyBorder(0,0,0,0));
         paneDetail.add(jlName);
 
         JLabel lblSchool = new JLabel();
         lblSchool.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        lblSchool.setText("学院:        "+" "+App.session.getStudent().getSchool());
+        lblSchool.setText("学院:        "+" "+App.session.getPersonBelongsToSchool().getSchool());
         lblSchool.setBounds(10, 150, 250, 30);
         lblSchool.setBorder(new EmptyBorder(0,0,0,0));
         paneDetail.add(lblSchool);
@@ -299,19 +299,19 @@ public class DailyReportPanel extends JPanel {
                 {
                     PersonWhoReport person=new PersonWhoReport();
                     //person.setIdReport();
-                    person.setCardNumber(App.session.getStudent().getCardNumber());//获取一卡通
-                    person.setName(App.session.getStudent().getName());
-                    person.setSchool(App.session.getStudent().getSchool());
+                    person.setCardNumber(App.session.getPersonBelongsToSchool().getCardNumber());//获取一卡通
+                    person.setName(App.session.getPersonBelongsToSchool().getName());
+                    person.setSchool(App.session.getPersonBelongsToSchool().getSchool());
                     person.setCampus(cmbCampus.getSelectedItem().toString());//获取combobox当前值
                     person.setTemperature(36+(double)(slider.getValue())/10);
                      Date date= new Date(System.currentTimeMillis());
                     //SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     person.setDate(date);
                     person.setCity(txtExact.getText());
-                    person.setIfQarantined(cmbQuarantined.getSelectedItem().toString());
-                    person.setIfDefinite(cmbDiagnosed.getSelectedItem().toString());
-                    person.setIfSuspected(cmbRiskyVisit.getSelectedItem().toString());
-                    person.setIfHistoryOfRiskyArea(cmbRiskyVisit.getSelectedItem().toString());
+                    person.setIsQuarantined(cmbQuarantined.getSelectedItem().toString());
+                    person.setIsDefinite(cmbDiagnosed.getSelectedItem().toString());
+                    person.setIsSuspected(cmbRiskyVisit.getSelectedItem().toString());
+                    person.setIsHistoryOfRiskyArea(cmbRiskyVisit.getSelectedItem().toString());
 
                     upload(person);
                     JOptionPane.showMessageDialog(null, "上传成功");

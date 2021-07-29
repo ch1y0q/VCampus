@@ -52,7 +52,7 @@ public class AppLifeTeacher extends JFrame {
 
         String lossJudge;
         lossJudge=ResponseUtils
-                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacher.getCardStatus",
+                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacherServer.getCardStatus",
                         new Object[]{teacherCardNumber}).send())
                 .getReturn(String.class);
         String lossJudgeChinese="ERROR";
@@ -63,13 +63,13 @@ public class AppLifeTeacher extends JFrame {
 
         String teacherBankAccountPassword=
                 ResponseUtils
-                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacher.getBankAccountPassword",
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacherServer.getBankAccountPassword",
                                 new Object[]{teacherCardNumber}).send())
                         .getReturn(String.class);
 
         String teacherBankAccountPasswordSalt=
                 ResponseUtils
-                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacher.getBankAccountPasswordSalt",
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacherServer.getBankAccountPasswordSalt",
                                 new Object[]{teacherCardNumber}).send())
                         .getReturn(String.class);
 
@@ -215,7 +215,7 @@ public class AppLifeTeacher extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ResponseUtils
-                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacher.setLossStatusLost",
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacherServer.setLossStatusLost",
                                 new Object[]{teacherCardNumber}).send())
                         .getReturn(Boolean.class);
                 lblCurCardStatus.setText("挂失");
@@ -244,7 +244,7 @@ public class AppLifeTeacher extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ResponseUtils
-                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacher.setLossStatusNormal",
+                        .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacherServer.setLossStatusNormal",
                                 new Object[]{teacherCardNumber}).send())
                         .getReturn(Boolean.class);
                 lblCurCardStatus.setText("正常");
@@ -333,14 +333,14 @@ public class AppLifeTeacher extends JFrame {
                         HashMap<String, Object> mapCardNum_BalanceAdded = new HashMap<String, Object>();
                         mapCardNum_BalanceAdded.put("cardNumber", teacherCardNumber);
                         BigDecimal _balance = ResponseUtils
-                                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacher.getCardBalance",
+                                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacherServer.getCardBalance",
                                         new Object[]{teacherCardNumber}).send())
                                 .getReturn(BigDecimal.class);
 
                         BigDecimal result=_balance.add(balanceAdded);
                         mapCardNum_BalanceAdded.put("money", result);
                         ResponseUtils
-                                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacher.setCardBalance",
+                                .getResponseByHash(new Request(App.connectionToServer, null, "com.vcampus.server.AppLifeTeacherServer.setCardBalance",
                                         new Object[]{mapCardNum_BalanceAdded}).send())
                                 .getReturn(Boolean.class);
                         JOptionPane.showMessageDialog(null, "充值成功");

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AppLifeTeacher {
+public class AppLifeTeacherServer {
 
     public static String getCardStatus(String cardNumber) {
         String cardStatus="ERROR";

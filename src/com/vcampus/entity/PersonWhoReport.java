@@ -16,10 +16,10 @@ public class PersonWhoReport {
     private String location;//是否在校区
     private String city;//不在校区时所在城市
     private String campus;//校区
-    private String ifQarantined;//是否被隔离
-    private String ifSuspected;//是否疑似病例
-    private String ifDefinite;//是否确诊
-    private String ifHistoryOfRiskyArea;//是否到过风险区
+    private String isQuarantined;//是否被隔离
+    private String isSuspected;//是否疑似病例
+    private String isDefinite;//是否确诊
+    private String isHistoryOfRiskyArea;//是否到过风险区
 
     public PersonWhoReport(){
        // idReport=1;
@@ -31,10 +31,10 @@ public class PersonWhoReport {
         location="在校区";
         city="";
         campus="";
-        ifQarantined="";
-        ifSuspected="";
-        ifDefinite="";
-        ifHistoryOfRiskyArea="";
+        isQuarantined ="";
+        isSuspected ="";
+        isDefinite ="";
+        isHistoryOfRiskyArea ="";
     }
     public int getIdReport() {
         return idReport;
@@ -94,32 +94,32 @@ public class PersonWhoReport {
     {
         this.campus=campus;
     }
-    public String getIfQarantined() {
-        return ifQarantined;
+    public String getIsQuarantined() {
+        return isQuarantined;
     }
-    public void setIfQarantined(String ifQarantined)
+    public void setIsQuarantined(String isQuarantined)
     {
-        this.ifQarantined=ifQarantined;
+        this.isQuarantined = isQuarantined;
     }
-    public String getIfSuspected() {
-        return ifSuspected;
+    public String getIsSuspected() {
+        return isSuspected;
     }
-    public void setIfSuspected(String ifSuspected)
+    public void setIsSuspected(String isSuspected)
     {
-        this.ifSuspected=ifSuspected;
+        this.isSuspected = isSuspected;
     }
-    public String getIfDefinite() {
-        return ifDefinite;
+    public String getIsDefinite() {
+        return isDefinite;
     }
-    public void setIfDefinite(String ifDefinite)
+    public void setIsDefinite(String isDefinite)
     {
-        this.ifDefinite=ifDefinite;
+        this.isDefinite = isDefinite;
     }
-    public String getIfHistoryOfRiskyArea() {
-        return ifHistoryOfRiskyArea;
+    public String getIsHistoryOfRiskyArea() {
+        return isHistoryOfRiskyArea;
     }
-    public void setIfHistoryOfRiskyArea(String ifHistoryOfRiskyArea)
+    public void setIsHistoryOfRiskyArea(String isHistoryOfRiskyArea)
     {
-        this.ifHistoryOfRiskyArea=ifHistoryOfRiskyArea;
+        this.isHistoryOfRiskyArea = isHistoryOfRiskyArea;
     }
 }

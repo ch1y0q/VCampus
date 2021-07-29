@@ -14,6 +14,7 @@ public class Session {
     private Teacher teacher = null;
     private Admin admin = null;
     private UserType userType = null;
+    private IOnCampus onCampus = null;
 
     public Student getStudent() {
         return student;
@@ -29,6 +30,17 @@ public class Session {
 
     public UserType getUserType() {
         return userType;
+    }
+
+    public IOnCampus getPersonBelongsToSchool(){
+        switch(userType){
+            case STUDENT:
+                return student;
+            case TEACHER:
+                return teacher;
+            default:
+                return null;
+        }
     }
 
     public Session() {}

@@ -8,7 +8,7 @@ import static com.vcampus.util.CommonUtils.getSchoolByCode;
  * @author Huang Qiyue
  * @date 2021-07-12
  */
-public class Teacher {
+public class Teacher implements IOnCampus{
     /* required */
     private String name;
     private String password;

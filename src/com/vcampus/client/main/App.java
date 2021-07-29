@@ -42,7 +42,7 @@ public class App extends JFrame {
         UserType userType = App.session.getUserType();
         //ManagerType managerType = (userType == UserType.MANAGER ? App.session.getManager().getManagerType() : null);
         target = userType == UserType.STUDENT ? new StudentFancyUI()
-                : userType == userType.TEACHER ? new AppTeacher()
+                : userType == userType.TEACHER ? new TeacherFancyUI()
                 : userType == userType.ADMIN ? new AppAdmin()
                 /*
                 ? (managerType == ManagerType.LIBRARY ? new AppLibraryManager()

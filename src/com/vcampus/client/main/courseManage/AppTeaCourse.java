@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class AppTeaCourse {
-    private JFrame jf = new JFrame("课程管理");
+public class AppTeaCourse extends JFrame {
     private int width = 1151;
     private int height = 800;
     private DefaultTableModel model0;
@@ -31,15 +30,15 @@ public class AppTeaCourse {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         width = screenSize.width;
         height = screenSize.height;
-        jf.setVisible(true);
-        jf.setLayout(null);
-        jf.setResizable(true);
-        jf.setBounds(0, 0, width, height);
-        Container container = jf.getContentPane();
+        setVisible(true);
+        setLayout(null);
+        setResizable(true);
+        setBounds(0, 0, width, height);
+        Container container = getContentPane();
         container.setBackground(new Color(0xD8F6F6));
         JTabbedPane tp = new JTabbedPane();
         tp.setBounds(width *2/ 11, height / 50, width * 4 / 5, height * 4 / 5);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         container.add(tp);
         JPanel jp0 = new JPanel();
         JPanel jp1 = new JPanel();
@@ -59,7 +58,7 @@ public class AppTeaCourse {
 
         //侧边栏
         JTree jt=new TeaCategory().getJTree();
-        jf.add(jt);
+        add(jt);
         jt.setBounds(0,height/50,width*2/11,height);
 
 
@@ -203,11 +202,11 @@ public class AppTeaCourse {
         //事件
 
         //监听窗口大小变化
-        jf.addComponentListener(new ComponentAdapter() {
+        addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                int currentWidth = jf.getWidth();
-                int currentHeight = jf.getHeight();
+                int currentWidth = getWidth();
+                int currentHeight = getHeight();
                 jt.setBounds(0,currentHeight/50,currentWidth*2/11,currentHeight);
                 tp.setBounds(currentWidth *2/ 11, currentHeight / 50, currentWidth * 4 / 5, currentHeight * 4 / 5);
                 //jp0
@@ -425,8 +424,8 @@ public class AppTeaCourse {
         }
     }
     public void close(){
-        jf.setVisible(false);
+        setVisible(false);
     }
-    public void open(){jf.setVisible(true);}
+    public void open(){setVisible(true);}
 }
 
