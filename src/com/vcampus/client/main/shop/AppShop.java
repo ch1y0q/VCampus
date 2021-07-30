@@ -488,7 +488,7 @@ public class AppShop extends JFrame {
         tblCart.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         //tblCart.setBounds(300, 800, 500, 80);
         JScrollPane cartScrollPane=new JScrollPane(tblCart);
-        cartScrollPane.setBounds(300, 500, 500, 160);
+        cartScrollPane.setBounds(330, 500, 500, 160);
         //contentPane.add(tblCart);
         contentPane.add(cartScrollPane);
 
