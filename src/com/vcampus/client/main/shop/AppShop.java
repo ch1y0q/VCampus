@@ -33,7 +33,7 @@ import java.util.Vector;
 
 /**
  * 商店界面（学生、教师通用）
- * @author Y, Huang Qiyue
+ * @author Y, Huang Qiyue, Franklin Yang
  * @date 2021/7/21
  */
 
@@ -173,6 +173,9 @@ public class AppShop extends JFrame {
         }
     }
 
+    /**
+     * 向购物车加入商品
+     */
     private void addToCart(int x)
     {
         int row = tblGoodsList.getSelectedRow();
@@ -218,6 +221,9 @@ public class AppShop extends JFrame {
         }
     }
 
+    /**
+     * 从购物车移除商品
+     */
     private void removeFromCart(int x)
     {
         int row = tblGoodsList.getSelectedRow();

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 一系列图书馆书籍相关操作的接口
+ *
  * @author Franklin Yang
  * @date 2021/7/22
  */

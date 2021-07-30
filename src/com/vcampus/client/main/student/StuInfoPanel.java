@@ -82,7 +82,9 @@ public class StuInfoPanel extends JPanel {
         lblBookLend.setFont(new Font("宋体", Font.PLAIN, 15));
         add(lblBookLend);
     }
-
+    /**
+     * 学生信息面板实现
+     */
     public void init()
     {
         lblName.setText(App.session.getStudent().getName());
