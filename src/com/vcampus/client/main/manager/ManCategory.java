@@ -27,7 +27,7 @@ public class ManCategory extends JTree {
      * Build a JTree.
      */
     private void init() {
-        DefaultMutableTreeNode nodLogin= new DefaultMutableTreeNode("管理员登陆");
+        nodLogin= new DefaultMutableTreeNode("管理员登陆");
         DefaultMutableTreeNode nodInfor = new DefaultMutableTreeNode("个人信息");
         DefaultMutableTreeNode nodTeaInfor = new DefaultMutableTreeNode("教师信息管理");
         DefaultMutableTreeNode nodStuInfor = new DefaultMutableTreeNode("学生信息管理");
