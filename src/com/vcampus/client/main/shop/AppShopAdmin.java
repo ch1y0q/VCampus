@@ -95,9 +95,20 @@ public class AppShopAdmin extends JFrame {
         rGoodsList.setHorizontalAlignment(JLabel.CENTER);
         tblCommodityList.setDefaultRenderer(Object.class, rGoodsList);
         JScrollPane scrollPane=new JScrollPane(tblCommodityList);
-        scrollPane.setBounds(330,200,1000,35*6);
+        scrollPane.setBounds(330,200,1000,35*12);
         contentPane.add(scrollPane);
 
+        JButton btnGoBack=new JButton("返回");
+        btnGoBack.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        contentPane.add(btnGoBack);
+        btnGoBack.setBounds(685,67,100,30);
+        btnGoBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
+        /*
         JLabel lblCommodityInfoDetail = new JLabel("商品详细信息");
         lblCommodityInfoDetail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommodityInfoDetail.setHorizontalAlignment(SwingConstants.CENTER);
@@ -249,7 +260,7 @@ public class AppShopAdmin extends JFrame {
             }
         });
 
-
+/*
         cmbCommoditySaleInfoMonth.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -294,5 +305,7 @@ public class AppShopAdmin extends JFrame {
                 }
             }
         });
+
+ */
     }
 }
