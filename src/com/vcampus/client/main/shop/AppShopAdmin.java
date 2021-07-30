@@ -4,6 +4,7 @@ import com.alee.managers.style.StyleId;
 import com.vcampus.client.main.App;
 import com.vcampus.client.main.manager.ManCategory;
 import com.vcampus.entity.Goods;
+import com.vcampus.client.main.shop.AppShopHelper;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
 
@@ -15,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 /**
@@ -38,12 +41,14 @@ public class AppShopAdmin extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
+        /*
         JTree jt=new ManCategory().getJTree();
         jt.setBounds(0,60,200,400);
         jt.setBackground(new Color(240, 255, 240));
         contentPane.add(jt);
 
+
+         */
         JLabel lblCommoditySearch = new JLabel("商品查询");
         lblCommoditySearch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommoditySearch.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,30 +78,6 @@ public class AppShopAdmin extends JFrame {
         contentPane.add(btnCommodityEntering);
         btnCommodityEntering.setBounds(280,122,140,30);
 
-        /*
-        JTable tblCommodityList=new JTable(6,6);
-        tblCommodityList.setBounds(330,200,1000,35*6);
-        tblCommodityList.setRowHeight(35);
-        tblCommodityList.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        tblCommodityList.getModel().setValueAt("商品编号",0,0);
-        tblCommodityList.getModel().setValueAt("商品名称",0,1);
-        tblCommodityList.getModel().setValueAt("售价",0,2);
-        tblCommodityList.getModel().setValueAt("库存数量",0,4);
-        tblCommodityList.getModel().setValueAt("是否下架",0,5);
-        tblCommodityList.getModel().setValueAt("商品描述",0,3);
-        tblCommodityList.setPreferredScrollableViewportSize(new Dimension(200, 100));
-        DefaultTableCellRenderer rCommodityList =new DefaultTableCellRenderer();
-        rCommodityList.setHorizontalAlignment(JLabel.CENTER);
-        tblCommodityList.setDefaultRenderer(Object.class,rCommodityList);
-        //JScrollPane scrollPane=new JScrollPane(tblCommodityList);
-        contentPane.add(tblCommodityList);
-        */
-        /*
-        JButton btnCommodityDelete=new JButton("删除选中商品");
-        btnCommodityDelete.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        contentPane.add(btnCommodityDelete);
-        btnCommodityDelete.setBounds(1180,430,150,35);
-         */
         String[] header = {"商品编号", "商品名称","售价","商品描述","库存数量","是否下架"};
         tblCommodityList = new JTable(tableModel){
             @Override
@@ -117,9 +98,20 @@ public class AppShopAdmin extends JFrame {
         rGoodsList.setHorizontalAlignment(JLabel.CENTER);
         tblCommodityList.setDefaultRenderer(Object.class, rGoodsList);
         JScrollPane scrollPane=new JScrollPane(tblCommodityList);
-        scrollPane.setBounds(330,200,1000,35*6);
+        scrollPane.setBounds(330,200,1000,35*12);
         contentPane.add(scrollPane);
 
+        JButton btnGoBack=new JButton("返回");
+        btnGoBack.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        contentPane.add(btnGoBack);
+        btnGoBack.setBounds(685,67,100,30);
+        btnGoBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
+        /*
         JLabel lblCommodityInfoDetail = new JLabel("商品详细信息");
         lblCommodityInfoDetail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommodityInfoDetail.setHorizontalAlignment(SwingConstants.CENTER);
@@ -225,7 +217,7 @@ public class AppShopAdmin extends JFrame {
         txtCommoditySaleInfoMonthIncome.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         txtCommoditySaleInfoMonthIncome.setBounds(900,617,160,30);
         contentPane.add(txtCommoditySaleInfoMonthIncome);
-
+/*
         JLabel lblCommoditySaleInfoMonthBenefit = new JLabel("月盈利");
         lblCommoditySaleInfoMonthBenefit.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblCommoditySaleInfoMonthBenefit.setHorizontalAlignment(SwingConstants.CENTER);
@@ -237,6 +229,8 @@ public class AppShopAdmin extends JFrame {
         txtCommoditySaleInfoMonthBenefit.setBounds(900,667,160,30);
         contentPane.add(txtCommoditySaleInfoMonthBenefit);
 
+
+ */
         btnCommoditySearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -269,5 +263,52 @@ public class AppShopAdmin extends JFrame {
             }
         });
 
+/*
+        cmbCommoditySaleInfoMonth.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                String item=e.getItem().toString();
+                switch (item){
+                    case "第1月":
+                       txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(1)));
+                       txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(1)));
+                    case "第2月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(2)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(2)));
+                    case "第3月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(3)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(3)));
+                    case "第4月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(4)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(4)));
+                    case "第5月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(5)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(5)));
+                    case "第6月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(6)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(6)));
+                    case "第7月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(7)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(7)));
+                    case "第8月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(8)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(8)));
+                    case "第9月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(9)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(9)));
+                    case "第10月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(10)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(10)));
+                    case "第11月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(11)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(11)));
+                    case "第12月":
+                        txtCommoditySaleInfoMonthAmount.setText(String.valueOf(AppShopHelper.getMonthSum(12)));
+                        txtCommoditySaleInfoMonthIncome.setText(String.valueOf(AppShopHelper.getMonthSaleMoney(12)));
+                }
+            }
+        });
+
+ */
     }
 }

@@ -123,7 +123,7 @@ public final class AdminFancyUI extends FancyUI
         internal.setContentPane(new AppAdmin().getContentPane());
         internal.pack();
         internal.setVisible(true);
-        internal.setBounds(10,10,1600,1000);
+        internal.setBounds(-5,-5,1400,1000);
         internal.toFront();
         desktopPane.add(internal);
 
