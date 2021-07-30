@@ -114,7 +114,7 @@ public class StuLibrary extends JFrame {
             }
         });
         /**
-         * 图书续借
+         * 图书续借功能
          */
         table.addMouseListener(new MouseAdapter() {
             @Override

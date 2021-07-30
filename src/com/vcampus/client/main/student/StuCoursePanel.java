@@ -91,7 +91,9 @@ public class StuCoursePanel extends JPanel {
 //        lblCI4.setText("校企实训");
 //        lblCI5.setText("校企实训");
 //    }
-
+    /**
+     * 主界面展示的学生课程实现
+     */
     public void init(){
         int labelIndex=0;
         JLabel[] lblCourses = new JLabel[]{lblCI1, lblCI2, lblCI3, lblCI4, lblCI5};
