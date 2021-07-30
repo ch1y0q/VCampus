@@ -21,9 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * 参见AppLife
  * @author Y
  * @date 2021/7/22
- * 参见AppLife
  */
 
 
@@ -177,11 +177,6 @@ public class AppDormAdmin extends JFrame {
             }
         });
         jp1.add(btnDormHygieneRateEntering);
-
-
-
-
-
 
 
         JLabel lblDormBillEntering = new JLabel("宿舍水电费录入");

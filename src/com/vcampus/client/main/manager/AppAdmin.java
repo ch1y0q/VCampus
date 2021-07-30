@@ -345,7 +345,7 @@ public class AppAdmin extends JFrame{
                 if(e.getSource()==CourseInfoLabel1)
                 {
                     AppAdminCourse app=new AppAdminCourse();
-                    app.open();
+                    app.setVisible(true);
                     setVisible(false);
                 }
             }

@@ -32,12 +32,10 @@ public class AppTeaCourse extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         width = screenSize.width;
         height = screenSize.height;
-        setVisible(true);
         setLayout(null);
         setResizable(true);
         setBounds(0, 0, width, height);
         Container container = getContentPane();
-        container.setBackground(new Color(0xD8F6F6));
         JTabbedPane tp = new JTabbedPane();
         tp.setBounds(width /50, height / 50, width * 4 / 5, height * 4 / 5);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -82,6 +82,7 @@ public class ManCategory extends JTree {
                         if(this.getClass().getName()!="com.vcampus.client.main.courseManage.AppAdminCourse") {
                             setVisible(false);
                             AppAdminCourse app = new AppAdminCourse();
+                            app.setVisible(true);
                         }
                     }
                     else if(node==nodDorm){

@@ -41,7 +41,6 @@ public class AppAdminCourse  extends JFrame{
         width = screenSize.width;
         height = screenSize.height;
         setLayout(null);
-        setVisible(true);
         setResizable(true);
         setBounds(0, 0, width, height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -403,7 +402,4 @@ public class AppAdminCourse  extends JFrame{
     }
 
     //打开页面
-    public void open(){
-        setVisible(true);
-    }
 }

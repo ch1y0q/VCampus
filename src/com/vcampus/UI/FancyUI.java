@@ -111,7 +111,6 @@ public abstract class FancyUI extends WebFrame
     WebStyledLabel information;
     WebPanel overlayContainer;
 
-
     /**
      * Returns application instance.
      *
