@@ -27,6 +27,13 @@ public class Response {
     public Response() {
     }
 
+    /**
+     * 完整的构造函数
+     * @param connectionToClient 通向客户端的连接
+     * @param hash 标识码
+     * @param fromApi 来源接口
+     * @param param 参数
+     */
     public Response(ConnectionToClient connectionToClient, String hash, String fromApi, Object param) {
         super();
         this.connectionToClient = connectionToClient;
@@ -59,7 +66,9 @@ public class Response {
 
     }
 
-    // 获取数组型业务数据
+    /**
+     * 获取列表型业务数据
+     */
     public <T> List<T> getListReturn(Class<T> elementClazz) {
 
         if (this.param == null) {
