@@ -1,7 +1,7 @@
 package com.vcampus.client.main.student;
 
 import com.alee.laf.WebLookAndFeel;
-import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.life.AppLife;
 import com.vcampus.client.main.chat.AppChatDiag;
 import com.vcampus.client.main.courseManage.AppStuCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
@@ -14,7 +14,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
-import java.awt.*;
 
 /**
  * 学生目录
@@ -112,7 +111,7 @@ public class StuCategory extends JTree{
                         }
                     }
                     else if(node==nodLivingServices||node==nodCard||node==nodDormManage){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppLife") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.life.AppLife") {
                             AppLife app = new AppLife();
                             app.setVisible(true);
                             setVisible(false);

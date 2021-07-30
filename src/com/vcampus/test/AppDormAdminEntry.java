@@ -1,7 +1,7 @@
 package com.vcampus.test;
 
 import com.alee.laf.WebLookAndFeel;
-import com.vcampus.client.main.AppDormAdmin;
+import com.vcampus.client.main.life.AppDormAdmin;
 
 import java.awt.*;
 

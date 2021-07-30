@@ -1,6 +1,7 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.life;
 
 import com.alee.api.annotations.NotNull;
+import com.vcampus.client.main.App;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;

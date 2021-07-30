@@ -7,6 +7,7 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 /**
+ * 支持UTF8字符的ResourceBundle类，用于JDK9以前版本
  * UTF-8 friendly ResourceBundle support
  *
  * Utility that allows having multi-byte characters inside java .property files.

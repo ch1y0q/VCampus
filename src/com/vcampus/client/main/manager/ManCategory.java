@@ -1,8 +1,7 @@
 package com.vcampus.client.main.manager;
 
-import com.kitfox.svg.A;
 import com.vcampus.client.main.courseManage.AppAdminCourse;
-import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.life.AppLife;
 import com.vcampus.client.main.dailyReport.AppDailyReportManage;
 import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
 import com.vcampus.client.main.shop.AppShopAdmin;
@@ -89,7 +88,7 @@ public class ManCategory extends JTree {
                         }
                     }
                     else if(node==nodDorm){
-                        if(this.getClass().getName()!="com.vcampus.client.main.AppDormAdmin") {
+                        if(this.getClass().getName()!="com.vcampus.client.main.life.AppDormAdmin") {
                             AppLife app = new AppLife();
                             app.setVisible(true);
                             setVisible(false);

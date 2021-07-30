@@ -5,7 +5,7 @@ import com.alee.managers.style.StyleId;
 import com.vcampus.UI.labels.MyJLabel;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.life.AppLife;
 import com.vcampus.client.main.courseManage.AppStuCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.library.StuLibrary;

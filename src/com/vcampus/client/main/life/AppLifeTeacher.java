@@ -1,8 +1,8 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.life;
 
 //import com.vcampus.client.main.student.AppStudent;
-import com.vcampus.client.main.student.StuCategory;
-import com.vcampus.client.main.teacher.AppTeacher;
+import com.vcampus.client.main.App;
+import com.vcampus.client.main.life.AppLifeHelper;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
