@@ -56,4 +56,20 @@ public class AppShopHelper {
                         new Object[]{goodsHistory}).send())
                 .getReturn(Boolean.class);
     }
+
+    public static int getMonthSum(int month)
+    {
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.shop.ShopAdminServer.getMonthSum",
+                        new Object[]{month}).send())
+                .getReturn(Integer.class);
+    }
+
+    public static BigDecimal getMonthSaleMoney(int month)
+    {
+        return ResponseUtils
+                .getResponseByHash(new Request(App.connectionToServer,null,"com.vcampus.server.shop.ShopAdminServer.getMonthSaleMoney",
+                        new Object[]{month}).send())
+                .getReturn(BigDecimal.class);
+    }
 }

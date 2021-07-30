@@ -11,5 +11,15 @@
             (#{id},NOW(),#{quantity},#{price})
     </insert>
 
+    <select id="getMonthSum" parameterType="Integer"
+            resultType="Integer">
+        SELECT SUM(quantity) FROM `goodsHistory` WHERE month(dealTime) =
+                                              #{_parameter}
+    </select>
 
+    <select id="getMonthSaleMoney" parameterType="Integer"
+            resultType="BigDecimal">
+        SELECT SUM(price) FROM `goodsHistory` WHERE month(dealTime) =
+                                                       #{_parameter}
+    </select>
 </mapper>
