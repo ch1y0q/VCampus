@@ -242,16 +242,12 @@ public final class AdminFancyUI extends FancyUI
                             internal.toFront();
                             desktopPane.add(internal);
                             break;
-                        case "商品列表":
-                            // fall through
-                        case "购物车":
-                            // fall through
-                        case "购买历史":
-                            internal = new JInternalFrame("在线商店",true,true,true, true);
+                        case "商店管理":
+                            internal = new JInternalFrame("在线商店管理",true,true,true, true);
                             internal.setContentPane(new AppShopAdmin().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setSize(1000,1000);
+                            internal.setSize(1500,1000);
                             internal.toFront();
                             desktopPane.add(internal);
                             break;

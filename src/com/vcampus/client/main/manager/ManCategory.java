@@ -5,6 +5,7 @@ import com.vcampus.client.main.courseManage.AppAdminCourse;
 import com.vcampus.client.main.AppLife;
 import com.vcampus.client.main.dailyReport.AppDailyReportManage;
 import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;
+import com.vcampus.client.main.shop.AppShopAdmin;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -35,10 +36,11 @@ public class ManCategory extends JTree {
         DefaultMutableTreeNode nodClassManage = new DefaultMutableTreeNode("课程管理");
         DefaultMutableTreeNode nodLibrary = new DefaultMutableTreeNode("图书馆");
         DefaultMutableTreeNode nodDorm = new DefaultMutableTreeNode("生活管理");
+        DefaultMutableTreeNode nodShop = new DefaultMutableTreeNode("商店管理");
         DefaultMutableTreeNode nodDailyReport = new DefaultMutableTreeNode("每日上报管理");
         nodLogin.add(nodInfor);nodLogin.add(nodTeaInfor); nodLogin.add(nodStuInfor);
         nodLogin.add(nodClassManage);nodLogin.add(nodLibrary);nodLogin.add(nodDorm);
-        nodLogin.add(nodDailyReport);
+        nodLogin.add(nodDailyReport);nodLogin.add(nodShop);
 
         jt = new JTree(nodLogin);
 
@@ -89,6 +91,13 @@ public class ManCategory extends JTree {
                     else if(node==nodDorm){
                         if(this.getClass().getName()!="com.vcampus.client.main.AppDormAdmin") {
                             AppLife app = new AppLife();
+                            app.setVisible(true);
+                            setVisible(false);
+                        }
+                    }
+                    else if(node==nodShop){
+                        if(this.getClass().getName()!="com.vcampus.client.main.shop.AppShopAdmin") {
+                            AppShopAdmin app = new AppShopAdmin();
                             app.setVisible(true);
                             setVisible(false);
                         }
