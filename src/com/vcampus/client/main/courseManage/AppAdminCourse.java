@@ -238,6 +238,7 @@ public class AppAdminCourse  extends JFrame{
                     course.setClassroom((String)model.getValueAt(i,6));
                     course.setCapacity((String)model.getValueAt(i,7));
                     course.setSelectedNumber("0");
+                    course.setStudents("-");
                     model.setValueAt("0",i,8);
                     course.setCredit((String)model.getValueAt(i,9));
                     ResponseUtils.getResponseByHash(new Request(App.connectionToServer,

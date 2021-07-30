@@ -25,7 +25,7 @@ public class CourseSelection {
             ICourseMapper courseMapper = sqlSession.getMapper(ICourseMapper.class);
             IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
             String temp = courseMapper.getStudentOfOneCourse(newClassId);
-            if(temp=="null"||temp==""){
+            if(temp.equals("-")){
                 temp="";
             }
             temp += student.getCardNumber();
@@ -36,7 +36,7 @@ public class CourseSelection {
             one = courseMapper.updateScoreOfOneCourse(map);
             String cardNumber = student.getCardNumber();
             temp = courseMapper.getCourseSelection(student);
-            if(temp=="null"||temp==""){
+            if(temp.equals("-")){
                 temp="";
             }
             temp+=newClassId;

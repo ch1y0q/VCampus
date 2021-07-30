@@ -41,7 +41,7 @@ public class Student implements IOnCampus{
         balance = new BigDecimal(0);
         courses = null;
         school=null;
-        courseList=null;
+        courseList="-";
         email=null;
         phoneNumber=null;
         gender=null;

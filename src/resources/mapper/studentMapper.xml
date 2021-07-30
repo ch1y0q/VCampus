@@ -38,7 +38,7 @@
         INSERT INTO
             `students` VALUES ( #{name},"","",#{cardNumber}, #{studentNumber},
                                #{bankAccount},"","",0,"", #{school},  #{dormAddress}, #{gender},  #{email}, #{phoneNumber},
-                                "")
+                                "-")
     </insert>
 
     <delete id="deleteStudent" parameterType="String">
