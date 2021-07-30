@@ -58,10 +58,13 @@ public class AppChatDiag extends JDialog {
             switch (App.session.getUserType()) {
                 case STUDENT:
                     name = App.session.getStudent().getName();
+                    break;
                 case TEACHER:
                     name = App.session.getTeacher().getName();
+                    break;
                 case ADMIN:
                     name = App.session.getAdmin().getName();
+                    break;
             }
         }
         if (name == null) {
