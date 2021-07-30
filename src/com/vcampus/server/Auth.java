@@ -19,7 +19,11 @@ import static com.alibaba.fastjson.JSON.toJSONString;
  */
 
 public class Auth {
-    //用于学生登录使用的检查方法
+    /** 用于学生登录使用的检查方法
+     *
+     * @param student 仅含userName和password（明文）Student
+     * @return 登陆成功后返回从数据库读出的Student对象
+     */
     public static Student studentLoginChecker(Student student) {
         Student result = null;
         try {
@@ -45,7 +49,11 @@ public class Auth {
         return result;
     }
 
-    //用于教师登录的检查方法
+    /** 用于教师登录使用的检查方法
+     *
+     * @param teacher 仅含userName和password（明文）Teacher
+     * @return 登陆成功后返回从数据库读出的Teacher对象
+     */
     public static Teacher teacherLoginChecker(Teacher teacher) {
         Teacher result = null;
         try {
@@ -71,7 +79,11 @@ public class Auth {
         return result;
     }
 
-    //用于管理员登录使用的检查方法
+    /** 用于管理员登录使用的检查方法
+     *
+     * @param admin 仅含userName和password（明文）的Admin
+     * @return 登陆成功后返回从数据库读出的Admin对象
+     */
     public static Admin adminLoginChecker(Admin admin) {
         Admin result = null;
         try {

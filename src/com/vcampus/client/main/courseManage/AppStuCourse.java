@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
+ * 学生课程界面
  * @author ryp
  */
 

@@ -14,12 +14,12 @@ import com.vcampus.net.Response;
 public final class ResponseUtils {
     static final long TIMEOUT_MS = 5000;
 
-    @Deprecated
     /**
      * 阻塞并等待响应
-     * @see `getResponseByHash` might be better
+     * @see ResponseUtils#getResponseByHash(String) might be better
      */
-    public final static void blockAndWaitResponse(String hash) {
+    @Deprecated
+    public static void blockAndWaitResponse(String hash) {
         while (!ResponseQueue.getInstance().contain(hash)) {
             if (ResponseQueue.getInstance().contain(hash)) {
                 break;
@@ -29,6 +29,8 @@ public final class ResponseUtils {
 
     /**
      * 阻塞并获取具体响应，支持超时中断
+     * @param hash 要获取相应的Hash
+     * @return 获取的响应
      */
 
     public static Response getResponseByHash(String hash) {

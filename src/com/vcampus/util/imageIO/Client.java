@@ -1,10 +1,5 @@
 package com.vcampus.util.imageIO;
 
-/**
- * @author Dong Ruojing
- * @date 2021/7/27
- */
-
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,6 +7,10 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * @author Dong Ruojing
+ * @date 2021/7/27
+ */
 public class Client {
     /*	public static void main(String[] args) throws ClassNotFoundException {
             Person person = new Person();

@@ -13,10 +13,11 @@ import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 
 /**
- * 教师信息界面
+ * 教师信息管理界面
  * @author Dong Ruojing
  * @date 2021/7/23
  */
+
 public class AppTeaInfo  extends JFrame {
     private JPanel contentPane;
 

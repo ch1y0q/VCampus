@@ -8,6 +8,7 @@ import com.vcampus.util.ResponseUtils;
 import java.util.HashMap;
 
 /**
+ * 管理员个人信息界面相关助手类
  * @author Dong Ruojing
  * @date 2021/7/29
  */

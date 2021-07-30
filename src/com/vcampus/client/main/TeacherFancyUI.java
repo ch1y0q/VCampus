@@ -93,7 +93,6 @@ import java.util.ArrayList;
  * @date 2021-07-29
  */
 
-
 public final class TeacherFancyUI extends FancyUI
 {
 

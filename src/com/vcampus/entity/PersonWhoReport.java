@@ -3,6 +3,7 @@ package com.vcampus.entity;
 import java.util.Date;
 
 /**
+ * 每日体温上报者
  * @author Dong Ruojing
  * @date 2021/7/28
  */

@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * 这是管理员接受每日上报的panel，用于目录的整合
+ * 管理员接受每日上报的panel，用于目录的整合
  * @author Dong Ruojing
  * @date 2021/7/27
  */

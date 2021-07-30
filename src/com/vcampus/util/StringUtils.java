@@ -29,6 +29,12 @@ public class StringUtils {
         return resultSb.toString();
     }
 
+    /**
+     * 转换字节为16进制字串
+     *
+     * @param b 字节
+     * @return 16进制字串
+     */
     private static String byteToHexString(byte b) {
         int n = b;
         if (n < 0) {
@@ -83,6 +89,7 @@ public class StringUtils {
         return resultString;
     }
     public static void main(String[] args) {
+        // examples
         System.out.println(MD5EncodeSalted("111", ""));//698d51a19d8a121ce581499d7b701668
         System.out.println(MD5EncodeSalted("123", ""));//202cb962ac59075b964b07152d234b70
         System.out.println(MD5EncodeSalted("222", ""));//bcbe3365e6ac95ea2c0343a2395834dd

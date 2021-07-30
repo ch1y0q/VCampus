@@ -19,6 +19,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
+ * 客户端主类
  * @author Franklin Yang
  * @date 2021/7/12
  */

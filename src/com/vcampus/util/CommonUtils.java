@@ -5,12 +5,11 @@ import com.vcampus.entity.UserType;
 import java.util.*;
 
 /**
- * 一些通用的工具方法
+ * 一些通用的工具
  *
  * @author Huang Qiyue
  * @date 2021-07-07
  */
-
 
 public class  CommonUtils {
     /**

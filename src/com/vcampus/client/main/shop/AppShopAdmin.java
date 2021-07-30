@@ -17,7 +17,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-
+/**
+ * 管理员角色的商店
+ * @author Franklin Yang, Huang Qiyue
+ */
 public class AppShopAdmin extends JFrame {
     private List<Goods> list = null;
     private DefaultTableModel tableModel=new DefaultTableModel();

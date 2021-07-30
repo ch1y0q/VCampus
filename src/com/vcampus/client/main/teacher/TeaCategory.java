@@ -13,10 +13,13 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
+
 /**
+ * 教师目录
  * @author Xiao Kaijie
  * @date 2021-07-13
  */
+
 public class TeaCategory extends JTree {
     private JTree jt;
     private DefaultMutableTreeNode nodLogin;

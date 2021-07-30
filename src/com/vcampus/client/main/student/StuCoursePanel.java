@@ -11,6 +11,7 @@ import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 /**
+ * 用于在主界面展示的学生课程面板
  * @author Xiao Kaijie
  * @date 2021-07-19
  */

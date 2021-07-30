@@ -19,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * 教师课程界面
+ */
+
 public class AppTeaCourse extends JFrame {
     private int width = 1151;
     private int height = 800;

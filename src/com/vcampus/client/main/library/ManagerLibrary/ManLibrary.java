@@ -1,9 +1,7 @@
 package com.vcampus.client.main.library.ManagerLibrary;
 
 import com.vcampus.client.LoginUI;
-import com.vcampus.client.main.manager.AppAdmin;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.manager.ManCategory;
 import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -21,6 +19,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
+ * 管理员角色的图书馆主界面
+ *
  * @author Xiao Kaijie
  * @date 2021-07-19
  */
@@ -106,11 +106,11 @@ public class ManLibrary extends JFrame {
         jc.setBounds(850,50,150,30);
         contentPane.add(jc);
 
-        ManLibrarydetailPanel Bookdetail=new ManLibrarydetailPanel();
-        Bookdetail.setBackground(new Color(255, 255, 255));
-        Bookdetail.setBounds(650,120,600,350);
-        Bookdetail.setVisible(false);
-        contentPane.add(Bookdetail);
+        ManLibraryDetailPanel paneBookDetail=new ManLibraryDetailPanel();
+        paneBookDetail.setBackground(new Color(255, 255, 255));
+        paneBookDetail.setBounds(650,120,600,350);
+        paneBookDetail.setVisible(false);
+        contentPane.add(paneBookDetail);
 
         String[] header = {"序号","ISBN号", "书籍名称", "剩余数量", "作者","详细信息"};
         model = new DefaultTableModel(null, header);
@@ -207,9 +207,9 @@ public class ManLibrary extends JFrame {
                 int column = table.getSelectedColumn();
                 int row = table.getSelectedRow();
                 if (column == 5) {
-                    Bookdetail.initnow();
-                    Bookdetail.init(table.getValueAt(row,1).toString());
-                    Bookdetail.setVisible(true);
+                    paneBookDetail.initNow();
+                    paneBookDetail.init(table.getValueAt(row,1).toString());
+                    paneBookDetail.setVisible(true);
                 }
             }
         });

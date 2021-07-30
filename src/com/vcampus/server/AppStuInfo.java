@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 学生修改个人信息
+ * 学生修改个人信息对应的后端API
  * @author Dong Ruojing
  * @date 2021/7/26
  */

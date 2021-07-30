@@ -22,7 +22,6 @@ public class DealHistory {
 
     public DealHistory(String _cardNumber,BigDecimal _dealAmount,String _dealType)
     {
-
         cardNumber=_cardNumber;
         dealAmount=_dealAmount;
         dealType=_dealType;

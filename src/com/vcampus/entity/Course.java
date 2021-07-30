@@ -3,6 +3,7 @@ package com.vcampus.entity;
 import java.util.List;
 
 /**
+ * 课程实体类
  * @author Huang Qiyue
  * @date 2021-07-12
  */

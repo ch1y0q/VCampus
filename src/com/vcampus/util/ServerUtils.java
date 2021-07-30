@@ -10,9 +10,14 @@ import java.util.Properties;
  * @date 2021/7/12
  */
 public final class ServerUtils {
+    /**
+     * 配置文件所在路径
+     */
     final static String CONFIG_PATH = "/resources/server.properties";
 
-    //返回服务器地址
+    /**
+     * 从配置文件返回服务器地址
+     */
     public static String getServerHost() {
         Properties prop = new Properties();
         try {
@@ -23,7 +28,9 @@ public final class ServerUtils {
         return prop.getProperty("server_host");
     }
 
-    //返回主端口号
+    /**
+     * 从配置文件返回主端口号
+     */
     public static String getMainPort() {
         Properties prop = new Properties();
         try {
@@ -34,7 +41,9 @@ public final class ServerUtils {
         return prop.getProperty("mainport");
     }
 
-    //返回对话端口号
+    /**
+     * 从配置文件返回聊天室端口号
+     */
     public static String getChatPort() {
         Properties prop = new Properties();
         try {

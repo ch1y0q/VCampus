@@ -34,9 +34,9 @@ import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
 /**
+ * 学生生活服务界面
  * @author Y
  * @date 2021/7/21
- * 学生生活服务界面
  */
 
 public class AppLife extends JFrame {

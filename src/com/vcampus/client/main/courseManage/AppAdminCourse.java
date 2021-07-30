@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 /**
+ * 管理员课程界面
  * @author ryp
  *
  */
 
-//管理员课程界面
 public class AppAdminCourse  extends JFrame{
     /**
      * AppAdminCourse类是管理员进行课程管理的界面，
@@ -250,7 +250,7 @@ public class AppAdminCourse  extends JFrame{
         );
 
 
-        /**
+        /*
          * 点击“保存”按钮，保存对课程所作的编辑，表格变回不可编辑状态
          */
         //保存编辑
@@ -379,7 +379,6 @@ public class AppAdminCourse  extends JFrame{
     /**
      * 刷新表格，重新从数据库中提取数据填充表格
      */
-    //刷新课表
     private void refreshCourseTable(){
         while(model.getRowCount()>0){
             model.removeRow(0);
@@ -396,10 +395,17 @@ public class AppAdminCourse  extends JFrame{
         }
     }
 
-    //关闭页面
+    /**
+     * 关闭页面
+     */
     private void close(){
         setVisible(false);
     }
 
-    //打开页面
+    /**
+     * 打开页面
+     */
+    private void open(){
+        setVisible(true);
+    }
 }

@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
+ * 商店界面（学生、教师通用）
  * @author Y, Huang Qiyue
  * @date 2021/7/21
  */

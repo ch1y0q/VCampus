@@ -1,7 +1,6 @@
 package com.vcampus.client.main.manager;
 
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.library.ManagerLibrary.ManlibdetailHelper;
 import com.vcampus.entity.Student;
 import com.vcampus.net.Request;
 import com.vcampus.net.Response;

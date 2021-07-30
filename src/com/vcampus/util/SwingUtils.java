@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
 /**
+ * 用于Swing框架的一些工具
  * @author Huang Qiyue
  * @date 2021-07-12
  */

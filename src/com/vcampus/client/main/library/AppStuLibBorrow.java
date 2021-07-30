@@ -14,13 +14,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 /**
+ * 学生角色的图书馆借书相关面板
  * @author Xiao Kaijie
  * @date 2021-07-19
  */
-public class AppStuLibborrow extends JPanel {
+public class AppStuLibBorrow extends JPanel {
     private List<Book> list = null;
     private DefaultTableModel model2;
-    public AppStuLibborrow()
+    public AppStuLibBorrow()
     {
         setLayout(null);
         setBackground(new Color(255, 255, 255));

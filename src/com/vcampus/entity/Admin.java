@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import static com.alibaba.fastjson.JSON.toJSONString;
 
 /**
+ * 管理员实体类
  * @author Huang Qiyue
  * @date 2021-07-12
  */

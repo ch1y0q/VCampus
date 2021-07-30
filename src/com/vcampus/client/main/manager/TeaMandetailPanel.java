@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 /**
+ * 教师信息详情面板
  * @author Xiao Kaijie
  * @date 2021-07-14
  */

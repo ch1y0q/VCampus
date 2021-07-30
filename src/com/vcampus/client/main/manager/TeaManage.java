@@ -19,6 +19,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
+ * 教师信息管理界面
  * @author Xiao Kaijie
  * @date 2021-07-22
  */

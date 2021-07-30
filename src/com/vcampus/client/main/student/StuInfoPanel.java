@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 /**
+ * 学生信息相关面板
  * @author Xiao Kaijie
  * @date 2021-07-20
  */

@@ -44,6 +44,9 @@ public class LoginUI extends JFrame {
 
     private UserType type;
 
+    /**
+     * 学生登录逻辑
+     */
     private void studentLogin(){
         type = UserType.STUDENT;
         Student student = Verifier.checkStudent(txtCardNumber.getText(), new String(txtPassword.getPassword()));
@@ -61,6 +64,9 @@ public class LoginUI extends JFrame {
         }
     }
 
+    /**
+     * 教师登录逻辑
+     */
     private void teacherLogin() {
         type = UserType.TEACHER;
         Teacher teacher = Verifier.checkTeacher(txtCardNumber.getText(), new String(txtPassword.getPassword()));
@@ -78,6 +84,9 @@ public class LoginUI extends JFrame {
         }
     }
 
+    /**
+     * 管理员登录逻辑
+     */
     private void adminLogin(){
         type = UserType.ADMIN;
         Admin admin = Verifier.checkAdmin(txtCardNumber.getText(), new String(txtPassword.getPassword()));
@@ -95,6 +104,10 @@ public class LoginUI extends JFrame {
         }
     }
 
+    /**
+     * GUI登录逻辑
+     * 检查是否有空字段、确定用户类型
+     */
     public void login() {
         /* check if all fields are filled */
         if (SwingUtils.isEmpty(txtCardNumber) || SwingUtils.isEmpty(txtPassword)) {

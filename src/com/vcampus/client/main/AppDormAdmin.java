@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * 管理员角色的宿舍管理
  * 参见AppLife
  * @author Y
  * @date 2021/7/22

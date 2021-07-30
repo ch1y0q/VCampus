@@ -21,6 +21,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
+ * 学生主入口
  * @author Xiao Kaijie
  * @date 2021-07-13
  */

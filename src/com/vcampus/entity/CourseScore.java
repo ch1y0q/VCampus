@@ -1,5 +1,8 @@
 package com.vcampus.entity;
 
+/**
+ * 课程成绩实体类
+ */
 public class CourseScore {
     private String studentCardNumber;
     private String courseId;
@@ -12,6 +15,13 @@ public class CourseScore {
         status="";
     }
 
+    /**
+     * 构造函数
+     * @param studentCardNumber 学生一卡通号
+     * @param courseId 课程ID
+     * @param score 分数
+     * @param status 状态
+     */
     public CourseScore(String studentCardNumber, String courseId, String score, String status){
         this.studentCardNumber=studentCardNumber;
         this.courseId=courseId;
@@ -19,6 +29,7 @@ public class CourseScore {
         this.status=status;
     }
 
+    /* getters and setters */
     public String getCourseId() {
         return courseId;
     }
