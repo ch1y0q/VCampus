@@ -38,7 +38,6 @@ public class AppStuCourse extends JFrame {
     private JLabel numOfScoreLabel;
     public AppStuCourse(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setVisible(true);
         setLayout(null);
         setResizable(true);
         setSize(screenSize);

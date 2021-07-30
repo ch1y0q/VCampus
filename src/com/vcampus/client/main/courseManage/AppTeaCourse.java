@@ -32,7 +32,6 @@ public class AppTeaCourse extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         width = screenSize.width;
         height = screenSize.height;
-        setVisible(true);
         setLayout(null);
         setResizable(true);
         setBounds(0, 0, width, height);
