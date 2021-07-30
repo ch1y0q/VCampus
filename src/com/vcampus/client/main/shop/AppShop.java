@@ -32,7 +32,8 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * @author Y, Huang Qiyue
+ * 商店界面（学生、教师通用）
+ * @author Y, Huang Qiyue, Franklin Yang
  * @date 2021/7/21
  */
 
@@ -57,8 +58,8 @@ public class AppShop extends JFrame {
     private static final String EMPTY_GOODS_PIC = "/resources/assets/bg/bg3.jpg";
     private static final String EMPTY_GOODS_DESCRIPTION = "这里应该是商品详细信息";
     private static final String CATEGORY_UNFILTERED = "所有商品";
-    private static final int PIC_WIDTH = 200,
-                             PIC_HEIGHT = 200;
+    private static final int PIC_WIDTH = 100,
+                             PIC_HEIGHT = 100;
     public void handleCategorySelection(String category) {
         tableModel.setRowCount(0);   // remove all rows
         if(category.equals(CATEGORY_UNFILTERED)){
@@ -106,23 +107,7 @@ public class AppShop extends JFrame {
      * 购买已选中的商品，并进行一系列初步检测。
      */
     private void purchase() {
-        /*
-        int row = tblGoodsList.getSelectedRow();
-        int quantity = Integer.parseInt(txtGoodsNum.getText());
 
-        // has selection
-        if (row == -1) {
-            JOptionPane.showMessageDialog(null, "未选中商品", "错误", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        int remaining = (int) tblGoodsList.getValueAt(row, 3);
-
-        // has remaining
-        if (quantity > remaining) {
-            JOptionPane.showMessageDialog(null, "商品剩余数量不足", "错误", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-*/
         String cardNumber;
         switch (App.session.getUserType()) {
             case STUDENT:
@@ -143,50 +128,7 @@ public class AppShop extends JFrame {
             JOptionPane.showMessageDialog(null, "余额不足", "错误", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        /* has money, done serverside
-        BigDecimal totalPrice = new BigDecimal(0);
-        totalPrice = (BigDecimal) tblGoodsList.getValueAt(row, 5);  // price
-        totalPrice = totalPrice.multiply(new BigDecimal(quantity));           // multiplies quantity
-        BigDecimal balance = getBalance(cardNumber, App.session.getUserType());
-        if (balance.compareTo(totalPrice) == -1) { // < , no enough money
-            JOptionPane.showMessageDialog(null, "余额不足", "错误", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        */
-        /*
-        int result = submitPurchase(cardNumber, App.session.getUserType(),
-                tblGoodsList.getValueAt(row, 0) + "@" + quantity+"@" + tblGoodsList.getValueAt(row, 5));
-        switch(result){
-            case 0:
-                JOptionPane.showMessageDialog(null, "成功支付。", "成功", JOptionPane.INFORMATION_MESSAGE);
-                // update balance label
-                lblBalanceVal.setText(getBalance(cardNumber,App.session.getUserType()).toString());
-                // update object of App.session
-                switch (App.session.getUserType()) {
-                    case STUDENT:
-                        App.session.getStudent().setBalance(getBalance(cardNumber,STUDENT));
-                        break;
-                    case TEACHER:
-                        App.session.getTeacher().setBalance(getBalance(cardNumber,TEACHER));
-                        break;
-                    default:
-                        System.err.println("Neither student nor teacher...");
-                        return;
-                }
-                // update table
-                handleCategorySelection(cmbGoodsCategory.getSelectedItem().toString());
-                break;
-            case 1:
-                JOptionPane.showMessageDialog(null, "余额不足", "错误", JOptionPane.ERROR_MESSAGE);
-                break;
-            case 2:
-                JOptionPane.showMessageDialog(null, "存货不足", "错误", JOptionPane.ERROR_MESSAGE);
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "发生错误", "错误", JOptionPane.ERROR_MESSAGE);
-                break;
-        }
-         */
+
         int checker=0;
         for (int i=0;i<tblCart.getRowCount();i++)
         {
@@ -220,7 +162,7 @@ public class AppShop extends JFrame {
             // update table
             handleCategorySelection(cmbGoodsCategory.getSelectedItem().toString());
             //clear cart
-            for (int i=0;i<tblCart.getRowCount();i++)
+            while(tblCart.getRowCount()!=0)
             {cartTableModel.removeRow(0);}
             //clear cost
             totalCost= BigDecimal.valueOf(0);
@@ -231,6 +173,9 @@ public class AppShop extends JFrame {
         }
     }
 
+    /**
+     * 向购物车加入商品
+     */
     private void addToCart(int x)
     {
         int row = tblGoodsList.getSelectedRow();
@@ -276,6 +221,9 @@ public class AppShop extends JFrame {
         }
     }
 
+    /**
+     * 从购物车移除商品
+     */
     private void removeFromCart(int x)
     {
         int row = tblGoodsList.getSelectedRow();
@@ -336,7 +284,7 @@ public class AppShop extends JFrame {
         jt.setBounds(0, 50, 200, 600);
         contentPane.add(jt);
         */
-
+/*
         JLabel lblGoodsSearch = new JLabel("商品查询");
         lblGoodsSearch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblGoodsSearch.setHorizontalAlignment(SwingConstants.CENTER);
@@ -347,7 +295,7 @@ public class AppShop extends JFrame {
         txtGoodsSearch.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         txtGoodsSearch.setBounds(390, 67, 160, 30);
         contentPane.add(txtGoodsSearch);
-
+*/
         JLabel lblGoodsKind = new JLabel("商品种类");
         lblGoodsKind.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblGoodsKind.setHorizontalAlignment(SwingConstants.CENTER);
@@ -453,18 +401,18 @@ public class AppShop extends JFrame {
         rGoodsList.setHorizontalAlignment(JLabel.CENTER);
         tblGoodsList.setDefaultRenderer(Object.class, rGoodsList);
         JScrollPane scrollPane=new JScrollPane(tblGoodsList);
-        scrollPane.setBounds(330, 150, 500, 600);
+        scrollPane.setBounds(330, 150, 500, 300);
         contentPane.add(scrollPane);
 
         JLabel lblGoodsPic = new JLabel("商品图片");
         lblGoodsPic.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblGoodsPic.setHorizontalAlignment(SwingConstants.CENTER);
-        lblGoodsPic.setBounds(1050, 150, 100, 40);
+        lblGoodsPic.setBounds(1050, 120, 100, 40);
         contentPane.add(lblGoodsPic);
 
 
         goodsPic = new JLabel();
-        goodsPic.setBounds(1000, 200, 300, 300);
+        goodsPic.setBounds(1050, 130, 200, 200);
         contentPane.add(goodsPic);
 
         /* load initial goods img */
@@ -482,30 +430,30 @@ public class AppShop extends JFrame {
         lblGoodsInfo.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblGoodsInfo.setHorizontalAlignment(SwingConstants.CENTER);
         lblGoodsInfo.setBounds(1050, 345, 100, 40);
-        contentPane.add(lblGoodsInfo);
+        //contentPane.add(lblGoodsInfo);
 
         JLabel lblGoodsDescription = new JLabel("商品详细信息");
         lblGoodsDescription.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblGoodsDescription.setHorizontalAlignment(SwingConstants.CENTER);
-        lblGoodsDescription.setBounds(850, 410, 200, 40);
+        lblGoodsDescription.setBounds(850, 300, 200, 40);
         contentPane.add(lblGoodsDescription);
 
         goodsDetail = new JTextArea(EMPTY_GOODS_DESCRIPTION, 8, 30);
         goodsDetail.setLineWrap(true);
         goodsDetail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        goodsDetail.setBounds(1050, 420, 300, 150);
+        goodsDetail.setBounds(1050, 300, 300, 60);
         contentPane.add(goodsDetail);
 
         JLabel lblGoodsNum = new JLabel("购买数量");
         lblGoodsNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblGoodsNum.setHorizontalAlignment(SwingConstants.CENTER);
-        lblGoodsNum.setBounds(900, 610, 100, 40);
+        lblGoodsNum.setBounds(900, 400, 100, 40);
         contentPane.add(lblGoodsNum);
 
         txtGoodsNum = new JTextField();
         txtGoodsNum.setText("1");
         txtGoodsNum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        txtGoodsNum.setBounds(1100, 615, 160, 30);
+        txtGoodsNum.setBounds(1100, 415, 160, 30);
         contentPane.add(txtGoodsNum);
 
         JButton btnAddToCart = new JButton("确认购买");
@@ -517,7 +465,7 @@ public class AppShop extends JFrame {
         });
         btnAddToCart.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         contentPane.add(btnAddToCart);
-        btnAddToCart.setBounds(1050, 900, 110, 35);
+        btnAddToCart.setBounds(1050, 580, 110, 35);
 
         /* show all goods upon show-up */
         handleCategorySelection(CATEGORY_UNFILTERED);
@@ -546,7 +494,7 @@ public class AppShop extends JFrame {
         tblCart.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         //tblCart.setBounds(300, 800, 500, 80);
         JScrollPane cartScrollPane=new JScrollPane(tblCart);
-        cartScrollPane.setBounds(300, 800, 500, 160);
+        cartScrollPane.setBounds(330, 500, 500, 160);
         //contentPane.add(tblCart);
         contentPane.add(cartScrollPane);
 
@@ -559,7 +507,7 @@ public class AppShop extends JFrame {
         });
         btnAddOne.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         contentPane.add(btnAddOne);
-        btnAddOne.setBounds(1050, 700, 110, 35);
+        btnAddOne.setBounds(1050, 500, 110, 35);
 
         JButton btnAddSome = new JButton("添加上记数量");
         btnAddSome.addActionListener(new ActionListener() {
@@ -570,7 +518,7 @@ public class AppShop extends JFrame {
         });
         btnAddSome.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         contentPane.add(btnAddSome);
-        btnAddSome.setBounds(1200, 700, 160, 35);
+        btnAddSome.setBounds(1200, 500, 160, 35);
 
         JButton btnRemoveOne = new JButton("删除一件");
         btnRemoveOne.addActionListener(new ActionListener() {
@@ -581,7 +529,7 @@ public class AppShop extends JFrame {
         });
         btnRemoveOne.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         contentPane.add(btnRemoveOne);
-        btnRemoveOne.setBounds(1050, 800, 110, 35);
+        btnRemoveOne.setBounds(1050, 540, 110, 35);
 
         JButton btnRemoveSome = new JButton("删除上记数量");
         btnRemoveSome.addActionListener(new ActionListener() {
@@ -592,13 +540,13 @@ public class AppShop extends JFrame {
         });
         btnRemoveSome.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         contentPane.add(btnRemoveSome);
-        btnRemoveSome.setBounds(1200, 800, 160, 35);
+        btnRemoveSome.setBounds(1200, 540, 160, 35);
 
         /* 购物车内总价 */
         lblTotalCost=new JLabel("共需付款");
         lblTotalCost.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblTotalCost.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTotalCost.setBounds(1200, 900, 100, 40);
+        lblTotalCost.setBounds(1200, 580, 100, 40);
         contentPane.add(lblTotalCost);
 
         lblTotalCost.setText(totalCost.toString());

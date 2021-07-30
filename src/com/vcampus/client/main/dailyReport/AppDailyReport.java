@@ -1,7 +1,7 @@
 package com.vcampus.client.main.dailyReport;
 
-import com.vcampus.UI.TreeUtils;
-import com.vcampus.client.main.student.StuCategory;
+
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,14 +9,16 @@ import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-
+/**
+ * 每日上报界面
+ */
 public class AppDailyReport extends JFrame {
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     private JPanel contentPane;
     public AppDailyReport() {
         setResizable(true);
-        setTitle(res.getString("student_main"));
+        setTitle(res.getString("daily_report_main"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -33,13 +35,9 @@ public class AppDailyReport extends JFrame {
 //        TreeUtils.expandTree(jt,true);
 //        contentPane.add(jt);//设置目录
 
-
-
         DailyReportPanel panel=new DailyReportPanel();
         panel.setBounds(50,20,1300,700);
         contentPane.add(panel);//绘制panel
-
-
 
     }
 }

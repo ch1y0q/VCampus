@@ -4,6 +4,7 @@ import com.vcampus.client.main.App;
 import com.vcampus.entity.Course;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -11,12 +12,13 @@ import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 /**
+ * 用于在主界面展示的学生课程面板
  * @author Xiao Kaijie
  * @date 2021-07-19
  */
 public class StuCoursePanel extends JPanel {
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     public JLabel lblCI1;
     public JLabel lblCI2;
     public JLabel lblCI3;
@@ -90,7 +92,9 @@ public class StuCoursePanel extends JPanel {
 //        lblCI4.setText("校企实训");
 //        lblCI5.setText("校企实训");
 //    }
-
+    /**
+     * 主界面展示的学生课程实现
+     */
     public void init(){
         int labelIndex=0;
         JLabel[] lblCourses = new JLabel[]{lblCI1, lblCI2, lblCI3, lblCI4, lblCI5};

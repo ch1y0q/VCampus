@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import static com.vcampus.util.CommonUtils.getSchoolByCode;
 
 /**
+ * 教师实体类
  * @author Huang Qiyue
  * @date 2021-07-12
  */

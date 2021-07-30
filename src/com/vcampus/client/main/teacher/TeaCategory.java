@@ -1,10 +1,11 @@
 package com.vcampus.client.main.teacher;
 
 import com.alee.laf.WebLookAndFeel;
-import com.vcampus.client.main.AppLife;
+import com.vcampus.client.main.life.AppLife;
 import com.vcampus.client.main.courseManage.AppTeaCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.library.StuLibrary;
+import com.vcampus.client.main.life.AppLifeTeacher;
 import com.vcampus.client.main.teacher.TeacherInfo.AppTeaInfo;
 import com.vcampus.client.main.shop.AppShop;
 
@@ -13,10 +14,13 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
+
 /**
+ * 教师目录
  * @author Xiao Kaijie
  * @date 2021-07-13
  */
+
 public class TeaCategory extends JTree {
     private JTree jt;
     private DefaultMutableTreeNode nodLogin;
@@ -80,8 +84,8 @@ public class TeaCategory extends JTree {
                         }
                     }
                     else if(node==nodCard){
-                        if(!this.getClass().getName().equals("com.vcampus.client.main.AppLife")) {
-                            AppLife app = new AppLife();
+                        if(!this.getClass().getName().equals("com.vcampus.client.main.life.AppLifeTeacher")) {
+                            AppLifeTeacher app = new AppLifeTeacher();
                             app.setVisible(true);
                             setVisible(false);
                         }

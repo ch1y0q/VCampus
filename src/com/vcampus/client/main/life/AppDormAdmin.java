@@ -1,5 +1,6 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.life;
 
+import com.vcampus.client.main.App;
 import com.vcampus.client.main.manager.AppAdmin;
 import com.vcampus.client.main.manager.ManCategory;
 import com.vcampus.entity.RepairHistory;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * 管理员角色的宿舍管理
  * 参见AppLife
  * @author Y
  * @date 2021/7/22

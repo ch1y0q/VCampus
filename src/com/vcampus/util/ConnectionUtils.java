@@ -5,6 +5,7 @@ import java.net.Socket;
 import com.vcampus.net.*;
 
 /**
+ * 建立连接所需的工具
  * @author Franklin Yang
  * @date 2021/7/12
  */
@@ -21,7 +22,11 @@ public class ConnectionUtils {
         return Integer.parseInt(ServerUtils.getChatPort());
     }
 
-    // 只应该被调用一次，connectionToServer作为长连接，在客户端整个生命周期内流动
+    /**
+     * 只应该被调用一次，connectionToServer作为长连接，在客户端整个生命周期内流动
+     * @throws IOException 创建Socket可能抛出异常
+     * @return ConnectionToServer对象
+     */
     public static ConnectionToServer formConnection() throws IOException {
         ConnectionToServer connectionToServer = null;
 

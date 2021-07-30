@@ -5,12 +5,11 @@ import com.vcampus.entity.UserType;
 import java.util.*;
 
 /**
- * 一些通用的工具方法
+ * 一些通用的工具
  *
  * @author Huang Qiyue
  * @date 2021-07-07
  */
-
 
 public class  CommonUtils {
     /**
@@ -19,12 +18,16 @@ public class  CommonUtils {
      */
     public static UserType getUserTypeByCardNumber(String cardNumber) {
         String first = cardNumber.substring(0, 1);
-        return switch (first) {
-            case "0" -> UserType.ADMIN;
-            case "1" -> UserType.TEACHER;
-            case "2" -> UserType.STUDENT;
-            default -> null;
-        };
+        switch (first) {
+            case "0":
+                return UserType.ADMIN;
+            case "1":
+                return UserType.TEACHER;
+            case "2":
+                return UserType.STUDENT;
+            default:
+                return null;
+        }
     }
 
     /**

@@ -9,6 +9,7 @@ import com.vcampus.util.ResponseUtils;
 import static com.alibaba.fastjson.JSON.toJSONString;
 
 /**
+ * 向服务器发送验证请求所需的工具类
  * @author Franklin Yang
  * @date 2021/7/12
  */

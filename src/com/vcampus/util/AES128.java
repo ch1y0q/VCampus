@@ -25,7 +25,7 @@ public class AES128 {
      * @param sSrc 明文
      * @param sKey 密钥
      * @return AES128加密的密文
-     * @throws Exception
+     * @throws Exception getBytes在未能识别编码时可能抛出异常
      */
     public static String Encrypt(String sSrc, String sKey) throws Exception {
         if (sKey == null) {
@@ -52,7 +52,7 @@ public class AES128 {
      * @param sSrc 密文
      * @param sKey 密钥
      * @return 解密后的明文
-     * @throws Exception
+     * @throws Exception getBytes在未能识别编码时可能抛出异常
      */
     public static String Decrypt(String sSrc, String sKey) throws Exception {
         try {

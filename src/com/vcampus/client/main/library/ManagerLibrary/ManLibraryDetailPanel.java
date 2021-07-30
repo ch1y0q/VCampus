@@ -12,11 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 /**
+ * 管理员角色的图书馆详情面板
+ *
  * @author Xiao Kaijie
  * @date 2021-07-19
  */
 
-public class ManLibrarydetailPanel extends JPanel {
+public class ManLibraryDetailPanel extends JPanel {
     public JTextField txtISBN;
     public JTextField txtBook;
     public JTextField txtWriter;
@@ -26,8 +28,8 @@ public class ManLibrarydetailPanel extends JPanel {
     public JTextField txtRemain;
     public JTextField txtPlace;
     public JTextField txtIntro;
-    public JLabel detailicon;
-    public ManLibrarydetailPanel(){
+    public JLabel detailIcon;
+    public ManLibraryDetailPanel(){
         setLayout(null);
 
         JButton btnSure = new JButton("确认");
@@ -36,16 +38,16 @@ public class ManLibrarydetailPanel extends JPanel {
         add(btnSure);
         btnSure.setEnabled(false);
 
-        JButton save = new JButton("保存");
-        save.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        save.setBounds(320, 0, 150, 30);
-        add(save);
-        save.setEnabled(false);
+        JButton btnSave = new JButton("保存");
+        btnSave.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnSave.setBounds(320, 0, 150, 30);
+        add(btnSave);
+        btnSave.setEnabled(false);
 
-        JButton bookadd = new JButton("添加书籍");
-        bookadd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        bookadd.setBounds(0, 0, 150, 30);
-        add(bookadd);
+        JButton btnBookAdd = new JButton("添加书籍");
+        btnBookAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnBookAdd.setBounds(0, 0, 150, 30);
+        add(btnBookAdd);
 
 
         JButton edit = new JButton("启动编辑");
@@ -57,38 +59,38 @@ public class ManLibrarydetailPanel extends JPanel {
         btnSure.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addbook();
-                closeedit();
-                bookadd.setEnabled(true);
+                addBook();
+                closeEdit();
+                btnBookAdd.setEnabled(true);
                 edit.setEnabled(true);
                 btnSure.setEnabled(false);
-                save.setEnabled(false);
+                btnSave.setEnabled(false);
             }
         });
 
         //保存
-        save.addActionListener(new ActionListener() {
+        btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                savechange();
-                closeedit();
-                bookadd.setEnabled(true);
+                saveChange();
+                closeEdit();
+                btnBookAdd.setEnabled(true);
                 edit.setEnabled(true);
                 btnSure.setEnabled(false);
-                save.setEnabled(false);
+                btnSave.setEnabled(false);
             }
         });
 
         //添加书籍
-        bookadd.addActionListener(new ActionListener() {
+        btnBookAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                initnow();
-                startedit();
-                bookadd.setEnabled(false);
+                initNow();
+                startEdit();
+                btnBookAdd.setEnabled(false);
                 edit.setEnabled(false);
                 btnSure.setEnabled(true);
-                save.setEnabled(false);
+                btnSave.setEnabled(false);
             }
         });
 
@@ -96,11 +98,11 @@ public class ManLibrarydetailPanel extends JPanel {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startedit();
-                bookadd.setEnabled(false);
+                startEdit();
+                btnBookAdd.setEnabled(false);
                 edit.setEnabled(false);
                 btnSure.setEnabled(false);
-                save.setEnabled(true);
+                btnSave.setEnabled(true);
             }
         });
 
@@ -110,9 +112,9 @@ public class ManLibrarydetailPanel extends JPanel {
         detail.setBorder(new EmptyBorder(0,0,0,0));
         add(detail);
 
-        detailicon=new JLabel("");
-        detailicon.setBounds(0,70,180,240);
-        add(detailicon);
+        detailIcon =new JLabel("");
+        detailIcon.setBounds(0,70,180,240);
+        add(detailIcon);
 
         JLabel ISBNnum=new JLabel("ISBN号");
         ISBNnum.setFont(new Font("微软雅黑", Font.PLAIN, 18));
@@ -201,6 +203,7 @@ public class ManLibrarydetailPanel extends JPanel {
     /**
      * 图书信息查询
      * 通过ISBN号返回Book
+     * @param ISBN 要查询的ISBN号
      */
     public void init(String ISBN)
     {
@@ -209,7 +212,7 @@ public class ManLibrarydetailPanel extends JPanel {
                 new Request(App.connectionToServer, null, "com.vcampus.server.library.BookServer.searchBookDetail",
                         new Object[] { ISBN }).send())
                 .getReturn(Book.class);
-        detailicon.setIcon(new ImageIcon(getClass().getResource(book.getpictureURL())));
+        detailIcon.setIcon(new ImageIcon(getClass().getResource(book.getpictureURL())));
         txtISBN.setText(book.getISBN());
         txtBook.setText(book.getName());
         txtWriter.setText(book.getAuthor());
@@ -223,7 +226,7 @@ public class ManLibrarydetailPanel extends JPanel {
     /**
      * 设置文本框为可编辑
      */
-    public void startedit(){
+    public void startEdit(){
         txtISBN.setEditable(true);
         txtBook.setEditable(true);
         txtWriter.setEditable(true);
@@ -237,7 +240,7 @@ public class ManLibrarydetailPanel extends JPanel {
     /**
      * 保存改变
      */
-    public void savechange(){
+    public void saveChange(){
         String ISBN=txtISBN.getText();
         String txtTabs=txtClassify.getText();
         String txtNum=txtRemain.getText();
@@ -245,22 +248,22 @@ public class ManLibrarydetailPanel extends JPanel {
         HashMap<String,String> mapResetTabs = new HashMap<String, String>();
         mapResetTabs.put("ISBN", ISBN );
         mapResetTabs.put("_tabs",txtTabs);
-        ManlibdetailHelper.resetTabsByISBN(mapResetTabs);
+        ManLibDetailHelper.resetTabsByISBN(mapResetTabs);
 
         HashMap<String,String> mapResetNum = new HashMap<String, String>();
         mapResetNum.put("ISBN", ISBN);
         mapResetNum.put("_number",txtNum);
-        ManlibdetailHelper.resetNumByISBN(mapResetNum);
+        ManLibDetailHelper.resetNumByISBN(mapResetNum);
 
         HashMap<String,String> mapResetPlace = new HashMap<String, String>();
         mapResetPlace.put("ISBN", ISBN);
         mapResetPlace.put("_place",txtPla);
-        ManlibdetailHelper.resetPlaceByISBN(mapResetPlace);
+        ManLibDetailHelper.resetPlaceByISBN(mapResetPlace);
     }
     /**
      * 图书添加功能实现
      */
-    public void addbook(){
+    public void addBook(){
         String txt1=txtISBN.getText();
         String txt2=txtBook.getText();
         String txt3=txtWriter.getText();
@@ -283,7 +286,7 @@ public class ManLibrarydetailPanel extends JPanel {
     /**
      * 图书信息初始化
      */
-    public void initnow()
+    public void initNow()
     {
         txtISBN.setText("");
         txtBook.setText("");
@@ -298,7 +301,7 @@ public class ManLibrarydetailPanel extends JPanel {
     /**
      *关闭编辑功能
      */
-    public void closeedit()
+    public void closeEdit()
     {
         txtISBN.setEditable(false);
         txtBook.setEditable(false);

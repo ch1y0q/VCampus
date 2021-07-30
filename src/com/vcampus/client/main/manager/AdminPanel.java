@@ -1,9 +1,7 @@
 package com.vcampus.client.main.manager;
 
 import com.alee.managers.style.StyleId;
-import com.vcampus.client.LoginUI;
-import com.vcampus.client.main.App;
-import com.vcampus.client.main.AppDormAdmin;
+import com.vcampus.client.main.life.AppDormAdmin;
 import com.vcampus.client.main.courseManage.AppAdminCourse;
 import com.vcampus.client.main.dailyReport.AppDailyReportManage;
 import com.vcampus.client.main.library.ManagerLibrary.ManLibrary;

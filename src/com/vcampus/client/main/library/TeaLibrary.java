@@ -2,8 +2,6 @@ package com.vcampus.client.main.library;
 
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.teacher.AppTeacher;
-import com.vcampus.client.main.teacher.TeaCategory;
 import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -19,6 +17,8 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 /**
+ * 教师角色的图书馆主界面
+ *
  * @author Xiao Kaijie
  * @date 2021-07-16
  */
@@ -117,7 +117,7 @@ public class TeaLibrary extends JFrame {
             }
         });
         /**
-         * 图书续借
+         * 图书续借功能
          */
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -148,7 +148,7 @@ public class TeaLibrary extends JFrame {
         jScrollPane.setBounds(0, 30, 980, 700);
         jp1.add(jScrollPane);
 
-        jp2=new AppStuLibborrow();
+        jp2=new AppStuLibBorrow();
 
         JButton btnLogout = new JButton("登出");
         btnLogout.addActionListener(new ActionListener() {

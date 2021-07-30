@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 一系列课程管理相关的接口
+ *
  * @author Franklin Yang
  * @date 2021/7/21
  */

@@ -10,6 +10,7 @@ import com.vcampus.util.ResponseUtils;
 import java.math.BigDecimal;
 
 /**
+ * 商店相关的助手类
  * @author Huang Qiyue
  * @date 2021-07-26
  */

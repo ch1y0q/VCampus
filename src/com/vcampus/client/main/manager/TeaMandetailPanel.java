@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 /**
+ * 教师信息详情面板
  * @author Xiao Kaijie
  * @date 2021-07-14
  */
@@ -90,16 +91,6 @@ public class TeaMandetailPanel extends JPanel {
         txtlevel.setBounds(190, 130, 150, 30);
         txtlevel.setEditable(false);
         add(txtlevel);
-        JLabel TeaNumber=new JLabel("工号");
-        TeaNumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        TeaNumber.setBounds(100, 160, 90, 30);
-        TeaNumber.setBorder(new EmptyBorder(0,0,0,0));
-        add(TeaNumber);
-        txtTeaNum = new JTextField();    //创建文本框
-        txtTeaNum.setText("工号");
-        txtTeaNum.setBounds(190, 160, 150, 30);
-        txtTeaNum.setEditable(false);
-        add(txtTeaNum);
         JLabel Teaemail=new JLabel("邮箱");
         Teaemail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         Teaemail.setBounds(400, 10, 150, 30);
@@ -130,6 +121,16 @@ public class TeaMandetailPanel extends JPanel {
         txtphone.setBounds(560, 70, 150, 30);
         txtphone.setEditable(false);
         add(txtphone);
+        JLabel TeaNumber=new JLabel("工号");
+        TeaNumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        TeaNumber.setBounds(400, 100, 150, 30);
+        TeaNumber.setBorder(new EmptyBorder(0,0,0,0));
+        add(TeaNumber);
+        txtTeaNum = new JTextField();    //创建文本框
+        txtTeaNum.setText("工号");
+        txtTeaNum.setBounds(560, 100, 150, 30);
+        txtTeaNum.setEditable(false);
+        add(txtTeaNum);
         JButton nodTeaSureAdd = new JButton("确认添加老师");
         nodTeaSureAdd.setEnabled(false);
         JButton save = new JButton("保存");
@@ -231,6 +232,7 @@ public class TeaMandetailPanel extends JPanel {
     }
     /**
      * 教师信息初始化
+     * @param cardNumber 教师的一卡通号
      */
     public void init(String cardNumber)
     {
@@ -252,6 +254,7 @@ public class TeaMandetailPanel extends JPanel {
     }
     /**
      * 教师信息删除
+     * @param cardNumber 要删除信息的教师的一卡通号
      */
     public void deleteTea(String cardNumber)
     {
@@ -265,6 +268,7 @@ public class TeaMandetailPanel extends JPanel {
     }
     /**
      * 教师信息添加
+     * @param teacher 欲添加信息的Teacher对象
      */
     public void AddTea(Teacher teacher)
     {

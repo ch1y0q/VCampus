@@ -5,6 +5,7 @@ import com.vcampus.client.main.App;
 import com.vcampus.entity.Student;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -19,13 +20,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
+ * 学生信息管理界面
  * @author Xiao Kaijie
  * @date 2021-07-13
  */
 
 public class StuManage extends JFrame{
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     private List<Student> list = null;
     private DefaultTableModel model;
     public StuManage(){
@@ -220,6 +222,7 @@ public class StuManage extends JFrame{
                 if (column == 5) {
                     table.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>", row, column);
                     Studetail.changeedit();
+                    Studetail.initnow();
                     Studetail.init(table.getValueAt(row,0).toString());
                     Studetail.setVisible(true);
                 }

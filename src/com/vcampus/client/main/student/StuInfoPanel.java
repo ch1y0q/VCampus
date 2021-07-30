@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 /**
+ * 学生信息相关面板
  * @author Xiao Kaijie
  * @date 2021-07-20
  */
@@ -81,7 +82,9 @@ public class StuInfoPanel extends JPanel {
         lblBookLend.setFont(new Font("宋体", Font.PLAIN, 15));
         add(lblBookLend);
     }
-
+    /**
+     * 学生信息面板实现
+     */
     public void init()
     {
         lblName.setText(App.session.getStudent().getName());

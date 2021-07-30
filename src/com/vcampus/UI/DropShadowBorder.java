@@ -18,7 +18,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
-import java.beans.JavaBean;
+//import java.beans.JavaBean;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ import javax.swing.border.Border;
 
 import org.jb2011.ninepatch4j.GraphicsUtilities;
 
-@JavaBean
+//@JavaBean
 public class DropShadowBorder implements Border, Serializable {
 
     private static final long serialVersionUID = 715287754750604058L;

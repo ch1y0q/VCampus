@@ -6,10 +6,11 @@ import com.vcampus.util.ResponseUtils;
 
 import java.util.HashMap;
 /**
+ * 管理员角色的图书馆维护相关的助手类
  * @author Xiao Kaijie
  * @date 2021-07-19
  */
-public class ManlibdetailHelper {
+public class ManLibDetailHelper {
     public static Boolean resetTabsByISBN(HashMap map) {
         return ResponseUtils
                 .getResponseByHash(new Request(App.connectionToServer,

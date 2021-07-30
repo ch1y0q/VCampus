@@ -7,7 +7,7 @@ import java.util.List;
 import static com.vcampus.util.CommonUtils.getSchoolByCode;
 
 /**
- * 学生类
+ * 学生实体类
  *
  * @author Huang Qiyue
  * @date 2021-07-09

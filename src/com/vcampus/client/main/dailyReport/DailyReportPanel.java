@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.Hashtable;
 
 /**
- * 学生教师每日上报的panel
+ * 学生/教师每日上报的panel
  * @author Dong Ruojing
  * @date 2021/7/28
  */

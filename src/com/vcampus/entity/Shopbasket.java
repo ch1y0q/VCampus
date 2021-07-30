@@ -1,7 +1,7 @@
 package com.vcampus.entity;
 
 /**
- * 购物车类
+ * 购物车实体类
  * @author Dong Ruojing
  * @date 2021/7/18
  */

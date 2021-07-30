@@ -1,8 +1,8 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.life;
 
 //import com.vcampus.client.main.student.AppStudent;
-import com.vcampus.client.main.student.StuCategory;
-import com.vcampus.client.main.teacher.AppTeacher;
+import com.vcampus.client.main.App;
+import com.vcampus.client.main.life.AppLifeHelper;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -33,10 +33,10 @@ import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
 /**
- * @author Y
- * @date 2021/7/21
  * 参见AppLife
  * 该Java类是去掉AppLife中部分功能实现的。
+ * @author Y
+ * @date 2021/7/21
  */
 
 public class AppLifeTeacher extends JFrame {

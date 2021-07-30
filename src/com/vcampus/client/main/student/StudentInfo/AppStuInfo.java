@@ -52,7 +52,7 @@ public class AppStuInfo  extends JFrame {
         jt.setOpaque(false);
         jt.setBackground(new Color(240, 255, 240));
         TreeUtils.expandTree(jt,true);
-        contentPane.add(jt);
+        //contentPane.add(jt);
 
         JButton returnButton = new JButton("← 返回");//返回按钮
         returnButton.setFont(new Font("微软雅黑", Font.BOLD, 14));

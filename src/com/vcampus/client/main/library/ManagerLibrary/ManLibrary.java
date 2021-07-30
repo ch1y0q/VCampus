@@ -1,12 +1,11 @@
 package com.vcampus.client.main.library.ManagerLibrary;
 
 import com.vcampus.client.LoginUI;
-import com.vcampus.client.main.manager.AppAdmin;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.manager.ManCategory;
 import com.vcampus.entity.Book;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -21,13 +20,15 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
+ * 管理员角色的图书馆主界面
+ *
  * @author Xiao Kaijie
  * @date 2021-07-19
  */
 
 public class ManLibrary extends JFrame {
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     private DefaultTableModel model;
     private DefaultTableModel model2;
     private List<Book> list = null;
@@ -106,11 +107,11 @@ public class ManLibrary extends JFrame {
         jc.setBounds(850,50,150,30);
         contentPane.add(jc);
 
-        ManLibrarydetailPanel Bookdetail=new ManLibrarydetailPanel();
-        Bookdetail.setBackground(new Color(255, 255, 255));
-        Bookdetail.setBounds(650,120,600,350);
-        Bookdetail.setVisible(false);
-        contentPane.add(Bookdetail);
+        ManLibraryDetailPanel paneBookDetail=new ManLibraryDetailPanel();
+        paneBookDetail.setBackground(new Color(255, 255, 255));
+        paneBookDetail.setBounds(650,120,600,350);
+        paneBookDetail.setVisible(false);
+        contentPane.add(paneBookDetail);
 
         String[] header = {"序号","ISBN号", "书籍名称", "剩余数量", "作者","详细信息"};
         model = new DefaultTableModel(null, header);
@@ -170,11 +171,26 @@ public class ManLibrary extends JFrame {
                         };
                         table.setModel(model);
                     }
+                }
+            }
+        });
+        /**
+         * 图书详细信息显示
+         */
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int column = table.getSelectedColumn();
+                int row = table.getSelectedRow();
+                if (column == 5) {
+                    paneBookDetail.initNow();
+                    paneBookDetail.init(table.getValueAt(row,1).toString());
+                    paneBookDetail.setVisible(true);
                     model2 = new DefaultTableModel(null, header2);
                     table2.setModel(model2);
                     list1 = ResponseUtils.getResponseByHash(
                             new Request(App.connectionToServer, null, "com.vcampus.server.library.AddoneBook.getBorrowedBookFromtitle",
-                                    new Object[] { txtfield.getText() }).send())
+                                    new Object[] { table.getValueAt(row,2) }).send())
                             .getListReturn(Book.class);
                     String[][] listData1 = new String[list1.size()][4];
                     if (list1 == null || list1.size() == 0) {
@@ -195,21 +211,6 @@ public class ManLibrary extends JFrame {
                         };
                         table2.setModel(model2);
                     }
-                }
-            }
-        });
-        /**
-         * 图书详细信息显示
-         */
-        table.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int column = table.getSelectedColumn();
-                int row = table.getSelectedRow();
-                if (column == 5) {
-                    Bookdetail.initnow();
-                    Bookdetail.init(table.getValueAt(row,1).toString());
-                    Bookdetail.setVisible(true);
                 }
             }
         });

@@ -12,8 +12,7 @@ import com.vcampus.dao.IStudentMapper;
 import com.vcampus.entity.Student;
 
 /**
- * 学生管理类
- *
+ * 学生管理后端API
  *
  * @author Xiao Kaijie
  * @date 2021-07-19

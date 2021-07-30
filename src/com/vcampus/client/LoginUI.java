@@ -7,6 +7,8 @@ import com.vcampus.entity.Admin;
 import com.vcampus.entity.UserType;
 import com.vcampus.net.Session;
 import com.vcampus.util.SwingUtils;
+import com.vcampus.util.UTF8Control;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -44,6 +46,9 @@ public class LoginUI extends JFrame {
 
     private UserType type;
 
+    /**
+     * 学生登录逻辑
+     */
     private void studentLogin(){
         type = UserType.STUDENT;
         Student student = Verifier.checkStudent(txtCardNumber.getText(), new String(txtPassword.getPassword()));
@@ -61,6 +66,9 @@ public class LoginUI extends JFrame {
         }
     }
 
+    /**
+     * 教师登录逻辑
+     */
     private void teacherLogin() {
         type = UserType.TEACHER;
         Teacher teacher = Verifier.checkTeacher(txtCardNumber.getText(), new String(txtPassword.getPassword()));
@@ -78,6 +86,9 @@ public class LoginUI extends JFrame {
         }
     }
 
+    /**
+     * 管理员登录逻辑
+     */
     private void adminLogin(){
         type = UserType.ADMIN;
         Admin admin = Verifier.checkAdmin(txtCardNumber.getText(), new String(txtPassword.getPassword()));
@@ -95,6 +106,10 @@ public class LoginUI extends JFrame {
         }
     }
 
+    /**
+     * GUI登录逻辑
+     * 检查是否有空字段、确定用户类型
+     */
     public void login() {
         /* check if all fields are filled */
         if (SwingUtils.isEmpty(txtCardNumber) || SwingUtils.isEmpty(txtPassword)) {
@@ -133,7 +148,8 @@ public class LoginUI extends JFrame {
 
     public LoginUI() {
         locale = Locale.getDefault();
-        res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+        // locale = Locale.US;
+        res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

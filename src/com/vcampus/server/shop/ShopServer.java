@@ -165,7 +165,7 @@ public class ShopServer {
 
     /**
      * 新增交易记录，记录交易的商品和数量
-     * @param  goodsHistory
+     * @param  goodsHistory 要新增的商品历史
      * @return 是否成功
      */
     public static Boolean insertGoodsHistory(GoodsHistory goodsHistory) {

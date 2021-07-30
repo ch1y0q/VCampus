@@ -3,17 +3,14 @@ package com.vcampus.client.main.teacher;
 import com.alee.managers.style.StyleId;
 import com.vcampus.client.LoginUI;
 import com.vcampus.client.main.App;
-import com.vcampus.client.main.AppLife;
-import com.vcampus.client.main.AppLifeTeacher;
+import com.vcampus.client.main.life.AppLifeTeacher;
 import com.vcampus.client.main.courseManage.AppTeaCourse;
-import com.vcampus.client.main.dailyReport.AppDailyReport;
-import com.vcampus.client.main.dailyReport.AppDailyReportManage;
 import com.vcampus.client.main.teacher.TeacherInfo.AppTeaInfo;
 import com.vcampus.client.main.library.TeaLibrary;
 import com.vcampus.client.main.shop.AppShop;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,13 +20,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
+ * 教师主入口
  * @author Xiao Kaijie
  * @date 2021-07-18
  */
 
 public class AppTeacher extends JFrame {
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
     public AppTeacher() {
         setResizable(true);

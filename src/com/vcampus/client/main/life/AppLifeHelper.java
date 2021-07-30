@@ -1,6 +1,7 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.life;
 
 import com.alee.api.annotations.NotNull;
+import com.vcampus.client.main.App;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
@@ -11,10 +12,9 @@ import java.util.HashMap;
 /**
  * 生活服务需要用到的工具类。
  * 用ResponseUtils函数与服务器进行通信，唤起server下对应函数，也可直接写在界面中
- * @author Huang Qiyue， Y
+ * @author Huang Qiyue, Y
  * @date 2021-07-24
  */
-
 
 public class AppLifeHelper {
     @NotNull

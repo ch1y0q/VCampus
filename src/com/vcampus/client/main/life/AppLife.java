@@ -1,8 +1,8 @@
-package com.vcampus.client.main;
+package com.vcampus.client.main.life;
 
 //import com.vcampus.client.main.student.AppStudent;
+import com.vcampus.client.main.App;
 import com.vcampus.client.main.student.AppStudent;
-import com.vcampus.client.main.student.StuCategory;
 import com.vcampus.entity.DealHistory;
 import com.vcampus.entity.RepairHistory;
 import com.vcampus.net.Request;
@@ -34,9 +34,9 @@ import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
 /**
+ * 学生生活服务界面
  * @author Y
  * @date 2021/7/21
- * 学生生活服务界面
  */
 
 public class AppLife extends JFrame {

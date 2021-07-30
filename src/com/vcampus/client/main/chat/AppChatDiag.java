@@ -55,11 +55,17 @@ public class AppChatDiag extends JDialog {
         // 响应发送按钮
         String name = null;
         if(App.session != null) {
-            name = switch (App.session.getUserType()) {
-                case STUDENT -> App.session.getStudent().getName();
-                case TEACHER -> App.session.getTeacher().getName();
-                case ADMIN -> App.session.getAdmin().getName();
-            };
+            switch (App.session.getUserType()) {
+                case STUDENT:
+                    name = App.session.getStudent().getName();
+                    break;
+                case TEACHER:
+                    name = App.session.getTeacher().getName();
+                    break;
+                case ADMIN:
+                    name = App.session.getAdmin().getName();
+                    break;
+            }
         }
         if (name == null) {
             name = "匿名用户";

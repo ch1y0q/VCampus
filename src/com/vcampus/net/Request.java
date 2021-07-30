@@ -21,6 +21,13 @@ public class Request {
     public Request() {
     }
 
+    /**
+     * 完整的构造函数
+     * @param connectionToServer 通向服务器的连接
+     * @param session 会话控制信息
+     * @param targetApi 目标接口
+     * @param params 请求参数
+     */
     public Request(ConnectionToServer connectionToServer, Session session, String targetApi, Object[] params) {
         super();
         this.connectionToServer = connectionToServer;

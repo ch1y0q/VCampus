@@ -2,7 +2,7 @@ package com.vcampus.util.imageIO;
 
 /**
  *
- *实现图像传输
+ * 实现图像传输
  * @author Dong Ruojing
  * @date 2021/7/26
  */
