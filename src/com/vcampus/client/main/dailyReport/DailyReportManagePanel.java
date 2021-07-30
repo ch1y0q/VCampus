@@ -83,7 +83,7 @@ public class DailyReportManagePanel extends JPanel {
         lblNumReport.setOpaque(true);
         lblNumReport.setText("0");
         lblNumReport.setForeground(new Color(33, 117, 206));
-        lblNumReport.setBackground(new Color(33, 177, 206, 80));
+        lblNumReport.setBackground(new Color(117, 220, 241));
         lblNumReport.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblNumReport);
 
@@ -96,7 +96,7 @@ public class DailyReportManagePanel extends JPanel {
         lblNumAbnormal.setFont(new Font("微软雅黑", Font.BOLD, 14));
         lblNumAbnormal.setOpaque(true);
         lblNumAbnormal.setForeground(new Color(33, 117, 206));
-        lblNumAbnormal.setBackground(new Color(33, 177, 206, 80));
+        lblNumAbnormal.setBackground(new Color(117, 220, 241));
         lblNumAbnormal.setHorizontalAlignment(SwingConstants.CENTER);
         lblNumAbnormal.setText("0");
         add(lblNumAbnormal);

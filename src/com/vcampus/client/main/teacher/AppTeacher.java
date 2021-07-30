@@ -46,15 +46,16 @@ public class AppTeacher extends JFrame {
         JLabel label =new JLabel();
         label.setText(" 欢迎您,"+ App.session.getTeacher().getName() );//App.session.getTeacher().getName()
         label.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setOpaque(true);
         label.setForeground(new Color(33, 117, 206));
         label.setBackground(new Color(33,177,206,80));
-        label.setBounds(50, 5, 100, 30);
+        label.setBounds(50, 5, 140, 30);
         contentPane.add(label);
 
         JButton LogoutButton = new JButton(res.getString("logout"));
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        LogoutButton.setBounds(160,5,50,30);
+        LogoutButton.setBounds(200,5,50,30);
         LogoutButton.setForeground(new Color(33, 117, 206,100));
         LogoutButton.addActionListener(new ActionListener() {
             @Override
