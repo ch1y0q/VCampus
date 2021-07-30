@@ -170,11 +170,26 @@ public class ManLibrary extends JFrame {
                         };
                         table.setModel(model);
                     }
+                }
+            }
+        });
+        /**
+         * 图书详细信息显示
+         */
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int column = table.getSelectedColumn();
+                int row = table.getSelectedRow();
+                if (column == 5) {
+                    paneBookDetail.initNow();
+                    paneBookDetail.init(table.getValueAt(row,1).toString());
+                    paneBookDetail.setVisible(true);
                     model2 = new DefaultTableModel(null, header2);
                     table2.setModel(model2);
                     list1 = ResponseUtils.getResponseByHash(
                             new Request(App.connectionToServer, null, "com.vcampus.server.library.AddoneBook.getBorrowedBookFromtitle",
-                                    new Object[] { txtfield.getText() }).send())
+                                    new Object[] { table.getValueAt(row,2) }).send())
                             .getListReturn(Book.class);
                     String[][] listData1 = new String[list1.size()][4];
                     if (list1 == null || list1.size() == 0) {
@@ -195,21 +210,6 @@ public class ManLibrary extends JFrame {
                         };
                         table2.setModel(model2);
                     }
-                }
-            }
-        });
-        /**
-         * 图书详细信息显示
-         */
-        table.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int column = table.getSelectedColumn();
-                int row = table.getSelectedRow();
-                if (column == 5) {
-                    paneBookDetail.initNow();
-                    paneBookDetail.init(table.getValueAt(row,1).toString());
-                    paneBookDetail.setVisible(true);
                 }
             }
         });

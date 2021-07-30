@@ -221,6 +221,7 @@ public class StuManage extends JFrame{
                 if (column == 5) {
                     table.setValueAt("<html><font color='rgb(110,110,110)'>已选</font></html>", row, column);
                     Studetail.changeedit();
+                    Studetail.initnow();
                     Studetail.init(table.getValueAt(row,0).toString());
                     Studetail.setVisible(true);
                 }
