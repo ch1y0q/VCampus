@@ -402,7 +402,4 @@ public class AppAdminCourse  extends JFrame{
     }
 
     //打开页面
-    public void open(){
-        setVisible(true);
-    }
 }

@@ -43,7 +43,6 @@ public class AppStuCourse extends JFrame {
         setSize(screenSize);
 
         Container container = getContentPane();
-        container.setBackground(new Color(0xD8F6F6));
         JTabbedPane tp = new JTabbedPane();
         tp.setBounds(width/50,height/50,width*4/5,height*4/5);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -566,9 +565,6 @@ public class AppStuCourse extends JFrame {
         return res;
     }
 
-    public void open(){
-        setVisible(true);
-    }
 
 }
 

@@ -117,7 +117,7 @@ public final class StudentFancyUI extends FancyUI
         internal.setContentPane(new AppStudent().getContentPane());
         internal.pack();
         internal.setVisible(true);
-        internal.setBounds(10,10,1600,1000);
+        internal.setBounds(10,10,1400,1000);
         desktopPane.add(internal);
 
         final JInternalFrame chatFrame = new JInternalFrame("聊天室",true,true,true, true);
@@ -176,7 +176,7 @@ public final class StudentFancyUI extends FancyUI
                             internal.setContentPane(new AppStuInfo().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "图书查询借阅":
@@ -188,7 +188,7 @@ public final class StudentFancyUI extends FancyUI
                             internal.setContentPane(new StuLibrary().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "课程表":
@@ -202,7 +202,7 @@ public final class StudentFancyUI extends FancyUI
                             internal.setContentPane(new AppStuCourse().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "宿舍管理":
@@ -212,7 +212,7 @@ public final class StudentFancyUI extends FancyUI
                             internal.setContentPane(new AppLife().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "商品列表":
@@ -224,7 +224,7 @@ public final class StudentFancyUI extends FancyUI
                             internal.setContentPane(new AppShop().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "每日上报":
@@ -232,7 +232,7 @@ public final class StudentFancyUI extends FancyUI
                             internal.setContentPane(new AppDailyReport().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "聊天室":

@@ -49,12 +49,12 @@ public class AppTeacher extends JFrame {
         label.setOpaque(true);
         label.setForeground(new Color(33, 117, 206));
         label.setBackground(new Color(33,177,206,80));
-        label.setBounds(1270, 5, 100, 30);
+        label.setBounds(50, 5, 100, 30);
         contentPane.add(label);
 
         JButton LogoutButton = new JButton(res.getString("logout"));
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        LogoutButton.setBounds(1380,5,50,30);
+        LogoutButton.setBounds(160,5,50,30);
         LogoutButton.setForeground(new Color(33, 117, 206,100));
         LogoutButton.addActionListener(new ActionListener() {
             @Override
@@ -262,8 +262,8 @@ public class AppTeacher extends JFrame {
                     //AppDailyReport app=new AppDailyReport();
                     //setVisible(false);
                     //app.setVisible(true);
-                    btnReport.setForeground(new Color(236, 116, 116));
-                    btnReport.setBackground(new  Color(255, 255, 255));
+                    btnReport.setBackground(new Color(236, 116, 116));
+                    btnReport.setForeground(new  Color(255, 255, 255));
                 }
             }
         });
