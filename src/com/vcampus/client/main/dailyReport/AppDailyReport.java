@@ -1,6 +1,8 @@
 package com.vcampus.client.main.dailyReport;
 
 
+import com.vcampus.util.Utf8ResourceBundle;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -12,7 +14,7 @@ import java.util.ResourceBundle;
  */
 public class AppDailyReport extends JFrame {
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     private JPanel contentPane;
     public AppDailyReport() {
         setResizable(true);

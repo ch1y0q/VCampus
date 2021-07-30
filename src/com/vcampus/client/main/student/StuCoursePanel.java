@@ -4,6 +4,7 @@ import com.vcampus.client.main.App;
 import com.vcampus.entity.Course;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -17,7 +18,7 @@ import java.util.ResourceBundle;
  */
 public class StuCoursePanel extends JPanel {
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     public JLabel lblCI1;
     public JLabel lblCI2;
     public JLabel lblCI3;

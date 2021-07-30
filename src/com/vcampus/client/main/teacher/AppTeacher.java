@@ -11,6 +11,7 @@ import com.vcampus.client.main.dailyReport.AppDailyReportManage;
 import com.vcampus.client.main.teacher.TeacherInfo.AppTeaInfo;
 import com.vcampus.client.main.library.TeaLibrary;
 import com.vcampus.client.main.shop.AppShop;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -30,7 +31,7 @@ import java.util.ResourceBundle;
 
 public class AppTeacher extends JFrame {
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
     public AppTeacher() {
         setResizable(true);

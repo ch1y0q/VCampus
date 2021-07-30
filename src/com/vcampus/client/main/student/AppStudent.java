@@ -11,6 +11,7 @@ import com.vcampus.client.main.dailyReport.AppDailyReport;
 import com.vcampus.client.main.library.StuLibrary;
 import com.vcampus.client.main.student.StudentInfo.AppStuInfo;
 import com.vcampus.client.main.shop.AppShop;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -28,7 +29,7 @@ import java.util.ResourceBundle;
 
 public class AppStudent extends JFrame {
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     static int index=0;
     public MyJLabel avatarPhoto =new MyJLabel();
     private class TimeListener implements ActionListener{

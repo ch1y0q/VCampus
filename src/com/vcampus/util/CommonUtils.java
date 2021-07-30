@@ -18,12 +18,16 @@ public class  CommonUtils {
      */
     public static UserType getUserTypeByCardNumber(String cardNumber) {
         String first = cardNumber.substring(0, 1);
-        return switch (first) {
-            case "0" -> UserType.ADMIN;
-            case "1" -> UserType.TEACHER;
-            case "2" -> UserType.STUDENT;
-            default -> null;
-        };
+        switch (first) {
+            case "0":
+                return UserType.ADMIN;
+            case "1":
+                return UserType.TEACHER;
+            case "2":
+                return UserType.STUDENT;
+            default:
+                return null;
+        }
     }
 
     /**

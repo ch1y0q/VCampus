@@ -7,6 +7,8 @@ import com.vcampus.entity.Admin;
 import com.vcampus.entity.UserType;
 import com.vcampus.net.Session;
 import com.vcampus.util.SwingUtils;
+import com.vcampus.util.UTF8Control;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -146,7 +148,8 @@ public class LoginUI extends JFrame {
 
     public LoginUI() {
         locale = Locale.getDefault();
-        res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+        // locale = Locale.US;
+        res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

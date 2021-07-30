@@ -5,6 +5,7 @@ import com.vcampus.client.main.App;
 import com.vcampus.entity.Student;
 import com.vcampus.net.Request;
 import com.vcampus.util.ResponseUtils;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +27,7 @@ import java.util.ResourceBundle;
 
 public class StuManage extends JFrame{
     private static Locale locale = Locale.getDefault();
-    private static ResourceBundle res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+    private static ResourceBundle res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
     private List<Student> list = null;
     private DefaultTableModel model;
     public StuManage(){

@@ -10,6 +10,7 @@ import com.vcampus.net.Session;
 import com.vcampus.util.ConnectionUtils;
 import com.vcampus.util.SwingUtils;
 import com.vcampus.entity.UserType;
+import com.vcampus.util.Utf8ResourceBundle;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -64,7 +65,7 @@ public class App extends JFrame {
 
     public App() throws IOException {
         locale = Locale.getDefault();
-        res = ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
+        res = Utf8ResourceBundle.getBundle("com.vcampus.client.ClientResource", locale);
 
         // 连接到服务器
         App.connectionToServer = ConnectionUtils.formConnection();

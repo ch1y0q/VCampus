@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import com.vcampus.server.chat.ChatService;
 import com.vcampus.server.chat.ClientManager;
+import com.vcampus.util.Utf8ResourceBundle;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -68,7 +69,7 @@ public class App extends JFrame implements ChatService.OnSocketAcceptListener {
      */
     public App() {
         locale = Locale.getDefault();
-        res = ResourceBundle.getBundle("com.vcampus.server.AppResource", locale);
+        res = Utf8ResourceBundle.getBundle("com.vcampus.server.AppResource", locale);
 
         setResizable(false);
         setTitle(res.getString("title"));
