@@ -162,7 +162,7 @@ public class AppShop extends JFrame {
             // update table
             handleCategorySelection(cmbGoodsCategory.getSelectedItem().toString());
             //clear cart
-            for (int i=0;i<tblCart.getRowCount();i++)
+            while(tblCart.getRowCount()!=0)
             {cartTableModel.removeRow(0);}
             //clear cost
             totalCost= BigDecimal.valueOf(0);
@@ -278,7 +278,7 @@ public class AppShop extends JFrame {
         jt.setBounds(0, 50, 200, 600);
         contentPane.add(jt);
         */
-
+/*
         JLabel lblGoodsSearch = new JLabel("商品查询");
         lblGoodsSearch.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblGoodsSearch.setHorizontalAlignment(SwingConstants.CENTER);
@@ -289,7 +289,7 @@ public class AppShop extends JFrame {
         txtGoodsSearch.setFont(new Font("微软雅黑", Font.PLAIN, 16));
         txtGoodsSearch.setBounds(390, 67, 160, 30);
         contentPane.add(txtGoodsSearch);
-
+*/
         JLabel lblGoodsKind = new JLabel("商品种类");
         lblGoodsKind.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         lblGoodsKind.setHorizontalAlignment(SwingConstants.CENTER);
