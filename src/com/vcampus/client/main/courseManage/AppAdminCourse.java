@@ -23,7 +23,7 @@ import java.util.Random;
  */
 
 //管理员课程界面
-public class AppAdminCourse {
+public class AppAdminCourse  extends JFrame{
     /**
      * AppAdminCourse类是管理员进行课程管理的界面，
      * 在这个界面中可以实现添加课程，删除课程，
@@ -32,8 +32,7 @@ public class AppAdminCourse {
      * 方便管理员快速找到需要修改的找到的课程
      *
      */
-
-    private JFrame jf = new JFrame("课程管理");
+    
     private int width = 1151;
     private int height = 800;
     private DefaultTableModel model;
@@ -41,11 +40,13 @@ public class AppAdminCourse {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         width = screenSize.width;
         height = screenSize.height;
-        jf.setLayout(null);
-        jf.setResizable(true);
-        jf.setBounds(0, 0, width, height);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container container = jf.getContentPane();
+        setLayout(null);
+        setVisible(true);
+        setResizable(true);
+        setBounds(0, 0, width, height);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Container container = getContentPane();
+        container.setBackground(new Color(0xD8F6F6));
         JPanel jp = new JPanel();
         container.add(jp);
         jp.setLayout(null);
@@ -57,7 +58,7 @@ public class AppAdminCourse {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==btnBack)
                 {
-                    jf.setVisible(false);
+                    setVisible(false);
                 }
             }
         });
@@ -135,11 +136,11 @@ public class AppAdminCourse {
          * 大小变化时，窗口内组件大小，位置相应变化
          */
         //监听窗口大小变化
-        jf.addComponentListener(new ComponentAdapter() {
+        addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                int currentWidth = jf.getWidth();
-                int currentHeight = jf.getHeight();
+                int currentWidth = getWidth();
+                int currentHeight = getHeight();
                 jp.setBounds(currentWidth/50,currentHeight/50,currentWidth*4/5,currentHeight*4/5);
                 btnBack.setBounds(currentWidth-60, 0, 60, 30);
                 CourseInformationManagerLabel.setBounds(currentWidth/50,currentHeight/40,90,30);
@@ -398,11 +399,11 @@ public class AppAdminCourse {
 
     //关闭页面
     private void close(){
-        jf.setVisible(false);
+        setVisible(false);
     }
 
     //打开页面
     public void open(){
-        jf.setVisible(true);
+        setVisible(true);
     }
 }
