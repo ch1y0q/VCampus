@@ -118,7 +118,7 @@ public final class TeacherFancyUI extends FancyUI
         internal.setContentPane(new AppTeacher().getContentPane());
         internal.pack();
         internal.setVisible(true);
-        internal.setBounds(10,10,1600,1000);
+        internal.setBounds(0,0,1400,1000);
         desktopPane.add(internal);
 
         /* Teachers need no chatroom
