@@ -436,7 +436,7 @@ public class AppTeaCourse extends JFrame {
 
     private void clearCourseTable(){
         for(int i =0;i<13;i++){
-            for(int j=0;j<7;j++){
+            for(int j=1;j<=7;j++){
                 model0.setValueAt("",i,j);
             }
         }

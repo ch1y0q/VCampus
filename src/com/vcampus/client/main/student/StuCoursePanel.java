@@ -104,7 +104,7 @@ public class StuCoursePanel extends JPanel {
                         "com.vcampus.server.teaching.CourseSelection.getCourseSelection",
                         new Object[] {App.session.getStudent()}).send())
                 .getReturn(String.class);
-        if(selectedCourses!=""){
+        if(selectedCourses!=""||selectedCourses!="null"){
             String[] splitSelectedCourses = selectedCourses.split(",");
             for(String s:splitSelectedCourses){
                 Course course = ResponseUtils
