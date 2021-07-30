@@ -75,7 +75,7 @@ public class TeaCategory extends JTree {
                     else if(node==nodGrades||node==nodChooseCourses){
                         if(!this.getClass().getName().equals("com.vcampus.client.main.courseManage.AppTeaCourse")) {
                             AppTeaCourse app = new AppTeaCourse();
-                            app.open();
+                            app.setVisible(true);
                             setVisible(false);
                         }
                     }

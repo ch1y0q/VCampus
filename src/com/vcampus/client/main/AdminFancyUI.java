@@ -123,7 +123,7 @@ public final class AdminFancyUI extends FancyUI
         internal.setContentPane(new AppAdmin().getContentPane());
         internal.pack();
         internal.setVisible(true);
-        internal.setBounds(10,10,1600,1000);
+        internal.setBounds(10,10,1400,1000);
         desktopPane.add(internal);
 
         /* Teachers need no chatroom
@@ -184,7 +184,7 @@ public final class AdminFancyUI extends FancyUI
                             internal.setContentPane(new AppAdminInfoFrame().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "教师信息管理":
@@ -200,7 +200,7 @@ public final class AdminFancyUI extends FancyUI
                             internal.setContentPane(new StuManage().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "图书馆":
@@ -214,7 +214,7 @@ public final class AdminFancyUI extends FancyUI
                             internal.setContentPane(new ManLibrary().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "成绩录入":
@@ -224,7 +224,7 @@ public final class AdminFancyUI extends FancyUI
                             internal.setContentPane(new AppAdminCourse().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "生活管理":
@@ -232,7 +232,7 @@ public final class AdminFancyUI extends FancyUI
                             internal.setContentPane(new AppDormAdmin().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "商品列表":
@@ -244,7 +244,7 @@ public final class AdminFancyUI extends FancyUI
                             internal.setContentPane(new AppShopAdmin().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         case "每日上报管理":
@@ -252,7 +252,7 @@ public final class AdminFancyUI extends FancyUI
                             internal.setContentPane(new AppDailyReportManage().getContentPane());
                             internal.pack();
                             internal.setVisible(true);
-                            internal.setBounds(30,50,1000,1000);
+                            internal.setBounds(30,50,1400,1000);
                             desktopPane.add(internal);
                             break;
                         default:
