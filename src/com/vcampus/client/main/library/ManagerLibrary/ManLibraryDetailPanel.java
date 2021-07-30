@@ -203,6 +203,7 @@ public class ManLibraryDetailPanel extends JPanel {
     /**
      * 图书信息查询
      * 通过ISBN号返回Book
+     * @param ISBN 要查询的ISBN号
      */
     public void init(String ISBN)
     {

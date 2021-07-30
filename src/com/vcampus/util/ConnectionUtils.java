@@ -24,6 +24,8 @@ public class ConnectionUtils {
 
     /**
      * 只应该被调用一次，connectionToServer作为长连接，在客户端整个生命周期内流动
+     * @throws IOException 创建Socket可能抛出异常
+     * @return ConnectionToServer对象
      */
     public static ConnectionToServer formConnection() throws IOException {
         ConnectionToServer connectionToServer = null;

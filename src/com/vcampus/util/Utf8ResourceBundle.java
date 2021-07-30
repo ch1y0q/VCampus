@@ -23,7 +23,7 @@ public abstract class Utf8ResourceBundle {
     /**
      * Gets the unicode friendly resource bundle
      *
-     * @param baseName
+     * @param baseName Package name of resource bundle
      * @see ResourceBundle#getBundle(String)
      * @return Unicode friendly resource bundle
      */

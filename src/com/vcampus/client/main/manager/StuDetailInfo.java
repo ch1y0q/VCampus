@@ -228,6 +228,7 @@ public class StuDetailInfo extends JPanel {
     }
     /**
      * 学生信息初始化
+     * @param cardNumber 要初始化信息的一卡通号
      */
     public void init(String cardNumber)
     {
@@ -249,6 +250,7 @@ public class StuDetailInfo extends JPanel {
     }
     /**
      * 学生信息删除
+     * @param cardNumber 要删除的学生的一卡通号
      */
     public void deleteStu(String cardNumber)
     {
@@ -262,6 +264,7 @@ public class StuDetailInfo extends JPanel {
     }
     /**
      * 学生信息添加
+     * @param student 欲添加信息的Student对象
      */
     public void AddStu(Student student)
     {

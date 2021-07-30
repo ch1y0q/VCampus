@@ -22,6 +22,9 @@ public class SwingUtils {
 
     /**
      * 弹出信息提示框
+     * @param parent 将要生成的对话框的父亲JPanel
+     * @param msg 提示信息
+     * @param title 对话框标题
      */
     static public void showMessage(JPanel parent, String msg, String title) {
         JOptionPane.showMessageDialog(parent, msg, title, JOptionPane.INFORMATION_MESSAGE);
@@ -29,6 +32,9 @@ public class SwingUtils {
 
     /**
      * 弹出错误提示框
+     * @param parent 将要生成的对话框的父亲JPanel
+     * @param msg 错误提示信息
+     * @param title 对话框标题
      */
     static public void showError(JPanel parent, String msg, String title) {
         JOptionPane.showMessageDialog(parent, msg, title, JOptionPane.ERROR_MESSAGE);

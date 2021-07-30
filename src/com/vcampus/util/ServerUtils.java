@@ -17,6 +17,7 @@ public final class ServerUtils {
 
     /**
      * 从配置文件返回服务器地址
+     * @return 服务器地址
      */
     public static String getServerHost() {
         Properties prop = new Properties();
@@ -30,6 +31,7 @@ public final class ServerUtils {
 
     /**
      * 从配置文件返回主端口号
+     * @return 主端口号
      */
     public static String getMainPort() {
         Properties prop = new Properties();
@@ -43,6 +45,7 @@ public final class ServerUtils {
 
     /**
      * 从配置文件返回聊天室端口号
+     * @return 聊天室端口号
      */
     public static String getChatPort() {
         Properties prop = new Properties();

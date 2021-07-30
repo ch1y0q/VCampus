@@ -16,6 +16,7 @@ public final class ResponseUtils {
 
     /**
      * 阻塞并等待响应
+     * @param hash 要获取的响应的Hash
      * @see ResponseUtils#getResponseByHash(String) might be better
      */
     @Deprecated
@@ -29,7 +30,7 @@ public final class ResponseUtils {
 
     /**
      * 阻塞并获取具体响应，支持超时中断
-     * @param hash 要获取相应的Hash
+     * @param hash 要获取的响应的Hash
      * @return 获取的响应
      */
 

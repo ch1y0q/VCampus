@@ -232,6 +232,7 @@ public class TeaMandetailPanel extends JPanel {
     }
     /**
      * 教师信息初始化
+     * @param cardNumber 教师的一卡通号
      */
     public void init(String cardNumber)
     {
@@ -253,6 +254,7 @@ public class TeaMandetailPanel extends JPanel {
     }
     /**
      * 教师信息删除
+     * @param cardNumber 要删除信息的教师的一卡通号
      */
     public void deleteTea(String cardNumber)
     {
@@ -266,6 +268,7 @@ public class TeaMandetailPanel extends JPanel {
     }
     /**
      * 教师信息添加
+     * @param teacher 欲添加信息的Teacher对象
      */
     public void AddTea(Teacher teacher)
     {

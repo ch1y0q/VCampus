@@ -68,6 +68,8 @@ public class Response {
 
     /**
      * 获取列表型业务数据
+     * @param elementClazz 欲获取响应数据的类型对应的类
+     * @return 列表型业务数据
      */
     public <T> List<T> getListReturn(Class<T> elementClazz) {
 
@@ -99,6 +101,8 @@ public class Response {
 
     /**
      * 获取Map型业务数据
+     * @param valueClazz 欲获取的业务数据相应的类
+     * @return Map型的响应对象
       */
     public <T> Map<String, T> getMapReturn(Class<T> valueClazz) {
 

@@ -14,8 +14,9 @@ public class TreeUtils {
 
     /**
      * 让目录全部展开
-     * 如果bo为true展开所有节点，为false关闭所有节点
-     */
+     * @param tree 需进行操作的JTree
+     * @param bo 如果bo为true展开所有节点，为false关闭所有节点
+      */
     public static void expandTree(JTree tree, boolean bo) {
         TreeNode root = (TreeNode) tree.getModel().getRoot();
 
