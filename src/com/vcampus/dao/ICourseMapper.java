@@ -53,4 +53,5 @@ public interface ICourseMapper {
 
     public void deleteLineFromCourseScore(CourseScore courseScore);
 
+
 }

@@ -64,7 +64,7 @@ public class AppTeaCourse extends JFrame {
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack.setBounds(width-60, 0, 60, 30);
+        btnBack.setBounds(width*41/50, 0, 60, 30);
         container.add(btnBack);
 
 

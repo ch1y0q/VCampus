@@ -74,7 +74,7 @@ public class AppStuCourse extends JFrame {
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack.setBounds(width-60, 0, 60, 30);
+        btnBack.setBounds(width*41/50, 0, 60, 30);
         container.add(btnBack);
         /*
         //侧边栏
@@ -364,18 +364,21 @@ public class AppStuCourse extends JFrame {
                                 "com.vcampus.server.teaching.CourseSelection.getOneCourse",
                                 new Object[] {s}).send())
                         .getReturn(Course.class);
-                if(semester.equals("All")||course.getSemester().equals(semester)){
-                    String time = course.getTime();
-                    String[] splitTime = time.split("-");
-                    int start = Integer.parseInt(splitTime[1]);
-                    int end = Integer.parseInt(splitTime[2]);
-                    int day = Integer.parseInt(splitTime[0]);
-                    for(int i = start-1;i<=end-1;i++){
-                        String name = course.getClassName();
-                        String classroom = course.getClassroom();
-                        model0.setValueAt("<html><center>"+name+"<br>"+classroom+"</center></html>",i,day);
+                if(course!=null){
+                    if(semester.equals("All")||course.getSemester().equals(semester)){
+                        String time = course.getTime();
+                        String[] splitTime = time.split("-");
+                        int start = Integer.parseInt(splitTime[1]);
+                        int end = Integer.parseInt(splitTime[2]);
+                        int day = Integer.parseInt(splitTime[0]);
+                        for(int i = start-1;i<=end-1;i++){
+                            String name = course.getClassName();
+                            String classroom = course.getClassroom();
+                            model0.setValueAt("<html><center>"+name+"<br>"+classroom+"</center></html>",i,day);
+                        }
                     }
                 }
+
 
             }
         }

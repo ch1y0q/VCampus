@@ -109,4 +109,6 @@
         UPDATE courseScore SET
                            score=#{score} WHERE `studentCardNumber` = #{studentCardNumber} AND courseId = #{courseId} LIMIT 1
     </update>
+
+
 </mapper>

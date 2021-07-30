@@ -62,7 +62,7 @@ public class AppAdminCourse  extends JFrame{
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnBack.setBounds(width-60, height, 60, 30);
+        btnBack.setBounds(width*41/50, height, 60, 30);
         container.add(btnBack);
 
 
@@ -183,7 +183,7 @@ public class AppAdminCourse  extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 int column = courseInformationTable.getSelectedColumn();
                 int row = courseInformationTable.getSelectedRow();
-                if(column == 10){
+                if(column == 10&&!((String)model.getValueAt(row,8)).equals("0")){
                     String courseId = (String)model.getValueAt(row,1);
                     ResponseUtils.getResponseByHash(new Request(App.connectionToServer,
                             null,"com.vcampus.server.teaching.CourseSelection.deleteCourse",
