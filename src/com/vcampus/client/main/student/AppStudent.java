@@ -248,7 +248,7 @@ public class AppStudent extends JFrame {
                 if(e.getSource()==btnTeaching)
                 {
                     AppStuCourse app=new AppStuCourse();
-                    app.open();
+                    app.setVisible(true);
                     setVisible(false);
                 }
             }

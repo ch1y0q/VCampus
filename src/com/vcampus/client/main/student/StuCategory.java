@@ -106,7 +106,7 @@ public class StuCategory extends JTree{
                             ||node==nodChosenCourses){
                         if(this.getClass().getName()!="com.vcampus.client.main.courseManage.AppStuCourse") {
                             AppStuCourse app = new AppStuCourse();
-                            app.open();
+                            app.setVisible(true);
                             setVisible(false);
                         }
                     }

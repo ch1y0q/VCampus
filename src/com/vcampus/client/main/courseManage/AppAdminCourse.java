@@ -42,12 +42,10 @@ public class AppAdminCourse {
         width = screenSize.width;
         height = screenSize.height;
         jf.setLayout(null);
-        jf.setVisible(true);
         jf.setResizable(true);
         jf.setBounds(0, 0, width, height);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = jf.getContentPane();
-        container.setBackground(new Color(0xD8F6F6));
         JPanel jp = new JPanel();
         container.add(jp);
         jp.setLayout(null);
