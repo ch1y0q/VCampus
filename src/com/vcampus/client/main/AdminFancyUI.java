@@ -123,7 +123,7 @@ public final class AdminFancyUI extends FancyUI
         internal.setContentPane(new AppAdmin().getContentPane());
         internal.pack();
         internal.setVisible(true);
-        internal.setBounds(10,10,1600,1000);
+        internal.setBounds(0,0,1400,1000);
         desktopPane.add(internal);
 
         /* Teachers need no chatroom

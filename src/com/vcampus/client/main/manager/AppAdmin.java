@@ -46,27 +46,28 @@ public class AppAdmin extends JFrame{
         label.setText(" 欢迎您,"+App.session.getAdmin().getName() );//App.session.getAdmin().getName()
         label.setFont(new Font("微软雅黑", Font.BOLD, 14));
         label.setOpaque(true);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setForeground(new Color(33, 117, 206));
         label.setBackground(new Color(33,177,206,80));
-        label.setBounds(50, 5, 100, 30);
+        label.setBounds(50, 5, 140, 30);
         contentPane.add(label);
 
 
-        JButton returnButton = new JButton("← 返回");
-        returnButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        returnButton.setBounds(10,5,80,30);
-        returnButton.setForeground(new Color(33, 117, 206,100));
-        contentPane.add(returnButton);
-        returnButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                setVisible(false);
-            }
-        });
+//        JButton returnButton = new JButton("← 返回");
+//        returnButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
+//        returnButton.setBounds(10,5,80,30);
+//        returnButton.setForeground(new Color(33, 117, 206,100));
+//        contentPane.add(returnButton);
+//        returnButton.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                setVisible(false);
+//            }
+//        });
 
         JButton LogoutButton = new JButton("登出");
         LogoutButton.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        LogoutButton.setBounds(160,5,50,30);
+        LogoutButton.setBounds(200,5,50,30);
         LogoutButton.setForeground(new Color(33, 117, 206,100));
         LogoutButton.addActionListener(new ActionListener() {
             @Override
@@ -235,7 +236,7 @@ public class AppAdmin extends JFrame{
         ShopInfoLabel1.setFont(new Font("微软雅黑", Font.BOLD, 18));
         ShopInfoLabel1.setForeground(new Color(0, 0, 0,150));//字颜色
         ShopInfoLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        ShopInfoLabel1.setBounds(285, 580, 340, 190);
+        ShopInfoLabel1.setBounds(285, 580, 340, 160);
         ShopInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -275,12 +276,12 @@ public class AppAdmin extends JFrame{
         ShopInfoLabel.setBackground(new Color(255,255,255,90));
         ShopInfoLabel.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
           new Color(255,255,255,255)));
-        ShopInfoLabel.setBounds(285, 580, 340, 190);
+        ShopInfoLabel.setBounds(285, 580, 340, 160);
         contentPane.add(ShopInfoLabel);//先添加的label在最上层
 
         JLabel bg2 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/bg2.jpg")));
         contentPane.add(bg2);
-        bg2.setBounds(120, 585, 500, 180);
+        bg2.setBounds(120, 585, 500, 150);
 
         JLabel LifeInfoLabel1 = new JLabel("生活管理");
         LifeInfoLabel1.setFont(new Font("微软雅黑", Font.BOLD, 18));
@@ -337,7 +338,7 @@ public class AppAdmin extends JFrame{
         CourseInfoLabel1.setFont(new Font("微软雅黑", Font.BOLD, 18));
         CourseInfoLabel1.setForeground(new Color(0, 0, 0,150));//字颜色
         CourseInfoLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        CourseInfoLabel1.setBounds(1230, 185, 165, 165);
+        CourseInfoLabel1.setBounds(1230, 185, 145, 165);
         CourseInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -377,18 +378,18 @@ public class AppAdmin extends JFrame{
         CourseInfoLabel.setBackground(new Color(255,255,255,90));
         CourseInfoLabel.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
                 new Color(255,255,255,255)));
-        CourseInfoLabel.setBounds(1230, 185, 165, 165);
+        CourseInfoLabel.setBounds(1230, 185, 145, 165);
         contentPane.add(CourseInfoLabel);//先添加的label在最上层
 
         JLabel bg4 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/bg4.jpg")));
         contentPane.add(bg4);
-        bg4.setBounds(1140, 190, 250, 250);
+        bg4.setBounds(1140, 190, 230, 250);
 
         JLabel LibraryInfoLabel1 = new JLabel("图书馆");
         LibraryInfoLabel1.setFont(new Font("微软雅黑", Font.BOLD, 18));
         LibraryInfoLabel1.setForeground(new Color(0, 0, 0,150));//字颜色
         LibraryInfoLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        LibraryInfoLabel1.setBounds(695, 465, 200, 310);
+        LibraryInfoLabel1.setBounds(695, 465, 200, 280);
         LibraryInfoLabel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -429,13 +430,13 @@ public class AppAdmin extends JFrame{
         LibraryInfoLabel.setBackground(new Color(255,255,255,90));
         LibraryInfoLabel.setBorder(BorderFactory.createMatteBorder(5,5,5,5,
                 new Color(255,255,255,255)));
-        LibraryInfoLabel.setBounds(695, 465, 200, 310);
+        LibraryInfoLabel.setBounds(695, 460, 200, 280);
         contentPane.add(LibraryInfoLabel);//先添加的label在最上层
 
 
         JLabel bg5 = new JLabel(new ImageIcon(getClass().getResource("/resources/assets/AdminImage/bg5.jpg")));
         contentPane.add(bg5);
-        bg5.setBounds(700, 465, 690, 300);
+        bg5.setBounds(700, 465, 670, 270);
 
         JLabel TransLabel = new JLabel("");
         TransLabel.setHorizontalAlignment(SwingConstants.CENTER);
