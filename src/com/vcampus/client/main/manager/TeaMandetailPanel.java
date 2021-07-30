@@ -91,16 +91,6 @@ public class TeaMandetailPanel extends JPanel {
         txtlevel.setBounds(190, 130, 150, 30);
         txtlevel.setEditable(false);
         add(txtlevel);
-        JLabel TeaNumber=new JLabel("工号");
-        TeaNumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        TeaNumber.setBounds(100, 160, 90, 30);
-        TeaNumber.setBorder(new EmptyBorder(0,0,0,0));
-        add(TeaNumber);
-        txtTeaNum = new JTextField();    //创建文本框
-        txtTeaNum.setText("工号");
-        txtTeaNum.setBounds(190, 160, 150, 30);
-        txtTeaNum.setEditable(false);
-        add(txtTeaNum);
         JLabel Teaemail=new JLabel("邮箱");
         Teaemail.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         Teaemail.setBounds(400, 10, 150, 30);
@@ -131,6 +121,16 @@ public class TeaMandetailPanel extends JPanel {
         txtphone.setBounds(560, 70, 150, 30);
         txtphone.setEditable(false);
         add(txtphone);
+        JLabel TeaNumber=new JLabel("工号");
+        TeaNumber.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        TeaNumber.setBounds(400, 100, 150, 30);
+        TeaNumber.setBorder(new EmptyBorder(0,0,0,0));
+        add(TeaNumber);
+        txtTeaNum = new JTextField();    //创建文本框
+        txtTeaNum.setText("工号");
+        txtTeaNum.setBounds(560, 100, 150, 30);
+        txtTeaNum.setEditable(false);
+        add(txtTeaNum);
         JButton nodTeaSureAdd = new JButton("确认添加老师");
         nodTeaSureAdd.setEnabled(false);
         JButton save = new JButton("保存");
