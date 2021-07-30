@@ -111,7 +111,7 @@ public class AppTeaCourse extends JFrame {
         }
         chooseSemester0.setBounds(width / 50 + 60, height / 40, 120, 30);
         jp0.add(chooseSemester0);
-        courseTable.setRowHeight(30);
+        courseTable.setRowHeight(50);
         sp0.setViewportView(courseTable);
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
@@ -136,6 +136,7 @@ public class AppTeaCourse extends JFrame {
                 return false;
             }
         };
+        courseInformationTable.setRowHeight(30);
         sp1_0.getViewport().add(courseInformationTable);
         JScrollPane sp1_1 = new JScrollPane();
         sp1_1.setBounds(width / 50, 90 + height * 7 / 40, width * 3 / 5, height * 2 / 5);
@@ -196,6 +197,7 @@ public class AppTeaCourse extends JFrame {
                 return false;
             }
         };
+        checkScoreTable.setRowHeight(25);
         sp2.getViewport().add(checkScoreTable);
         JLabel semesterLabel = new JLabel("学期", JLabel.CENTER);
         semesterLabel.setBounds(width / 50, height / 40, 40, 30);
